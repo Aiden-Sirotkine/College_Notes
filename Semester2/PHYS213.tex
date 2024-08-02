@@ -1,0 +1,327 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\equations}[1]{
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+
+\title{PHYS 213}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Intro to Thermal Physics}
+
+\section*{conservation of energy??????????????}
+\[
+W = \int \vec{F} \, dx
+\]
+
+sfhfjdvsddjvjsh
+
+pressure is forc iver an area
+
+\[
+dU = dQ - pdV
+\]
+
+\subsection{Heat Transfer}
+\[
+\Delta U_{hot} < 0 \hp \Delta U_{cold} > 0
+\]
+
+\section{Some basic ass AP chem specific heat}
+
+\section{Entropy}
+Based on the amount of possible ways a thing can be arranged (permutations)
+
+When rolling 2 dice, the sum of 7 has the highest entropy
+
+\subsection{Process}
+\begin{itemize}
+\item
+compute S as a function of macrostate variables
+\item
+Write down what can change and what cannot
+\item
+Maximize S with respect to the variables that can change
+\end{itemize}
+
+
+\subsection{Equilibrium Positiion of a particle}
+\[
+S = N k \ln V + f(U, N)
+\]
+
+\equations{
+\frac{dS}{dV_1} = 0 = \frac{dS_1}{dV_1} + \frac{dS_2}{dV_2} \frac{dV_2}{dV_1}
+}
+
+
+\subsection{Equations/Relationships}
+\equations{
+\frac{1}{T} = (\frac{dS}{dU})_{V, N}
+\\
+C_V = (\frac{dQ}{dT})_{V, N}
+\\
+\Delta S = \int^{T_{f}}_{T_i} \frac{C_V(T)}{T} dT
+\\
+\textrm{important}
+\\\
+\Delta U = \int^{T_{f}}_{T_i}  C_V (T) dT
+\\
+dS = \frac{dU}{T} + \frac{P}{T} dV = \frac{dQ}{T}
+}
+\section{Ideal Gas Law}
+\[
+pV = NkT
+\rightarrow
+pV = N \frac{m(|v|^2)}{3}
+\]
+\section{Quasistatic Processes}
+\begin{itemize}
+\item
+isothermal = constant temp
+\item
+isochoric = constant volume
+\item
+isobaric = constant pressure
+\item
+adiabatic = $\Delta S = 0$
+\end{itemize}
+
+Isothermal processes are reversable
+
+Isobaric processes are not
+
+\subsection{PV Diagrams}
+pressure on y-axis, volume on x-axis
+\[
+W_{on} = - \int p(V) \, dV
+\]
+
+\section{Heat Engines}
+heat gas to push piston, do work to put piston back.
+
+\[
+dS = \frac{dQ}{T} \rightarrow \Delta S = - \frac{Q_h}{T}
+\]
+
+\subsection{Efficiency}
+\[
+\epsilon = \frac{W_{by2} + W_{by4}}{Q_h}
+\]
+
+\equations{
+\frac{Q_H}{Q_C} \leq \frac{T_H}{T_C}
+\\
+\epsilon = \frac{W_{by}}{Q_H} = \frac{Q_H - Q_C}{Q_H} \rightarrow
+\\
+\epsilon = \frac{W_{by}}{Q_H} \leq 1 - \frac{Q_C}{Q_H}
+}
+
+\subsection{Heat Pumps/Refrigerators}
+COP is coefficient of performance 
+Heat pump
+\[
+COP = \frac{Q_H}{W_{ON}} \leq \frac{1}{1 - \frac{T_C}{T_H}}
+\]
+
+Refrigerator
+\[
+COP = \frac{Q_C}{W_{ON}} \leq \frac{1}{\frac{T_H}{T_C} - 1}
+\]
+
+\section{Gibbs Free Energy}
+Easier formula to figure out whether something is reversible
+\[
+G = U - T S + pV
+\]
+\[
+G = \frac{dU}{dX} + p \frac{dV}{dX} - T\frac{dS}{dX}
+\]
+
+\subsection{Chemical Potential}
+\[
+\mu_A = \frac{dG_A}{dN_A}
+\]
+\[
+G = \mu N
+\]
+Minimize Free Energy
+\[
+\frac{d(G_A + G_B)}{dN_A} = 0
+\hp
+N_A + N_B = N_{tot}
+\]
+
+\section{Something with Processes}
+\equations{
+dS = \frac{1}{T} dU + \frac{p}{T} dV - \frac{\mu}{T} dN
+\\
+G = U + pV - TS
+\\
+dU = TdS - pdV + \mu dN
+\\
+dG = Vdp + \mu dN - S dT
+\\
+d \mu_x = \frac{V_x}{N_x} dp - \frac{S_x}{N_x} dT
+\\
+\frac{V_x}{N_x} = \textrm{ density}
+\hp
+\frac{S_x}{N_x} = \textrm{ entropy per particle}
+}
+The reasoon that materials change in the order of solid-liquid-gas is because the density increases with each of those which increases chemical potential
+
+\section{Ideal Solutions}
+\[
+\frac{N_{sugar}}{N_{water}} \propto e^{\frac{\Delta}{kT}}
+\]
+
+It costs energy to dissolve particles in a solution
+
+its all microstates
+\[
+\Omega(N) = \frac{N_{water}}{N} 
+\]
+so if you add salt (not water molecule)
+
+\[
+\Delta S(N + 1) - \Delta S(N) = k \ln (\frac{N_{h2O}}{N})
+\]
+
+Assume solid molecule don't interact. Assume constant energy cost per salt added no matter the number of salt
+
+\equations{
+G(N + 1) - G(N) = \Delta_{sol} - Tk \ln (\frac{N_{H2O}}{N}) = 0
+\\
+\Delta_{sol} = Tk \ln (\frac{N_{H2O}}{N})
+\rightarrow
+\frac{\Delta_{sol}}{kT} = \ln (\frac{N_{H2O}}{N})
+\rightarrow
+e^{\frac{\Delta_{sol}}{kT}} = \frac{N_{H2O}}{N}
+\rightarrow
+\\
+\frac{N}{N_{H2O}} = e^{\frac{\Delta_{sol}}{kT}}
+}
+doesnt actually work, but is proportional to
+\[
+\frac{N}{N_{H2O}} = n_s e^{\frac{\Delta_{sol}}{kT}}
+\]
+You have you figure out $n_S$ yourself
+
+\subsection{Goofy Silly Graph}
+slope of graph is proportional to $- \Delta{sol}$
+
+\subsection{Effects on Phase Diagrams}
+lowers freezing point, increases boiling point.
+
+Basically just makes everything want to be a liquid
+
+\section{Boltzmann Factors}
+microstate probability is dependent on temperature
+\[
+P(e) \approx e^{\frac{-E}{k T}}
+\]
+equilibrium means minimized Gibbs free energy
+\equations{
+E = \frac{1}{2} mv^2 + mgy
+\\
+P(h) = \frac{e^{\frac{-E}{kT}}}{Z}
+\\
+P(h_1)/P(h_2) = e^{mg (h_1 - h_2)}{kT}
+}
+assume temperature does not change with height
+
+\subsection{Centrifuge}
+its literally the same as gravity, just sideways
+
+\subsection{More Boltzmann Factor Stuff}
+\equations{
+f_i = e^{\frac{-E_i}{kT}}
+}
+
+\subsection{Quantum Mechanics}
+\equations{
+P(i) = \frac{ e^{\frac{-E_i}{kT}}}{ \sum e^{\frac{-E_i}{kT}}}
+}
+
+increase heat to make all possible microstates equal
+
+max entropy is $k \ln 2$
+
+\section{Semiconductors}
+Remember Band Gaps from 214
+
+That except semiconductors have a valence band that doesnt conduct electricity at all and a higher energy conduction band, so if you add energy and get electrons in the conduction band, then it conducts
+
+\equations{
+\rho = \frac{N_{conduction}}{N_{atoms}} = e^{\frac{- \Delta}{2kt}}
+}
+
+insulator = large $\Delta$
+
+\subsection{Neutrality}
+\equations{
+N_e = N_C
+\\
+n_e = \frac{1}{Z} \exp(\frac{- \Delta}{2kt})
+}
+
+
+\chapter{Final Study}
+
+\subsection{Changing Boiling Point}
+\equations{
+d \mu_{liquid} = d \mu_{gas}
+\\
+V_l dp - S_l dT = V_g dp - S_g dT
+\\
+(V - V) dp = S - S dT
+}
+
+\section{All Sortsa Boltzmann Factors}
+\equations{
+\textrm{resistivity } = e^{-\Delta / 2kT} / Z
+\\
+p = e^{-E/kT} / Z
+\\
+p = e^{-mgh/kT} / Z
+}
+
+
+
+
+\end{document}

@@ -1,0 +1,909 @@
+\documentclass{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage{graphicx}
+
+\graphicspath{ {../Images/} }
+
+\newcommand{\p}{\partial}
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2023}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+
+
+\title{MATH241}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+
+
+\chapter{Calc I Review}
+\begin{itemize}
+\item
+derivative $\rightarrow$ rate of change
+
+\item
+$\int_b^a g(x) dx =$ area under $g(x)$ from $a$ to $b$
+
+\item
+\textbf{FUNDAMENTAL THEOREM OF CALCULUS}
+$$
+\int_b^a f'(x) dx = f(b) - f(a)
+$$
+
+\end{itemize}
+%\newpage
+
+\chapter{3D Coordinates}
+\begin{itemize}
+\item
+x, y, AND z
+
+crazy, I know
+
+\section*{12.2 Vectors}
+A vector is a quantity that has magnitude and direction.
+
+A scalar is a quantity that has only magnitude.
+
+
+\end{itemize}
+
+\chapter{Reviewing all of Calc 3}
+
+
+\chapter{11 Basic Vectors}
+3D coordinates are goofy but I know just about everything for em
+
+\subsection{cross and dot product}
+goofy properties
+$$
+u \cdot (v \times w) = (u \times w) \cdot v
+$$
+$$
+u \times u = 0
+$$
+$$
+u \times v = -(v \times u)
+$$
+$$
+u \times v \text{ is orthogonal to both } u \text{ and } v
+$$
+$$
+u \times v = 0 \text{ if u and v are scalar multiples}
+$$
+$$
+u \cdot v = 
+||u||||v||\cos(\theta) =
+0 \text{ if u and v are orthogonal}
+$$
+$$
+\text{proj}_vu = \frac{| v \cdot u |}{||v||}
+$$
+
+\newpage
+\section{11.5 planes}
+Given 3 points $A, B, C$, $AB \times BC = $ normal vector for the plane
+
+given normal vector $n = \langle a, b, c \rangle$ and points $P(x_1, y_1, z_1)$
+$$
+x=x_1 + at, y = y_1 + bt, z = z_1 + zt
+$$
+$$
+a(x-x_1) + b(y- y_1) + z(z-z_1) = 0 \text{ or}
+$$
+$$
+ax + by + zc + d = 0
+$$
+Distance Formula
+
+Let $Q$ be a point and $P$ any point on a plane and $n$ the normal vector of said plane.
+$$
+d = \frac{|\vec{PQ} \cdot \vec{n}|}{||n||} = \text{proj}_nPQ
+$$
+
+Angle between two planes given their normal vectors $n_1$ and $n_2$
+$$
+\text{cos}(\theta) = \frac{n_1 \cdot n_2}{||n_1|| ||n_2||}
+$$
+
+\textbf{other distance shit that I need to probably look at later}
+
+plane and point, plane and plane, line and point
+
+\chapter{12 3D Shenanigans}
+\section{12.1}
+I remember how to graph shit in 3D
+
+Practice Question:
+
+$x^2 + z^2 = 9$
+
+It is a cylinder of radius 3 parallel to the y-axis
+
+Surfaces in space eh you understand 
+
+\section{More Surfaces}
+Look at revolutions?
+
+
+\section{12.2 Vectors}
+Goofy parallelogram addition
+
+vectors are built of components
+$$
+\vec{v} = \langle x, y, z \rangle
+$$
+$$
+\text{Proj}_vu = \left( \frac{\vec{u} \cdot \vec{v}}{||v||^2} \right)\vec{v} = \text{projection of v onto u} = \vec{v}\text{cos}(\theta)
+$$
+$$
+cos(\theta) =  \left|\left|\frac{\text{proj}_vu}{||u||}\right|\right| = \frac{\vec{u} \cdot \vec{v}}{||u|| ||v||}
+$$
+
+\chapter{13 Vector Functions}
+\section{Unit Tangent Vector}
+13.2
+$$
+\mathbf{T}(t) = \frac{r'(t)}{|r'(t)|} \text{ where r is a vector function}
+$$
+$$
+\mathbf{N}(t) = \frac{\mathbf{T}'(t)}{|\mathbf{T}'(t)|} \text{ Normal unit vector}
+$$
+
+\section{Arc Length and Curvature}
+13.3
+$$
+L = \int_a^b \sqrt{(\frac{dx}{dt}) + (\frac{dy}{dt}) + (\frac{dz}{dt})} \text{dt = arclength from a to b}
+$$
+$$
+L(t) = \int_a^t \sqrt{(\frac{dx}{du}) + (\frac{dy}{du}) + (\frac{dz}{du})} du \text{ = arc length parameter}
+$$
+$$
+\frac{ds}{dt} = |r'(t)|
+$$
+if $||r'(t)|| = 1$, then $t$ is the arc length parameter. That is, $t = s(t)$.
+
+\subsection{Curvature}
+$$
+K = \frac{|y|}{(1+(y')^2)^{3/2}} = |\frac{d\mathbf{T}}{ds}| = \frac{d\mathbf{T}/ds}{ds/dt} = \frac{|\mathbf{T}'(t)|}{r'(t)}
+ = \frac{|r' \times r''|}{|r'|^3}
+$$
+$$
+a(t) = \frac{d^2(x)}{dt^2}T + K\left( \frac{ds}{dt}\right)^2N \text{ where $\frac{ds}{dt}$ = speed}
+$$
+
+\subsection{Binormal Vector}
+perpendicular to both T and N
+$$
+\mathbf{B}(t) = \mathbf{T}(t) \times \mathbf{N}(t)
+$$
+
+\subsection{Torsion}
+$$
+\tau(t) = -\frac{d\mathbf{B}}{ds} \cdot \mathbf{N} = 
+-\frac{\mathbf{B}'(t) \cdot \mathbf{N}(t)}{|r'(t)|} =
+\frac{[ r'(t) \times r''(t)] \cdot r'''(t)}{|r'(t) \times r''(t)|^2}
+$$
+
+
+\chapter{14 Partial Derivatives}
+Literally just think of the numbers you're not deriving as a constant
+Let $f(x, y) = 3x - x^2y^2 + 2x^3y$
+$$
+f_x(x, y) = z_x = \pdif{z}{x} = \pderiv{x} f(x, y) = 3 - 2xy^2 + 6x^2y
+$$
+$$
+f_y(x, y) = z_y = \pdif{z}{y} = \pderiv{y} f(x, y) = 2x^2y + 2x^3
+$$
+
+\subsection{higher order notation}
+$$
+\pderiv{x} \left( \pdif{z}{y} \right) = \frac{\partial^2z}{\partial x \partial y} = f_{yx}(x, y)
+\text{ notice the subscript order}
+$$
+
+\newpage
+\subsection{Partial Derivative Problem}
+14.3 \#6
+
+Estimate $f_x(2, 1)$ and $f_y(2, 1)$ in the following contour map.
+\newline
+
+\includegraphics{14_3_6Graph}
+\newline
+
+(2, 1) is on the contour line $z = 10$. Because the 12 contour line is as about $(2.66, 1)$, $f_x(2, 1)$ will probably have a value of about 3. $f_y(2, 1)$ will be about -2 because of where the 8 contour line is located.
+$$
+f_x(2, 1) \approx 3 \hspace{1cm} f_y(2, 1) \approx 2
+$$
+Quizlet+ give or take agrees phew
+
+\section{Limits}
+Basically set one of the numbers to a constant or the other variable and see what happens.
+
+Try y=0, x=0, y=x, x=y, y=mx, x=my, idfk
+
+\subsection{Limit Practice Problem}
+2012 practice midterm 1 problem
+
+Exactly one of the two limits exists, show which and why.
+$$
+\lim_{(x, y) \to (0, 0)} \frac{x^2 - y^2}{\sqrt{x^2 + y^2}}
+\hspace{2cm}
+\lim_{(x, y) \to (0, 0)} \frac{xy}{(x^2 + y^2)^2	}
+$$
+I can factor the first one
+$$
+\frac{\sqrt{x^2 + y^2} \sqrt{x^2 - y^2}}{\sqrt{x^2+y^2}} = \sqrt{x^2 - y^2} = 0 \text{ definitely exists}
+$$
+Now I'll prove the other one doesn't exist just for funsies.
+
+line $y=0$, lim = 0
+
+line $y=x$, lim DNE
+
+
+\section{Tangent Planes and Linear Approximations}
+$$
+z - z_0 = f_x(x_0, y_0) (x - x_0) + f_y(x_0, y_0) (y - y_0)
+$$
+Calculate the differential and then replace $dx$ and $dy$ with $\Delta x$ and $\Delta y$
+
+Yea I was basically right. Use the tangent plane as an approximation
+$$
+f(x_0, y_0) \approx f(x_0, y_0) + f_x(x_0, y_0) (x - x_0) + f_y(x_0, y_0) (y - y_0)
+$$
+\section{Differentials}
+$$
+dz = \pdif{z}{x} dx + \pdif{z}{y}dy = f_x(x, y)dx + f_y(x, y)dy
+$$
+
+\subsection*{Theorem}
+If $f_x$ and $f_y$ are are continuous, then $f$ is differentiable.
+
+\subsection{Clairaut's Theorem}
+Suppose $f$ is defined on a disk $D$ that contains the point $(a, b)$. If $f_{xy}$ and $f_{yx}$ are both continuous on D, then \\
+$f_{xy}(a,b) = f_{yx}(a,b)$
+
+\section{Chain Rule for Partial Derivatives}
+14.5
+
+page 1020
+	
+Let $w = f(x, y)$ where $x.= g(t)$ and $y = h(t)$. Then
+$$
+\frac{d w}{dt} = \pdif{w}{x} \frac{dx}{dt} + 
+\pdif{w}{y}
+\frac{dy}{dt}
+$$
+
+\newpage
+\subsection{Chain Rule Problem}
+2012 Practice Midterm 1 \#11 
+
+An exceptionally tiny spaceship positioned as shown is travelling so that its
+x-coordinate increases at a rate
+of 1/2 m/s and y-coordinate increases at a rate of 1/3 m/s. Use the Chain Rule to calculate the rate at which
+the distance between the spaceship and the point (0, 0) is increasing.
+$$
+\pdif{x}{t} = \frac{1}{2}t, \pdif{y}{t} = \frac{1}{3}t, w = \sqrt{x^2 + y^2}
+$$
+$$
+\pdif{w}{t} = \pdif{w}{x} \pdif{x}{t} + \pdif{w}{y} \pdif{y}{t}
+$$
+$$
+\pdif{w}{x} = \frac{1}{2}(x^2+y^2)^{-1/2}2x \hspace{1cm}
+\pdif{w}{y} = \frac{1}{2}(x^2+y^2)^{-1/2}2y
+$$
+Just plug the numbers in, I don't have the actual answer for this one but this looks correct.
+
+
+
+\subsection{Implicit Differentiation}
+Let $F(x, y) = 0$ and let $y = f(x)$
+$$
+\frac{dy}{dx} = - \frac{F_x(x, y)}{F_y(x, y)}
+$$
+
+\section{Directional Derivatives and Gradients}
+If $f$ is a differentiable function of $x$ and $y$, and $f$ has a directional derivative in the direction of any unit vector $\vec{u} = \langle a, b \rangle$, then
+$$
+D_uf(x, y) = f_x(x, y)a + f_y(x, y)b
+$$
+Gives the slope of the function in the direction of $\vec{u}$
+$$
+\nabla f(x, y) = f_x(x, y) \mathbf{i} + f_y(x, y) \mathbf{j} = \pdif{f}{x}\mathbf{i} + \pdif{f}{y} \mathbf{j}
+$$
+The gradient exists such that $\nabla f(x, y) \cdot \mathbf{u} = D_u f(x, y)$
+
+\section{Extrema}
+The maximum possible directional derivative is $||\nabla f(\vec{x})||$, and it occurs when $\vec{u}$ is in the direction of $\nabla f(\vec{x})$
+$$
+D_uf = \nabla f \cos(\theta)
+$$
+
+\section{Tangent Planes to Level Surfaces}
+Let $S$ be a surface with the equation $F(x, y, z) = k$. Let $P = (x_0, y_0, z_0)$ be a point on $S$. 
+Let $C$ be a curve on $S$ that passes through $P$. $C$ has the equation $\mathbf{r}(t) = \langle x(t), y(t), z(t) \rangle$. Let $t_0$ correspond to $P$, meaning $r(t_0) = P$.
+
+We can derive $F$ to get
+$$
+\pdif{F}{x} \frac{dx}{dt} + \pdif{F}{y} \frac{dy}{dt} + \pdif{F}{z} \frac{dz}{dt} = 0 = \nabla F \cdot \mathbf{r}'(t)
+$$
+We can use this and dot product properties to show that the gradient of F is orthogonal to the tangent vector of C.
+
+Therefore, the gradient can be the normal vector for a plane tangent to S. So our tangent plane equation will be
+$$
+F_x(x_0, y_0, z_0)(x-x_0) +
+F_y(x_0, y_0, z_0)(y-y_0) +
+F_z(x_0, y_0, z_0)(z-z_0) =
+0
+$$
+
+\section{Extrema}
+14.7
+
+If $f(a, b)$ has a local extrema at $(a, b)$ and the first order partial derivatives of $f(a, b)$ exist, then $f_x(a, b) = 0$ and $f_y(a, b) = 0$
+
+\subsection{Second Derivatives Test}
+Suppose the second partial derivatives of $f$ are continuous on a disk with center $(a, b)$, and suppose that $(a, b)$ is a critical point of $f$. Let
+$$
+D = D(a,b) = f_{xx}(a, b)f_{yy}(a,b) - [f_{xy}(a, b)]^2
+$$
+\begin{enumerate}
+\item
+If $D > 0$ and $f_{xx}(a, b) > 0$ then $f(a, b)$ is a local minimum
+\item
+If $D > 0$ and $f_{xx}(a, b) < 0$ then $f(a, b)$ is a local maximum
+\item
+If $D < 0$, them $f(a, b)$ is a saddle point
+
+\end{enumerate}
+
+\subsection{Extrema Problem}
+14.7 \#5
+
+Find the extrema of $f(x, y) = x^2 + xy + y^2 + y$
+$$
+f_x = 2x+y |
+f_y = 2y+x+1 |
+f_{xx} = 2 |
+f_{yy} = 2 |
+f_{xy} = 1 
+$$
+Critical points uhh somewhere
+
+$2x = -y$
+
+$-4x+x+1 = 0 \rightarrow x = 1/3, y=-2/3$
+$$
+D = f_{xx}f_{yy} - (f_{xy})^2 = 
+2*2 - 1 = 3
+$$
+$D < 0 = $ saddle point else \\
+$f_{xx} > 0 = $ minimum \\
+$f_{xx} < 0 = $ maximum
+
+
+Minimum at $(1/3, -2/3)$
+
+\newpage
+\section{Lagrange Multipliers}
+How to find all the maximum and minimum values of $f(x, y, z)$ under the constraints that $g(x, y, z) = k$ for some equation g.
+
+Step 1: Find all values such that
+$$
+\nabla f(x, y, z) = \lambda \nabla g(x, y z) \text{ and $g(x, y, z) = k$ for some scalar $\lambda$}
+$$
+Step 2: Evaluate at all points, the biggest is a maximum, the smallest is a minimum.
+
+\subsection{Two contraints}
+Let $g(x, y, z) = k$ and $h(x, y, z) = c$
+$$
+\nabla f(x, y, z) = \mathbf{\lambda} g(x, y, z) + \mathbf{\mu} h(x, y, z)
+$$
+Find the components to get enough equations to solve for the 7 billion variables.
+
+\newpage
+\section{Lagrange Multipliers Example Problems}
+\subsection*{pg 1061 \#6}
+
+$$
+f(x, y) = xe^y \hspace{1cm} g(x, y) = x^2+y^2 = 2
+$$
+$$
+\nabla g(x, y) = (2x)\vec{i} + (2y)\vec{j}
+\hspace{1cm}
+\nabla f(x, y) = (e^y)\vec{i} + (xe^y)\vec{j}
+$$
+$
+2x = \lambda e^y \\
+2y = \lambda xe^y \\
+x^2 + y^2 = 2
+$
+\newline
+
+\noindent $
+2x = \lambda e^y \\
+y = x^2 \\
+$
+$$
+x^4 + x^2 - 2 = 0 \rightarrow x = \frac{-1 \pm 3}{2} \rightarrow x^2 = -2, 1, x= \pm 1
+$$
+\newline
+
+$
+x=-2, y=4 nope not actually allowed\\
+-4 = \lambda e^{4} \rightarrow \lambda = -4/e^4 \text{ I dont think this is necessary}
+$
+
+$(1, 1)$ is a maximum this was a waste of my time 
+$(-1, 1)$ is a minimum lets fucking go I actually did it right omg
+
+\newpage
+\subsection{pg 1061 \# 7}
+$$
+f(x, y) = 2x^2 + 6y^2,\hspace{1cm} g(x, y) = x^4 + 3y^4 = 1
+$$
+$$
+\nabla f(x, y) = 4x \mathbf{i} + 12y \mathbf{j}, \hspace{1cm} 
+\nabla g(x, y) = 4x^3 \mathbf{i} + 12y^3 \mathbf{j}
+$$
+$
+4x = \lambda 4x^3 \\
+12y = \lambda 12y^3 \\
+x^4 + 3y^4 = 1
+$
+\newline
+
+\noindent $
+\lambda = 1/x^2 \\
+1 = y^2/x^2 \rightarrow \pm x = \pm y \\
+4x^4 = 1 \rightarrow x = \pm 1/\sqrt{2}, y = \pm 1/\sqrt{2}
+$
+
+time to figure out all the sets of points that work
+
+\noindent $
+(1/ \sqrt{2}, 1/ \sqrt{2}) \\
+(-1/ \sqrt{2}, 1/ \sqrt{2}) \\
+(1/ \sqrt{2}, -1/ \sqrt{2}) \\
+(-1/ \sqrt{2}, -1/ \sqrt{2}) \\
+$
+
+All these points have the exact same f(x, y) values so theyre all maximums?
+
+Ah damn I missed one. the minimums are $(\pm 1, 0)$ but I give or take understand
+
+\newpage
+\subsection*{pg 1062 \# 33}
+$$
+f(x, y, z) = yz + xy \hspace{1cm}
+xy = 1 \hspace{1cm}
+y^2 + z^2 = 1
+$$
+$
+f_x = y = \lambda y \\
+f_y = z + x = \lambda x + \mu 2y \\
+f_z = y = \mu 2z \\
+xy = \lambda  \\ 
+y^2 + z^2 = 1
+$
+\newline
+
+\noindent $
+\lambda = 1 \\
+z = \mu 2y \\
+y = \mu 2z \\
+z = y/(2\mu) \\
+4\mu^2 = 1 \rightarrow \mu = \pm 1/2 \textbf{ IMPORTANT }\\ 
+y^2 = z^2 = \pm 1/\sqrt{2} \\
+x = \pm \sqrt{2}
+$
+\newline
+
+\noindent $
+(\sqrt{2}, \frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}) \\
+(-\sqrt{2}, -\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}) \\
+(-\sqrt{2}, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}) \\
+(\sqrt{2}, \frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}})
+$
+\newline
+
+$
+f(x, y, z) = 3/2 = \text{ maximum} \\
+f(x, y, z) = 1/2 = \text{ minimum}
+$
+
+Okay I think I understand this shit assuming I'm given a g(x, y, z)
+
+\chapter{15 Multiple Integrals}
+$$
+\iint \limits_R f(x, y) dA = V
+$$
+
+\section{Iterated Integrals}
+Just consider whatever you aren't integrating as constant
+$$
+\int_{x_0}^{x_1}\int_{y_0}^{y_1}f(x, y) \,dy \,dx
+$$
+Example
+
+$$
+\int_1^2 \int_0^3 x^2 y \,dx \,dy 
+\rightarrow
+\int_1^2 \frac{x^3 y}{3} \bigg|_0^3 \,dy 
+\rightarrow
+\int_1^2 9y \,dy
+$$
+$$
+4.5y^2 \bigg|_1^2
+\rightarrow
+18 - 4.5 = 13.5
+$$
+
+\section*{Fubini's Theorem}
+If $f(x, y)$ is continuous on a rectangle R, then
+$$
+\iint \limits_R f(x, y) \,dA = 
+\int_{y_0}^{y_1} \int_{x_0}^{x_1} f(x, y) \,dx \,dy =
+\int_{x_0}^{x_1} \int_{y_0}^{y_1} f(x, y) \,dy \,dx
+$$
+
+If $f(x, y)$ can be factored into 2 functions multiplying each other, meaning $f(x, y) = g(x)h(y)$, then
+$$
+\iint \limits_R f(x, y) dA = 
+\int_{y_0}^{y_1} \int_{x_0}^{x_1} g(x) h(y) \,dx \,dy = 
+\int_{x_0}^{x_1} g(x) \,dx \int_{y_0}^{y_1} h(y) \,dy
+$$
+
+\section{Average Value}
+$$
+f_{avg} = \frac{1}{A(R)} \iint \limits_R f(x, y) dA
+$$
+
+\section{Integrating Over General Regions}
+$$
+\iint \limits_D f(x, y) = \int_{x_0}^{x_1} \int_{g(x)_0}^{g(x)_1} f(x, y) dy dx
+$$
+
+\subsection{Changing Order of Integration}
+Just fucking floop the shit
+$$
+\int_0^1 \int_x^1 f(x, y) dy dx \longrightarrow
+\int_0^1 \int_0^y f(x, y) dx dy
+$$
+$y=x$ so $x=y$ and $y=1$ where $x=0$
+
+Think of it in picture, thats like literally the only way to do it
+
+\section{15.5 Surface Area}
+$$
+A(S) = \iint \limits_D \sqrt{[f_x(x, y)]^2 + [f_y(x, y)]^2 + 1} \,dA
+$$
+
+
+\section{15.6 Triple Integrals}
+It's like a double integral but another one.
+
+
+I skipped a bunch of shit but I also dont give a shit I can figure it out fuck you
+
+
+
+\chapter{16 Vector Calculus}
+Vector Fields
+$$
+\mathbf{F}(a, b) = P(a, b)\mathbf{i} + Q(a, b)\mathbf{j} =
+\langle P(a, b), Q(a, b) \rangle
+$$
+Gradient is a vector field
+
+\subsection{Dfn: Conservative}
+A vector field $\mathbf{F}$ is conservative if it acts as the gradiant for some scalar function. That is, there exists a function $f(x, y)$ such that 
+$$
+\mathbf{F} = \nabla f(x, y)
+$$
+
+\newpage
+\section{16.2 Line Integrals}
+Integrate over a line instead of a regular region
+$$
+\text{arclength } L = \int_a^b \sqrt{\left( \frac{dx}{dt} \right) + \left( \frac{dy}{dt} \right)} dt
+$$
+$$
+\int_C f(x, y)\,ds = \int_a^b f(x(t), y(t)) \sqrt{\left( \frac{dx}{dt} \right) + \left( \frac{dy}{dt} \right)} dt
+$$
+
+\subsection*{Integrating over x and y}
+$$
+\int_C f(x, y)\,dx = \int_a^b f(x(t), y(t)) x'(t) dt
+$$
+$$
+\int_C f(x, y)\,dy = \int_a^b f(x(t), y(t)) y'(t) dt
+$$
+
+\subsection{Line Integral Problem}
+16.2 \# 9
+$ \int_c x^2y \,ds \hspace{1cm} C = \langle \cos(t), \sin(t), t \rangle (0 < t < \pi/2) $
+$$
+\int_0^{\pi/2} \cos^2(t) \sin(t) \sqrt{(\frac{dx}{dt})^2 + (\frac{dy}{dt})^2 + (\frac{dz}{dt})^2} \, dt
+$$
+$$
+\int_0^{\pi/2} \cos^2(t) \sin(t) \sqrt{(-\sin(t))^2 + (\cos(t))^2 + 1} \, dt
+\rightarrow
+$$
+$$
+\sqrt{2} \int_0^{\pi/2} \cos^2(t) \sin(t) \, dt 
+\hspace{1cm}
+u = \cos(t), -du = \sin(t)dt
+$$
+$$
+-\sqrt{2} \int_1^0 u^2 \, du = -\sqrt{2}u^3/3\bigg|_1^0 = \sqrt{2}/3
+$$
+
+\subsection{Integrating Over a Vector Field}
+Let $\mathbf{F}$ be integrated over a smooth curve $C$. \\
+Let $F = P\mathbf{i} + Q\mathbf{j} + R\mathbf{k}$
+$$
+\int_C \mathbf{F} \cdot dr = 
+\int_a^b \mathbf{F}(r(t)) \cdot r'(t) dt =
+\int_C \mathbf{F} \cdot \mathbf{T} ds =
+\int_C P dx + Q dy + R dz
+$$
+
+\newpage
+\section{The Fundamental Theorem For Line Integrals}
+$$
+\int_C \nabla f(x, y) \cdot d\mathbf{r} = f(\mathbf{r}(b)) - f(\mathbf{r}(a))
+$$
+also shows how conservative fields get the same shenanigans independent of path
+\subsection{Independence of Path Theorem}
+$\int_C \mathbf{F} \cdot dr$ is independent of the path taken iff $\int_C \mathbf{F} \cdot dr = 0$ for every closed path C (every loop)
+
+
+\section{16.4 Green's Theorem}
+relationship between a double integral of a region and a line integral over the border of that region.
+
+Let $C$ be a positively oriented (\textit{meaning counterclockwise}), piecewise-smooth, simple
+closed curve in the plane and let $D$ be the region bounded by $C$. If $P$ and $Q$ have
+continuous partial derivatives on an open region that contains $D$, then
+$$
+\int_C P \,dx + Q \,dy = \iint \limits_D (\pdif{Q}{x} - \pdif{P}{y}) dA
+$$
+
+\section{Curl}
+Curl is associated with rotation around a point. The magnitude of curl is the speed of rotation, and the direction of curl is the axis of rotation.
+$$
+\text{curl } \mathbf{F} = 
+\left( \pdif{R}{y} - \pdif{Q}{z} \right) \mathbf{i} +
+\left( \pdif{P}{z} - \pdif{R}{x} \right) \mathbf{j}+
+\left( \pdif{Q}{x} - \pdif{P}{y} \right) \mathbf{k}
+$$
+Imagine it as a cross product
+$$
+\nabla \times \mathbf{F} = 
+\begin{vmatrix}
+\pderiv{x} &&
+\pderiv{y} &&
+\pderiv{z} \\
+P &&
+Q &&
+R
+\end{vmatrix}
+$$
+$$
+\text{curl}(\nabla f) = 0
+$$
+\subsection*{Theorem}
+If $\mathbf{F}$ is function whose components have continuous partial derivatives and curl$(\mathbf{F}) = 0$, then $\mathbf{F}$ is a conservative vector field.
+
+\section{Divergence}
+$$
+\text{div } \mathbf{F} =
+\pdif{P}{x} +
+\pdif{Q}{y} +
+\pdif{R}{z} =
+\div \mathbf{F}
+$$
+$$
+\text{div curl } \mathbf{F} = 0
+$$
+
+
+\section{Vector Forms of Green's Theorem}
+$$
+\oint_C \mathbf{F} \cdot \,dr = \oint_C \mathbf{F} \cdot \mathbf{T} \,ds = \iint \limits_D (\curl \mathbf{F}) \cdot \mathbf{k} \,dA
+$$
+also
+$$
+\oint_C \mathbf{F \cdot n} \,ds = \iint \limits_D (\div2 \mathbf{F}(x, y)) \,dA
+$$
+
+
+\section{Parametric Surfaces}
+$$
+\mathbf{r}(u, v) = x(u, v) \mathbf{i} + y(u, v) \mathbf{j} + z(u, v) \mathbf{k}
+$$
+
+\subsection{Tangent Planes}
+$$
+r_u \times r_v = n
+$$
+
+\subsection{Surface Area}
+$$
+A(S) = |r_u \times r_v| \, dA
+$$
+\subsection*{Surface Area of Graphs of Functions}
+x=x, y=y, z = f(x, y)
+$$
+A(S) = \iint \limits_D \sqrt{[f_x(x, y)]^2 + [f_y(x, y)]^2 + 1} \,dA
+$$
+
+\section{Surface Integrals}
+$$
+\iint \limits_S f(x, y, z) d\mathbf{S} = \iint \limits_D f(r(u, v)) |r_u \times r_v | dA
+$$
+
+\subsection{Graphs of Functions}
+x=x, y=y, z=f(x, y)
+$$
+\iint \limits_S f(x, y, z) d\mathbf{S} = \iint \limits_D f(x, y, f(x, y)) \sqrt{[f_x(x, y)]^2 + [f_y(x, y)]^2 + 1} \,dA
+$$
+Similar vibes as line integrals using arclength
+
+\section{Oriented Surfaces}
+the unit vector for certain surfaces can be either n or -n. 
+Let $S$ be a surface given by the vector function $r(u, v)$
+$$
+n = \frac{r_u \times r_v}{|r_u \times r_v|}
+$$
+Yea I don't actually entirely know how the orientation changes things I'll be honest
+
+\section{Flux}
+if \textbf{F} is a continuous vector field over a surface $S$ with a normal vector \textbf{n}, then the Surface Integral of \textbf{F} over $S$, or the Flux of \textbf{F} over $S$, is:
+$$
+\iint \limits_S \mathbf{F} \cdot d \mathbf{S} = 
+\iint \limits_S \mathbf{F \cdot n} d\mathbf{S} =
+\iint \limits_D \mathbf{F \cdot (r_u \times r_v)} dA
+$$
+Where $D$ is the parameter domain.
+
+if S is given by $g(x, y) = z$
+$$
+\iint \limits_S \mathbf{F} \cdot d\mathbf{S} = 
+\iint \limits_D \langle P, Q, R \rangle \cdot \langle -\pdif{g}{x}, -\pdif{g}{y}, 1 \rangle \,dA
+$$
+
+\section{Stoke's Theorem}
+let $\mathbf{F}$ be a piecewise smooth surface bounded by $S$, a region with a boundary $C$ with positive (counterclockwise) orientation
+$$
+\int_C \mathbf{F} d\mathbf{r} = 
+\iint \limits_S \text{ curl } \mathbf{F} \cdot d\mathbf{S}
+$$
+Literally just generalized Green's Theorem for higher dimensions. 
+
+\newpage
+\section{Divergence Theorem}
+Green's Theorem Extended to Vector Fields
+
+Let $E$ be a simple solid region and let $S$ be the boundary surface of $E$, given with positive (outward) orientation. Let $F$ be a vector field
+whose component functions have continuous partial derivatives on an open region
+that contains $E$. Then
+$$
+\iint \limits_S \mathbf{F} \cdot d\mathbf{S} = \iiint \limits_E \div \mathbf{F} \,dV
+$$
+
+
+\chapter{Extras: Cylindrical and Spherical Coordinates}
+\section{Polar Coordinates}
+$$
+\iint_S f(x, y) dA = \iint_D f(r\cos(\theta), r\sin(\theta) r \,dr \, d\theta)
+$$
+\section{Cylindrical Coordinates}
+instead of $(x, y, z)$, you got $(r, \theta, z)$, where $\theta$ is counter-clockwise relative to the $+x$ line
+$$
+\iiint_A f(x, y, z) dA = \iiint_A f(r\cos(\theta), r\sin(\theta), z) r \,dz dr d\theta
+$$
+
+\section{Spherical Coordinates}
+instead of $(x, y, z)$, you got $(r, \theta, \phi)$, where $\phi$ goes down from the $+z$ line
+$$
+\iiint_A f(x, y, z)dV = 
+$$
+$$
+\iiint_A f(\rho \sin(\phi) \cos(\theta), \rho \sin(\phi) \sin(\theta), \rho \cos(\psi)) \rho^2 \sin(\phi)
+d\rho d\theta d\phi
+$$
+
+
+\section{Jacobians}
+A 1D Jacobian is just a u-sub.
+
+Let $x = g(u, v)$ and $y = h(u, v)$. The Jacobian is
+$$
+\frac{\p (x, y)}{\p (u, v)} =
+\begin{vmatrix} 
+\pdif{x}{u} && \pdif{x}{v} \\
+\pdif{y}{u} && \pdif{y}{v}
+\end{vmatrix}
+=
+\pdif{x}{u} \pdif{y}{v} - \pdif{x}{v} \pdif{y}{u} 
+$$
+Change of Variables
+$$
+\iint \limits_R f(x, y) dA = \iint \limits_S f(g(u, v), h(u, v))
+\bigg| \frac{\p (x, y)}{\p (u, v)} \bigg| \,du \,	q	dv
+$$
+3 variables
+$$
+\iiint \limits_R f(x, y, z) dV = \iiint \limits_S f(x(), y(), z()) \bigg| \frac{\p (x, y, z)}{\p (u, v, w)} \bigg| \,du \,dv \,dw
+$$
+(3d determinant)
+$$
+a\begin{bmatrix}e && f \\ h && i \end{bmatrix} -
+b\begin{bmatrix}d && f \\ g && i \end{bmatrix} +
+c\begin{bmatrix}d && e \\ g && h \end{bmatrix}
+$$
+
+
+\chapter{Test Problems}
+\section{Midterm 2 2012 \#4}
+Let $C$ be the curve in $\mathbb{R}^3$ parameterized by $r(t) = \langle \sin(t), 2t, \cos(t) \rangle$
+
+Compute the length of $C$ over $0 < t < \pi/2$.
+$$
+\text{arclength}(C) = \int_0^{\pi/2} \sqrt{\frac{dx}{dt} + \frac{dy}{dt} + \frac{dz}{dt}} \,dt
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

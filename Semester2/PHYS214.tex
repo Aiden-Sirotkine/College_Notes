@@ -1,0 +1,599 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\equations}[1]{
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+
+\title{PHYS 214}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Intro to Quantum Physics}
+idk bro I skipped half the class to play violin
+
+\chapter{Waves}
+I know what a wave is
+\[
+y(t) = A \cos (kx - \omega t + \phi)
+\]
+
+\[
+I = \frac{A^2}{2}
+\]
+
+\section{Phasor}
+Use the imaginary projection of a wave and add them like vectors to figure out interference.
+
+
+\chapter{Interferenec}
+You can use phasors and the law of cosines 
+
+$(A_{tot} = A_1 + A_2 + 2A_1 A_2 \cos \theta)$ to figure out the amplitude of the resultant waves.
+
+The inside of the wave function $A \cos \alpha$ will be 
+\[
+\alpha_{tot} = \pi - (\alpha_2 - \alpha_1)
+\Rightarrow
+(\alpha_2 - \alpha_1)
+\Rightarrow
+kr_1 - kr_2 + \varphi_2 - \varphi_1
+\]
+
+\[
+A_{tot}^2 = A_1^2 + A_2^2 + 2A_1 A_2 \cos (k(r_1 - r_2) + \varphi_2 - \varphi_1)
+\]
+
+\[
+f_1 = A \cos (\frac{2 \pi r_1}{\lambda} -  \omega t)
+\hp
+f_2 = A \cos (\frac{2 \pi r_2}{\lambda} -  \omega t)
+\]
+The phase difference between $f_1$ and $f_2$ is
+\[
+2\pi \frac{(r_2 - r_1)}{\lambda} + \varphi_0
+\]
+
+\[
+A_{tot} = A^2 + A^2 + 2 A^2 \cos ( \frac{2 \pi}{ \lambda} (r_2 - r_1)a - \omega t)
+\]
+
+
+\section{More Goofy Interference}
+\[
+\Delta \varphi = (kr_2 - \omega t + \varphi_2) - (kr_1 - \omega t + \varphi_1)
+\]
+\[
+I = 2A^2 \cos^2( \varphi/2)
+\]
+\[
+\varphi = \frac{2 \pi (r_2 - r_1)}{\lambda} + \varphi_2 - \varphi_1
+\]
+Don't trust any formula I put in these notes.
+
+constructive interference when $(r_2 - r_1) = m \lambda, m \in \mathbb{Z}$
+
+
+\chapter{Diffraction}
+When light goes in a small slit, it starts bending around and then interfering with itself, making a wave pattern
+
+"Diffraction is interference when the number of sources goes to infinity"
+
+-Nikolas
+\[
+tan(\theta) = y/L
+\hp
+a \sin \theta = \lambda
+\textrm{ (first wave minimum)}
+\]
+
+For circular apertures
+\[
+\sin \theta_0 = 1.22 \lambda / D
+\]
+where D is the diameter of the aperture
+
+
+
+\chapter{Photons}
+\[
+E = hf
+\hp
+p = \frac{h}{\lambda}
+\]
+$p$ is momentum, $h$ is Planck's constant.
+
+Energy is unit is usually the electron-volt $eV = 1.6 * 10^{-19} J$ bc 1 electron$ = 1.6 * 10^{-19}$ Coulombs.
+
+Its the energy an electron gains/loses when its potential changes by 1 volt
+
+\section{Photoelectric Effects}
+Electrons boink off metal when it gets hit with enough light
+\[
+hf = \phi + KE
+\]
+$\phi$ is the work function (the energy it takes to release the electron)
+\[
+\hbar = \frac{h}{2 \pi}
+\]
+
+\chapter{Probabilities and Complex Numbers}
+How to reconcile probability and intensity
+\[
+P = IA = Nhf
+\]
+That is the power absorbed by a detector
+
+The absorbed number of photons is
+\[
+N = P_{\textrm{detector}} *N_{\textrm{emit}}
+\]
+
+\section{Probability Density}
+Given a probability density function, you can find the probability a particle is in between a and b via
+\[
+P(a < x < b) = \int^b_a p(x) \, dx = \int^b_a | \Psi |^2 \, dx
+\]
+
+Linear Intensity = power per unit area.
+\[
+\hbar
+\]
+
+
+\section{Complex Numbers}
+You know how complex numbers work.
+
+
+
+\chapter{Wave Function}
+$\Psi (x, t)$ is a complex number
+\[
+p(x) = |\Psi (x, t)| = \Psi (x, t)\Psi^* (x, t)
+\]
+Take the integral over an interval to find the probability the particle is in that interval.
+\[
+p(a < x < b) = \int^b_a |\Psi (x, t)|^2 dx
+\]
+particles have wavelengths as well because fuck you
+\[
+\Psi (x, t) = e^{i(kx - \omega t)} = \cos (kx - \omega t) + i \sin (kx - \omega t)
+\]
+\subsection{De Broglie Wavelength}
+\[
+P = \frac{h}{\lambda} = \hbar k
+\]
+It all has superposition as well
+\[
+\Psi (x, t) = A (e^{ikr_{1}} + e^{ikr_{2}})e^{-i \omega t}
+\hp
+\Psi^* (x, t) = A (e^{-ikr_{1}} + e^{-ikr_{2}})e^{i \omega t}
+\]
+\[
+|\Psi(x, t)|^2 = A^2 \left( 1 + e^{ik (r_1 - r_2)} + e^{ik(r_2 - r_1)} + 1 \right)
+\]
+\[
+ A^2 \left( 2 + e^{ik (r_1 - r_2)} + e^{-ik(r_1 - r_2)} \right)
+ \rightarrow
+ A^2 (2 + 2 \cos (k(r_1 - r_2))) \in \mathbb{R}
+\]
+\[
+2A^2 (1 + 1 \cos (k(r_1 - r_2))) \textrm{ intensity formula}
+\]
+\[
+E = hf = \hbar \omega
+\]
+Given particle with wavelength $\lambda = \frac{2 \pi}{k}$
+
+ignore
+
+\subsection{Probabiltity and Intensity}
+\[
+p_{avg}(y) \propto \cos^2 \frac{k(r_2 - r_1)}{2}
+\hp
+I_{avg}(y) \propto \cos^2 \frac{k(r_2 - r_1)}{2}
+\]
+
+
+\chapter{Momentum and Position}
+\[
+E = hf = \hbar \omega
+\hp
+p = \frac{h}{\lambda} = \hbar k
+\]
+\[
+\Psi (x, t) = Ae^{i(kx - wt)}
+=
+A \cos (kx - wt) + iA \sin (kx - wt)
+\]
+\[
+\Psi (x, t ) = Ae^{i (\frac{p}{\hbar} x - \frac{E}{\hbar} t)} \ 
+\]
+The wave function for $p = \hbar k$ is $e^{ikx}$
+
+Probability function is a constant for $\Psi (x, t) = Ae^{i(kx - \omega t)}$
+\[
+\Psi (x, t) = Ae^{i(kx - \omega t)} Ae^{i(px - E t)/ \hbar}
+\]
+Sodmething about superpositions.
+
+They have discrete positions with distinct probabilities
+\[
+\hbar k_1 \rightarrow \frac{|a|^2}{|a|^2 + |b|^2}
+\hp
+\hbar k_2 \rightarrow \frac{|b|^2}{|a|^2 + |b|^2}
+\]
+
+Localized wave functions are superpsoitions of moentum eigenstates. The mor elocalized ,the more eigenstates are required. This is summarize in the relationship 
+\[
+\Delta x \Delta p \geq \hbar / 2 
+\]
+
+Position can be anywhere but momentum has a discrete number of values depending on eigenstates and superpositions.
+
+When we measure momentum the wave function collapses and turns from a superpositions of states to just
+\[
+\Psi_{k_1} = e^{ik_1x}
+\]
+
+\section{Localized Waves}
+more eigenstates means more uncertainty
+
+
+\chapter{Time Independent Schroedinger equation}
+\[
+\frac{- \hbar^2}{2m} \frac{\del^2 \Psi (x)}{\del x^2}
++
+U(x) \Psi (x)
+=
+E \Psi (x)
+\]
+$\hat{h}$ = hamiltonian operator
+\[
+\hat{h} \Psi = E \Psi
+\hp
+A \vec{x} = \lambda \vec{x}
+\]
+The wave function must be an energy eigenstate for the hamiltonian operator to work
+
+\section{Momentum Eigenstate}
+\[
+-i \hbar \frac{d \Psi(x)}{dx} = p \Psi(x)
+\hp
+\Psi = Ae^{ikx}
+\]
+\[
+\hat{p} = -i \hbar \frac{d}{dx}
+\longrightarrow
+\hat{p} \Psi = p \Psi
+\]
+\[
+\hat{p} \Psi 
+=
+ -i \hbar \frac{d}{dx}
+\left(
+Ae^{ikx}
+\right)
+\]
+\[
+=
+-i \hbar A (ik) e^{ikx}
+=
+\hbar k A e^{ikx}
+=
+\hbar k \Psi(x)
+\]
+It all works with $E = p^2 / 2m$
+\[r
+E = \frac{p^2}{2m} = \frac{\hbar^2 k^2}{2m}
+\]
+\[
+\frac{\hat{p}^2}{2m} = \frac{\hbar^2}{2m} \frac{d^2}{dx^2}
+\]
+and then you can use the eigenvalue properties of $\Psi(x)$ and $\hat{p}$ to get the k's
+
+Waves with definite momentum have definite energy
+
+\section{Schroedinger Equation}
+Wave functions that satisfy this equation are energy eigenstates and have definite energy.
+
+They are also stationary, so probability does not change with time
+
+particles have discrete energy eigenstates and cannot take on all the energies.
+
+\section{Infinite Square Well}
+Potential Energy $U(x)$ is infinite on 2 sides and 0 in the middle
+
+The wave function is 0 where $U(x)$ is infinite and $\Psi (x) = \sin(kx)$ where $U(x)$ is 0
+
+\subsection{Boundary}
+continuous function 
+\[
+k = \frac{n \pi}{L}
+\]
+goofy node shenanigans
+
+\subsection{Normalization}
+\[
+\Psi(x) = C \sin (kx) 
+\hp
+k = \frac{n \pi}{L}
+\]
+What could $C$ be to make sure the integral over everywhere is 1?
+\[
+C = \sqrt{\frac{2}{L}}
+\]
+
+
+\chapter{Harmonic Oscillator}
+\[
+\Psi(x, t) = A(e^{i(kr_1 - \omega t)} + e^{i(kr_2 - \omega t)})
+\]
+That's not a harmonic oscillator
+\[
+U = \frac{1}{2} k x^2
+\hp
+kx = \ddot{x}
+\hp
+x(t) = A \cos (\omega t + \phi)
+\hp
+\omega = \sqrt{\frac{k}{m}}
+\]
+To have a quantum harmonic oscillator you need
+\[
+\frac{-\hbar^2}{2m} \pdif{^2 \Psi(x)}{x^2} + U(x) \Psi (x) = E \Psi (x)
+\]
+and $U = kx^2/2$. Potential is parabola shaped 
+\[
+\frac{-\hbar^2}{2m} \pdif{^2 \Psi(x)}{x^2} + \frac{kx^2}{2} \Psi (x) = E \Psi (x)
+\]
+
+\section{Ground State of a Harmonic Oscillator}
+Do some Schroedinger nonsense with guess equation
+\[
+\Psi (x) = Ae^{-2ax^2}
+\]
+And get
+\[
+E = \frac{1}{2} \hbar \sqrt{ \frac{k}{m}}
+=
+\frac{ \hbar^2 a}{m}
+\hp
+a = \sqrt{ \frac{km}{2 \hbar^2}}
+\]
+\[
+E_0 = \frac{1}{2} \hbar \omega = \frac{1}{2} \hbar \sqrt{ \frac{k}{m}}
+\]
+smaller mass = greater energies. larger spring constant = greater energy
+
+Given a quantum number $n$
+\[
+E = \left( n + \frac{1}{2} \right) \hbar \omega
+\hp
+\omega = \sqrt{ \frac{k}{m}}
+\]
+Each energy state is equally spaced with spacing $E_n - E_{n-1} = \hbar \omega$
+
+\section{Many Particles}
+Literally just remember the shit u learned in AP chem.
+
+Electron Spin = $\pm 1/2$
+
+QHO = Quantum Harmonic Oscilattor
+
+SINGLE Electron in QHO has energy $\Psi_n : E = (n + 1/2) \hbar \omega$
+
+MANY ELECTRONS must have a unique wave functions
+
+\subsection{Pauli Exclusion Principle}
+2 electrons per level (one 1/2 spin one -1/2 spin)
+
+\subsection{Aufbau Principle}
+Electrons fill lowest energies first
+
+total energy is just adding the energies of the individual electrons together.
+
+\section{Atoms}
+Some awful 3d wave function
+\[
+\Psi (r, \theta, \phi)
+\]
+Use Hamiltonian something or other
+\[
+H \Psi_{n, l, m} (r, \theta, \psi) = E_n \Psi_{n, l, m} (r, \theta, \psi)
+\]
+To get
+\[
+U(r) = \frac{-ke^2}{r}
+\]
+Goofy shapes depending on energy level which you remember from AP Chem
+
+some fuckin s p d orbital nonsense
+
+higher n means more nodes in the waves
+\[
+E_i = E_f + E_{\textrm{photon}}
+\]
+
+
+\chapter{Band Structure}
+Infinite square wells have a discrete number of possible eigenstates inside the well and potential is just $\infty$ outside of the well so $\Psi (x)$ is 0
+\equations{
+\Psi(x) = \sqrt{\frac{2}{L}} \sin \left( \frac{n \pi x}{L} \right)
+=
+ \sqrt{\frac{2}{L}} \frac{1}{2i} \left(  e^{\frac{i n \pi x}{L}} - e^{\frac{-i n \pi x}{L}} \right)
+\\
+K_n = \frac{n \pi}{L}: n = 1, 2, 3 \ldots
+\\
+P(E = E_n) = 1
+\hp
+E_n = \frac{\hbar^2 n^2 \pi^2}{2m L^2}
+\\
+P(p = + \hbar k) = \frac{1}{2}
+\hp
+P(p = - \hbar k) = \frac{1}{2}
+}
+
+for a large enough square well, there are so many eigenstates that energy is basically continuous energy and momentum 
+$ E = \frac{p^2}{2m}$
+
+Electron density is electrons per unit length
+
+Conductors have 0 band gap
+
+Semi-conductors have some gap
+
+Insulators have big gap
+
+\subsection{Fermi Level}
+Highest occupied level of a system by an electron
+\[
+E_{max} = \frac{\hbar^2 n^2_{max} \pi^2}{2 m L^2} 
+= 
+\frac{ \hbar^2 \pi^2}{2 m} \left( \frac{ N_e/2}{L} \right)^2
+=
+\frac{\hbar^2 \pi^2}{8m} \left( \frac{N_e}{L} \right)
+\]
+
+Electron density $n_e = \frac{N_e}{L}$ where $N_e$ is the total number of electrons
+
+\[
+E_{max} = \frac{\hbar^2 \pi^2}{8 m} n_e^2
+\]
+
+If we assume wiggles inside an infinite square well (from Coulomb Interaction of atomic ion something or other)
+\[
+U(r) \approx \frac{-1}{r}
+\]
+Approximate by adding corrugation
+\[
+V(x) = 2U \cos (gx)
+\]
+$U$ is interaction strength between electrons and atomic ions
+
+$g$ is whatever constant is necessary such that the wavelength is $2 \pi / g$
+
+
+If $U = 0$, then you just get a regular infinite square well
+
+As $U$ become non-zero, when start getting funky something or other (energy gaps)
+
+Our quadratic function has been split into two \textbf{bands} split by \textbf{band gaps}
+
+The band gaps size is the exact distance between something in our crystal
+
+$g \iff k$ is crystal momentum
+
+Every important part of the band gap is within $\pm \hbar g$
+
+The Fermi levels within a band gap chart are determined by electrons per atom
+
+If the photon energy is larger than the band gap, then the photon can be absorbed by the material
+
+For example, silicon has a band gap energy $E_g < \frac{hc}{750 nm}$
+
+
+\chapter{Polarization and Spin}
+
+\section{Polarization}
+horizontal and vertical directions
+\[
+\Psi = a \Psi_v + b \Psi_h
+\]
+with chances
+\[
+P(v) = \frac{|a|^2}{|a|^2 + |b|^2}
+\hp
+P(h) = \frac{|b|^2}{|a|^2 + |b|^2}
+\]
+everything is in unit vectors
+
+professor goofy something
+\[
+P_{i \to f} = |\Psi_i* \cdot \Psi_f|^2
+\]
+example
+\[
+P_{i \to f} = (0 \Psi_v + 1\Psi_f) \cdot (1 \Psi_v + 0Psi_f) = 0
+\]
+
+
+\subsection{Circular Polarization}
+\[
+\Psi = \frac{\Psi_v \pm i \Psi_h}{\sqrt{2}}
+\]
+imaginary polarization
+
+always a 50\% chance that it goes through any filter
+
+\section{Electron Spin}
+Angular momentum of $\pm \hbar / 2$
+
+stern-gerlach filters can block certain spins and x-axis orientations
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\chapter{Formulas}
+\[
+e^{ix} + e^{-ix} = 2 \cos (x)
+\hp
+e^{ix} - e^{-ix} = 2 i \sin (x)
+\]
+
+\section{Easiest Way to Integrate $\sin^2(x)$}
+\[
+\sin^2 (x) + \cos^2 (x) = 1
+\hp
+%\int^b_a sin^2(x) = \int^b_a \cos^2(x)
+\]
+\[
+\int \sin^2 (x) = \int \frac{1 - \cos (2x)}{2}
+=
+\frac{1}{2} \left( x + \frac{\sin(2x)}{2} \right)
+\]
+
+\end{document}

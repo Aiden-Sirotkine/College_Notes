@@ -1,0 +1,415 @@
+\documentclass{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2023}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+\newcommand{\done}{\textbf{\checkmark}}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+
+\title{MATH213 Final Study Guide}
+\author{Aiden Sirotkine}
+
+\begin{document}
+\maketitle{}
+
+\tableofcontents
+
+\chapter{Lets FUcking Go EZ Final Ace}
+
+
+\subsection{Pigeonhole Principle}
+if you have $N$ objects in $k$ boxes, then one box contains at least the ceiling of $N/k$ objects.
+
+WHAT THE FUCK IS A PERMUTATION RAAAAAAHHHHHHHHHH
+
+https://www.youtube.com/watch?v=zWy77XbkRF8
+
+
+\subsection{Binomial Theorem}
+\[
+(x + y)^n = \sum_{k = 1}^n {n \choose k} x^{n-k}y^k
+\]
+
+
+\subsection{Another useful theorem}
+\[
+\sum_{k=1}^n {n \choose k} = 2^n
+\textrm{ power set identity basically}
+\]
+
+
+
+\section{Combinatorial Identities}
+
+\subsection{Pascal's Identity}
+\[
+{n+ 1 \choose k} = {n \choose k-1} + {n \choose k}
+\]
+Combinatorial proof: youre choosing $n+1$ objects $\{ 1,2, 3 ,\ldots n, \alpha\}$.
+ ${n \choose k-1}$ is choosing from the rest of the items because you've picked 
+ $\alpha$ and ${n \choose k}$ is picking from the rest of the items because you definitely have not picked 
+ $\alpha$
+ 
+ 
+ \subsection{Vandermonde's Identity}
+ \[
+ {m + n \choose r} = \sum_{k = 0}^r {m \choose r - k} {n \choose k}
+ \]
+ Combinatorial proof: Just imagine the two different combinatorics things as different subsets of the same set $m + n$ and you're picking the same amount of stuff from the same set, just at two different times.
+ 
+ \subsection{Hockey Stick Identity}
+ \[
+ {n+1 \choose r+1 } = \sum_{j=r}^n {j \choose r}
+ \]
+ Ive proved this before but ${n \choose r}$ is you definitely picked the $n+1$st item and ${n - 1 \choose r}$ is you definitely picked the $n$th item and not the $n+1$st and so on and so forth.
+ 
+\subsection{Stars and Bars}
+if given you have to pick $n$ total objects of $r$ different types of objects, then the total way is
+\[
+{n + r - 1 \choose r-1}
+=
+{n + r - 1 \choose n}
+\]
+
+
+\subsection{Distinguishable People in Undistinguishable Boxes}
+if you have $n$ total objects with $a$ of type 1, $b$ of type 2, etc. the formula is
+$\frac{n!}{a!b!c!\ldots}$
+
+Just fucking figure it out permutations are not that difficult.
+
+\subsection{Bernoulli Trials}
+Probability of exactly $k$ successes for a given independent thingy and $n$ total trials with success chance $p$ and fail chance $1 - p$ is 
+\[
+{n \choose k} p^k (1 - p)^{n - k}
+\]
+
+
+\subsection{Expected Value and Variance}
+\[
+E(x) = \sum_{s \in S}p(s)X(s)
+\]
+Expected values have some nice properties
+
+\[
+V(x)
+=
+\sum_{s \in S}(X(s) - E(X))^2p(s)
+\]
+If $X$ is a random variable on a sample space, then
+\[
+V(X) = E(X^2) - E(X)^2
+=
+E(X - E(X))^2
+\]
+Both follow the law of superposition if the probabilities are independent
+
+
+\subsection{Example Problems}
+The amount of ways to permute the letters in SUCCESS is
+\[
+C(7, 3)C(4, 2)C(2, 1)C(1, 1)
+\]
+The (7, 3) is 7 open spots for 3 letters (S), then 4 spots for 2 (C), then 2 for 1 (E) and 1 for 1 (U)
+
+
+
+\section{Linear Homogeneous Recurrence Relations}
+Solve the things, get the solutions, put the solutions as things that go to the nth power. Solve for coefficients based off of initial conditions.
+
+\section{Solving Recurrence Relations with Generating Functions}
+
+\section{Power Series}
+\[
+1 + x + x^2 + \ldots = \frac{1}{1-x}
+\]
+
+Trust the process, or remember the youtube video where the guy put $x^n$ in each recurrence relation for each level $n$ and developed generating functions that way.
+\[
+a_n = 3a_{n-1}
+\rightarrow
+G(x) - 3xG(x) = a_0
+\rightarrow
+G(x) = \frac{a_0}{1 - 3x}
+\]
+and just solve
+
+\subsection{MORE ON GENERATING FUNCTIONS}
+\[
+(1 + x + x^2 + \ldots + x^n) = \frac{1 - x^{n+1}}{1-x}
+\]
+useful for permutation stuff and then you can just use the stars n bars
+
+\[
+\left( \frac{1}{1-x} \right)^n = \sum_{k =1}^\infty {n + k - 1 \choose k - 1} x^k
+\]
+\[
+1 + x^2 + x^4 \ldots = \frac{1}{1 - x^2}
+\]
+
+the derivative of a generating function is $\sum n x^n$
+
+\newpage
+\section{Fixing Midterm 2}
+The last proof
+
+Prove that
+\[
+\sum^n_{k = 1} 
+k
+{n \choose k}
+=
+n
+2^{n-1}
+\]
+$2^{n-1}$ is the amount of subsets of a set of cardinality $n-1$. Let $N$ have cardinality $n$. $n 2^{n-1}$ is the total amount of ways to pick an element $n \in N$ and then a subset of $N$ that does NOT contain $n$.
+
+Now we abuse the identity
+\[
+{n \choose r} = {n \choose n - r}
+\]
+
+Let $1 {n \choose 1}$ be the amount of ways you can pick a subset of size $n-1$ and then an element outside of that subset. $2 {n \choose 2}$ is the amount of ways you can pick a subset with cardinality $n -2$ and an element outside of that subset. So on and so forth until you reach $n {n \choose n}$ which is picking a subset of size $0$ and an element in $N$
+
+\subsection{The Generating Function One}
+\[
+x_1 \leq 2, x_2 \leq 2, x_3 \geq 3, x_4 \geq 3
+\rightarrow
+x^6(1 - x^3)^2 \left( \frac{1}{1 - x} \right)^4
+\rightarrow
+\]
+\[
+x^6(1 - 2x^3 + x^6)\left( \frac{1}{1 - x} \right)^4
+\rightarrow
+{14 + 4 - 1 \choose 4 - 1} - 2{11 + 4 - 1 \choose 4 - 1} + {8 + 4 - 1 \choose 4 - 1}
+\]
+
+
+\newpage
+\subsection{3d}
+Find the coefficient of $x^{16}$ in $(2x - 5/x^3)^{100}$
+\[
+(2x - 5x^{-3})^{100} = 
+\]
+The binomial theorem is
+\[
+(x+y)^n = \sum^n_{j = 0} {n \choose j} x^{n-k}y^j
+\]
+I need to figure out for what $j$ does 
+\[
+x^{100 - j} + {x^{-3j}} = x^{16}
+\rightarrow
+100 - j - 3j = 16
+\rightarrow
+-4j = -84
+\rightarrow
+j = 21
+\]
+\[
+{100 \choose 21}2^{79} (-5)^{21}
+\]
+
+
+\section{Review Stuff}
+Figure out how to prove an isomorphism using a bijection between vertices
+
+For $10.3.26$ just use the exact same bijection that makes the isomorphism between regular $G$ and $H$.
+
+
+\chapter{Graphs}
+\subsection{Handshaking Lemma}
+\[
+\sum \textrm{deg}(V) = 2 \times \textrm{edges}
+\]
+
+for a degree sequence to be graphic the sum of degrees needs to be even and nothing needs to break math.
+
+
+\section{The Shit with Euler and the bridges}
+\begin{center}
+path $\subset$ trail $\subset$ walk
+\end{center}
+A trail is a walk with no edges repeated.
+
+A path is a walk with no vertices or edges repeated
+\begin{itemize}
+\item
+A circuit is a path that starts and ends at the same vertex.
+\item
+An Eulerian Circuit is a circuit that uses every edge exactly once (can repeat vertices)
+\item
+A graph has an Eulerian Circuit iff all its vertices have even degrees.
+
+It has an Eulerian Path, but not an Eulerian Circuit iff 2 of its vertices have odd degrees.
+\item
+A Hamiltonian Circuit is a circuit that goes through every vertex exactly once.
+\item
+a graph is connected if there exists a path from any vertex to any other vertex.
+\item
+Strong connected and weakly connected is only important in di-graphs
+\item
+vertex and edge cuts are kind of self explanatory
+
+\end{itemize}
+
+\subsection{Dirac's Theorem}
+Let $G$ be a simples graph with vertices $n \geq 3$. if each vertex has a degree greater than $n/2$ then there exists a hamiltonian circuit.
+
+\subsection{Dijkstra's Algorithm}
+Just know it to find the shortest path between 2 nodes in a weighted graph.
+
+\section{Graph Colorings}
+bipartite graphs are 2-colorable. A matching is the subset of edges that connect the 2 sides of a bipartite graph
+
+COLORS ARE VERTICES NOT FACES I SWEAR TO FUCKING GOD IF YOU MAKE THIS MISTAKE AGAIN
+
+
+
+
+\section{Graph Representations}
+
+\subsection{Adjacency Matrices}
+an adjacency matrix has 0 if there isnt an edge between two vertices and 1 if there is.
+
+\subsection{Incidence Matrices}
+rows are vertices, columns are edges. 1 if the edge is connected to a vertex, 0 if othewise.
+
+\section{Isomorphism}
+If there exists a 1 to 1 function between each vertex such that vertices in F are adjacent iff theyre adjacent in G.
+
+
+\section{Planar Graphs}
+Graphs that can lay on a plane without any overlaps
+
+\subsection{Euler's Formula}
+Let $G$ be a planar graph.
+\begin{center}
+vertices + faces - edges = 2
+\end{center}
+
+
+\subsection{Kuratowski's Theorem}
+A graph is non-planar if it contains a subgraph of either $K_{3, 3}$ or $K_5$
+
+\chapter{Trees}
+I don't actually think there was much we went over in like any of the lectures that really covered trees but to be honest I don't give a shit im learning it all anyways.
+
+A full m-ary tree with i internal vertices has mi + 1 total vertices.
+
+Oh SHit figure out minimum weighted spanning trees.
+
+\subsection{Full M-ary Tree}
+\begin{itemize}
+\item
+if $n$ vertices, then $(n-1)/m$ interval vertices and 
+
+$((m - 1)n + 1)/m$ leaves.
+
+\item
+if $i$ interval vertices then $mi + 1$ regular vertices and $(m-1)i + 1$ leaves
+
+\item
+if $l$ leaves then $(ml - 1)/(m - 1)$ vertices and $(l-1)/(m-1)$ internal leaves
+
+\end{itemize}
+
+
+\section{Spanning Trees}
+A spanning tree of a graph $G$ is a subgraph of $G$ that is a tree and contains every vertex in $G$.
+
+A simple graph is connected iff it has a spanning tree.
+
+if spanning tree is unweighted just use depth first or breadth first search to find a spanning tree. 
+
+\subsection{Minimum Spanning Trees}
+in a connected weighted graph, it is a spanning tree that has the smallest possible sum of edge weights.
+
+\subsection{Prim's Algorithm}
+Start at one node. add the smallest possible edge every time.
+
+
+
+
+\subsection{Kruskal's Algorithm}
+Add the smallest weighted edges that do NOT contain a simple circuit. Stop after $n-1$ edges have been selectied (for $n$ vertices)
+
+ 
+ \newpage
+\section{Miscellaneous}
+ 
+ \subsection{Bubble Sort}
+ you know it
+ 
+ \subsection{Selection Sort}
+ find smallest, put at beginning, repeat.
+ 
+ \subsection{Merge Sort}
+ split up a bunch. merge function actually sort.
+
+\section{Time Complexity of Divide n Conquer}
+Let
+\[
+f(n) = af(n/b) + cn^d
+\]
+for $a \geq 1$, $n = b^k$ for integer $b$, $c, d$ are real numbers.
+\[
+f(n)
+=
+\begin{cases}
+O(n^d) \rightarrow a < b^d \\ 
+O(n^d\log n) \rightarrow a = b^d \\
+O(n^{\log_ba}) \rightarrow a > b^d
+\end{cases}
+\]
+
+\subsection{Relations}
+Equivalence Classes are basically the range of the function
+
+S is totally ordered if the partial ordering of S contains all elements in S. The partial ordering is well-ordered 
+
+\subsection{Hasse Diagrams}
+turn a relation into a di-graph
+
+
+
+\subsection{Well-Ordering Property}
+Every non-empty set of integers has a least element.
+
+
+
+\subsection{Extra thing abt Generating Function}
+\[
+1 + x^2 + x^4 \ldots = \frac{1}{1 - x^2}
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

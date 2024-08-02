@@ -1,0 +1,2505 @@
+\documentclass{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2023}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+\newcommand{\done}{\textbf{\checkmark}}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+
+\title{MATH213}
+\author{Aiden Sirotkine}
+
+\begin{document}
+\maketitle{}
+
+\tableofcontents
+
+\chapter{Catch Up}
+
+The guy said functions are gonna be on the test so learn functions but in a funky rigorous way.
+
+\section{Practice Problem}
+\section*{2.2.4}
+Suppose that $A$ is the set of sophomores at your school
+and $B$ is the set of students in discrete mathematics at
+your school. Express each of these sets in terms of $A$ and
+$B$.
+\begin{enumerate}[label = (\alph*)]
+\item
+the set of sophomores taking discrete mathematics in your school
+\[
+A \cap B
+\]
+\item
+the set of sophomores at your school who are not taking discrete mathematics
+\[
+A - B
+\]
+\item
+the set of students at your school who either are sophomores or are taking discrete mathematics
+\[
+A \cup B
+\]
+\item
+the set of students at your school who either are not sophomores or are not taking discrete mathematics
+\[
+\overline{A \cap B}
+\]
+\end{enumerate}
+\chapter{Complexity Classes}
+\section{Big O Notation}
+Written as $O(f(x))$ where f(x) is some function that acts as the upper bound of a function.
+\[
+\textrm{is } n-3 = O(4n^3)
+\]
+\[
+n-2 < n^3 - n^3 = 2n^3
+\]
+\[
+\textrm{find } C: 2n^3 \leq C|4n^3|
+\longrightarrow
+C = 1/2 
+\]
+
+
+\section{Big Theta Notation}
+$\Theta (f(x))$ where $f(x)$ acts as both the upper and lower bound of the function.
+
+Find C such that $g(x) \leq Cf(x)$ for all $x$.
+
+
+\newpage
+\subsection{Linear Search}
+find average time complexity for linear search. What is the average number of steps.
+i=1
+
+while $(\mathbf{1 < n} \& \mathbf{x \neq a}) \{$
+
+i = i + 1
+
+\}
+
+if \textbf{i < n} location = i
+
+else location = 0
+
+return location
+\newline
+
+bold means step
+
+if $x = a_1$, then 3 steps
+
+if $x = a_2$, then 5 steps
+
+if $x = a_3$, then 7 steps
+
+for $a_n$ the amount of steps in 2n+1
+
+now take average of all the steps
+
+\[
+\frac{1}{n} \sum^{n}_{i=1}(2i+1) = \frac{1}{n}(n(n+1) + n) = n+2
+\]
+
+linear search is $\Theta(n)$
+
+
+
+\subsection{Bubble Sort}
+for i = 1 to n
+
+for j=1 and n=i
+
+if $a_j > a_{j+1}$ swap $a_j$ and $a_{j+1}$
+\newline
+
+amount of steps is (n-1) + (n-2) . . . to 1 or 1+2+3. .  +n which is $\frac{n(n-1)}{2}$ which will have a big theta notation of $\Theta (n^2)$
+
+
+\section{Algorithm paradigms}
+\begin{enumerate}
+\item
+greedy - pick the largest algorithm
+\item
+Brute force - try all of them
+\end{enumerate}
+
+Linear search is brute force.
+
+\subsection{Example Problem}
+Given an evenly sized list n, find the set of n/2 numbers that yields the largest sum
+\begin{enumerate}
+\item
+brute force
+
+look at every single n/2 subset and find the biggest sum.
+\(
+O(2^n/\sqrt{n}) \) time a.k.a very bad
+
+\item
+bubble sort and pick the last n/2 numbers
+
+$ O(n^2) $ time
+\end{enumerate}
+
+
+\section{Unsolvable Problem}
+Complexity Classes \( \longrightarrow \) Classify Problems/Algorithms
+by how many resources they use.
+
+\( O(n^2) \) is polynomial time and called tractable
+
+\subsection{Theoretical vs Practical Tractability}
+if you have \( O(n) \) time but only for C = a billion, its not actually super useful.
+
+Does every problem have an algorithm?
+
+No. (Halting Problem)
+
+Same reason you cant have a set of all sets.(Russel's Paradox)
+
+
+
+\chapter{Induction}
+\begin{enumerate}
+\item
+P is true for n=1
+\item
+if P is true for n, P is true for n+1
+\end{enumerate}
+
+That's literally it. Think of it like dominoes. If domino 0 falls, and if domino n falls, then domino n+1 falls, then all dominoes fall.
+
+\subsection{Example Problem}
+Let $a$ and $b$ be integers. Let $a$ divide $b$, meaning there exists an integer $x$ such that $b = xa$.
+
+\noindent Show that $n^3 - n$ is divisible by 3 for all natural numbers $n$.
+
+Let us proceed with induction.
+
+\begin{itemize}
+\item
+Base Case n = 0:
+
+0 divides 3 so yea we're good
+
+\item
+Funky case 
+
+If $n^3 - n$ is divisible by 3, then $(n+1)^3 - n-1$ is divisible by 3
+
+Expand
+
+\[
+n^3 + 3n^2 + 3n + 1 - n - 1 =  n^3 + 3n^2 + 2n
+\]
+add n-n
+\[
+n^3 + 3n^2 + 3n - n \rightarrow
+(n^3 - n) + 3(n^2+n)
+\]
+$n^3 - n$ is divisible by 3 and a multiple of 3 is divisible by 3, so the whole thing is divisible by 3.
+\[
+3b + 3(n^2+n) = 3(\textrm{doesn't matter})
+\]
+\end{itemize}
+
+
+\subsection{Another One}
+Show $2^n < n!$ for $n \geq 4$
+
+Base Case
+\[
+2^4 < 4! \rightarrow 16 < 24 \checkmark
+\]
+
+Funky Case
+if $2^k < k!$, then $2^{k+1} < (n+1)!$
+\[
+2*2^k < n! (n+1)
+\]
+\[
+2*2^k < 2(n!) < n! (n+1) \longrightarrow
+2 < n+1; n \geq 4
+\]
+\[
+2^n = O(n!) \textrm{ if } n \geq 4
+\]
+
+
+\chapter{Strong Induction}
+2 Steps: Base Case and The Rest of the Dominoes.
+
+\section{Review Example}
+Show 
+\[
+\overline{A_1 \cup A_2 \cdots \cup A_n} = \overline{A_1} \cup \overline{A_2} \cdots \cup \overline{A_n} 
+\text{ for $n > 2$}
+\]
+
+\subsection{Base Case}
+\[
+\overline{A_1 \cup A_2} = \overline{A_1} \cup \overline{A_2}
+\]
+DeMorgan's Rule
+
+\newpage
+\subsection{Domino Case}
+\[
+\overline{A_1 \cup A_2 \cdots \cup A_k \cup A_{k+1}} = \overline{A_1} \cup \overline{A_2} \cdots \cup \overline{A_k} \cup \overline{A_{k+1}} 
+\]
+\[
+\overline{\left(A_1 \cup A_2 \cdots \cup A_k\right) \cup A_{k+1}} = \left( \overline{A_1} \cup \overline{A_2} \cdots \cup \overline{A_k} \right) \cup \overline{A_{k+1}} 
+\]
+DeMorgan's Rule again.
+
+\section{Actual Strong Induction}
+\begin{itemize}
+\item 
+Prove for $P(0)$
+
+\item
+Prove if $P(0), P(1), P(2) \cdots P(k)$ is true, then $P(k+1)$ is true.
+
+\end{itemize}
+
+\section{Prime Number Thingy}
+A number $p$ is prime if the only integers that divide it are itself and 1.
+
+Show that if $n \geq 2$ is a positive integer, then it can be written as a product of prime numbers.
+
+\subsection{Base Case}
+n = 2
+
+2 = 2 QED
+
+\subsection{Domino Case}
+Show k+1 can be written as a multiple of primes if blah blah blah.
+
+If k+1 is prime then just use that number and you're chilling.
+
+If k is not prime, then it has 2 factors less than k, which we know by the induction hypothesis are products of primes, so you can separate that less than k number into its prime factors and boom you have your product of primes.
+
+\section{Stamps}
+Show that postages of n cents for $n \geq 12$ can be formed using 4 cent and 5 cent stamps.
+
+\subsection{Base Case}
+Prove for n = 12, 13, 14, 15
+
+Its true just trust me.
+
+\subsection{Domino}
+Show k+1 given smaller k's
+
+k-3 + 4 is how you solve it.
+
+$(k - 3) > 12$ because $(k+1) > 15$ because that's how many we checked are 100\% true
+
+\section{Nim Game}
+2 piles of matches. A player chooses a pile of matches and removes some. The player to tale the last match wins.
+
+\subsection{Base Case}
+k = 2, player 1 takes 1 match, player 2 wins.
+
+\subsection{Domino}
+When player 1 takes a match, player 2 takes another and we reach a game state of k matches, for which we know player 2 wins.
+
+\section{Sum}
+\[
+\frac{1}{1*2} + \frac{1}{2*3} + \frac{1}{3*4} \cdots + \frac{1}{n*(n+1)} = \frac{n}{n+1}
+\]
+
+\subsection{Base Case}
+\[
+\frac{1}{1*2} = \frac{1}{1+1} = 1/2
+\]
+
+
+\subsection{Domino}
+\[
+\frac{1}{1*2} + \frac{1}{2*3} + \frac{1}{3*4} \cdots + \frac{1}{(n+1)(n+2)} = \frac{n}{n+1} + \frac{1}{(n+1)(n+2)}
+\]
+
+Just fuckin algebra it.
+
+
+
+\chapter{Recursion}
+Defining an object in terms of itself
+
+\subsection{Factorial}
+\[
+n! = n(n-1)!, n > 0 \hspace{1cm} 1! = 1
+\]
+\begin{itemize}
+\item
+contains a base case and a recursion step often
+
+\item
+Why use recursion?
+
+Allows you to make complex functions in a couple lines.
+
+\item
+Why not use recursion?
+
+Sometimes it can be slow as hell
+
+\subsection{Fibonacci Numbers}
+\[
+F(n) = F(n-1) + F(n-2), \hspace{1cm} F(1) = 1, F(0) = 0
+\]
+Easy to code, but takes an exponential amount of steps because it has to recurse all the way back to 0 every time.
+
+\section{Defining Sets}
+Let $\Sigma$ be a finite set (the alphabet).
+
+Let $\Sigma ^*$ be the set of all finite strings in the alphabet $\Sigma$.
+
+\item
+Base Case
+
+$
+\lambda \in \Sigma^* = \{\}
+$ 
+
+\item
+Recursive Step
+
+If $w \in \Sigma^*$ and $x \in \Sigma$, then $wx \in \Sigma^*$ where $wx$ is the concatenation operation.
+
+\item
+Prove it (with induction)
+
+Let $P(n)$ be the statement that $\Sigma^*$ contains every string of items in $\Sigma$ of length $n$.
+\item
+Base Case (P(n) = 0)
+
+$\{\} \in \Sigma^*$ true via in the definition of the set.
+
+\item
+Induction Step
+
+True via in the definition of the set.
+
+\subsection{Merge Sort}
+Split list into 2, sort, merge
+
+\item
+Pseudocode for list of length n
+
+If $(n > 1)$ \{
+
+m = floor(n/2)
+
+$L_1 = [a_1, a_2 \ldots, a_m]$
+
+$L_2 = [a_{m+1}, a_{m+2}, \ldots, a_n]$
+
+L = merge(mergesort($L_1$), mergsort($L_2$))
+
+\}
+
+def merge(A[], B[]) \{
+
+L = empty list of length A+B
+
+look at the first elements, stick the smallest into L, look at the next element of the list that we took the smallest out of.
+
+\}
+
+Merge is a linear time algorithm.
+
+\item
+Time Complexity
+
+Let $n = 2^m$
+
+Merge step plus recursion step.
+
+m recursive steps for $n = 2^m$
+
+Layer 1 has 1 merge size $n/2$, 2 has 2 merges size $n/4$, 3 has 4 merges size $n/8$, layer m has $2^{m-1}$ merges of size 1.
+
+Total number of merges: $2^{m-1}$
+\[
+m2^m - \sum^m_{i=1}2^i = m2^m - 2^m - 1 = (m-1)2^m =
+\]
+\[
+ O(n\log_2 n) \rightarrow (m = \log_2 n)
+\]
+
+
+\end{itemize}
+
+
+
+\chapter{Counting}
+The product rule: if a procedure can be done in a sequence of two tasks. If there are $n_1$ ways to do the first task an $n_2$ ways to do the second task, there are $n_1*n_2$ ways to do both.
+\begin{itemize}
+\item
+Let $S$ be a finite set of size $n$. The power set of $S$ $P(S)$ has a cardinality of $2^n$ because there are 2 options for every item in the set: it can either be in the set or not in the set.
+\item
+There are $2^n$ distinct binary strings of length $n$ because for every digit in the string, that digit can be either 1 or 0, so you have 2 options $n$ times.
+\item
+How many functions are there from a set of $m$ elements to a set of $n$ elements?
+
+Each element in $m$ can map to any one of the $n$ elements there are, so there are $n$ choices for each element $m$, so $n$ choices $m$ times is $n^m$.
+
+\item
+How many one-to-one functions?
+$n*(n-1)*(n-2)*\ldots*(n-m)$ Because the first element gets all $n$ choices and then the next $n-1$ all the way until there are no more $m$ elements in which you will have $n-m$ choices.
+\[
+\frac{n!}{(n-m)!}
+\]
+
+
+\section{The Sum Rule}
+If a task can be done in $n_1$ ways or in one of $n_2$ ways, and none of $n_1$ ways is the same as $n_2$ ways, then there is a total of $n_1+n_2$ ways.
+
+If you have 3 dogs and 4 cats, you have 7 animals total.
+
+\section{The Subtraction Rule (Inclusion and Exclusion)}
+If a task can be done in $n_1$ ways or $n_2$ ways, the total is $n_1 + n_2$ minus the ways that they have in common.
+
+\item
+This is literally just shit I did in mathcounts.
+\end{itemize}
+
+
+\chapter{Pigeon Hole Principle}
+come on now
+
+Nah this'll actually be on the test I am gonna review this.
+
+
+\chapter{Permutations and Combinations}
+\section{Permutations}
+set of objects in ordered arrangements.
+
+Amount of permutations in an $n$ set is $n!$.
+
+Amount of $r-$permutations of $n$ items where $r \leq n$
+\[
+\frac{n!}{(n-r)!} = p(n, r)
+\]
+God this is dumb
+
+\newpage
+\section{Combinations}
+$C(n, r)$ is an $r-$element subset of $n$ (ordering doesn't matter)
+\[
+C(n, r) = \frac{p(, r)}{r!} = \frac{n!}{r!(n-r)!}
+\]
+How many 5 element subsets of a deck of cards?
+\[
+\frac{52!}{(5!)47!}
+\]
+\newline
+
+How many ways can you write the word SYSTEMS (permutations). There are repeated numbers so you gotta do some funky stuff.
+
+You have a couple strategies. First, think of all the letters as distinct, and then divide by the ways you can permute your repeated numbers. Doing this, you get 7!/3!.
+
+Another way you can do it is by thinking about iteratively and just plopping the repeated numbers at the ends, so if you have 7 slots, the 1st slot has 7 options, the 2nd 6, the 3rd 5, the 4th 4, and the last 3 numbers are all S so you only have 1 available option. Using this you get $7*6*5*4 = 7!/3!$.
+
+\newpage
+You have a committee of 7 women and 4 men, find all the combinations of 3 women and 2 men. Use product rule.
+\[
+\begin{pmatrix}7 \\ 3 \end{pmatrix}
+\cdot
+\begin{pmatrix}4 \\ 2 \end{pmatrix}
+\]
+
+equal number of men and women.
+\[
+\begin{pmatrix}7 \\ 1 \end{pmatrix}
+\begin{pmatrix}4 \\ 1 \end{pmatrix}
++
+\begin{pmatrix}7 \\ 2 \end{pmatrix}
+\begin{pmatrix}4 \\ 2 \end{pmatrix}
++
+\begin{pmatrix}7 \\ 3 \end{pmatrix}
+\begin{pmatrix}4 \\ 3 \end{pmatrix}
++
+\begin{pmatrix}7 \\ 4 \end{pmatrix}
+\begin{pmatrix}4 \\ 4 \end{pmatrix}
+\]
+
+4 people, 1 is always Bob
+\[
+\begin{pmatrix} 10 \\ 3 \end{pmatrix}
+\]
+
+4 people, at least 2 women
+\[
+\begin{pmatrix}7 \\ 2 \end{pmatrix}
+\begin{pmatrix}4 \\ 2 \end{pmatrix}
++
+\begin{pmatrix}7 \\ 3 \end{pmatrix}
+\begin{pmatrix}4 \\ 1 \end{pmatrix}
++
+\begin{pmatrix}7 \\ 4 \end{pmatrix}
+\begin{pmatrix}4 \\ 0 \end{pmatrix}
+\]
+
+
+\section{Combinatorial Proof}
+Count the same thing in 2 ways (?)
+
+Prove
+\[
+\sum^n_{i=0}\begin{pmatrix}n\\ i \end{pmatrix} = 2^n
+\]
+\[
+\begin{pmatrix} n \\ 1 \end{pmatrix}
++
+\begin{pmatrix} n \\ 2 \end{pmatrix}
++
+\cdots
++
+\begin{pmatrix} n \\ n \end{pmatrix}
+\]
+How did we prove shit what
+
+\newpage
+Prove
+\[
+\begin{pmatrix} n \\ k \end{pmatrix}
+\begin{pmatrix} k \\ m \end{pmatrix}
+=
+\begin{pmatrix} n \\ m \end{pmatrix}
+\begin{pmatrix} n-m \\ k-m \end{pmatrix}
+\]
+Select $k$ people out of $n$ and $m$ leaders out of that $k$. Like matryoshka dolls.
+
+Select $m$ people out of $n$ and then select $k-m$ losers out of $n-m$.
+
+I think this is the same as 52 choose 5 and 52 choose 47 being equal.
+
+HWAT THE FUCK IS HAPPENING HSDUILAHGUiwljskadxviulraug
+
+Prove
+\[
+\begin{pmatrix} r \\ r \end{pmatrix}
++
+\begin{pmatrix} r+1 \\ r \end{pmatrix}
++
+\cdots
++
+\begin{pmatrix} n \\ r \end{pmatrix}
+=
+\begin{pmatrix} n+1 \\ r+1 \end{pmatrix}
+\]
+Using the funky sum rule to determine where the last guy in the $r+1$ out of $n+1$ sits.
+
+
+\chapter{Binomial Coefficients and Identities}
+MIDTERM: everything before combinations and permutations inclusive. No combinatoric proofs (thank the lords)
+
+
+Permutation: counting ordered things
+
+Combination: counting unordered things. 
+\[
+C(n, r) = \begin{pmatrix} n \\ r \end{pmatrix} =  \textrm{ "binomial coefficient"}
+\]
+
+Combinatorial Proof = proof by counting
+\[
+\begin{pmatrix}
+m+n \\ k
+\end{pmatrix}
+=
+\sum^k_{r=0} \begin{pmatrix}
+m \\ r \end{pmatrix}
+\begin{pmatrix}
+n \\ n-r 
+\end{pmatrix}
+\rightarrow
+\textrm{ Vandermonde's Identity}
+\]
+\[
+\begin{pmatrix} 7 \\ 5 \end{pmatrix}
+=
+\begin{pmatrix} k-7 \\ k-5 \end{pmatrix}
+\textrm{ I still don't get it}
+\]
+\[
+\sum^n_{k=0}(-1)^k \begin{pmatrix} n \\ ks \end{pmatrix}
+\]
+HW: Find combinatorial proof or interpretation.
+
+$(x +y)^3$
+\[
+\begin{pmatrix} 3 \\ 3 \end{pmatrix} x^3 + 
+\begin{pmatrix} 3 \\ 2 \end{pmatrix} x^2y + 
+\begin{pmatrix} 3 \\ 1 \end{pmatrix}y^2x + 
+\begin{pmatrix} 3 \\ 0 \end{pmatrix} y^3
+\]
+Binomial Theorem
+\[
+(x+y)^n = \sum^n_{i=0} \begin{pmatrix} n \\ i \end{pmatrix} x^iy^{n-i}
+\]
+x=1, y=1
+\[
+(x+y)^n =  \sum^n_{i=0} \begin{pmatrix} n \\ i \end{pmatrix} = 2^n
+\]
+x=-1, y=1
+\[
+0 =  \sum^n_{i=0} \begin{pmatrix} n \\ i \end{pmatrix} -1^i
+\]
+x=2. y=1
+\[
+3^n =  \sum^n_{i=0} \begin{pmatrix} n \\ i \end{pmatrix} 2^i
+\]
+HW: do it
+
+These goofy things are all binomial identities.
+
+Find coefficient of $x^{12}y^{13}$ in $(2x+3y)^{25}$
+\[
+\begin{pmatrix} 25 \\ 12 \end{pmatrix} (2x)^{12}(3y)^{13}
+\]
+
+\section{Pascal's Triangle Shenanigans}
+Necessary Binomial Identity
+\[
+\begin{pmatrix} n \\ k \end{pmatrix}
+=
+\begin{pmatrix} n-1 \\ k \end{pmatrix}
++
+\begin{pmatrix} n-1 \\ k-1 \end{pmatrix}
+\]
+Case 1: $a$ is in the set $\begin{pmatrix} n-1 \\ k-1 \end{pmatrix}$
+
+Case 2: $a$ is in the set $\begin{pmatrix} n-1 \\ k \end{pmatrix}$
+
+Pascal's Triangle
+\[
+\begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\]
+\[
+\begin{pmatrix} 1 \\ 0 \end{pmatrix} 
+\begin{pmatrix} 1 \\ 1 \end{pmatrix} 
+\]
+\[
+\begin{pmatrix} 2 \\ 0 \end{pmatrix}
+\begin{pmatrix} 2 \\ 1 \end{pmatrix}
+\begin{pmatrix} 2 \\ 2 \end{pmatrix} 
+\]
+=
+\[
+1
+\]
+\[
+1 1
+\]
+\[
+1 \, 2 \, 1
+\]
+
+There's a whole bunch of goofy patterns here, such as the hockey stick identity which I am free to google later.
+\[
+\begin{pmatrix} r \\ r \end{pmatrix} +
+\begin{pmatrix} r+1 \\ r \end{pmatrix} 
++
+\cdots
++
+\begin{pmatrix} n \\ r \end{pmatrix} =
+\begin{pmatrix} n+1 \\ r+1 \end{pmatrix}
+\]
+
+\newpage
+\subsection*{Estimating Binomial Coefficients}
+Dumb bounds for the coefficient are 
+\[
+0 \leq \begin{pmatrix} n \\ k \end{pmatrix} \leq n! \hspace{1cm}
+0 \leq \begin{pmatrix} n \\ k \end{pmatrix} \leq 2^n
+\]
+\[
+\begin{pmatrix} n \\ k \end{pmatrix} = \frac{n!}{k!(n-k)!} = \frac{n(n-1)(n-2)\cdots(n-k)}{k!}
+\]
+\[
+\frac{n-i}{k-i} \geq \frac{n}{k}
+\]
+so
+\[
+\frac{n}{k} \cdot \frac{n-1}{k-1} \cdots \frac{n-k}{1} \geq \left( \frac{n}{k} \right)^k
+\textrm{ boom lower bound}
+\]
+Higher bound is $e^k\left( \frac{n}{k} \right)^k$ via shenanigans
+
+Fact
+\[
+k! \geq \left( \frac{k}{e} \right)^k 
+\]
+Taylor expansion
+\[
+e^x \sum^\infty_{i=0}\frac{x!}{i!} 
+\hspace{1cm}
+e^k \geq \frac{k^k}{k!}
+\hspace{1cm}
+\left( \frac{e}{k} \right)^k \geq 
+\left( \frac{1}{k!} \right)
+\hspace{1cm}
+k! \geq \left( \frac{k}{e} \right)^k
+\]
+
+
+\chapter{Generated Permutations and Combinations}
+How many ways to subset four fruits combining apples, oranges, pears, order does not matter, only type of fruit and quantity.
+
+\section{Stars and Bars}
+\begin{center}
+\begin{tabular}{c | c | c c}
+A & P & O & O
+\end{tabular}
+or 
+\begin{tabular}{c | |c  c c}
+A & O & O & O
+\end{tabular}
+or
+\begin{tabular}{c  | c  c c |}
+A & P & P & P
+\end{tabular}
+\end{center}
+
+The bars are showing a change in fruit. For $n$ options, you need $n-1$ bars, and there are $k$ stars for $k$ items that you need. The formula for finding combinations (unordered) is 
+\[
+\begin{pmatrix} n+k -1\\ k-1 \end{pmatrix}
+\textrm{ pick $n$ things out of $k$ distinct options}
+\]
+
+You can do some goofy shit with Diophantine equations but I wasn't paying enough attention to see what was happening.
+\[
+x + y + z = 11 \textrm{ how many integer solutions}
+\]
+11 stars 2 bars to $\begin{pmatrix} 13 \\ 2 \end{pmatrix}$.
+
+How many ways to permute SUCCESS
+
+Can do it iteratively starting with S and then C and then the others
+
+7 options for 3 S's, 4 options for 2 C's, and 1.2 and 1.1 for the other
+\[
+\begin{pmatrix}7 \\ 3 \end{pmatrix}
+\begin{pmatrix}4 \\ 2 \end{pmatrix}
+\begin{pmatrix}2 \\ 1 \end{pmatrix}
+\begin{pmatrix}1 \\ 1 \end{pmatrix}
+=
+\frac{7! \times 4! \times 2!}
+{
+3! \times 4! \times 2! \times 2! \times 1
+}
+=
+\frac{
+7!}
+{
+3! 2!}
+\]
+That coincides from the answer we got doing it other ways.
+
+Theorem: the number of permutations of $n_1$ objets of type 1, $n_2$ objects of type 2 $\ldots$ $n_k$ objects of type $k$.
+\[
+\frac{n!}
+{
+n_1! n_2! n_3! \ldots n_k!
+}
+\]
+
+
+\section{trinomial theorem}
+\[
+(x+y+z)^n = \sum_{a+b+c=n}x^ay^bz^c
+=
+\begin{pmatrix}n \\ a \end{pmatrix}
+\begin{pmatrix}n-a \\ b \end{pmatrix}
+\begin{pmatrix}n-a-b \\ c \end{pmatrix}
+=
+\]
+\[
+\frac{n!}{a! b! c!}
+=
+\begin{pmatrix}n \\ a,b,c \end{pmatrix}
+\textrm{ trinomial theorem}
+\]
+You're solving for $a + b + c = n$ which is a diophantine equation so you can find the total amount of things in your trinomial equation with $\begin{pmatrix}n+2 \\ 2 \end{pmatrix}$
+
+\subsection*{Quick mafs}
+\[
+\begin{pmatrix}n \\ a \end{pmatrix}
+\begin{pmatrix}n-a \\ b \end{pmatrix}
+\begin{pmatrix}n-a-b \\ c \end{pmatrix}
+=
+\frac{n!(n-a)!(n-a-b)!}
+{
+a!(n-a)!b!(n-a-b)!c!(n-a-b-c)!
+}
+\]
+\[
+=
+\frac{n!}
+{
+a!b!c!(n-a-b-c)!}
+=
+\frac{n!}
+{
+a!b!c!}
+\]
+because $n-a-b-c=0$.
+
+\subsection*{back to actual math}
+Many counting problems can be phrased as putting objects into boxes.
+
+Are the objects distinguishable? Are the boxes distinguishable?
+
+52 cards, how many ways to give 5 cards to 4 players.
+
+Think about it iteratively.
+\[
+\begin{pmatrix} 52 \\ 5 \end{pmatrix}
+\begin{pmatrix} 47 \\ 5 \end{pmatrix}
+\begin{pmatrix} 42 \\ 5 \end{pmatrix}
+\begin{pmatrix} 37 \\ 5 \end{pmatrix}
+=
+\frac{52!}
+{5! \cdot 5! \cdot 5! \cdot 5! \cdot 32!}
+\]
+
+
+\section{Identical Objects into Distinguishable Boxes}
+60 golf balls into 10 boxes
+\[
+b_1 + b_2 + \ldots b_10 = 60
+\]
+n = 60, 10-1 = 9 sticks
+\[
+\begin{pmatrix}69 \\ 9 \end{pmatrix}
+\]
+
+\section{Distinguishable Objects in Indistinguishable Boxes}
+4 people into 3 indistinguishable boxes
+\[
+\{ A, B, C, D \}
+\]
+How to partition $n$ thing into $i$ subsets
+\[
+S(4, 3) + S(4, 2) + S(4, 1)
+\]
+
+
+\section{Indistinguishable Objects in Indistinguishable Boxes}
+How many ways to partition 5
+(4+1, 1+2+1+1, etc.)
+
+No closed formula, just brute force iit
+
+
+\chapter{Probabilistic Method / Expectation / Variance}
+We want lower bounds on $R(k,k)$ where $R(k,k)$ is the ramsey theory thing
+
+Theorem: $R(k,k) > 2^{k/2}$ for $k > 4$.
+
+Say you have $n$ people at a party where $n < 2^{k/2}$. For each pair of people, flip a coin if they are friends or enemies.
+
+Let $E_1$ be the event that there is a group of mutual friends or enemies
+\[
+Pr(E_1) = \frac{2}{2^{k/2}}
+\]
+
+make a bunch of insane upper bound assumptions and hope for the best.
+
+
+Expectation:
+
+Expectation = average of a bunch of dice rolls
+
+
+what the fuck is an RV
+
+
+what is the expectation of the binomial distribution
+\[
+Pr(x=k) = {n \choose k} p^k (1-p)^{n-k}
+\]
+idfk but i saw a $\cap p$
+
+It takes on average 6 dice rolls to get a 1 but via spme obscene series shenanigans I dont get.
+\[
+\frac{1}{6}\sum^\infty_{n=1}n*(\frac{5}{6})^{n-1} = \frac{1/6}{(1 - 5/6)^2} = 6
+\]
+
+Whatis the expected number of inversions in n randomly ordered sequential numbers (an inversion is a larger number before a smaller number)
+\[
+\frac{n(n-1)}{4}
+\]
+
+Variance
+\[
+Vx) = E[x^2] - E[x]^2
+\]
+
+
+variance of a dice roll is 35/12
+
+Please for the love of god just read the goddamn textbook.
+
+
+
+\chapter{Application of Recurrence Relations}
+Recursive functions: Merge sort, Factorial, Fibonacci Sequence
+
+Let bacteria grow exponentially and have 5 at hour 0.
+\[
+a_0 = 5, \hspace{1cm}
+a_n = 2a_{n-1}
+\]
+ All we're gonna do is set up these goddamn recursion pieces of shit.
+ 
+\section{Breeding Rabbits}
+ 
+ Don't breed until 2 months, then each pair makes a new pair. rabbits dont die. The mature rabbits make a new pair each month.
+ \[
+ f_n = f_{n-1} + f_{n-2}
+ \]
+ $f_{n-1}$ is everyone born the month before
+ 
+ $f_{n-2}$ is all of the new pairs.
+
+If you make a table it will all make sense.
+
+\section{domino covering}
+you have a 2 by $n$ chess board. How many ways can you cover the chess board with either $2 \times 1$ or $1 \times 2$ dominoes. For every $1 \times 2$ domino you have to put a second $1 \times 2$ domino to make a square.
+ \[
+ f_n = f_{n-1} + f_{n-2}
+ \]
+$f_1 = 1$ and $f_2 = 2$ boom you have the fibonacci sequence again.
+
+
+\section{Bit Strings}
+Find the total number of bit strings with no consecutive 0's.
+
+1 + the rest of the string which is $a_{n-1}$
+
+0 + the rest of the string minus 2 which is $a_{n-2}$
+\[
+a_n = a_{n-1} + a_{n-2}
+\]
+I genuinely don't get it but that's what the textbook is for.
+
+\section{Digit Strings}
+A sequence is good if it has an odd number of 0's. Set up a recurrence relation and initial condition to count the good sequences.
+
+$a_1 = 1$ and $a_2 = 18$ because
+
+you use $a_{n-1}$ and then you can choose from 1 to 9 inclusive which is 9 extra options so $9a_{n-1}$ is part of it.
+
+You can then add a 0 to all the wrong sequences of $a_{n-1}$ which is $10^{n-1} - a_{n-1}$ so the full relation is
+\[
+a_n = 9a_{n-1} + (10^{n-1} - a_{n-1})
+=
+a_n = 8a_{n-1} + 10^{n-1} 
+\]
+
+
+\section{Bracketing}
+how many ways can you bracket $x_1 \cdot x_2 \cdot \ldots \cdot x_n$
+
+Think about the dots themselves. There always has to be at least one dot outside of parentheses.
+\[
+C_n = \sum_{k=0}^{n-1}C_kC_{n-k}
+\]
+Obscenely goofy
+
+\section{Dynamic Programming (Scheduling)}
+1 classroom, $n$ classes, what is the total amount of students we can schedule.
+
+I have no fucking idea what is happening.
+
+
+\chapter{Solving Linear Recurrence Relations}
+A linear homogeeous recurrence relation of degree K is a recurrenece of the form
+\[
+a_n = c_1a_{n-1}
++
+c_2a_{n-2} +
+\ldots +
+c_ka_{n-k}
+\]
+Must be linear and must be homogeneous (all items are of the same order)
+
+Imagine
+\[
+a_n = a_{n-3} + a_{n-4}
+\]
+k = 4 because $c_1 = 0$ and $c_2 = 0$.
+
+\section{Characteristic equation}
+\[
+r_n = 
+c_1r^{n-1} + 
+c_2r^{n-2} + 
+\ldots + 
+c_kr^{n-k}
+\]
+Divide both sides by $r^{n-k}$
+\[
+r_k = 
+c_1r^{k-1} + 
+c_2r^{k-2} + 
+\ldots + 
+c_k
+\]
+So the characteristic equation is 
+\[
+r_k - 
+c_1r^{k-1} -
+c_2r^{k-2} -
+\ldots -
+c_k
+=
+0
+\]
+
+\section{Theorem}
+Let $a_1, a_2$ be real numbers. Suppose $r^2 - c_1r - c_2 = 0$ 
+has two distinct roots $r_1, r_2$. Then, $\{ a_n \}$ is the solution of
+\[
+a_n = c_1a_{n-1}
+c_2a_{n-2} +
+\ldots +
+c_ka_{n-k}
+\]
+IF
+\[
+a_n = 
+c_1r^{n-1} + 
+c_2r^{n-2} + 
+\ldots + 
+c_kr^{n-k}
+\textrm { for constants $a_1, a_2$}
+\]
+
+
+
+\section{example}
+Fibonacci Sequuence
+\[
+f_n = f_{n-1} + f_{n-2}
+\]
+Order 2 equation
+\[
+r^2 = r + 1
+\rightarrow
+r_2 - r - 1 = 0
+\]
+solve to get
+\[
+r_1 = \frac{1 + \sqrt{5}}{2},
+r_2 = \frac{1 - \sqrt{5}}{2}
+\]
+
+plug into $a$ equation to get
+\[
+f_1 = a_1 \frac{1 + \sqrt{5}}{2} + a_2 \frac{1 - \sqrt{5}}{2}
+\]
+
+ah shit she erased the board whatever that's alright
+
+
+\section{new example}
+\[
+a_n = 6a_{n-1} - 9 a_{n-2}
+\]
+
+$a_0 = 1$ and $a_1 = 6$
+
+$c_1 = 6, c_2 = -9$
+
+\[
+r^2 -6r + 9 = 0
+\rightarrow
+(r-3)^2 = 0, r_0 = 3
+\]
+\[
+a_n = a_1 3^n + a_2 3^n
+\rightarrow
+6 = 3 \alpha_1 + 3\alpha_2
+\]
+\[
+a_n = 3^n + n\cdot 3^n
+\]
+
+
+\section{new example}
+\[
+a_n = 
+6a_{n-1}
+- 11a_{n-2}
++
+6a_{n-3}
+\hspace{1cm}
+(a_0 = 2,a_1 =5, a_3 = 15)
+\]
+$c_1 = 6, c_2 = -11, c_3 - 6$
+\[
+r^3 - 6r^2 + 11r - 6 = 0
+\]
+guess $r = 1$, find that solution, and then do long division which I most definitely do not remember well enough to do on a midterm.
+
+get $r=2$ and $r=3$
+
+\begin{tabular}{c c c | c}
+1 & 1 & 1 & 2 \\ 
+0 & 1 & 2 & 3 \\
+0 & 3 & 8 & 13
+\end{tabular}
+
+Do Gaussian Elimination on the thing to solve for $a_1, a_2, a_3$.
+
+Dont ask me how she got the numbers idfk
+
+
+\chapter{Divide and Conquer}
+\[
+a_n = 4a_{n-1} - 3a_{n-2}
+\hspace{1cm}
+a_0 = 1, a_1 = 2
+\]
+The thing grows geometrically, so set up the things from last lesson
+\[
+r^2 - 4r + 3 = 0
+\]
+Solve for r
+\[
+(r-3)(r-1) = 0
+\]
+r = 3 and r = 1 give us the equation
+\[
+f(n) = c_13^n + c_21^n
+\rightarrow
+f(n) = c_13^n + c_2sd
+\]
+Set up as a matrix solving for $a_0$ and $a_1$
+\[
+\begin{pmatrix}
+1 && 1 && 1 \\
+3 && 1 && 2
+\end{pmatrix}
+\]
+Gaussian Elimination to solve to get
+\[
+c_1 = 1/2 
+\hspace{1cm}
+c_2 = -1/2
+\]
+
+\section{New Equation}
+Now try to solve the equation
+\[
+a_n = 3a_{n-1} + 2n
+\]
+Non-homogeneous solution so we arent allowed to use any of the other things that we tried before
+
+\subsection{Theorem}
+If $a_n^{(p)}$ is a particular solution of the nonhomogeneous solution linear recurrence relation 
+\[
+a_n = c_1a_{n-1} + c_2a_{n-2} + \ldots + c_ka_{n-k}
+\]
+Every solution where $a_n^k$ is the homogeneous solution of the something something something he fucking erased it goddamit.
+
+\section{Example}
+\[
+a_n = a_{n-1} + 2n,
+\hspace{1cm}
+ a_0 =3
+\]
+Just throw a number out and see what happens.
+\[
+a_n^k = c3^n
+\]
+Particular solution try $Cn + d = a_n$
+\[
+Cn+d
+=
+3(C(n-1)+d)+2n
+\rightarrow
+3cn - 3c +3d + 2n
+\rightarrow
+\]
+\[
+0
+=
+2cn + 2n + 2d - 3c
+\longrightarrow
+0 
+=
+n(2c+2) + (2d - 3n)
+\]
+\[
+2c + 2 = 0
+\hspace{1cm}
+2d - 3c = 0
+\]
+c = -1, d = -3/2
+
+\section{Divide and Conquer Algorithms}
+Merge sort is a divide and conquer algorithm.
+
+FInd an algorithm that takes an input n
+\[
+f(n) = 2f(n/2) + n
+\]
+Binary search an also a divide and conquer algorithm and it is $O(\log n)$ which is pretty damn fast.
+
+\subsection{Theorem}
+Let f be an incresing function such that 
+\[
+f(n) = af(n/2) = c
+\]
+Whenever n is divisible by b, $a \geq 1$, b is an integer greater than 1 and c is positive
+\[
+f(n) = 
+\begin{cases}
+O(n^{\log_bn}) \textrm{ if $a > 1$} \\
+O(\log(n)) \textrm{ if $n = 1$}
+\end{cases}
+\]
+
+\subsection{Proof}
+$n = b^k$ where $k$ is an integer.
+\[
+f(n) = f(b^k) = f(b^{k-1}) + c
+=
+a^kf(1)
++
+\sum^{k-1}_{i=0}a^ic
+\]
+geometric series shenanigans
+\[
+a^kf(1)
++
+\frac{a^k - 1}{a-1}
+=
+a^k (f(1) + \frac{c}{a-1}) - \frac{c}{a-1}
+\rightarrow
+\]
+\[
+a^k(C_1) + C_2 
+=
+n^{\log_ba}C_1 + C_2
+\]
+
+New thing
+
+suppose $b^k < n < b^{k-1}$ and 
+as f increases, $f(n) \leq b^{k+1}$
+\[
+a^kf(1) + \sum^{k-1}_{i=0}a^ic
+=
+O(\log_b(n))
+\]
+
+So because of nice math
+\[
+f(n/2) + c 
+=
+O(\log n)
+\]
+Doesn't work for merge sort $f(n) = f(n/2) + n$
+
+\section{Master Theorem}
+Let
+\[
+f(n) = af(n/b) = cn^d
+\]
+for $a \geq 1$, $n = b^k$ for integer $b$, $c, d$ are real numbers.
+\[
+f(n)
+=
+\begin{cases}
+O(n^d) \rightarrow a < b^d \\ 
+O(n^d\log n) \rightarrow a = b^d \\
+O(\log_ba) \rightarrow a > b^d
+\end{cases}
+\]
+
+\subsection{Example}
+\[
+f(n) = 1000f(n/2) + 3n^2
+\]
+\[
+a = 1000, 
+b = 2,
+c = 3, 
+d = 2
+\]
+$1000 > 2^2$ so 
+\[
+f(n) = O(\log_21000)
+\]
+
+
+\chapter{Generating Functions}
+Let $a_1, a_2, a_3$ be a sequence. We want to 'know" the sequence.
+
+If there is a recurrence relation, then we can solve the sequence entirely.
+
+Let the generating function of the sequence be
+\[
+G(x) = \sum^\infty_{k = 0}a_kx^k
+\]
+manipulate them in a funky way to get the coefficients of the sequence to get something of value.
+
+Why do we care?
+
+\begin{itemize}
+\item
+Can sometimes be used to solve sequences exactly. 
+
+\item
+Can sometimes find recurrence relations.
+
+\item
+Can see asymptotic behavior of a sequence?
+
+\item
+is useful for finding statistics on your sequence (averages)
+\end{itemize}
+
+
+\section{Example}
+\[
+a_k = 3
+\hspace{1cm}
+\sum^\infty_{k = 1}3^k
+\]
+\[
+a_k = (k+1) 
+\longrightarrow
+\sum^\infty_{k = 1} (k + 1) x^k
+\]
+\[
+a_k = 2^k
+\longrightarrow
+\sum^\infty_{k = 1} 2^k x^k
+\]
+\[
+a_k = {m \choose k}
+\longrightarrow
+\sum^\infty_{k = 1} {m \choose k} x^k = (1 = x)^m
+\textrm{ Binomial Theorem}
+\]
+\[
+a_k = 1
+\longrightarrow
+\sum^\infty_{k = 1} x^k = \frac{1}{1-x}
+\]
+
+\section{Dfn:}
+Let $u \in \mathbb{R}$ nad $k \in \mathbb{N}$.
+\[
+{u \choose n} = 
+\begin{cases}
+\frac{u \cdot u - 1 \cdot (u - k + 1)}{k!} \textrm{ if $k > 1$}\\
+1 \textrm{ if $k = 0$}
+\end{cases}
+\]
+For example
+\[
+{1/2 \choose 3} = \frac{(1/2)(-1/2)(-3/2)}{3!}
+\]
+
+\section{Extended Binomial Theorem}
+Let $x$ and $u$ be real numbers such that $|x| < 1$
+\[
+(1 + x)^u = \sum^\infty_{k = 0} {-n \choose k} x^k
+\]
+proof by do calculus (Maclaurin Series)
+
+\[
+(1 + x)^{-n} = \sum^\infty_{k = 0} {n \choose k} x^k
+\]
+\[
+{-n \choose k} = \frac{-n (-n - 1) (-n - 2) \cdots (n-k+1)}{k!} \rightarrow
+\]
+\[
+(-1)^k \frac{n (n + 1) \cdots (n + k - 1)}{k!}
+\rightarrow 
+\]
+\[
+(-1)^k \frac{(n+k+1)!}{k!(n-1)!} = (-1)^k {n+k-1 \choose k}
+\]
+So
+\[
+ \sum^\infty_{k = 0} {-n \choose k} x^k
+=
+(-1)^k {n + k - 1 \choose k}x^k
+\]
+\[
+(1 - x)^{-n}
+ \sum^\infty_{k = 0} {-n \choose k} -x^k
+=
+(-1)^k {n + k - 1 \choose k}(-x)^k
+=
+ {n + k - 1 \choose k}x^k
+\]
+
+
+\section{Generating a Function Combinatorically}
+\[
+(1 - x)^{-n} = \left( \frac{1}{1-x} \right)^n = (1+x+x^2+x^3+\ldots)^n
+\]
+Let $y_1$ be the number of $x's$ you buy at the store.
+
+$k$ hotdogs and $n - 1$ sticks
+\[
+{n - 1 + k \choose k}
+\]
+
+
+\section{He's going too fast for me ahhhh}
+Counting Problem
+\[
+e_1 + e_2 + e_3 = 17
+\]
+Where
+\[
+2 \leq e_1 \leq 5
+\hspace{1cm}
+3 \leq e_2 \leq 6
+\hspace{1cm}
+4 \leq e_1 \leq 7
+\]
+\[
+(x^2 + x^3 + x^4 + x^5)
+(x^3 + x^4 + x^5 + x^6)
+(x^4 + x^5 + x^6 + x^7)
+\]
+We want the coefficient of $x^{17}$
+
+Factor out x's
+\[
+x^9 (1 + x + x^2 + x^3)^3
+\]
+Want coefficient of $x^8$
+\[
+3 \textrm{ via shenanigans}
+\]
+
+\section{Another Example}
+How many ways to select $r$ types of objects from $n$ if we must select at least 1 of each object.
+
+Treat each object as a store and we must buy at least 1 object
+\[
+(x+x^2+x^3 + \ldots )^r
+\]
+We want the coefficient of $x^n$
+\[
+x^r (1 + x+x^2+x^3 + \ldots )^r
+=
+x^r \sum^\infty_{k=0} {r+k-1 \choose k} x^k
+=
+\]
+Bring the $x^r$ on the inside
+\[
+ \sum^\infty_{k=0} {r+k-1 \choose k} x^{k+r}
+\]
+Find the coefficient for $x^{k+r} = x^t$ so $t = k+r, k = t -r$
+\[
+ \sum^\infty_{k=0} {t-1 \choose t-r} x^{t}
+\]
+So our coefficient is 
+\[
+{t-1 \choose t-r}
+\]
+for $x^t$
+
+
+\section{I'm gonna cry}
+Find generating function for $a_n = n$
+\[
+\sum^\infty_{k=0} k x^k
+\]
+We know that 
+\[
+\sum^\infty_{k=0} x^k = \frac{1}{1-x}
+\]
+Take the goddamn derivative and do some bullshit to get
+\[
+\sum^\infty_{k=0} k x^k = \frac{x}{(1-x)^2}
+\]
+
+
+\section{Generating Functions from Recurrence Relations}
+$a_k = 3a_{k-1} $ for $k \geq 1$ and $a_0 = 2$
+\[
+G(x) 
+= 
+\sum^\infty_{k=0}a_k x^k
+\]
+We know that 
+\[
+a_k - 3a_{k-1} = 0 \textrm{ for } k \geq 1
+\]
+\[
+xG(x) 
+= 
+\sum^\infty_{k=0}a_k x^{k+1}
+=
+\sum^\infty_{k=1}a_{k-1} x^{k}
+\]
+\[
+G(x) - 3xG(x) = 
+\sum^\infty_{k=0}a_k x^k
+-
+3x \sum^\infty_{k=1}a_{k-1} x^{k}
+=
+\]
+\[
+a_0
++
+\sum^\infty_{k=1}a_k x^k
+-
+3x \sum^\infty_{k=1}a_{k-1} x^{k}
+\longrightarrow
+\]
+\[
+a_0 + \sum^\infty_{k=1} (a_k - 3a_{k-1}) x^k
+=
+a_0 
+=
+2
+\]
+
+\section{Fibonacci Sequence}
+\[
+f_k = f_{k-1} + f_{k-2}
+\]
+\[
+G(x) = \sum^\infty_{k=0} f_k x^k
+\]
+\[
+G(x) - x(G(x)) - x^2(G(x)) = f_0 + f_1 = 1
+\]
+\[
+G(x) = \frac{1}{1 - x - x^2}
+\]
+
+
+\chapter{More Generating Functions}
+\[
+(1 + x^2 + x^4 + x^6 = x^8 + x^{10})^2(x^3+x^4 + x^5)^3
+\]
+Find generating function
+
+\section{Theorem?}
+generating function for $a_r$ distribute $r$ identical objects into five distinct objects . The first two boxes have even number and the rest 10. Between 3 and 5 for the other three boxes
+\[
+e_1 = e_2 + e_3 + e_4 = e_5 = r
+\]
+\[
+e_1,e_2 \% 2 = 0 
+\hspace{1cm}
+0 \leq e_1, e_2 \leq 10
+\]
+\[
+3 \leq e_3, e_4, e_5 \leq 5
+\]
+
+\section{Permutation Example}
+How many ways to distribute 25 identical balls into seven distinct boxes, such that the first box has at most 10
+\[
+(x^3+x^4 + x^5 = \ldots + x^{10})(1 + x + x^2 + \ldots)^6
+\]
+We want coefficients of $x^{25}$ we use binomial bs?
+\[
+(1 - x)^{11} \left( \sum^\infty_{k=0} {7 - 1 - k \choose k}x^k \right)
+\]
+Case 1: we pick $1: {6 + 25 \choose 25}$
+
+Case 2: we pick $-x^{11}: {6 + 14 \choose 14}$
+\[
+\textrm{Total: } {30 \choose 25}  - {20 \choose 14}
+\]
+
+\section{Proof by Generating Function}
+Let's prove
+\[
+{n \choose 0}^2 + {n \choose 1}^2 + \ldots + {n \choose n}^2 = {2n \choose n}
+\]
+\[
+(x+1)^{2n} \textrm{ What is the coefficient of $x^n$} {2n \choose n}
+\]
+\[
+\textrm{Binomial Theorem: } (x + 1)^m = \sum^n_{k = 0} {m \choose k}x^k y^{m-k}
+\]
+\[
+(x + 1)^{2n} = (x + 1)^n(x + 1)^n \textrm{ what is the coefficient of $x^n$}
+\]
+\[
+(x+1)^n = \sum^n_{k=0} {n \choose k} + {n \choose 0} + {n \choose 1} + \ldots + {n \choose n}
+\]
+\[
+(x+1)^n(x+1)^n = \sum^n_{k=0} {n \choose k}{n \choose k} 
++ 
+{n \choose 0}{n \choose 0} 
++ 
+{n \choose 1}{n \choose 1} 
++ 
+\ldots 
++ 
+{n \choose n}{n \choose n}
+\]
+
+\section{Obscene Theorem Please Ignore?}
+\[
+f_n = f_{n-1} + f_{n-2}
+\]
+\[
+C(x) = \frac{1}{1 - x - x^2}
+\]
+How many ways to correctly label the parentheses of $x_1 + x_2 + \ldots + x_n$
+\[
+C_n = \sum^{infty}_{k = 0}C_kC_{n-1-k}
+\]
+Catalan Numbers
+\[
+C(x) = \sum^{\infty}_{n = 0}C_nx^n
+\]
+\[
+C(x) = 1 + x(C(x))^2
+\]
+Quadtratic formula
+\[
+C(x) = \frac{1 - \sqrt{1 - 4x}}{2x}
+\]
+\[
+(1 + y)^{1/2} = \sum^{\infty}_{n = 0}{1/2 \choose n}y^n
+\]
+I'm so fucking confused.
+
+I'm hsdjfnjilas dnfjskLDNX.JGEAWo;wilesdM
+
+This guy just fucking talks
+
+WHAT THE FUCK IS HE GOING ON ABOUT HE IS GOING SO GODDAMN FAST PROVING THIS RANDOM ASS THEOREM THAT 
+
+He's done that was fucking insane
+\[
+C_n = \frac{1}{n+1} {2n \choose n}
+\]
+
+\section{Partitions}
+There's still no closed formula but we're just going to extra prove that.
+
+How many partitions
+\[
+e_1 + 2e_2 + 3e_3 + \ldots + re_r = r
+\]
+\[
+(1+x+x^2+\ldots)
+(1 + x^2 + x^4 + x^6 + \ldots)
+(1 + x^3 + x^6 + x^9 + \ldots)
+(\ldots) \ldots
+\]
+Geometric series
+\[
+\frac{1}{1-x}
+\cdot
+\frac{1}{1 - x^2}
+\cdot
+\frac{1}{1 - x^3}
+\ldots
+\frac{1}{1 - x^r}
+\]
+Find the coefficient of $x^n$ which is pretty difficult because there are alot of things to multiply
+
+How many partitions of 1000 into 1's and 2's
+\[
+e_1 + 2e_2 = 1000
+\longrightarrow
+\underset{a}{
+\frac{1}{1-x}
+}
+\cdot
+\underset{b}{
+\frac{1}{1 - x^2}}
+ = 1000
+\]
+Find coefficient of $x^1000$
+\[
+\sum^{1000}_{i=0}a_ib_{1000-i} = \sum^{1000}_{i = 0}b_{1000 - i}
+=
+500
+\]
+
+
+
+\chapter{Inclusion and Exclusion}
+You know how a venn diagram works? Then you're good
+
+How many positive integers not exceeding 100 are divisible by 7 or 11
+
+The amount of divisible integers is the floor of dividing the two numbers.
+
+14 items are divisible by 7. 9 are divisible by 11. Only 1 is divisible by both. Answer is 22
+
+There's a theorem for larger venn diagrams because trying to do a 4 venn diagram is absurd but i will write it down later because inclusion and exclusion i get intuitively so eh.
+
+\subsection*{Actually interesting example}
+Find the amount of 26 letter permutations that do not contain the strings "fish", "rat", and "bird".
+
+There are $26!$ total strings, there are $23!$ that do not contain fish, $24!$ that don't contain rat, and $23!$ that don't count bird. There are $21!$ strings that contain both fish and rat, and 0 for the other two intersections because they have overlapping letters. That also means there are 0 that contain all 3, so.
+\[
+C = 26! - 23! -24! - 23! + 21!
+\]
+
+
+
+\chapter{Applications of Inclusion/Exclusion}
+\[
+(A_1 \cup A_2 \cup \ldots \cup A_n) 
+= 
+\sum A_i 
++ 
+\sum A_i \cap A_j 
+-
+\sum A_i \cap A_j \cap A_k 
++ 
+\ldots
+-
+\]
++ some other alternating shit idk
+
+Let $A_i$ be the set of things with property p
+\[
+N(p_1, \ldots , p_n)
+=
+(A_1 \cup A_2 \cup \ldots \cup A_n)
+\textrm{ all the things with property p}
+\]
+
+\section{Example}
+Find all the solutions of $x_1 + x_2 + x_3 = 11$ where $x_1 \geq 4$, $x_2 \geq 5$ and $x_3  \geq 7$
+\[
+N(\overline{p_1}, \overline{p_2}, \overline{p_3})
+=
+N - N(p_1) - N(p_2) - N(p_3) + N(p_1, p_2) + N(p_2, p_3)
+\]
+\[
+ + N(p_1, p_3 - N(p_1, p_2, p_3)
+\]
+Now do some bullshit with
+\[
+x_1 + x_2 + x_3 = 11 
+\hp
+x_1 \geq 4
+\]
+\[
+y_1 = x_1 - 4 \geq 0
+\]
+\[
+(y_1 + 4) + x_2. + x_3 = 11
+\]
+\[
+y_1 + x_2 + x_3 = 7
+\]
+Now there's no contraint and just all of em are greater than or equal to 0.
+
+you get the n choose k's using stars and bars which is an important things to no the formula for.
+\[
+N(p_1) = {9 \choose 2}
+\]
+\[
+N(p_2) = {8 \choose 2}
+\]
+\[
+N(p_3) = {6 \choose 2}
+\]
+\[
+N(p_1, p_2) = {4 \choose 2}
+\]
+\[
+N(p_2, p_3) = 0
+\]
+\[
+N(p_1, p_3) = 1
+\]
+\[
+N(p_1, p_2, p_3) = 0
+\]
+
+\section{omg primes}
+Algorithm to find the total amount of prime numbers less than $n$
+
+Use the sieve of eratosthenes and subtract the intersections of multiple.
+for $n = 100$ you only need multiples for $k \leq 10$ which are the multiples of $2, 3, 5, 7$
+
+$p_1$ = divisible by 2
+
+$p_2$ = divisible by 3
+
+$p_3$ = divisible by 5
+
+$p_4$ = divisible by 7
+
+the number of primes is 4 + $N(\overline{p_1}, \overline{p_2}, \overline{p_3}, \overline{p_4})$
+
+Do the goofy $N$ formula
+\[
+N = 99
+\]
+\[
+N(p_1) = \lfloor 100/2 \rfloor
+\]
+\[
+N(p_1, p_4) = \lfloor 100/2*7 \rfloor
+\]
+etc etc do the dumb shit and solve to get 21 + 4 = 25
+
+
+
+\section{new example}
+how many onto functions map 6 elements onto 3 elements.
+
+$p_1$ = functions dont map to $b_1$
+
+$p_2$ = functions dont map to $b_2$
+
+$p_3$ = functions dont map to $b_3$
+\[
+N = 3^6
+\]
+\[
+N(p_1) = 2^6
+\]
+\[
+N(p_2) = 2^6
+\]
+\[
+N(p_3) = 2^6
+\]
+\[
+N(p_1, p_2) = 1^6
+\]
+\[
+N(p_3, p_2) = 1^6
+\]
+\[
+N(p_1, p_3) = 1^6
+\]
+\[
+N(p_1, p_2, p_3) = 0
+\]
+you can generalize this pretty easily.
+
+
+
+
+"In chess, you gamble pieces. In proof by contradiction, you gamble the entire game"
+
+"you say a statement is falls and then the game blows up and you win"
+\begin{center}
+\textbf{ END OF MATERIAL THAT WILL BE ON THE MIDTERM}
+\end{center}
+
+
+
+
+\chapter{Relations}
+Let $A$ and $B$ be sets, $A \times B$ is all ordered pairs $\{ a, b \}$ such that $a \in A$ and $b \in B$, and it's called the Cartesian product.
+
+A Primary Relation from $A$ to $B$ is a subset of $A \times B$.
+
+if $R \subseteq A \times B$, and $(a, b) \in R$, we write $aRb$
+
+Let $f$ be a function from $A$ to $B$. The graph of the function of all the pairs $(a, b)$ such that $F(a) = b$.
+The graph of the funtion is a relation.
+
+A relation on a set $A$ is a relation $R \subseteq A \times A$.
+
+$R_A$ has a size of $2^{n^2}$ if $A$ is size $n$ because $A \times A$ has size $n^2$.
+
+Relations on $\{1, 2, 3, 4\}$
+
+It's just the power set of the all of the ordered pairs in the set idc.
+
+\subsection{Reflexive}
+A relation is reflexive if it contains $(a, a)$ for all $a \in A$
+
+\subsection{Symmetric}
+A relation is symmetric if $(b, a)$ is in $R$ for all $(a, b)$ in $R$.
+
+\subsection{Antisymmetric}
+A relation is antisymmetric if $(a, b), (b, a) \in R \iff a = b$.
+
+\subsection{Transitive}
+A relation is transitive if $\forall (a, b), (b, c) \in R, (a, c) \in R$.
+
+Let $R$ be a relation from $A$ to $B$ and let $S$ be a relation from $B$ to $C$.
+
+The composite of $R$ and $S$ consists of all $a, c$ such that $(a, b) \in R$ and $(b, c) \in S$.
+Written at $R \circ S$.
+
+
+
+\chapter{Equivalence Relations}
+A relation is an equivalence relation if it is reflexive, symmetric, and transitive.
+
+$aRb \iff a = b$ is an equivalence relation.
+
+That's it, you can go home.
+
+Okay the relations with regards to statements are kind of interesting but i dont give a fuck its not on the midterm its also relations so i am not worried in the slightest.
+
+mans is talking about shapes now
+
+\section{Partition}
+Partition of a set $S$ is a collection of disjoint nonempty subsets of $S$ whose union is $S$.
+
+A Collection of subsets $A$ if something interset of S iff
+\[
+A \neq \varnothing
+\]
+\[
+A_i \cap A_j = \varnothing
+\]
+\[
+\underset{i \in Z}{\bigcup} A = S
+\]
+\subsection{Thm}
+Let $R$ be an equivalnce relation on a set $S$. Then the equivalence class of $R$ form a partition of $S$. Conversely, given a partition $\{A_i | \in I \}$ of the set $S$, there i an equivalence relation $R$ that has the sets $A_i$.
+
+i'll look at my goddamn number theory notes from highschool.
+
+A partial ordering is a relation thats reflexive, antisymmetric, and transitive.
+
+
+\chapter{Graph Isomorphisms}
+It's a good thing I came here but I can't draw pictures so we'll figure out how much I can actually do. But I'm guessing that on Monday we went over graph theory and I skipped it because I was too busy dying.
+
+How to make a graph without actually drawing it but actually I can use my phone
+
+\section{Adjacency List}
+you just write what every node is connected to and you can build a graph off of that.
+
+Good for sparse graphs (few edges).
+
+A graph is $k$ regular if every vertex has degree $k$ ($k$ nodes)
+
+\section{Adjacency Matrix}
+\[
+\begin{bmatrix}
+0 && 1 && 1 && 1 \\
+0 && 0 && 0 && 1 \\
+0 && 1 && 0 && 0 \\
+0 && 1 && 1 && 0 
+\end{bmatrix}
+\]
+1 if connected, 0 if not connected.
+
+\begin{center}
+\begin{tabular}{ c | c | c | c | c }
+   & a & b & c & d \\ \hline
+a & 0 & 1 & 1 & 1 \\ \hline
+b & 0 & 0 & 0 & 1 \\ \hline
+c & 0 & 1 & 0 & 0 \\ \hline
+d & 0 & 1 & 1 & 0 
+\end{tabular}
+\end{center}
+
+Constant time look up, but $O(n^2)$ memory so very costly to build for large graphs.
+
+
+Pseudograph = graph with loops
+
+Multigraph = graph with multi-edges
+
+
+Go look up some beautiful definition of a graph that I was too busy not being alive to witness.
+
+\section{When are two graphs the same?}
+Two graphs are the same if you can relabel the vertices and get literally the exact same graph.
+
+
+\section{Isomorphism}
+Let $C_1 = (V_1, E_1)$ and $C_2 = (V_2, E_2)$ 
+An isomorphism from $C_1$ to $C_2$ is a bijective mapping from $V_1$ to $V_2$. 
+\[
+ab \in E_1 \iff f(a)f(b) \in E_2 \forall a,b \in V_1
+\]
+
+Graph invariants are graph properties that do not change under isomorphism. The amount of edges and the amount of vertices is a graph invariant.
+
+Degree sequence is a graph invariant
+
+max degree is a graph invariant. Min degree is a graph invariant. Avg degree is a graph invariant.
+
+How to determine if two graphs are isomorphic (Can we solve this problem in polynomial time??)
+
+%Babai, 2015 found one thats $2^{O(\log n^C)}$
+
+
+\section{IMPORTANT LEMMA}
+The sum of the degrees of a graph is 2 times the number of EDGES.
+
+
+\chapter{Connectivity}
+Define subgraph:
+
+Let $C = (V, E)$ be a graph. $H = (V', E')$ is a subgraph of $C$ if $V' \subset V$ and $E' \subset E$.
+\newline
+
+A walk in a graph is an alternating sequence of vertices and edges
+\[
+v_0, c_1 v_1, c_2 v_2, c_3 v_3 \ldots c_k v_k
+\]
+where $e_i = \{ v_i, v_{i - 1} \} \in E$
+
+A trail is a walk with no edges repeated.
+
+A path is a walk with no vertices or edges repeated
+\[
+\textrm{ path } \subset \textrm{ trail } \subset \textrm{ walk}
+\]
+This is completely different notation from the book because the book is wrong and stupid. The homework has goofy book notation but know in your brain that the book is wrong and dumb.
+
+\section{Theorem}
+Let $C = (V, E)$ be a graph. If there is a walk between vertices $u$ and $v$, then there is a path between vertices $u$ and $v$.
+
+Proof:
+
+Let $w$ be the shortest walk between $u$ and $v$.
+\[
+w = u e_1 v_1, \ldots, e_i w e_{i + 1} \ldots e_j w e_{j + 1} \ldots e_k v
+\]
+Let $w'$ 
+\[
+w' = u e_1 \ldots e_i w e_{j + 1} \ldots e_k v
+\]
+$w$ is a walk of shortest length is a contradiction.
+
+Basically every shortest walk must be a path
+
+\section{Dfn: connected}
+A graph is connected iff for every pair of vertices of the graph there is a walk/path jioning them. 
+
+We say a graph is disconnected otherwise.
+
+7 steps from Kevin Bacon and someone's Erdös number are examples of connected graphs.
+
+A maximally connected subgraph of a graph is a (connected) component.  A graph is connected iff it only has 1 component.
+
+A cut vertex of a graph is a vertex $v \in V$ such that $G - v$ is disconnected.
+
+A cut edge or a bridge is an edge $e \in E$ such that $G - e$ is disconnected .
+
+If you have a cut edge $\rightarrow$ you have a cut vertex (take the endpoint of the cut edge).
+
+I do not know what the notation $G - v$ or $G - e$ means but I'll sure find out by either Google or textbook
+
+\section{}
+A set of vertices $s \subseteq V$ is a vertex cut if $G - s$ is disconnected.  A graph is $k-connected$ if it has no vertex cut of size less than $k$.
+\[
+\kappa (G) = \textrm{ size of minimum vertex cut}
+\]
+\[
+\kappa (G) = \textrm{ min } dv = \sigma (v)
+\]
+Supposed you have a vertex $v$ such that $N(v) \neq G - v$. THen $N(v)$ is a vertex cut of the graph.
+
+\section{Theorem}
+If $G = (V, E)$ is not the complete graph, then it has a vertex cut.
+
+A set of edge $S \subseteq E$ is an edge cut if $G - E$ is disconnected .
+
+A graph $C$ is $k$-edge connected if it has no edge cut of sie smaller than $k$
+
+\[
+\Lambda (G) = \textrm{ min size of an edge cut}
+\]
+\[
+\kappa (G) \leq \Lambda (G) \leq \textrm{ min } d(v)
+\]
+
+
+\chapter{Eulerian and Hamiltonian Paths}
+\section{Eulerian Path}
+An Eulerian Path is a path that uses every edge exactly once
+
+\section{Eulerian Circuit}
+An Eulerian Circuit is a closed trail that uses every edge exactly once.
+
+
+If a multigraph G has an Eulerian Circuit:
+\begin{itemize}
+\item
+every vertex has to have an even degree
+\item
+has to be connected
+\end{itemize}
+These are necessary conditions
+
+\section{Theorem}
+A connected multigraph G has an Eulerian circuit iff every vertex has even degree.
+
+\subsection{Proof}
+Let G be a connected multigraph where every vertex has eve ndegree
+
+Let C be a closed trail of maximum length. Suppose $E(C) \neq E(G)$.
+
+We may suppose $|E(C)| > 0$
+
+because each vertex has a minimum degree of 2 so to make a closed cycle you have to reach a vertex twice.
+
+Consider $G' = G - E(C)$
+
+Let H be a non-trivial component o fG' suc hthat thtere exists a vertex $w \in v(h) \cup v(c)$.
+Note $|E(H)| < |E(C)|$.
+
+By induction (on the number of edges) H has an Eulerian Circuit $C'$ such that $w \in v(C)$.
+
+Consider $C \cup C' \to$ larger closed trail a contradicts started at $w$, walk C, then walk $C'$
+
+
+
+\section{Theorem}
+A connected multigraph with at least two vertices has an Eulerian path but not an Eulerian cycle iff it has exactly 2 vertices of odd degree.
+
+\section{Hamiltonian}
+A path is Hamiltonian if it contains every vertex
+
+A cycle is Hamiltonian if it contains every cycle.
+
+Finding Hamiltonian Cycles is NP-hard unfortunately.
+
+Two known sufficient conditions:
+\begin{itemize}
+\item
+Dirac's Theorem
+\item
+Ore's Theorem
+\end{itemize}
+
+
+\chapter{Graph Coloring}
+A proper coloring (coloring) of a graph $G$ is an assignment of a color to each vertex of $G$ such that no two adjacent vertices have the same color.
+
+We usually just use integers instead of actual colors because why would we use actual colors.
+
+A coloring of a graph $G$ iis often represented as a function
+\[
+\varphi: V(G) \rightarrow \mathbb{N}
+\]
+\[
+\varphi(u) = 2 
+\hp
+\varphi(v) = 1
+\hp
+\varphi(w) = 3 
+\]
+
+The US wanting to beat up the commies is the main reason graph theory had a lot of development.
+
+Scheduling problems are a useful application of graph colorings.
+
+\section{Scheduling}
+Assign rooms for meetings
+
+Group A: 10am - 12pm
+\hp
+Group B: 11am - 1pm
+
+\noindent
+Group C: 12:30pm - 5pm
+,
+Group D: 10am - 11am, 3pm - 4pm
+
+Make a graph where each vertex is a group and each edge corresponds to whether or not the groups overlap.
+
+A proper coloring of the graph corresponds to a correct room assignment with the number of colors being the number of rooms.
+
+\section{Dfn: k-colorable}
+A graph $G$ is k-colorable if there exists a coloring of $G$ with at most $k$ colors.
+
+Equivalently, if there exists a proper coloring function $\varphi: V(G) \rightarrow \{1, 2, \ldots k \}$
+
+\section{Dfn: Chromatic Number}
+The chromatic number of a graph $G$ is the smallest number $k$ such that $G$ is $k$-colorable.
+
+\section{Dfn: Independent Set} 
+An independent set in a graph $G$ is a vertex set 
+\[
+S \subseteq V(G): \forall u, v \in S, uv \notin E(G)
+\]
+A $k$-coloring of a graph $G$ is equivalent to a partition of $V(G)$ into $k$ independent sets.
+
+You find the chromatic number of a graph by showing that the graph is $k$-colorable but not $(k-1)$-colorable.
+
+\section{Dfn: Bipartite}
+A graph $G$ is bipartite iff it is 2-colorable
+
+A cycle $C_n$ is bipartite iff $n$ is even
+
+\section{Thm}
+a graph $G$ is bipartite $\iff$ $G$ has no odd cycle subgraph.
+
+Proof:
+If $G$ has an odd cycle, then that cycle must be 3-colorable so the graph cannot be bipartitite.
+
+Another Proof:
+
+Assume $G$ has no odd cycle, show $G$ has a 2-coloring.
+
+It is enough to show that each component of $G$ has a 2-coloring. 
+
+Just take the union of the colorings of the components to get a 2-coloring of all of $G$. 
+
+Pick a vertex $v \in V(G)$. $\forall u \in V(G)$, define $d(v, u)$ to be the length of shortest walk from $v$ to $u$. 
+
+We define a 2-coloring of $G$ as follows:
+\[
+\forall u \in V(G), \varphi (u) 
+= 
+\begin{cases}
+ 1 \textrm{ if d(v, u) is even} \\ 
+ 2 \textrm{ if d(v, u) is odd} \end{cases}
+\]
+We want to show $\varphi$ is a proper 2-coloring.
+
+
+
+\chapter{Directed Graphs}
+A directed graph $D$ is a pair $(V,E)$ where $V$ is the vertex set and $E = \{ (u, v) = u, v \in V \}$.
+
+You can make a directed graph for any Hasse diagram, but you CANNOT make a Hasse diagram for every directed graph.
+
+degree of a vertex = the amount of edges that are connected to the vertex.
+
+Di-graphs have out-degree and in-degree which are in fact both kind of self explanatory.
+
+\section{IMPORTANT LEMMA (HANDSHAKING LEMMA}
+The sum of the degrees of a graph is 2 times the number of EDGES.
+
+\section{NEW LEMMA}
+\[
+\sum d^+(v) = \sum d^- (v)
+\]
+The sum of the in-degrees is equal to the sum of the out-degrees
+
+\section{Dfn: Underlying graph}
+The underlying graph of a digraph $G$ is obtained by treated the edges as unordered pairs.
+
+The total degree of a vertex is the in-degree + the out-degree
+
+\section{Dfn: Directed Path}
+Follow the arrows
+
+\section{Dfn: Weakly Connected}
+The underlying graph is connected.
+
+\section{Dfn: Strongly Connected}
+For every pair $(u, v), u, v \in V(D)$, there is a directed path between the two vertices. There must be a directed path from from $u$ to $v$ and from $v$ to $u$.
+
+Directed cycles are strongly connected. All strongly connected graphs are weakly connected.
+
+\section{Dfn: Orientation}
+An orientation of a graph is obtained by assigning each edge a direction.
+
+If a graph has $m$ edges, then it has $2^n$ orientations.
+
+\section{Eulerian Circuit}
+A trail (not a path because vertices can be repeated) that goes through every edge exactly once. 
+
+If a graph $G$ has an eulerian circuit, then every vertex has an even degree.
+
+\section{Dfn: Eulerian Digraph}
+A graph $G$ is an Eulerian Digraph if
+\begin{itemize}
+\item
+$d^+(V) = d^-(V)$ for every $v \in V(G)$.
+\end{itemize}
+
+A graph $G$ has an Eulerian circuit iff it has an orientation which is an Eulerian digraph.
+
+
+\chapter{Back to Graphs}
+The chromatic number of a complete graph of $n$ vertices is $n$.
+\[
+X(K_n) = n
+\]
+$K_{m, n}$ is the notation for the complete bipartite graph where the complete graph can be covered with subsets $m$ and $n$.
+\[
+X(K_{m, n}) = 2 \textrm{ for any non-zero bipartite graph}
+\]
+If $G$ is bipartite, then $G$ has no odd cycle
+
+Parity is. . . something
+
+Suppose that $\exists u_1, u_2 \in E(G): \varphi(u_1) = \varphi(u_2)$.
+
+$
+d(v, u_1) \equiv d(v, u_2) \mod 2
+$
+idk something somethign something proof by contradiction
+
+This guy uses too many symbols for me to be able to take notes without paying attention dammit idc i got mp2
+
+Walks and trails and path and something idk
+
+$d(v, u)$ IS DISTANCE OH MY GOD
+\section{Two Coloring Algorithm}
+\[
+\varphi(u)
+=
+\begin{cases}
+1 \textrm{ if $d(v, u)$ is even} \\
+2 \textrm{ if $d(v, u)$ is odd} \\
+\end{cases}
+\]
+
+Damn I sure hope none of this is gonna be on the midterm in 2 weeks
+
+\section{Dfn: Planar}
+A graph is planar if it can be drawn in the plane without crossing edges
+
+$K_3$ is just a triangle
+
+$K_4$ you make planar by making a triangle with a vertex in the middle 
+
+\section{Thm (Kuratowski):}
+A graph $G$ is planar iff $G$ has no $K_{3, 3}$ or $K_5$ topological minor.
+
+This means that if you turn some of the edges into paths then youre still fucked (idk what's happening)
+
+Proof that $K_{3, 3}$ isnt planar:
+
+make a 4 vertex cycle with $\{v_1, v_2 \}$ and $\{ w_1, w_2 \}$
+
+vertex $v_3$ only has a single isomorphic graph that works.
+
+Anywhere we put $w_3$ gets a crossing.
+
+\section{Dfn: Faces}
+A planar graph divides a plane into regions called faces (including outside)
+
+\section{Euler's Theorem}
+Let $G$ be a simple planar graph:
+\[
+v - e + f = 2
+\]
+This is a waste of time why the hell am I here I could be at physics office hours right now.
+
+
+\section{Corrolary}
+If $G$ is simple, connected, $v \geq 3$, then $e \leq 3v - 6$.
+
+
+The length of a face is the number of edges on the face's boundary.
+
+
+
+
+\chapter{Shortest Path Problem}
+Given some nodes and some edges with certain distance values find the shortest path from one node to another.
+
+\section{Brute Force}
+dumb
+
+\section{Dijkstra's Algorithm}
+Finds the shortest length of a path between two vertices in a connected simple undirected graph.
+
+Facts:
+\begin{itemize}
+\item
+All edge weights are positive (for convenience)
+\item
+Graph is connected 
+\end{itemize}
+
+Find the shortest (a, x) path for all vertices (x).
+
+\section{Overview}
+Begin a labelling a. 
+
+Every other vertex $\infty$ meaning we dont care atm.
+
+use $L(v)$ to denote this labeling as the algorithm become one-by-one "certified"
+
+Let $S$ denote the set of certified labellings.
+
+Dijkstra's algorithm is actually just very easy:
+
+start at a node, check the near ones. the new node is the one with the smallest tentative distance.
+
+\section{Pseudocode}
+idfk take a picture and watch a youtube video and read the textbook 
+
+its kind of just like a breadth-first search it doesnt look too bad.
+
+Start with a single vertex and find more information using given information.
+
+Can be modified pretty easily to allow for disconnected graphs
+\subsection{Directed Graphs}
+Just only check in the out directions from whatever vertex you're looking at.
+
+\subsection{EXAM QUESTION}
+I'll have to use Dijkstra's algorithm to find the shortest path.
+
+\subsection{Info abt Dijkstra's Algo}
+Uses $O(n^2)$ operations (additions, comparisons).
+
+$n$ max operations to linear search to find u
+
+$n$ comparisons to find the shortest path.
+
+Figure out more shit later
+
+\chapter{MIDTERM REVIEW}
+eh you'll be alright
+
+sum of degrees of vertices is 2 times the number of edges
+
+partial ordering of a set is a relation that is reflexive, transitive, and ANTI=symmetric
+
+
+
+
+\chapter{Minimum Weighted Spanning Trees}
+Two algorithms:
+
+Prims
+
+Kruskal's Algorithm
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,1191 @@
+\documentclass{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2023}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+
+\title{PHYS225}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Relativity and Math Applications}
+Dr. Koptieva is Ukrainian, does gravity research
+
+Venn Diagram Course Plan:
+
+Very intense, might die. 
+
+Special Relativity \hspace{1cm} Symmetries and other junk \hspace{1cm}
+
+\textbf{OFFICE HOURS}
+
+Wednesday 12:30pm-3:30pm in Loomis 276
+
+or email TA
+
+\section*{Course Goals}
+\begin{itemize}
+\item time dialation, length contraction, Doppler shifts
+\item the postulates of relativity and how they imply the Lorentz transformations
+\item 4-vectors and the spacetime metric
+\item relativistic kinematics, using invariance an energy-momentum 
+
+\item more stuff
+\end{itemize}
+
+\section{TEXTBOOKS}
+REQUIRED
+
+Special Relativity for Enthusiastic Beginners by David Morin
+
+RECOMMENDED
+
+Basic Training in Mathematics: A Fitness Program for Science Students by R. Shankar
+
+\section{Homework}
+Opens Thursday August 24th
+
+Due Thursday August 31st
+
+\section{Midterm}
+
+October 10th, in-class
+
+
+\chapter{Introduction to Special Relativity}
+First written down in 1905 by Albert Einstein. Passed every experimental test for 100 years.
+
+\textbf{OMP}
+(One Minute Paper: Write down one topic you are excited to learn about in PHYS225:
+
+I know that gravity is the curvature of spacetime, but I don't actually know anything about it, to learning about spacetime curvature in a more in-depth manner sounds fun.)
+\newline
+
+The speed of light is constant within all reference frames which means everything else gets goofy.
+
+Let someone throw a ball on a moving train
+
+\subsection*{Regular Relativity (Galilean Relativity):}
+
+Newton's Laws of Motions are the same in all reference frames.
+
+Time is universal and equal for all observers
+\[
+v_{ball} = v_{train} + v_{throw}
+\]
+
+\subsection{Special Relavity:}
+\textbf{EXTREMELY IMPORTANT EQUATION}
+\[
+v_{ball} = 
+\frac
+{v_{train} + v_{throw}}
+{1+v_{train}v_{throw}/c^2}
+\]
+Not much changes with small values, however, for large numbers, the equation creates an effective upper bound. No addition of velocities can ever reach the speed of light.
+
+\subsection*{Electromagnets}
+Maxwell's Equations 
+%$$
+%E_{loop} = \int_a^b \frac{d\phi}{dt} \textbf{idk fix later}
+%$$
+Lorentz Forces
+\[
+F = qv \times B
+\]
+
+These are wholly related to Einstein's special relativity
+
+\subsection{Einstein's Theory of Relativity}
+\begin{itemize}
+\item
+All laws of physics are the same in all inertial reference frames
+\item
+The speed of light in a vacuum is constant in all inertial frames
+
+\end{itemize}
+
+velocities vary depending on reference frames.
+
+\textbf{OMP}
+(One Minute Paper:
+What does "special" mean in special relativity?)
+
+Read Morin 1.1-1.2, Appendix F 6.6.1 - 6.6.3
+
+\chapter{The Three Fundamental Effects}
+\textbf{OMP}
+List one or two examples of systems that you know from PHYS211 that can be used s clocks. In other words, their motion is cyclical with a definite period.
+
+Answer: gravity based swinging pendulum and spring pendulum
+
+\begin{itemize}
+\item
+define the concepts of reference frame, event, simultaneity, time, and length
+
+\item
+Use these concepts to see the three fundamental effects of relativity:
+
+Rear Clock Ahead
+
+Time Dialation
+
+Lorentz (length) Contraction.
+
+\end{itemize}
+
+\subsection{goofy paradox}
+You travel at the speed of light and someone shines a laser at you. How fast is it moving?
+\[
+r_{laser} = \frac{c-c}{1-(c^2/c^2)} = 0/0
+\]
+That illiegal, which shows how the speed of light is not a valid inertial reference frame.
+If \(v < c\), then you will see that the laser's speed is in fact \(c\).
+
+\section{Reference Frame}
+What is a reference frame?
+
+Imagine a network of synchronized clocks.
+
+Everyone is the same reference frame sees the same clock/time.
+
+\subsection{Event}
+A thing that happens at a specific time and a specific place.
+
+The reading on the clock in S at the location of the event.
+
+\subsection{Simultaneity}
+Two events that happen in different locations in space, but at the same time.
+
+\section{How do we measure a time elapsed in S}
+We look at the same clock at 2 different times and observe the difference of the readings.
+
+\subsection{How do we measure length in S}
+We measure two locations in S at different times
+
+\subsection{Length given constant velocity}
+Observe velocity over time.
+
+\subsection*{fuck}
+Events that are simultaneous in one reference frame are NOT necessarily simultaneous in another because of constant speed of light.
+
+Imagine a light in the middle of two trains with clocks on either side of the train. to measure $\Delta t$, you do
+\[
+t_1 - t_2 = \frac{L(c+v)}{2c^2} - {L(c-v)}{2c^2} = \frac{Lv}{c^2} = \textrm{ difference in clocks time}
+\]
+
+
+
+\section{Time Dialation}
+How to measure time elapsed in S' reference frame.
+\[
+\Delta t = \gamma \Delta \tau
+\]
+Where t is the time elapsed in S and 
+\[
+\gamma = \frac{1}{\sqrt{1 - v^2/c^2}} = \textrm{Gamma/Lorentz/boost factor}
+\]
+\(\gamma\) is always bigger than 1, which means time for someone with a velocity appears slower than someone who is stationary. But velocity is relative to reference frame, so who has slower time? 
+
+They both are when they have to check the clock????? I don't get it. Acceleration fucks up special relativity.
+
+
+\section{Length Contraction}
+\[
+\Delta t' = \frac{L}{v}
+\]
+\[
+\Delta t' = \frac{L}{\gamma v}
+\]
+Planck's something
+\[
+L_A = v \Delta t = \frac{L}{\gamma}
+\]
+
+OMP
+
+Which of the fundamental effects was most surprising?
+
+
+
+\chapter{Vectors and Matrices}
+
+OMP: Give an example of a mathematical tool that is useful in physics
+
+Answer: sine and cosine functions with regards to harmonic motion.
+
+\begin{itemize}
+\item
+Vector Manipulation
+
+\item
+Matrix Manipulation
+
+\item 
+How Linear Transformations are used in physics
+
+\end{itemize}
+
+\section{Vectors}
+Object with magnitude and direction.
+
+Can be decomposed into unit vectors
+\[
+\vec{v} = v_1\hat{x} + v_2\hat{y} + v_3\hat{z}, \hspace{1cm}
+\vec{v} = \langle v_1, v_2, v_3 \rangle
+\]
+Vectors have no preferred origin.
+\subsection*{Vector Functions}
+\begin{itemize}
+\item
+addition
+\item
+scalar multiplication
+\item
+dot product
+\item
+cross product
+
+\end{itemize}
+
+
+
+\section{Matrix}
+\begin{itemize}
+\item
+Rectangle of numbers. 
+\item
+Matrices allow us to transform vectors.
+\item
+consists of m rows and n columns
+\end{itemize}
+\[
+A\vec{x} =
+\begin{bmatrix}
+a && b \\
+c && d 
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\ v_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+av_1 + bv_2 \\
+cv_1 + dv_2
+\end{bmatrix}
+\]
+
+\subsection{Einstein Summation Notation}
+Kronecker Delta $\delta^i_j$
+\[
+\delta^{ij}= 
+\begin{bmatrix}
+1 && 0 \\ 0 && 1 
+\end{bmatrix}
+\]
+0 if $i \neq j$.
+1 if $i = j$
+
+write v = Mx
+\[
+M = \begin{bmatrix}
+M^1_1 && M^2_1 \\
+M^1_2 && M^2_2 
+\end{bmatrix}
+\]
+\[
+v_i = M^j_i x_j 
+\hspace{1cm}
+v_1 = M^1_1x_1 + M^2_1x_2
+\hspace{1cm}
+v_1 = M^1_2x_1 + M^2_2x_2
+\]
+Matrix is considered an operator to turn a vector into another vector.
+
+dot product
+\[
+\vec{A} \cdot \vec{B} = \sum^2_{i, j=1} \delta^{ij}A_iB_j
+\]
+
+
+\chapter{Deriving Lorentz Transformations}
+OMP: Name at least one way the Galilean Transformations of Newtonian Mechanics must be modified to be consistent with relativity.
+\section{Two Important Postulates of Relativity}
+\begin{enumerate}
+\item
+All physical laws must be the same in all reference frames $S$ and $S'$.
+\item
+The speed of light is constant in all reference frames.
+\[
+x=ct, x' = ct', \rightarrow x-ct = 0, x' - ct' = 0 \rightarrow x'-ct' = (x - ct)
+\]
+
+\end{enumerate}
+
+
+Holy Fucking Shit I Fucking Give Up I have no idea what is happening
+
+
+\chapter{Matrix Multiplication and Taylor Series}
+OMP:
+
+We often make approximations for small quantities, but "small" is a dimensionless concept. How would we define a "small' (dimensionless) velocity in relativity?
+
+\begin{itemize}
+\item
+Learn how to multiply two matrices
+\item
+Relate matrix multiplication to linear transformations
+\item
+other stuff I didn't get in time
+
+\end{itemize}
+For a matrix $M$ and a vector $v$
+\[
+Mv = \begin{bmatrix} av_1 + bv_2 \\ cv_1 + dv_2 \end{bmatrix}
+\]
+Multiplying a $2 \times 2$ matrix is treating the second matrix as a bunch of vectors.
+\[
+M = 
+\begin{pmatrix}
+a && b \\ c && d
+\end{pmatrix}
+N = 
+\begin{pmatrix}
+p && q \\ r && s 
+\end{pmatrix}
+\]
+\[
+MN = 
+\begin{pmatrix}
+ap+br && aq + bs \\
+cp + dr && cq + ds 
+\end{pmatrix}
+\hspace{1cm}
+NM
+\begin{pmatrix}
+ap+cq && bp + dq \\
+ar + cs && br + ds 
+\end{pmatrix}
+\]
+Einstein notation is actually very useful here but I didnt fUCKING WRITE IT IN TIME
+\[
+MN = M^i_j N^j_i
+\]
+
+imagine person S'' with velocity $v_2$ on train $S'$ with velocity $v_1$ on ground S
+\[
+(x''^0, x'''^1) \overset{\Delta_v1}{\rightarrow} (x'^0, x''^1) \overset{\Delta_v2}{\rightarrow}(x^0, x^1)
+\]
+\[
+\begin{pmatrix}
+x^0 \\ x^1
+\end{pmatrix}
+=
+\Delta_{v1} \Delta_{v2}
+\begin{pmatrix}
+x''^0 \\ x''^1
+\end{pmatrix}
+\]
+In HW you will show how multiplying these two matrices gets you the velocity addition formula
+\[
+\frac{\beta_1 + \beta_2}{1 + \beta_1 \beta_2}
+\]
+\[
+\begin{pmatrix}
+x'^0 \\ x'^1 
+\end{pmatrix}
+=
+\Delta_{v1}
+\begin{pmatrix}
+x''^0 \\ x''^1 
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma_1 && \gamma_1 \beta_1 \\
+ \gamma_1\beta_1 && \gamma_1
+ \end{pmatrix}
+\begin{pmatrix}
+x''^0 \\ x''^1 
+\end{pmatrix}
+\]
+\[
+\begin{pmatrix}
+x^0 \\ x^1 
+\end{pmatrix}
+=
+\Delta_{v2}
+\begin{pmatrix}
+x'^0 \\ x'^1 
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma_2 && \gamma_2 \beta_2 \\
+ \gamma_2\beta_2 && \gamma_2
+ \end{pmatrix}
+\begin{pmatrix}
+x'^0 \\ x'^1 
+\end{pmatrix}
+\]
+\[
+\begin{pmatrix}
+x^0 \\ x^1
+\end{pmatrix}
+=
+\begin{pmatrix}
+\gamma_2 && \gamma_2 \beta_2 \\
+ \gamma_2\beta_2 && \gamma_2
+ \end{pmatrix}
+\begin{pmatrix}
+x'^0 \\ x'^1 
+\end{pmatrix}
+=
+\]
+\[
+\begin{pmatrix}
+\gamma_2 (\gamma_1x''^0 + \gamma_1 \beta_1 x''^1) + 
+\gamma_2 \beta_2 (\gamma_1 \beta_1 x''^0) + \gamma_1 x''^1)
+\\
+\gamma_2 \beta_2 (\gamma_1 x''^0 + \gamma_1 \beta_1 x''^1 + 
+\gamma_2 (\gamma_1 \beta_1 x''^0 + \gamma_1 ''^1))
+\end{pmatrix}
+\]
+=
+\[
+\begin{pmatrix}
+(\gamma_2 \gamma_1 + \gamma_2 \beta_2 \gamma_1 \beta_1) x''^0 + 
+(\gamma_2 \gamma_1 \beta_1 + \gamma_2 \beta_2 \gamma_1) x''^1
+\\
+(\gamma_2 \beta_2 \gamma_1 + \gamma_2 \gamma_1 \beta_1)x''^0 +
+(\gamma_2 \beta_2 \gamma_1 \beta_1 + \gamma_2 \gamma_1)x''^1 +
+\end{pmatrix}
+\]
+
+\subsection{EINSTEIN NOTATION}
+\[
+x'^\mu = (\Delta_{v1})^\mu_\nu x''^\nu
+\]
+\[
+x^\sigma = (\Delta_{v2})^\sigma_\mu ((\Delta_{v1})^\mu_\nu x''^\nu )
+\]
+
+
+\section{Taylor Series}
+\[
+f(x) = f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2 + \cdot = \sum^\infty_{n=0} \frac{f^{(n)}(a)}{n!}(x-a)^n
+\]
+Example
+\[
+e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!}
+\]
+\[
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots
+\]
+\[
+\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots
+\]
+
+What about things that arent defined everywhere such that $\ln 0$.
+\[
+\ln 1+x = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} = \cdots
+\]
+Goofy approximation
+\[
+\sin x = x \textrm{ for small angles x (error proportional to $x^3$)}
+\]
+Can multiply series together
+\[
+\sin^2 x = \left(x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots \right)^2
+=
+x^2 - \frac{x^4}{3} + \frac{2x^6}{45} + \cdots
+\]
+Common variations
+\[
+\frac{1}{1+x} = \frac{d}{dx} \ln (1 + x) = \frac{d}{dx} \textrm{sum} = 1 - x + x^2 + \cdots
+\]
+\[
+\frac{1}{1-x} = 1+x+x^2+x^3 + \cdots
+\]
+\[
+(1+x)^\alpha = x + \alpha x + \cdots \textrm{ binomial expansion}
+\]
+OMP:
+
+Differentiate the first two terms of the Taylor series for $\sin x$ to obtain the first two terms of the Taylor series for $\cos x$
+
+
+
+
+\chapter{Symmetrics and Group Theory}
+OMP:
+
+How owuld you define the concept of symmetry?
+
+\begin{itemize}
+\item
+Raise and lower indices with contractions
+
+\item
+Learn the concept of transpose, inverse, and determinant
+
+\item
+Define an orthogonal matrix as one which preserves the dot product
+
+\item 
+Define a mathematical group 
+
+\item 
+Show that Lorentz boosts along a single axis form a group.
+
+\end{itemize}
+
+\section{Types of Vectors}
+Column vector:
+\[
+\vec{v} = \begin{pmatrix} v_1 \\ v_2 \end{pmatrix}
+\]
+
+Row vector:
+\[
+\vec{r} = \begin{pmatrix} r_1 && r_2 \end{pmatrix}
+\]
+
+Convention/Notation:
+\[
+M^i_j \textrm{ $i$ is column, $j$ is rows}
+\]
+
+Dot product is really just the product of a row vector and a column vector via matrix multiplication.
+
+Matrix multiplication in the form of dot products
+\[
+w \cdot v = w_i v^i \hspace{1cm} Mv = M^i_{\,\,j} v^j
+\]
+Fancy way to write dot products
+\[
+w \cdot v = \delta*{ij}w_iv_j = w_i(v_j \delta^{ij})
+\]
+Theres some shenanigans about northeast that I missed.
+
+can also raise the index on $w$
+\[
+w \cdot v = \delta*{ij}w_iv_j = v_i(w_j \delta^{ij}) = w^jv_j
+\]
+Other stuff
+
+Dot product is commutative so $v \cdot w = w \cdot v$. and Kronecker delta is symmetric so $\delta^{ij} = \delta^{ji}$
+
+
+You can also have delta with lower index
+\[
+w \cdot v = \delta_{ij}w^iv^j
+\]
+
+
+\chapter{Invariant Interval and Spacetime Metric}
+OMP:
+
+Draw a pair of coordinate axes to represent $x$ and $ct$, and draw the path of a light ray on those axes.
+
+Everything gets fucked up in different reference frames, gee would it be nice to have a quantity thats the same in every reference frame.
+\[
+\Delta s^2 \equiv
+c^2(\Delta t^2)
+-
+(\Delta x^2)
+-
+(\Delta y^2)
+-
+(\Delta z^2)
+\]
+Not actually square! Just a thing called an invariant interval.
+
+Synchronize Coordinate Systems
+\[
+\Delta s^2 = 
+(x^0)^2
+-
+(x^1)^2
+-
+(x^2)^2
+-
+(x^3)^2
+\]
+For Lorentz boosts along the x-axis
+
+Try to find numbers such that the Lorentz boosted stuff equals the non-boosted stuff.
+\[
+ct' = \gamma ct - \gamma \beta x,
+\hspace{1cm}
+x' = \gamma \beta ct - \gamma x
+\]
+Do algebra to get
+\[
+(ct')^2 
+- 
+(x')^2 = 
+(ct^2) 
+- 
+x^2
+\]
+Works in all combinations of all directions but the equation for just $x$ motion is convenient
+
+Lorentz Transformations and rotations are similar and both have invariant thingies I think
+
+\[
+\Delta s^2 = (x^0)^2 - \vec{x} \cdot \vec{x}
+\]
+
+
+\[
+\Delta s^2 > 0 \textrm{ timelike separation}
+\]
+
+
+You can do stuff and things to make locations the same and only vary in time. Pick $v = x/t$
+\[
+\Delta \tau = t' = \sqrt{\Delta s^2}/c
+\]
+
+If $c^2t^2 < x^2$ then you cannot do a Lorentz transformation because $x/t > c$
+
+What we do is make them happen at the same time, but separated in space
+\[
+\Delta L = x' = \sqrt{- \Delta s^2}
+\]
+Space like events can never effect each other, so you can always find a frame such that one happened before the other (both happened before each other??)
+
+$\Delta s^2 = 0$ = Light-like separation
+
+\section{Minkowski Spacetime Diagram}
+
+
+\chapter{MIDTERM SHENANIGANS}
+Taylor series will be on the text pretty extensively 
+
+probably something with Lorentz transformations forming a group (the lorentz transformation matrix)
+
+Taylor Series for Lorentz transformations (because v/c is close to 0)
+
+Office hours on Monday
+\[
+\gamma = \frac{1}{\sqrt{ 1 - \beta^2}}, \hspace{1cm} \beta << 1
+\]
+Find $\gamma$ for $\beta \approx 0$ Using a goofy Taylor Series.
+
+
+
+\chapter{Relativistic Energy, Momentum, and Force}
+OMP:
+
+Define force and energy in classical mechanics in terms of momentum, mass, and/or time derivatives.
+
+\section{Momentum}
+Momentum is useful because it is conserved in the absence of external forces. We want to define momentum is special relativity so that it remains conserved at relativistic speeds.
+\[
+u_{B,S} = \frac{u_0}{\gamma}
+\]
+This means something surely. Define relativistic momentum as:
+\[
+p = \gamma m v
+\]
+I am so tired i genuinely could not get relativity at the moment if i wanted to
+\[
+\Delta p_{y,B} = \frac{2mu_0}{\gamma}
+\]
+Force is just the regular force equation but you have to use relativistic momentum
+\[
+F = \frac{d\mathbf{p}}{dt}
+\]
+\[
+\frac{d}{dt}(\gamma m v) = m(\overset{\cdot}{\gamma}v + \overset{\cdot}{v}\gamma)
+\]
+Do some bullshit calculus
+\[
+F = \gamma^3 ma
+\]
+im gonna kms
+
+\section{Relativistic Energy}
+\[
+\Delta E = \int \mathbf{F} \cdot d \mathbf{l}
+\]
+line integral
+\[
+\int^{v_f}_0 m \gamma^3 v \, dv
+\]
+
+Kinetic Energy??
+\[
+KE = (\gamma - 1)mc^2
+\]
+that $mc^2$ looks awfully familiar
+
+sdfg';sdf
+hjsiupkjf,chzgxndsfz;j,mnadsf;
+\[
+M = 2 \gamma_u m
+\]
+
+\section{Acceleration and Rapidity}
+\[
+v(r) + dv = \frac{v(r) + a \, d\tau}{1 + ad\tau v(r)/c^2}
+\]
+
+
+
+\chapter{Vector Shenanigans}
+\[
+p = \gamma m v
+\hp
+F = \frac{dp}{dt}
+\]
+You can do the same thing for multiple directions
+\[
+F = \langle F_x, F_y \rangle
+\hp
+\vec{F} = m \langle \gamma^3a_x, \gamma a_y \rangle
+\]
+She derived it on the blackboard using a bunch of funky calculus
+
+Know gradient and curl which are both things you already know. Also use other coordinate systems. I am not terribly worried I'll be completely honest.
+
+
+
+\chapter{4-Vector}
+OMP:
+
+Remind yourself of the Dopper Effect in classical mechanics. If a fire truck is driving towards you, do you hear the siren at a higher or lower frequency?
+
+Answer:
+
+Higher frequency.
+
+
+\section{Time 4 vector}
+\[
+x'^\mu = \Lambda^\mu_\nu x^\nu \iff \nu'^\mu \Lambda^\mu_\nu
+\]
+
+
+\chapter{Relativistic Collisions}
+OMP: 
+
+Write down the energy-momentum 4-vector for a particle of mass $m$ in its own rest frame, in natural units where $c = 1$
+
+
+\section{Energy Unit}
+Electron volt
+\[
+E_k = qU \rightarrow 1 eV = 1.6 * 10^{-19} C \times 1 V = 1.6 * 10^{-19} J
+\]
+\[
+E_0 = mc^2 \iff E_0 = m
+\hp
+m_e = 511 keV
+\hp
+m_p = 938 MeV
+\]
+
+Different types of decay (pion, beta, alpha)
+\[
+\pi^0 \rightarrow \gamma + \gamma 
+\hp
+n \rightarrow p + e^- + \overline{\nu}_e
+\hp
+U \rightarrow Th + He
+\]
+Smash particles together as well (matter anti-matter anhiilliation, Higgs boson)
+\[
+e^+ + e^- = \gamma + \gamma
+\hp
+p + \overline{p} = H
+\]
+
+Velocity is ugly and unfun, use energy and momentum instead and something good might happen. 
+
+Use invariance of relativistic dot products. Compute the same quantity in 2 different frames, and set the result equal.
+
+A charged pion of mass $M$ decays most of the time into a muon and a neutrino. The neutrino is so light that we can approximate it as massless. What is the energy of the outgoing neutrino in the rest frame of the pion?
+\[
+\pi^+ \rightarrow \mu^+ + \nu
+\]
+Step 1 i sassign energy-momentum 4-vector to each of the particles
+\[
+p^\mu_1 = p^\mu_2 + p^\mu_3
+\]
+\[
+p_1 = (M, \vec{0})
+\hp
+p_2 = (E_2, \vec{p_2})
+\hp
+p_3 = (E_3, \vec{p_3})
+\]
+We don't care about the direction of momentum in the 4-vectors, just energy.
+
+Do some math and get a dot product
+\[
+p_1 - p_3 = p_2
+\]
+\[
+(p_1 - p_3) \cdot (p_1 - p_3) = p_2 \cdot p_2
+\]
+\[
+p_1 \cdot p_1 + p_3 \cdot p_3 - 2p_1 \cdot p_3 = p_2 \cdot p_2
+\]
+\[
+p_1 \cdot p_1 = M^2
+\hp
+p_2 \cdot p_2 = m^2
+\hp
+p_3 \cdot p_3 = 0 \textrm{ bc massless}
+\]
+\[
+p_1 \cdot p_3 = ME_3 - 0 \cdot p_3 = ME_3
+\]
+\[
+M^2 - 2ME_3 = m^2
+\]
+\[
+E_3 = \frac{M^2 - m^2}{2M}
+\]
+Makes sense, right dimensions, if the particles are massless then $E_3 = M/2$ and if $m > M$ then you get a negative answer which makes sense because you'd be turning a particle into a heavier particle which breaks the laws of physics.
+
+Two fast enough protons can create a new particle with enough energy
+\[
+p + p \rightarrow p + p + p - p
+\]
+The antiproton has the same mass $m_p$ as the proton. What is the minimum amount of energy required for the reaction to occur?
+
+(
+Key strategy: use both the laboratory frame and the center-of-momentum frame (CM), where the total momentum is zero)
+)
+
+\[
+p^\mu_1 + p^\mu_2 \rightarrow k^\mu_1 + k^\mu_2 + k^\mu_3 + k^\mu_4
+\]
+\[
+p_1 = (E_{lab}, \vec{p}_{lab} )
+\hp
+p_2 = (m_2, \vec{0})
+\]
+\[
+p_1 \cdot p_1 = p_2 \cdot p_2 = m^2_p
+\hp
+p_1 \cdot p_2 = E_{lab}m - \vec{0}\vec{p} = E_{lab}m
+\]
+We could find the boost to figure out the CM frame but we dont have to
+\[
+\vec{p}_1 + \vec{p}_2 = 0
+\hp
+\vec{k}_1 + \vec{k}_2 + \vec{k}_3 + \vec{k}_4 = 0
+\]
+Because of conservation of momentum and the direction of the original protons is opposite so they cancel out.
+\[
+(p_1 + p_2)^2 = (k_1 + k_2 + k_3 + k_4)^2
+\]
+Evaluate left side in lab frame and right side in CM frame
+\[
+(p_1 + p_2) \cdot (p_1 + p_2) = p_1 \cdot p_1 + p_2 \cdot p_2 + 2p_1 \cdot p_2 = 2m^2_p + 2E_{lab}m_p
+\]
+\[
+4m_p \cdot 4m_p - \vec{0} \cdot \vec{0} = 16m^2_p
+\]
+\[
+2m^2_p + 2E_{lab}m_p = 16m^2_p \longrightarrow
+E_{lab} = 7m_p
+\]
+
+If you have to know the velocity of a particle
+\[
+p^\mu = (E, \vec{p}) = (\gamma m, \gamma m \vec{v})
+\Longrightarrow
+v = p/E
+\]
+If you need to find the velocity of the CM frame in the rest frame
+\[
+p^\mu_{tot} = p^\mu_1 + p^\mu_2 + p^\mu_3 + \ldots = (E_{tot}, \vec{p}_{tot})
+\Longrightarrow
+v_{CM} = \frac{\vec{p}_{tot}}{E_{tot}}
+\]
+
+OMP:
+
+In our first example of pion decay, how would you rearrange $p_1 = p_2 + p_3$ to find the energy of $p_2$ (the muon)?
+
+
+
+\chapter{Vector Calculus and Maxwell's Equations}
+OMP:
+
+Which of Maxwell's equations involve a surface integral? Which ones involve a line integral?
+
+
+Thank the lord I've already done calc 3 this shit ez.
+
+\section{Line Integrals}
+Imagine how a vector field acts upon an object as it moves along a line
+\[
+\lim_{\Delta t \to 0} \sum^{n}_{i = 1} \vec{F}(\vec{r}(t_i)) \cdot \Delta \vec{r}_i
+=
+\int_C \vec{F} \cdot d\vec{r}
+\]
+Use the fundamental theorem of calculus and some shenanigans with vector fields to get
+\[
+\int_C \nabla f \cdot d\vec{r}
+\equiv
+f(b) - f(a)
+\textrm{ for a curve going from a to b}
+\]
+Line integrals are path independent. The line integral for a closed line along any conservative vector field is 0.
+
+\section{Surface Integral}
+\[
+\lim_{\Delta u, v  \to 0} \sum^{}_{i} \vec{F}(u, v) \cdot \vec{n}(u_i, v_i)_i \Delta u \Delta v
+\equiv
+\int_S \vec{F} \cdot d\vec{S}
+\]
+\[
+\int_S \vec{F} \cdot d\vec{S}
+=
+\iint
+\vec{F}(\vec{r}(u, v)) 
+\cdot
+\left(
+\pdif{\vec{r}}{u}
+\times 
+\pdif{\vec{r}}{v}
+\right)
+du \, dv
+\]
+Where the goofy cross product is a normal vector relative to the surface
+\[
+\int_R df = \oint_{\partial R} f
+\]
+\[
+\int_V (\div \vec{F})d^3x
+=
+\oint_{\del V} \vec{F} \cdot dS
+\]
+\section{Stoke's Theorem}
+\[
+\int_S (\curl \vec{F}) \cdot d\vec{S}
+ = 
+ \oint_{\del S} \vec{F} d\vec{r}
+\]
+\[
+\int_S (\curl (\nabla f)) \cdot d\vec{S} 
+=
+ \oint_{\del S} \nabla f \cdot d\vec{r} = 0
+\]
+The the curl of a gradient is ALWAYS 0
+
+\section{More Index Notation}
+\[
+\epsilon^{ijk} = 
+\begin{cases}
+1, (ij) = \textrm{ even permutation of (1, 2, 3)} \\
+-1, (ijk) = \textrm{ odd permutation of (1, 2, 3)} \\
+0 \textrm{ otherwise}
+\end{cases}
+\]
+This is called the (totally antisymmetric) Levi-Civita symbol. Swapping two adjacent number sturns a permutation from even to odd and vice versa.
+
+Curl in index notation:
+\[
+\curl F
+\equiv 
+\epsilon^{ijk} \del_j \vec{F}_k
+\]
+\[
+\int_V (\div (\curl A)) d^3x 
+=
+\oint_{\del V} (\curl A) \cdot d\vec{S}
+=
+\oint_{\del \del V} A???
+=
+0
+\]
+Divergence of a curl MUST be 0
+
+Consider the vector field $F = \frac{1}{r^2} \hat{r}$ in spherical coordinates.
+
+compute divergence
+\[
+\div F
+=
+\frac{1}{r^2}
+\pdif{r^2F_r}{r}
+=
+\frac{1}{r^2}\pderiv{r}(1) 
+= 
+0
+\]
+
+but if we compute the divergence on a general ball $B_R$ of radius $R$, we get not 0
+\[
+\int_V \delta^{(3)}(x)d^3x 
+=
+\begin{cases}
+1 \textrm{, V contains the origin} \\
+0 \textrm{ otherwise}
+\end{cases}
+\]
+\section{Gauss's Law}
+\[
+\frac{Q_{enc}}{\epsilon_0} = \oint E \cdot dS = \int \div E dV \rightarrow \div E = \frac{\rho}{\epsilon_0}
+\]
+\[
+0 = \oint B \cdot dS
+\]
+\section{Faraday's Law}
+\[
+- \frac{d}{dt} \int B \cdot dS = \oint E \cdot dr = \int (\curl E) \cdot dS = -\pdif{B}{t} dS
+\]
+OMP:
+
+To apply Stoke's Theorem, do we want to integrate a curl as a line integral or a surface integral?
+
+
+\chapter{Complex Numbers and Fourier Transforms}
+OMP:
+In what areas of physics or math have you encountered complex numbers before, or is this your first time being introduced to them?
+
+
+I know what a complex number is.
+\[
+z = x + iy
+\]
+Makes sure that polynomials have the sufficient amount of answers
+
+You can add complex numbers by just combining like terms kinda similarly to a vector.
+
+The best thing about multiplying complex numbers is that $i^2 = -1$ so you always get just a regular complex number instead of some shenanigans.
+
+To divide complex numbers, you have to multiply the top and bottom of the fraction by the conjugate of the denominator to make is nice and good.
+\[
+\textrm{conjugate} \equiv z* \equiv \overline z
+\]
+multiplying a number by its conjugate gets you the modulus or the magnitude of z
+\[
+|z| = z* \times z = \sqrt{x^2 + y^2}
+\]
+
+
+if $|z| = 1$ then we get nice shenanigans
+\[
+z = x + iy = \cos \theta + i \sin \theta
+\]
+proof via taylor series nonsense on the blackboard
+
+This gets you
+\[
+e^{i \pi} = -1 
+\]
+You can also use this to take fractional powers of $i$
+
+\[
+z = re^{i \pi} \hp z* = re^{-i \pi}
+\]
+
+And we can use this trig shenanigans to graph complex numbers in polar form
+
+We can derive more goofy trig identities in complex forms which is currently being done on the whiteboard.
+
+Can be used to solve PDE's???
+
+Given some PDE
+\[
+\frac{ \del^2 f(t, x)}{\del t^2} 
+=
+v^2 
+\frac{\del^2 f(t, x)}{\del x^2}
+\]
+Guess a solution
+\[
+f = Ae^{iwt}e^{ikx} ???
+\]
+Do some stuff and things to get something.
+
+Get an integral of sdjilan j
+\[
+f(x, t) = \int^\infty_{-\infty} = dk \overset{\sim}{f} (k)e^{ikx} e^{ivkt}
+\]
+Also works in more dimensions????
+\[
+(\nabla^2 + C)f = 0
+\]
+Where that thing is the Lapacian operator.
+
+OMP:
+write $i$ in polar form
+
+
+\chapter{Maxwell's Equations and Special Relativity}
+OMP: 
+name 1 topic from each category that you learned about in this course for the first time
+
+Maxwell's Equations
+\[
+\div E = \frac{p}{\epsilon_0}
+\hp
+\div B = 0
+\hp 
+\curl E = -\pdif{B}{t}
+\hp
+\curl B = \mu_0 J + \mu_0 \epsilon_0 \pdif{E}{t}
+\]
+Take curl of both sides of third equation to get
+\[
+\curl \left( - \pdif{B}{t} \right) = - \pdif{}{t} (\curl B)
+=
+-\mu_0 \epsilon_0 \pdif{^2 E}{t^2}
+\]
+
+
+Fourier transform w 4d wave vector
+\[
+E(t, \vec x) = E_0 e^{-i \vec k_\mu \vec x^\mu}
+\]
+Einstein has done some goofy nonsense talking about how electric fields and magnetic fields are the same and everything is fucking goofy
+
+OMP: What was your favorite topic covered in this class?
+
+
+
+
+
+
+
+
+
+
+\end{document}

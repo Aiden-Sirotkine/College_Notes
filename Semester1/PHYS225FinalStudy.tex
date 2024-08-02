@@ -1,0 +1,137 @@
+\documentclass{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+
+\setlength{\columnsep}{1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2023}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+
+\title{PHYS225 Final Studyguide}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Relativity and Math Applications}
+
+i think ill be fiiiiiiine
+
+but how the fuck do I do Taylor Series huh
+
+I also can make a 2 page formula sheet on top of the formula sheet that already exists
+
+\section{Lorentz Transformations}
+A nice equation that allows you to see position and time from a different reference frame. Takes into account the rear-clock-ahead affect, length contraction, and time dilation. The formula is on the sheet.
+
+Proper time is in the frame where the events happen in the exact same location. 
+
+proper length is where both sides of the things are in the rest frame.
+
+\section{What the Fuck is Rapidity}
+Rapidity is just a goofy way to make a lorentz transformation look like a rotation matrix just with hyperbolic trig functions. 
+
+All of the regular identities of lorentz transformations are held under the goofy rapidity.
+
+\section{Group Theory}
+\begin{itemize}
+\item
+Identity
+
+There exists an element in the group such that $gI = ig = g$
+
+\item
+Inverse
+
+for every element, there exists another element such that $g^{-1}g = gg^{-1}$
+
+\item
+Closure
+
+for all elements $g, h$ in the group, $gh$ is in the group.
+
+\end{itemize}
+
+\section{Fourier Transforms}
+you guess for f(x, y, z)
+\[
+f = Ae^{i k_x x} e^{i k_y t} e^{i k_z t}
+\]
+then u derive that and hope for the best
+
+
+
+\section{Midterm Fix}
+How the fuck do I do the taylor series of the original thing
+\[
+\sqrt{\Delta s^2} = \sqrt{c^2t^2 - \Delta x^2} 
+= 
+(c^2t^2 - \Delta x^2)^{1/2}
+=
+( - \Delta x^2 + c^2t^2)^{1/2}
+=
+\]
+\[
+x(-1 + \frac{c^2 t^2}{x^2})^{1/2}
+=
+x(1 -  \frac{c^2 t^2}{2 x^2}) = x -  \frac{c^2 t^2}{2 x }
+\]
+
+Okay just always turn the thing into some form of $(1 + x)^n$ and use the shortcut
+
+\section{Final Practice Problem}
+\[
+\frac{640}{600} = 
+\sqrt{\frac{1 + \beta}{1 - \beta}}
+\rightarrow
+1.1377 -1.1377 \beta = 1 + \beta
+\rightarrow
+\]
+\[
+0.1377 = 2.1377 \beta
+\beta = 
+\]
+Whoops i didnt use the approximation
+
+\subsection{Energy of a particle}
+\[
+E = \gamma m = \frac{1}{\sqrt{1 - \beta^2}} m = (1 - \beta^2)^{-1/2}
+=
+m(1 + \frac{\beta^2}{2})
+\rightarrow 
+e
+=
+m
+\]
+that's all wrong specifically because it isnt beta thats going to 0 but the $1/200$.
+\[
+\beta = 1 - 1/200 \rightarrow \beta^2 = (1 - 1/200)^2 = 1 - 2/200 
+\]
+
+
+
+
+\end{document}

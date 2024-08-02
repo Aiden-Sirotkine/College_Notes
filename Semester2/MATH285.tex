@@ -1,0 +1,2884 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{MATH 285}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Intro to Differential Equations}
+
+It's an equation that contains derivatives of some functions instead of just regular functions
+
+\subsection{Ordinary Differential Equations (ODE's)}
+Does not contain directional derivatives
+
+
+\subsection{Partial Differential Equations (PDE's)}
+contains partial derivatives.
+
+
+\subsection{System of Differential Equations}
+self explanatory
+
+\subsection{Order of a Differential Equation}
+Number of the highest derivative
+
+$
+y'' + y' = y
+$
+is a 2nd order differential equation because of the y''
+
+\subsection{linear}
+the unknown and its derivatives appear linearly
+
+\[
+y'' + ty' = y
+\]
+
+\subsection{non-linear}
+not linear
+\[
+y'' + \sqrt{y} = t^2
+\hp
+y'' + yy' = t
+\]
+
+
+\section{Linear Nth Order ODE}
+\[
+a_n(t) y^n a_{n-1}(t)y^{n-1} + \ldots + a_1(t) y' + a_0 (t) y = f(t)
+\]
+If $f(t) = 0$, then the equation is homogeneous, and it is inhomogeneous if otherwise.
+
+$y(t)$ is a solution to the equation if all the necessary derivatives of $y$ exist and satisfy the equation.
+
+\[
+y' = 3y \Longrightarrow y = Ce^{3t} \hp \textrm{ C is called the free parameter}
+\]
+
+\[
+\begin{cases}
+y' = 3y \\
+y(0) = 5 
+\end{cases}
+\textrm{this is called an initial condition}
+\]
+
+
+\subsection{test}
+\[
+y' = ay 
+\hp
+y'' + a^2y = 0
+\hp
+y'' - a^2y = 0
+\]
+have the solutions
+\[
+y = A\cos(at) + B\sin(at)
+\]
+I didn't write it in time but im sure something interesting was there
+
+\section{Integration}
+The easiest way to solve some differential equations is just integrate it and that'll give you some variety of answer.
+\[
+\pdif{y}{t} = t^2
+\Longrightarrow
+y(t) = \frac{t^3}{3} + A
+\]
+
+\subsection{Initial Conditions}
+\[
+y''(t) + 2y'(t) + y(t) + 3
+\Rightarrow
+y''(t) = -2y'(t) - y(t) - 3
+\Rightarrow
+\]
+\[
+y''(0) = -2y'(0) - y(t) - 3
+\]
+
+\subsection{Separation of Variables}
+\[
+\pdif{y}{t} = \frac{t}{y}
+\Rightarrow
+y \del y = t \del t
+\Rightarrow
+\int y \, \del y = \int t \, \del t
+\Rightarrow
+\frac{y^2}{2} = \frac{t^2}{2}
+\Rightarrow
+y^2 = t^2 + A
+\]
+implicit solution
+\[
+y = \pm \sqrt{t^2 + A} \hp
+\textrm{explicit solution}
+\]
+
+
+\subsection{$\frac{dy}{dt} = f(t, y) = g(t) \cdot h(y)$}
+\[
+\int \frac{1}{h(y)} \, d y = \int g(t) \, d t
+\]
+
+\[
+\frac{dy}{dt} = \frac{3y^2}{t^4}
+\Rightarrow
+\int \frac{1}{y^2} \, dy = \int \frac{3}{t^4} \, dt
+\Rightarrow
+\frac{-1}{y} = \frac{-1}{t^3} + A
+\Rightarrow
+y = \frac{t^3}{1 + At^3}
+\]
+Thats the general solution. You also have to consider the singular solution $y(t) = 0$
+
+\subsection{Partial Fraction something}
+\[
+\frac{dp}{dt} = 2P - P^2 = P(2 - P)
+\Rightarrow
+\frac{dP}{P(2 - P)} = dt
+\]
+
+\[
+\frac{1}{P(2 - P)} = \frac{A}{P} + \frac{B}{2 - P}
+\Rightarrow
+\frac{2A + (B - A)P}{P(2 - P)}
+\]
+you can solve for A and B
+
+\[
+\int \left( \frac{0.5}{P} + \frac{0.5}{2 - P} \right) dP = \int \,dt
+\]
+solve??????
+
+
+\section{General and Explicit Solutions}
+
+idk just solve the way you normally do it seems to work well enough
+
+\subsection{Autonomous Differential Equation}
+In the form $y' = f(y)$
+
+
+
+\section{Slope Fields}
+You know what a slope field is.
+
+
+\section{Existence and Uniqueness Theorem}
+Let 
+\[
+y' = f(y, t) 
+\hp
+y(t_0) = y_0
+\]
+
+The theorem states that if $f(y t)$ is continuous around the neighborhood of $(y_0, t_0)$, then there exists a solution to the differential equation around $(y_0, t_0)$, and if $\frac{d}{dy}f(y, t)$ is continuous around the neighborhood of $(y_0, t_0)$, then there exists a unique solution to the differential equation.
+
+Also known as the Picard Theorem
+
+\[
+\exists S:
+\exists [a_0, b_0] \in S: \lim_{a \to a_0, b \to b_0} f(a, b) = f(a_0, b_0)
+\]
+\[
+\Longrightarrow
+\textrm{ there exists a solution to the differential equation}
+\]
+\[
+\lim_{a \to a_0, b \to b_0} \frac{df}{dt}(a, b) = \frac{df}{dt}(a_0, b_0)
+\Longrightarrow
+\textrm{ there exists a unique solution}
+\]
+
+
+\section{Picard's Iterations}
+\[
+\int^t_a \frac{dy}{dt} = \int^t_a f(t, y(t)) \, dt
+\]
+\[
+y(t) - y(a) = \int^t_a f(s, y(s)) \, ds
+\hp a = h
+\]
+\[
+y(t) = b + \int^t_a f(s, y(s)) \, ds
+\]
+Use successive approximation to find an answer
+\[
+y_0(s) = b
+\hp
+y_1(t) = b + \int^t_a f(s, y_0(t)) \, ds
+\hp
+y_2(t) = b + \int^t_a f(s, y_1(t)) \, ds
+\]
+take the limit and get
+\[
+y_\infty(t) = b + \int^t_a f(s, y_\infty(t)) \, ds
+\]
+if $y$ converges, then it converges to the original equation.
+
+\subsection{Example}
+\[
+\frac{dy}{dt} = 2(y + 1)
+\hp
+y(0) = 0
+\]
+\[
+y(t) = 0 + \int^t_0 2(y + 1) \, ds
+\]
+\[
+y_1 = 2(0 + 1) \, ds = 2t
+\hp
+y_2 = 2(2s + 1) \, ds = 2t^2 + 2t
+\]
+\[
+y_3 = 2(2t^2 + 2t + 1) \, ds = \frac{4t^3}{3} + 2t^2 + 2t
+\]
+\[
+y_N(t) = 2t + \frac{(2t)^2}{2!} + \frac{(2t)^3}{3!} + \ldots + \frac{(2t)^N}{N!} 
+=
+\]
+\[
+\sum^N_{k = 1} \frac{(2t)^k}{k!}
+=
+-1 + 1 + \sum^N_{k = 1} \frac{(2t)^k}{k!}
+=
+-1 + \sum^N_{k = 0} \frac{(2t)^k}{k!}
+=
+-1 + e^{2t}
+\]
+will maybe need to find first 2 y's on a test.
+
+
+\section{Solving First Order Linear Equations}
+\[
+y' + P(t)y = Q(t)
+\hp
+y(t_0) = 0
+\]
+
+\subsection{Theorem}
+If $\exists$ an interval I around $t = t_0$ where $P$ and $Q$ are continuous, then $\exists$ 1 and only 1 solution to the I.V.P. over all of I.
+
+\subsection{Integrating Factor}
+\[
+\mu(t) = e^{\int P(t) \, dt}
+\]
+Then get
+\[
+(y e^{\int P \, dt} )' = Q e^{\int P \, dt}
+\]
+then divide by $e^{\int P(t) dt}$ to get
+\[
+y(t) = Ce^{-\int P \, dt} + e^{- \int P \, dt} \int Q e^{\int P \, dt}
+\]
+
+\subsection{Example Problem}
+\[
+t^2 y' - y = 3
+\hp
+y(1) = 0
+\]
+\[
+y' + (\frac{-1}{t^2})y = \frac{3}{t^2}
+\]
+First find integrating factor
+\[
+e^{\int \frac{-1}{t^2} \, dt} = e^{1/t}
+\]
+\[
+(ye^{1/t})' = \frac{3}{t^2}e^{1/t}
+\]
+\[
+ye^{1/t} = \int \frac{3}{t^2}e^{1/t} \, dt = -3e^{1/t} + C
+\]
+\[
+y = -3 + Ce^{-1/t}
+\]
+
+\chapter{Exact Equations}
+\[
+\Psi (x, y) = C
+\]
+On the curve y(x), $\frac{d \Psi}{dx}dx + \frac{d \Psi}{dy} dy = 0$
+\[
+\frac{d \Psi}{dy} \frac{dy}{dx} + \frac{d \Psi}{dx} = 0
+\]
+\[
+N(x, y)\frac{dy}{dx} + M(x, y) = 0
+\]
+If $\exists \Psi (x, y): N = \frac{d \Psi}{dy}, M = \frac{d \Psi}{dx}$, then the differential equation has an exact solution.
+
+another helping thing
+\[
+\frac{dM}{dy} = \frac{dN}{dx}
+\]
+if thats true, then $\Psi (x, y)$ exists and there's an exact equation.
+
+\subsection{Example Problem}
+\[
+(x^2 + 3y^2) \frac{dy}{dx} + 2xy = 0
+\]
+\[
+2xy \, dx + (x^2 + 3y^2) \, dy = 0
+\]
+\[
+N = (x^2 + y^2)
+\hp
+M = 2xy
+\]
+\[
+\frac{dN}{dx} = 2x
+\hp
+\frac{dM}{dy} = 2x
+\]
+they equal each other so $\Psi$ exists. Now we have to find it
+\[
+\int \pderiv{\Psi}{x} \, dx =  \int 2xy \, dx
+\hp
+\Psi(x, y) = x^2y + f(y)
+\]
+\[
+x^2 + f'(y) = x^2 + 3y^2
+\longrightarrow
+f'(y) = 3y^2
+\rightarrow
+f(y) = y^3 + A
+\]
+\[
+\Psi (x, y) = c 
+\longrightarrow
+x^2y + y^2 + A = C
+\rightarrow
+x^2y + y^2 = C
+\]
+if given an initial condition, you can use that to solve for $C$.
+ 
+ \newpage
+\subsection{Another Problem}
+\[
+\frac{dy}{dx} = \frac{2xy^2}{\sin(y) - 2x^2y}
+\]
+\[
+(\sin(y) -  2x^2y) \, dy - 2xy^2 dx 
+\hp
+2xy^2 dx + (2x^2y - \sin(y)) \, dy = 0
+\]
+\[
+N = (2x^2y - \sin(y))
+\hp
+M = 2xy^2
+\]
+\[
+\frac{dM}{dy} = 4xy
+\hp
+\frac{dN}{dx} = 4xy
+\]
+The equation exists
+\[
+\frac{d \Psi}{dx} = M = 2xy^2
+\rightarrow
+\Psi = x^2y^2 + f(y)
+\]
+\[
+\frac{d\Psi}{dy} = 2x^2y + f'(y)
+\]
+\[
+\frac{d \Psi}{dy} = N = 2x^2y - \sin(y)
+\longrightarrow
+2x^2y + f'(y) = 2x^2y - \sin(y)
+\rightarrow
+\]
+\[
+f'(y) = -\sin(y)
+\rightarrow
+f(y) = \cos(y)
+\]
+\[
+\Psi (x, y) = x^2y^2 + \cos (y) = C
+\]
+
+\newpage
+\section{Substitutions}
+\subsection{Scale Invariant}
+\[
+\frac{dy}{dt} = F \left( \frac{y}{t} \right)
+\]
+Use a substitution $v(t) = \frac{y}{t}$
+\[
+y \frac{dy}{dt} = t + \frac{y^2}{t}
+\hp
+\frac{dy}{dt} = \frac{t}{y} + \frac{y}{t}
+\]
+\[
+v(t) = \frac{y(t)}{t}
+\hp
+y(t) = v(t) \cdot t
+\]
+\[
+\frac{dy}{dt} = \frac{d}{dt} (v \cdot t) )
+=
+v't + v
+\]
+Now our original equation becomes
+\[
+v't + v = \frac{1}{v} + v 
+\hp
+t \frac{dv}{dt} = \left( \frac{1}{v} + v - v \right)
+\rightarrow
+\frac{dv}{\frac{1}{v} + v - v} = \frac{dt}{t}
+\]
+solve like regular separable equation
+
+\[
+tv' + v = F(v)
+\longrightarrow
+t \frac{dv}{dt} = \left( F(v) - v \right)
+\]
+
+
+\chapter{Tricks with V substitution}
+\[
+y' + P(t)y = Q(t) y^\alpha
+\hp
+\alpha \neq 0, 1
+\]
+use $v(t) = y^{1 - \alpha}$
+
+\subsection{Example}
+\[
+y' = \frac{y^2}{t^2} + ty
+\rightarrow
+y' - ty = \frac{1}{t^2} y^2
+\]
+use $v(t) = y^{1 - 2} \rightarrow v(t) = 1/y$
+\[
+y = 1/v \hp
+y' = \frac{-1}{v^2}v'
+\]
+\[
+\frac{-1}{v^2}v' - t \frac{1}{v} = \frac{1}{t^2} \cdot \frac{1}{v^2}
+\]
+\[
+v' + tv = \frac{1}{t^2}
+\]
+first order linear equation. Solve with Integrating Factor.
+
+\section{Reducible Equation}
+
+\[
+F(t, y, y', y'') = 0 \textrm{ but y is missing}
+\]
+use $v(t) = y'$, $y'' = \frac{d}{dt} y' = v'$
+\[
+F(t, v, v') = 0
+\]
+
+\subsection{Example}
+\[
+y'' + \frac{2}{t}y' = t^2
+\]
+use $v = y', v' = y''$
+\[
+y' + \frac{2}{t} v = t^2
+\hp
+\mu = e^{\int \frac{2}{t} \, dt}
+=
+e^{2 \ln t}
+\]
+
+\subsection{Another One}
+\[
+v't^2 + 2tv = t^4
+\]
+\[
+(vt^2)' = t^4
+\]
+Integrate
+\[
+vt^2 = \frac{t^5}{5} + A
+\]
+\[
+y' = \frac{t^3}{5} + \frac{A}{t^2}
+\]
+Integrate
+\[
+y = \frac{t^4}{20} - \frac{A}{t} + B
+\]
+
+\section{If $t$ is missing (F(y, y', t''))}
+\[
+y'' = \frac{d}{dt}(y') = \frac{d}{dt}v(y(t)) = \frac{dv}{dy} \cdot \frac{dy}{dt} = \frac{dv}{dt}v
+\]
+
+\subsection{Example}
+\[
+y'' + 2yy' = 0
+\]
+Use $v(y) = y'$
+\[
+y'' = \frac{dv}{dy}v
+\]
+\[
+\frac{dv}{dy} v + 2yv = 0
+\]
+\[
+v = 0 \longrightarrow y' = 0 \longrightarrow y = C
+\]
+\[
+v \neq 0 \longrightarrow 
+\frac{dv}{dy} + 2y = 0 \longrightarrow 
+\frac{dv}{dy} -2y \rightarrow 
+v = A - y^2
+\]
+\[
+\frac{dy}{dt} = A - y^2 \longrightarrow
+\frac{dy}{A - y^2} = dt
+\]
+
+
+\chapter{More Slope FIeld Stuff}
+
+\section{Autonomous Equations}
+\[
+\frac{dP}{dt} = 3P - P^2 = P(3 - P)
+\]
+$P = 0$ and $P = 3$ are critical points aka also equilibrium solutions.
+
+toward point = stable equilibrium solution. away from point = unstable equilibrium solution.
+
+The other one is semi-stable
+
+\section{Add Harvesting}
+\[
+\frac{dP}{dt} = 6P - P^2
+\Longrightarrow
+\frac{dP}{dt} = 6P - P^2 - H
+\]
+if we make H = 5 then
+\[
+\frac{dP}{dt} = (P - 1)(P - 5)
+\]
+if H = 9 then
+\[
+\frac{dP}{dt} = (P - 3)(P - 3)
+\]
+semistable equilibrium
+
+If H = 10
+\[
+\frac{dP}{dt} = (P - 3)(P - 3) - 1
+\]
+no equilibriums
+
+just set equal to 0
+\[
+6P - P^2 - H = 0
+\hp
+P = \pm \sqrt{9 - H}
+\]
+
+\chapter{Approximations}
+\section{Euler's Method???}
+\[
+\frac{dy}{dt} = f(t, y)
+\]
+Integrate both sides to get
+\[
+y(t_B) - y(t_0) = \int^{t_B}_{t_0} f(t, y)
+\]
+\[
+y_{i + 1} = y_i + \int^{t_{i + 1}}_{t_{i}} f(t, y) \, dt
+\]
+\[
+y_{i + 1} = y_i + f(t_i, y_i) \, \Delta t
+\]
+
+
+\section{Midpoint Rule}
+\[
+y_{i + 1} = y_i + f(t_i + \frac{\Delta t}{2}, y_i + f(t_i, y_i)) \frac{\Delta t}{2} \Delta t
+\]
+
+
+\section{Improved Euler Method}
+\[
+y_{i + 1} = y_i + f(t_i, y_i) \frac{\Delta t}{2} + f(t_i + \Delta t, y_i + f(t_i, y_i) \Delta t)
+\]
+
+
+\chapter{Higher Order Linear Equations}
+\[
+y^{N} + a_{n - 1}(t)y^{n - 1} + 
+a_{n - 2}(t)y^{n - 2} + 
+a_{n - 3}(t)y^{n - 3} + \ldots
+a_{1}(t)y^{1}
+=
+f(t)
+\]
+plus a bunch of initial conditions
+
+\section{Existence and Uniqueness Theorem}
+If there exists an interval $I$ around $t_0$ such that $a_{N - 1}, a_{N - 2} \ldots f(n)$ are all continuous, then there exists one and only one solution for the differential equation
+
+\subsection{Example}
+\[
+y'' + \frac{1}{t} y' - \frac{9}{t^2} y = 0
+\hp
+y(1) = 0, y'(1) = 1
+\]
+Consider the interval $I = (0, \infty)$ and see a solution
+
+
+\section{Superposition}
+if $y_{1}, y_{2}, \ldots y_{n}$ are solutions to a differential equation, then any linear combination of those are also a solution to the differential equation.
+
+
+\subsection{example}
+\[
+y'' - 3y' + 2y = 0
+\]
+\[
+y_1 = e^t, y_2 = e^{2t}
+\textrm{ are solutions}
+\]
+
+
+\subsection{linear non-homogeneous}
+\[
+y'' - y = 4
+\]
+\[
+y_1 = 4 
+\hp
+y_2 = e^t + 4
+\]
+are solutions, but there sum is not
+
+
+
+\section{Equidimentional}
+\[
+\alpha (\alpha - 1)t^{\alpha - 2}
++
+\frac{1}{t}
+\alpha t^{\alpha - 1}
+-
+\frac{9}{t^2}
+t^{\alpha}
+=
+0
+\hp
+y(1) = 0, y'(1) = 1
+\]
+\[
+y = t^{\alpha}
+\hp
+y' = \alpha t^{\alpha - 1}
+\hp
+y'' = \alpha (\alpha - 1)t^{\alpha - 2}
+\]
+
+\[
+\alpha (\alpha - 1)
++
+\alpha
+-
+9
+=
+0
+\rightarrow
+\alpha = \pm 3
+\]
+\[
+y_1 = t^3
+\hp
+y_2 = t^{-3}
+\]
+I wasnt paying attention
+
+but you can use superposition to figure out a solution that works with the initial conditions of the problem
+\[
+y = c_1t^3 + \frac{c^2}{t^3}
+\hp
+y' = 3c_1t^2 - \frac{3c_2}{t^4}
+\]
+Apply initial conditions
+\[
+y = c_1 + c_2 = 0
+\hp
+y' = 3c_1- 3c_2 = 1
+\]
+
+
+\subsection{another example}
+\[
+y'' + 4y = 0
+\]
+\[
+\textrm{solutions } 
+y_1 = \sin (2t),
+y_2 = \sin(t) \cos(t)
+\]
+dont get nice answer because those two solutions are equivalent via double angle formula
+\[
+\textrm{I.C. } 
+y(0) = 1, y'(0) = \ldots
+\]
+\[
+t = c_1 \sin(2t) + c_2 \sin (t) \cos (t)
+\]
+apply initial conditions
+\[
+y(0) = 0 + 0 \neq 1
+\]
+
+
+
+
+\section{Linear Independence}
+Given $n$ solutions $y_1, y_2, \ldots y_n(t)$, write
+\[
+\alpha_1 y_1(t) + \alpha_2 y_2(t) + \ldots \alpha_n y_n(t) = 0
+\]
+if $\alpha_1, \alpha_2, \ldots \alpha_n = 0$, then the $y$'s don't matter, so the $y$'s are linearly independent.
+
+For all other values of $\alpha$, $y$ is linearly dependent.
+
+\subsection{Example}
+\[
+[ 1, e^t, e^{-t} ]
+\rightarrow
+\alpha_1 1 + \alpha_2 e^t + \alpha_3 e^{-t} = 0
+\hp
+\alpha = 0 \textrm{ only choice}
+\]
+Therefore its linearly independent
+
+However
+\[
+[ \cos(t), e^{it}, e^{-it} ]
+\rightarrow
+\alpha_1 \cos(t) + \alpha_2 e^{it} + \alpha_3 e^{-it} = 0
+\]
+\[
+([1, \frac{-1}{2}, \frac{-1}{2}], [2, -1, -1], \ldots) \textrm{ many choices}
+\]
+
+
+\[
+e^{it} = \cos(t) + i\sin (t)
+\hp
+e^{-it} = \cos(t) - i\sin (t)
+\]
+\[
+\cos(t) = \frac{e^{it} + e^{-it}}{2}
+\hp
+\sin(t) = \frac{e^{it} - e^{-it}}{2i}
+\]
+
+
+\subsection{What's dependent what's independent}
+$[1, t]$ is linearly independent
+
+$[t-1, 2 - 2t]$ dependent
+
+$e^t, e^{2t}$ independent
+
+$[1, t, t^2]$ INdependent
+
+$[1, t, 2t - 1]$ DEpendent
+
+
+\section{Wronskian}
+how to make system of equations
+
+take $n-1$ derivatives over the whole thingy
+\[
+\alpha_1 y_1^{n - 1} + \ldots + \alpha_n y_n^{n - 1} = 0 
+\]
+
+make a big ass matrix
+\[
+\begin{bmatrix}
+y_1 && y_2 && \ldots && y_n \\
+y_1' && y_2' && \ldots && y_n' \\
+\ldots && \ldots && \ldots && \ldots \\
+y_1^{n-1} && y_2^{n-1} && \ldots && y_n^{n-1} 
+\end{bmatrix}
+%
+\begin{bmatrix}
+\alpha_1 \\ \alpha_2 \\ \ldots \\ \alpha_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 \\ 0 \\ \ldots \\ 0
+\end{bmatrix}
+\]
+If the determinant = 0, then the only solution is making $\alpha = 0$
+
+If the determinant is NOT 0, then it is linearly dependent so there are $\infty$ solutions.
+
+The big stupid $y$ matrix determinant is called the Wronskian.
+
+\subsection{Use}
+Imagine you have an th linear homogeneous something something with n solutions and n initial conditions of the form $y^n(t_0) = b_n$
+
+You can use the Wronskian to find something or other
+
+\[
+\begin{bmatrix}
+y_1(t_0) && y_2(t_0) && \ldots && y_n(t_0) \\
+y_1'(t_0) && y_2'(t_0) && \ldots && y_n'(t_0) \\
+\ldots && \ldots && \ldots && \ldots \\
+y_1^{n-1}(t_0) && y_2^{n-1}(t_0) && \ldots && y_n^{n-1}(t_0) 
+\end{bmatrix}
+%
+\begin{bmatrix}
+\alpha_1 \\ \alpha_2 \\ \ldots \\ \alpha_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_1 \\ b_2 \\ \ldots \\ b_n
+\end{bmatrix}
+\]
+
+This matrix sure means something
+
+\subsection{Abel's Theorem}
+The Wronskian satisfies
+\[
+W' + \alpha_{n - 1}(t) W = 0
+\]
+This is a separable equation
+\[
+W' + \alpha_{n - 1}(t) W = 0
+\longrightarrow
+\begin{cases}
+W(t) = W(t_0)e^{- \int^{t}_{t_0} a_{n-1}(s) \, ds}
+\\
+W(t) = 0
+\end{cases}
+\]
+
+
+\section{MIDTERM INFO}
+Last Lecture with midterm info was February 2nd
+
+Find independent solutions of nth order linear homogeneous equations.
+
+
+\chapter{Constant Coefficient Equations}
+\[
+y^{N} + p_{N - 1}y^{N-1} + \ldots + p_1y = 0
+\]
+use $y = e^{rt}$
+
+
+\subsection{Example Problem}
+$y(0) = 0, y'(0) = 1$
+\[
+y'' + y' - 2y = 0
+\rightarrow
+r^2e^{rt} + re^{rt} - 2e^{rt} = 0
+\]
+\[
+r^2 + r - 2 = 0 \rightarrow (r + 2)(r - 1) = 0
+\]
+\[
+r = 1, -2
+\rightarrow
+y_1 = e^{1t}
+\hp
+y_2 = e^{-2t}
+\]
+\[
+y = C_1e^{t} + C_2e^{-2t}
+\]
+Apply initial conditions
+\[
+y(0) = C_1 + C_2 = 0
+\hp
+y'(0) = C_1 - 2C_2 = 1
+\]
+\[
+C_1 = -C_2
+\hp
+C_1 + 2C_1 = 1 \rightarrow C_1 = 1/3, C_2 = -1/3
+\]
+\[
+y = \frac{1}{3} e^{t} - \frac{1}{3} e^{-2t}
+\]
+
+
+\section{Another Example}
+\[
+y''' - 3y'' + 2y' = 0
+\rightarrow
+r^3 e^{rt} - 3r^2e^{rt} + 2r e^{rt} = 0
+\]
+\[
+r^3 - 3r^2 + 2r = 0 
+\rightarrow
+r(r - 1)(r - 2) = 0
+\hp
+r = 0, 1, 2
+\]
+\[
+y_1 = e^0 , y_2 = e^t, y_3 = e^{2t}
+\]
+\[
+y = C_1 + C_2e^t + C_3 e^{2t}
+\]
+Solve via initial conditions
+
+
+\section{When you Get Higher Multitude Zeros}
+\[
+y'' - 4y' + 4y = 0
+\rightarrow 
+r^2 e^{rt} - 4re^{rt} + 4e^{rt} = 0
+\]
+\[
+r^2 - 4r + 4 = 0
+\hp 
+(r - 2)^2 = 0
+\rightarrow
+y_1 = e^{2t},
+y_2 = t2^{2t}
+\]
+Try $y(t) = v(t) e^{2t}$
+\[
+y = Ate^{2t} + Be^{2t}
+\]
+
+
+\subsection{Example}
+\[
+y''' - 3y'' + 3y' - y = 0
+=
+r^3 e^{rt} - 3r^2 e^{rt} + 3r e^{rt} - e^{rt} = 0
+\]
+\[
+r^3 - 3r^2 + 3r - 1 = 0
+\rightarrow
+(r - 1)^3 = 0
+\rightarrow
+y_1 = e^t ,
+y_2 = te^{t},
+y_3 = t^2 e^t
+\]
+
+\newpage
+\subsection{Complex Numbers}
+\equations{
+y'' + y = 0
+\rightarrow
+r^2 e^{rt} + e^{rt} = 0
+\rightarrow
+(r^2 + 1) = 0
+\rightarrow
+r = \pm i
+\\
+y = C_1 e^{it} + C_2 e^{-it}
+=
+C_1 (\cos (t) + i \sin(t)) + 
+C_2 (\cos (t) - i \sin (t))
+\\
+(C_1 + C_2) \cos (t) + i(C_1 - C_2) \sin (t)
+\rightarrow
+A \cos(t) + B \sin (t)
+}
+
+\subsection{Example}
+\[
+y'' + 6y' + 13y = 0
+\rightarrow
+r^2 e^{r t} + 6r e^{r t} + 13 e^{r t} = 0
+\rightarrow
+r^2 + 6r + 13 = 0
+\]
+\[
+r = -3 \pm 2i
+\rightarrow
+y = C_1 e^{(-3 + 2i)t} + C_2 e^{(-3 - 2i)t}
+\]
+\[
+y = e^{-3t} \left( C_1 e^{2it} + C_2 e^{-2it} \right)
+\rightarrow
+e^{-3t} \left( A \cos(2t) + B \sin(2t) \right)
+\]
+
+
+\section{Operator Notation}
+\[
+Dy = \frac{dy}{dt}
+\hp
+D^2y = \frac{d^2y}{dt^2} = y''
+\]
+you can factor D operators
+\begin{gather*}
+y'' - 3y' + 2y  = (D^2 - 3D + 2)y = 0
+\rightarrow
+(D-2)(D - 1)y = 0
+\\
+(D - 1)y = 0 \rightarrow
+D = 1
+\rightarrow
+y = e^{t}
+\end{gather*}
+solutions to a factor is a solution to the whole equation.
+
+\subsection{Complex Examples}
+\begin{gather*}
+(D^2 - 2D + 5)y = 0
+\rightarrow
+r^2 - 2r - 5 = 0
+\\
+\rightarrow
+r = 1 \pm \sqrt{1 - 5}
+=
+1 \pm 2i
+\end{gather*}
+You can use Euler trig nonsense to get
+\begin{gather*}
+y = e^t \left( A\cos (2t) + B \sin (2t) \right)
++
+te^t \left( C \cos (2t) + D\sin (2t) \right)
+\end{gather*}
+The 2t is from the 2i
+
+other than that I'm lost
+
+\subsection{Another Thing}
+\begin{gather*}
+L = D^2 + \frac{1}{t} D - \frac{9}{t^2}
+\rightarrow
+y'' + \frac{1}{t} y' = \frac{9}{t^2} y = 0
+\end{gather*}
+
+
+\section{Linear Operator}
+\begin{gather*}
+L \left( \alpha y_1 + \beta y_2 \right)
+=
+\alpha L y_1 + \beta L y_2
+\end{gather*}
+If $Ly = 0,$ then you have a linear homogeneous equation
+\[
+y'' - 3y' + 2y = 0
+\]
+If $Ly = f(t)$, then you have a linear INhomogeneous equation
+\[
+y'' - 3y' + 2y = 4
+\]
+
+Let $Ly = f(t)$
+
+Call $y_c$ (complementary) a general solution to the homogeneous equation $L(y_c) = 0$
+
+Call $y_p$ (particular) a solution to the inhomogeneous equation $L(y_p) = f$
+\equations{
+L(y_c + y_p) = L(y_c) + L(y_p) = f
+}
+By adding together solutions, you get new solutions.
+
+Say y is a solution of the inhomogeneous equation $L(y) = f$
+\[
+L(y - y_p) = L(y) - L(y_p) = f - f = 0
+\]
+subtracting to inhomogeneous solutions gets you a general solution
+
+\subsection{IMPORTANT}
+Any general solution of the inhomogeneous can be written as a particular solution to the inhomogeneous plus a general solution to the homogeneous
+
+\subsection{Example}
+\equations{
+y'' - 3y' + 2y = 4
+\rightarrow
+(r - 1)(r - 2) = 0
+\rightarrow
+r = 1, 2
+\\
+y_c = c_1 e^t + c^2 e^{2t}
+}
+This is a general solution to the homogeneous equation
+
+Just guess n check a particular solution
+\equations{
+y_p = 1
+\\
+y = y_c + y_p = c_1 e^t + c_2 e^{2t} + 2
+}
+Let initial conditions be $y(0) = 1$ and $y'(0) = 5$
+\equations{
+y = c_1 e^t + c_2 e^{2t} + 2 = 1
+\hp
+y' = c_1 e^t + 2c_2 e^{2t}  = 5
+\\
+c_2 - 2 = 4
+\rightarrow
+c_2 = 6
+\rightarrow
+c_1 = -7
+\\
+y = -7 e^t + 6 e^{2t} + 2
+}
+Solution to the initial value problem
+
+\subsection{Solve a Linear Inhomogeneous I.V.P}
+Find $y_c$: General solution to homogeneous equation
+
+Find $y_p$: Particular solution to inhomogeneous equation
+
+$y = y_c + y_p$
+
+apply initial conditions
+
+c = complementary
+
+\subsection{Example}
+\equations{
+y'' + 4y = 8t
+\hp
+\begin{cases}
+y(0) = 5\\
+y'(0) = 2
+\end{cases}
+\\
+y_c: y'' + 4y = 0
+\rightarrow
+c_1 \cos (2t) + c_2 \sin (2t)
+\\
+y_p:  y'' + 4y = 8t
+\rightarrow
+y_p = 2t
+\\
+y = y_c + y_p = c_1 \cos (2t) + c_2 \sin (2t) + 2t
+\\
+c_1 \cos (2t) + c_2 \sin (2t) + 2t = 5 = c_1
+\hp
+y'(0) = 2c_2 + 2 = 2
+\\
+c_1 = 5, c_2 = 0 \Rightarrow
+y = 5\cos (2t) + 2t
+}
+
+\section{Undetermined Coefficients}
+If the Linear Homogeneous Solution is onstant coeffiients and linear, and the right hand side is an exponent, sin, cos, polynomial, or product of these, try a $y_p$ of the same form as a right hand side plus all possible derivatives, each [something] a coefficient, multiply by t until you have no duplication and find the coefficients.
+
+\subsection{Examples}
+\equations{
+y'' + y = e^t 
+\\
+y_p = Ae^{t} \hp 
+y''_p = Ae^t
+\\
+Ae^t + Ae^t = e^t
+\rightarrow
+2Ae^t = e^t
+\rightarrow
+A = \frac{1}{2}
+\\
+y = \frac{1}{2} e^t
+}
+
+\equations{
+y' + y = t^2
+\\
+y_p = At^2 + Bt + C
+\hp
+y_p'' = 2At + B
+\\
+2At + At^2 = t^2
+\hp
+2At + B + At^2 + Bt + C = t^2
+\\
+t^2: A = 1 \hp
+t: 2A + B = 0 \hp
+t^0: B + C = 0
+\\
+A = 1
+\hp
+B = -2 
+\hp
+C = 2
+\\
+y_p = t^2 - 2t + 2
+}
+
+\equations{
+y'' + y' + y = \cos (2t)
+\\
+y = A \cos (2t) + B \sin (2t)
+\hp
+y' = -2A \sin (2t) + 2B \cos (2t)
+\\
+y'' = -4A \cos (2t) - 4 B \sin (2t)
+\\
+-4A \cos (2t) - 4 B \sin (2t) - 2A \sin (2t) + 2B \cos (2t)
+\\
++  A \cos (2t) + B \sin (2t)
+=
+\cos (2t)
+\\
+\cos(2t) (-3A + 2B) = \cos 2t
+\hp
+\sin (2t) (-3B - 2A) = 0
+\\
+A = \frac{-3}{13}
+\hp
+B = \frac{2}{13}
+}
+Some goofy math that I dont understand but I took a picture of it 
+
+
+\equations{
+y'' - y = e^t
+\\
+y_p = Ae^t = y_p' = y_p''
+}
+I get $0 = e^t$ which breaks math so clearly I used the wrong $y_p$
+
+find $y_c$ complementary solution to homogeneous equation
+\equations{
+y'' - y = 0
+\rightarrow
+r = \pm 1
+\rightarrow
+y_c = c_1e^t + c_2 e^{-t}
+\\
+y_p = Ae^t t
+\hp
+y_p' = Ae^t + Ate^t
+\\
+y_p'' = 2Ae^t + Ate^t
+}
+plug everything back in and solve for $y_p$
+\[
+y = y_c + y_p
+\]
+
+\equations{
+y''' - y' = \cos(t) + t^2
+\\
+y_c \longrightarrow y''' - y' = 0
+\rightarrow
+r(r - 1)(r + 1) = 0
+\\
+y_c = C_1 + C_2 e^t + c_3e^{-t}
+\\
+y_p = [A \cos (t) + B \sin (t)] + [ct^2 + Dt + E]t
+\\
+}
+
+
+\chapter{Annihilator Method}
+Left Hand Side is constant coefficients
+
+Right Side is exponential / sin / cos / polynomial or a product of these
+\[
+Ly = f(t)
+\]
+
+\subsection{Find $y_c$}
+\equations{
+L y = 0
+\\
+y_c = e^{rt}
+\hp
+r = r_1, r_2, \ldots
+\\
+y_c = c_1 e^{r_1t} + c_2 e^{r_2t} + c_3 e^{r_3t} + \ldots c_N e^{r_Nt} 
+}
+
+\subsection{Find the Annihilator of f(t)}
+some function such that
+\[
+\overline{L} f = 0
+\]
+\equations{
+\overline{L} L y = \overline{L} f = 0 
+\\
+\overline{L} L y = 0
+\\
+y = e^{rt}
+}
+I think you then find the homogeneous solution to that equation and then cancel out a bunch of terms
+\[
+y_p = Ae^{r_{N + 1}t} + \ldots + ke^{r_{N + k}t}
+\]
+Find all the coefficients
+
+\subsection{Example}
+\equations{
+y'' - 4y = 4e^{2t}
+\\
+y_c \rightarrow y'' - 4y = 0 
+\hp
+y_c = e^{rt}
+\\
+(r + 2)(r - 2) = 0 \rightarrow r = \pm 2
+\\
+y_c = c_1 e^{2t} + c^2 e^{-2t}
+}
+Now find the Annihilator 
+
+He finds $(D - 2)$ via some voodoo witchcraft
+
+chuck the annihilator into the original equation because it makes the other side 0
+ \equations{
+ (D - 2)(D^2 - 4)y = (D - 2)4e^{rt} = 0
+ \\
+  (D - 2)(D^2 - 4)y = 0
+  \\
+  y = e^{rt}
+  \\
+  (r - 2)(r + 2)(r- 2) = 0
+  \\
+  r = -2, +2, +2
+  \rightarrow
+  e^{2t}, te^{2t}, e^{-2t}
+}
+cancel out $e^{2t}$ and $e^{-2t}$ because theyre in the complementary solution
+ \[
+  y_p = Ate^{2t}
+ \]
+ solve for A by plugging back into original equation
+ \[
+ y = y_c + y_p = c_1 e^{2t} + c_2 e^{-2t} + te^{2t}
+ \]
+ 
+ 
+ \subsection{another example problem}
+ \equations{
+ y'''' + y'' = 3te^t + 2t^2
+ \\
+ y'''' + y'' = 0
+ \hp
+ (r^4 + r^2) = 0
+ \rightarrow
+ \\
+ r^2 (r^2 + 1) = 0
+ \rightarrow r = 0, 0, \pm i
+ \\
+ y_c = c_1 + c_2t + c_3 \cos (t) + c_4 \sin (t)
+ }
+ now find Annihilator
+ \[
+ (D - 1)^2te^t = 0
+ \]
+ Thats the annihilator via more voodoo witchcraft
+ \equations{
+(D - 1)^2 (D^4 + D^2)y = (D - 1)^2 3te^t = 0
+\\
+(D - 1)^2 (D^4 + D^2)y = 0
+\\
+y = e^{rt}
+\\
+(r - 1)^2 (r^4 + r^2)y = 0
+\rightarrow
+r = 1, 1, 0, 0, \pm i
+\rightarrow
+\\
+e^t, te^t, 1, t, \cos(t), \sin(t)
+ }
+ get rid of the ones that already exist in the homogeneous solution
+ \[
+ y_p = A e^t + Bte^t
+ \]
+ Annihilator is $D^3$
+ \equations{
+ D^3(D^4 + D^2)y = 0
+ \\
+ r = 0, 0, 0, 0, 0, \pm i
+ \\
+ y_{p2} = Ct^2 + Dt^3 + Et^4
+ }
+ \[
+ y_p = y_{p1} + y_{p2}
+ =
+ A e^t + Bte^t
+ + Ct^2 + Dt^3 + Et^4
+ \]
+ 
+ 
+ 
+ \section{Finding the Annihilator}
+ Annihilator of $t^2$ is $D^3$ because derive that 3 times and get 0
+ 
+ example annihilators
+ \equations{
+ (D - a)e^{at} = 0
+ \\
+ (D - a)^{k + 1}t^ke^{at} = 0
+ \\
+ D^{k + 1}t^k = 0
+ }
+ 
+ \newpage
+ \section{Variation of Parameters}
+\equations{
+y'' + y = h(t)
+\\
+y_c \rightarrow y'' + y = 0 \rightarrow y_c = c_1 \cos (t) + c_2 \sin (t)
+\\
+y_p = u_1(t) \cos (t) + u_2 (t) \sin (t)
+\\
+\textrm{product rule}
+\\
+y_p' = u_1'(t) \cos (t) - u_1(t) \sin (t) + u_2' (t) \sin (t) + u_2 (t) \cos (t)
+\\
+y_p' = -u_1'(t) \sin (t) - u_1(t) \cos (t) + u_2' (t) \cos (t) - u_2 (t) \sin (t)
+\\
+\textrm{do something to get}
+\\
+-u_1'(t) \sin (t) - u_1(t) \cos (t) + u_2' (t) \cos (t) - u_2 (t) \sin (t) + u_1 \cos (t) 
+\\+ u_2 \sin (t) = \ln (t)
+\\
+\textrm{ cancel terms}
+\\
+-u_1' \sin(t) + u_2 ' \cos (t) = \ln (t)
+\rightarrow 
+u_1' \sin(t) - u_2 ' \cos (t) = 0
+\\
+u_2 ' = \frac{- \cos (t)}{\sin (t)} u_1'
+\hp
+-u_1 ' \sin (t) - \frac{\cos^2(t)}{\sin(t)} u_1' = \ln (t)
+\\
+- \sin^2(t) u_1' - \cos^2(t) u_1' = \sin (t) \ln (t)
+\\
+\begin{cases}
+u_1' = - \sin (t) \ln (t)
+\\
+u_2' = \cos (t) \ln (t)
+\end{cases}
+\hp
+\begin{cases}
+u_1 = \int - \sin (t) \ln (t) \, dt
+\\
+u_2 = \int \cos (t) \ln (t) \, dt
+\end{cases}
+}
+same $y_c$ and $y_p$ stuff at the end I think
+
+\equations{
+y'' + p(t) y' + q(t) y = f(t)
+\\
+y_c \rightarrow y'' + p(t) y' + q(t) y = 0
+\rightarrow
+y_1, y_2: \textrm{ linearly independent}
+\\
+y_1'' + py_1' + qy_1 = 0
+\hp
+y_2'' + py_2' + qy_2 = 0
+\\
+y_c = c_1 y_1 + c_2 y_2
+\\
+y_p = u_1(t) y_1 + u_2 (t) y_2
+\\
+y_p' = u_1' y_1 + u_1 y_1' + u_2' y_2 + u_2 y_2'
+\\
+\textrm{$u_1' y_1$ and $u_2' y_2$ cancel each other out}
+\\
+y_p'' = u_1' y_1' + u_1 y_1'' + u_2' y_2' + u_2 y_2'' 
+\\
++ p u_1 y_1' + pu_2 y_2' + q u_1 y_1 + q u_2 y_2 = f
+\\
+\textrm{inside that big something is the homogeneous equations for $y_1$ and $y_2$ which both cancel out}
+\\
+(u_1 y_1'' + p u_1 y_1'  + q u_1 y_1) + (+ u_2 y_2'' + pu_2 y_2'  + q u_2 y_2 ) 
+\\
++ u_1' y_1' + u_2' y_2'  = f
+\\
+u_1' y_1' + u_2' y_2'  = f
+\hp
+u_1' y_1 + u_2' y_2 = 0
+\\
+u_1' = \frac{y_2 f}{y_1 y_2' - y_1' y_2}
+\hp
+u_2' = \frac{y_1 f}{y_1 y_2' - y_1' y_2}
+\\
+u_1' = \int \frac{y_2 f}{W(y_1, y_2)} \, dt
+\hp
+u_2' = \int \frac{y_1 f}{W(y_1, y_2)} \, dt
+}
+
+I think this was just a big ass derivation of the equations at the very end
+
+\subsection{Example}
+\equations{
+y'' - 4y' + 4y = 2e^{2t}
+\\
+y_c: y'' - 4y' + 4y = 0 
+\rightarrow 
+(r - 2)^2 = 0
+\rightarrow 
+y_1 = e^{2t}, y_2 = te^{2t}
+\\
+y_c = c_1 e^{2t} + c_2 te^{2t}
+\\
+y_p = u_1 e^{2t} + u_2 t e^{2t}
+\\
+W = \begin{bmatrix}
+e^{2t} && te^{2t}\\
+2e^{2t} && e^{2t} + 2te^{2t}
+\end{bmatrix}
+=
+e^{4t} + 2te^{4t} - 2t e^{4t}
+=
+e^{4t}
+\\
+u_1 = \int \frac{
+te^{2t} \cdot 2e^{2t}
+}
+{
+e^{4t}
+} \, dt = \int 2t dt = -t^2
+\\
+u_2 = \int \frac
+{
+e^{2t} \cdot 2e^{2t}
+}
+{
+e^{4t}
+} \, dt = \int 2 dt = 2t
+\\
+y_p = -t^2 e^{2t} + 2t \cdot te^{2t} = t^2 e^{2t}
+\\
+y = y_c + y_p = c_1 e^{2t} + c^2 te^{2t} + t^2 e^{2t}
+}
+ 
+ 
+ \chapter{Laplace Transform}
+ given $f(t)$
+\equations{
+ L(f) = \int^{\infty}_0
+ e^{-st} f(t) \, dt
+ \\
+ L(1) = \int^{\infty}_0
+ e^{-st} \, dt
+ =
+ -\frac{1}{s} e^{-st} \Big|^\infty_0
+ =
+ \frac{1}{s}
+ \\
+ L(t) = 
+ \int^{\infty}_0
+ e^{-st} t \, dt
+ =
+ \frac{-1}{s} e^{-st} t \Big|^\infty_0
+ +
+ \frac{1}{s}
+\int^{\infty}_0 e^{-st} \, dt
+=
+\frac{1}{s^2}
+\\
+ L(e^{at}) 
+ =
+ \int^{\infty}_0
+ e^{-st} e^{at} \, dt
+ =
+  \int^{\infty}_0
+ e^{-t(s - a)} \, dt
+ =
+\frac{1}{s - a}
+\\
+ L(e^{ibt} = \frac{1}{s - ib})
+ =
+ \frac{s + ib}{s^2 + b^2}
+ =
+ \frac{s }{s^2 + b^2}
+ +
+i \frac{b}{s^2 + b^2} 
+\\
+L( \cos (bt) + i \sin (bt)) = L(e^{ibt})
+\\
+L( \cos (bt) + i \sin (bt)) = L(\cos (bt)) + i L (\sin (bt))
+}
+\newpage
+\[
+L(f') = \int^\infty_0 e^{-st} f'(t) \, dt
+=
+e^{-st} f'(t) \Big|^\infty_0
+-
+\int^\infty_0 -s e^{-st} f(t) \, dt
+\]
+\[
+= -f(0) + s L(f)
+\]
+Its just integration by parts
+\[
+L(f'') = -f'(0) + s (f(0) + s L(f) )
+=
+s^2 L(f) - s f(0) - f'(0)
+\]
+\[
+L(y) = y_{(s)}
+\]
+\equations{
+y' + 3y = 0 
+\hp
+y(0) = 2 
+\\
+L(y') + 3L(y) = 0
+\\
+sY - y(0) + 3Y = 0
+\\
+(s + 3) Y - 2 = 0
+\\
+Y(s) = \frac{2}{s + 3}
+\rightarrow
+y(t) = 2 e^{-3t}
+}
+We get a table of important Laplace transforms
+
+\subsection{Example}
+\equations{
+y' + 3y = t \hp y(0) = 2
+\\
+sY - y(0) + 3Y = \frac{1}{s^2}
+\\
+(s + 3)Y(s) - 2 = \frac{1}{s^2}
+\\
+Y = \frac{1}{s^2(s + 3)} + \frac{2}{s + 3}
+\\
+\frac{1}{s^2 (s + 3)} = \frac{A}{s + 3} + \frac{B}{s} + \frac{C}{s^2}
+=
+\\
+\textrm{blah blah blah partial fractions}
+\\
+C = 1/3, B = -1/9, A = 1/9
+\\
+Y = \frac{1}{9} \frac{1}{s + 3} + \frac{-1}{9} \frac{1}{s} + \frac{1}{3} \frac{1 }{s^2} + \frac{2}{s + 3}
+}
+this sucks
+
+\equations{
+y'' - 2y' - y = 2e^{t}
+\hp
+y(0) = 3, y'(0) = 4
+\\
+s^2Y - s y(0) - y'(0) - [sY - y(0) ] - 2Y = \frac{2}{s - 1}
+\\
+(s^2 - s - 2)Y - 3s - 4 + 3 = \frac{2}{s - 1}
+\\
+(s - 2)(s + 1)Y = \frac{2}{s - 1} + 3s + 1
+\\
+Y = \frac{2}{(s - 1)(s - 2)(s + 1)} + \frac{3s}{(s - 2)(s + 1)} + \frac{1}{(s - 2)(s + 1)}
+\\
+Y = \frac{-1}{s - 1} + \frac{3}{s -2 } + \frac{1}{s + 2}
+}
+ 
+ 
+\subsection{Heaviside}
+\[
+H(t - a) =
+\begin{cases}
+0 \hp t < a 
+\\
+1 \hp t \geq a 
+\end{cases}
+\]
+this has a use supposedly
+\[
+L (H(t - a)) = \int^\infty_0 e^{-st} H(t - a) \, dt = 
+\int^\infty_0 e^{-st} \, dt = \frac{-1}{s} e^{-st} \Big|^\infty_0 = \frac{1}{s} s^{-sa}
+\]
+ 
+ 
+ \chapter{Oscillators}
+ 
+ \section{Undampened Oscillator}
+ Hooke's Law and F  = ma
+ \equations{
+ -kx = m \frac{d^2 x}{dt^2}
+ \longrightarrow
+m x'' + kx = 0
+ }
+ If you solve this equation you get $x = A \cos \left( \sqrt{ \frac{ k}{m}} t \right) +  B \sin \left( \sqrt{ \frac{ k}{m}} t \right)$
+ 
+ The frequency is $\omega = \sqrt{ \frac{k}{m}}$ rads/second
+ 
+ If we add a periodic force to the thingy we get
+ \equations{
+  -kx = m \frac{d^2 x}{dt^2} + \sin (\omega t)
+ \longrightarrow
+m x'' + kx = \frac{1}{m} \sin ( \omega t)
+ }
+ Find a particular and a general solution and get
+ \[
+ x = A \cos (\omega t) + B \sin (\omega t) + \frac{\sin (\omega t)}{k - m \omega^2 }
+ \]
+ particular solution has important properties such as small $\omega$ being positive and large negative 
+ 
+ if $\omega_0 = \omega = \sqrt{ \frac{k}{m}}$ then we get undefined properties which is resonance in the real world.
+ 
+ If thats the case then our original solution doesnt work and we use other particular solution
+ \[
+ x_p = \frac{ -t \cos ( \omega_0 t)}{2m \omega_0}
+ \]
+ 
+ 
+ 
+ 
+ \section{Dampened Oscillator}
+ regular Hooke's Law plus a dampening force given by \\ $F =  -\gamma x'$
+ \equations{
+mx'' = F_{spring} + F_{damp} = -kx  - \gamma x'
+ \\
+ F_{spring} + F_{damp} - F_{net} \rightarrow  
+ \\
+mx'' + \gamma x' + kx = 0
+\\
+\textrm{find and solve characteristic equation}
+\\
+r = \frac{ - \gamma \pm \sqrt{ \gamma^2 - 4 m k} } {2m} = 
+\frac{- \gamma }{2m} \pm \sqrt{ \frac{ \gamma^2}{4m^2} - \frac{k}{m}}
+\\
+\textrm{the behavior of the equation depends on the sign of $\gamma^2 - 4mk$}
+}
+
+if $\gamma^2 - 4mk < 0$ then the system is underdamped and you get sustained oscillations of decreasing amplitude
+
+if $\gamma^2 - 4mk > 0$ then it's overdamped and the system never increases in distance, it just goes straight to 0.
+Roots are $r = \frac{1}{2m} ( -\gamma \pm \sqrt{\gamma^2 - 4km} )$
+
+if $\gamma^2 - 4mk = 0$ then it's perfectly damped and you go up to a peak before going down to 0.
+Root is $r = \frac{- \gamma}{2m}$
+
+\subsection{External Oscillating Force}
+ \equations{
+mx'' + \gamma x' + kx = F_0 \sin (\omega t)
+\\
+\textrm{find particular solution}
+\\
+x_p (t) = \frac{F_0}{(k - m \omega^2)^2 + \gamma^2 \omega^2}
+(- \gamma \omega \cos (\omega t) + (k - m \omega^2) \sin ( \omega t))
+\\
+\textrm{which is also}
+\\
+x_p (t) = \frac{F_0}{ \sqrt{(k - m \omega^2)^2 + \gamma^2 \omega^2}}
+\sin (\omega t - \phi)
+\hp
+\frac{\omega}{\phi} = \arctan (\frac{ \gamma \omega}{k - m \omega^2} )
+\\
+\textrm{the behavior of the equation depends on the sign of $\gamma^2 - 4mk$}
+\\
+\textrm{amplitude}(\omega) = \frac{F_0}{\sqrt{(k - m \omega^2)^2 + \gamma^2 \omega^2}}
+}
+
+Underdamped and critically damped oscillators look the same, and overdamped oscillators now look like critically damped oscillators.
+
+\comment{
+\section{Undampened Oscillator}
+\equations{
+Mx'' + kx= 0 \rightarrow x'' + \frac{k}{M}x = 0 \rightarrow
+\\
+x = c_1 \cos (\omega_0 t) + c_2 \sin (\omega_0 t)
+=
+R \cos (\omega_0 t - \delta) 
+= 
+\\s
+R \cos (\omega_0 t) \cos (\delta ) + R \sin (\omega t) \sin (\delta)
+\\
+\textrm{im so tired}
+\\
+\begin{cases}
+c_1 = R \cos (\delta) \\
+c_2 = R \sin (\delta)
+\end{cases}
+\\
+c_1^2 + c_2^2 = R^2 \rightarrow R = \sqrt{c_1^2 + c_2^2}
+\\
+\frac{c_2}{c_1} = t_g (\delta) \rightarrow \delta = \arctan(\frac{c_2}{c_1})
+\\
+\textrm{$\delta$ is phase angle}
+}
+ 
+\section{Forced Oscillator}
+\equations{
+mx'' + kx = F \cos (\omega t)
+\\
+x'' + \omega^2 x = \frac{F}{m} \cos ( \omega t)
+\\
+x_c = c_1 \cos (\omega_0 t) + c_2 \cos ( \omega_0 t)
+\\
+x_p = A \cos ( \omega t) + B \sin (\omega t)
+\\
+\textrm{assume $\omega \neq \omega_0$ so they arent the same}
+\\
+\textrm{just plug the shit into the thing and solve}
+\\
+x_p = \frac{F / M} {\omega_0^2 - \omega^2} \cos (\omega t)
+\\
+x = x_c + x_p = c_1 \cos (\omega_0 t) + c_2 \sin (\omega_0 t) + \frac{F / M}{\omega_0^2 - \omega^2} \cos (\omega t)
+}
+ 
+\subsection{Something else}
+\equations{
+x'' + \omega_0^2 x = \frac{F}{M} \cos ( \omega_0 t)
+\\
+x_c = c_1 \cos (\omega_0 t) + c_2 \sin (\omega_0 t)
+\\
+x_p = At \cos (\omega_0 t) + B t \sin (\omega_0 t)
+\\
+\textrm{derive the fucker and stick it into the thingy}
+\\
+x_p = \frac{F}{2 \omega_0 M} t \sin (\omega_0 t)
+\\
+x = x_c + x_p = c_1 \cos (\omega_0 t) + c_2 \sin (\omega_0 t) + \frac{F}{2 \omega_0 M} t \sin (\omega_0 t)
+}
+
+ }
+When forced frequency equals natural frequency then the wave gets bigger and bigger and diverges.
+ 
+ 
+ \comment{
+ 
+ \section{Free Damped Oscillator}
+ \[
+ r = \frac{\gamma \pm \sqrt{\gamma^2 - 4mk}}{2m}
+ \]
+ 
+ im not paying attention
+ 
+ WATCH LECTURE LATER PLEASE PLEASE PLEASE PLEASE PLEASE PLEASE
+ \[
+ C = \frac{F/m (\omega_0^2 - \omega)}{(\omega_0 - \omega^2) \ldots}
+ \]
+ 
+ somethosnegabdlgas
+ 
+ \section{Complexification}
+ \equations{
+m x'' + kx = F \cos (\omega t)
+\\
+e^{i \omega t} = \cos (\omega t) + i \sin (\omega t)
+\\
+\cos (\omega t) = \textrm{Re} (e^{i \omega t})
+\\
+m x'' + kx = \textrm{Re} (Fe^{i \omega t})
+\\
+\widetilde{x} \in \mathbb{C}
+\\
+m x'' + kx = \textrm{Re} (\widetilde{x})
+\\
+\Re m \widetilde{x}'' + kx 
+ }
+ 
+ WATCH THE LECTURE AHHHHHHHHHHHHH
+ 
+ }
+
+\section{RLC Circuits}
+Resistor - Inductor - Capacitor
+
+Battery gives voltage V makes current I. Resistor makes resistance $V_R = RI$. Inductor has Inductance L with makes a voltage against the direction of resistance $V_L = L \frac{dI}{dt}$. Capacitor builds up charge and increases in resistance with charge gained $V_c = \frac{1}{C} Q$. Also $I = \frac{dQ}{dt}$. Kirchoff's Loop rule means all the forces sum up to 0.
+
+\equations{
+V - V_R - V_L - V_C = 0
+\\
+V - RI - L \frac{dI}{dt} - \frac{1}{C} Q = 0
+\\
+\textrm{derive or do another thing to get}
+\\
+L \frac{d^2 I}{dt^2 } + R\frac{dI}{dt} + \frac{1}{C}I = \frac{dV}{dt}
+\\
+L I'' + R I' + \frac{1}{C}I = \frac{dV}{dt}
+\\
+\textrm{or}
+\\
+L Q''  + R Q' + \frac{1}{C} Q = V
+}
+You now have two useful differential equations to solve. It's basically the same as a mass spring with just different variables
+
+\comment{
+\[
+L \frac{dI}{dt} + RI = \frac{ \int^t_0 I \, dt}{C} = V(t)
+\]
+}
+
+\section{Complexification}
+\equations{
+L I'' + R I' + \frac{1}{C}I = - \omega V_0 \sin (\omega t)
+ \hp (V = V_0 \cos (\omega t))
+\\
+L I'' + R I' + \frac{1}{C}I = \textrm{Re}(i \omega V_0 e^{i \omega t})
+\\
+L \widetilde I'' + R \widetilde I' + \frac{1}{C} \widetilde I = i \omega V_0 e^{i \omega t} 
+\hp \widetilde I \in \mathbb{C}
+\\
+\textrm{take the real part of $\widetilde I$ to find $I$}
+}
+
+Consider a regular RC circuit
+ 
+\equations{
+R \widetilde I' + \frac{1}{C} \widetilde I = i \omega V_0 e^{i \omega t} 
+\\
+\textrm{get particular solution with guess} I_p = I_0 e^{i \omega t}
+\\
+I_0 = \frac{i \omega V_0}{i \omega R + \frac{1}{C}} =
+\frac{V_0}{R - \frac{i}{\omega C}} 
+\\
+V_0 = (R - \frac{i}{\omega C}) I_0
+\\
+\textrm{complex resistance is called impedance}
+}
+
+Now consider an LR circuit
+\equations{
+L \widetilde I'' + R \widetilde I' = i \omega V_0 e^{i \omega t}
+\rightarrow
+V_0 = (R + i \omega L) I_0
+}
+
+for a full RLC Circuit
+\equations{
+V_0 = (R + i(\omega L - \frac{1}{\omega C})) I_0
+}
+
+
+\section{FUCK THIS'LL BE ON THE MIDTERM}
+find the real current of something something
+ 
+\section{END OF MATERIAL FOR MIDTERM 2}
+
+\chapter{Linear Algebra}
+Ah yes I have never taken linear algebra before and definitely need this rerun
+\begin{itemize}
+\item
+multiply matrices
+\item
+invert matrices
+\item
+compute determinants
+\end{itemize}
+
+The determinant of an upper triangular matrix is the product of all of its diagonal entries
+
+Remember / figure out Cramer's Rule
+
+to find eigenvalues use $A - \lambda I$ and row operations to solve for lambda
+
+The eigenvalues of $A$ are the roots of its characteristic polynomial $\det (A - \lambda I)$ solve for lambda
+
+\chapter{Systems of Equations}
+
+\equations{
+m_{1} x_{1}'' = -k_{1}x_{1} - kx_{1} + kx_{2} + g_{1}(t) 
+\\
+m_{2} x_{2}'' = k_{}x_{1} - kx_{2} - k_{2}x_{2} + g_{2}(t) 
+\\
+\textrm{substitute}
+\\
+x_{3} = x_{1}' \hp x_{3}' = x_{1}'' 
+\\
+x_{4} = x_{}' \hp x_{4}' = x_{2}'' 
+\\
+x_{3}' = - \frac{(k_{1} + k) x_{1}}{m_{1}} + \frac{k}{m_{1}}x_{2} + \frac{g_{1}}{m_{1}}
+\\
+x_{4}' = \frac{k}{m_{2}}x_{1}- \frac{(k_{} + k_{2}) x_{2}}{m_{2}}  + \frac{g_{2}}{m_{2}}
+}
+
+\section{Order Reduction Quiz Problem}
+\equations{
+y'' - 5y' + 6y = 0
+\rightarrow
+x' - 5x + 6 = 0
+\\
+x = y'(t) \hp x' =  5x - 6y
+\\
+\begin{bmatrix}
+y' \\ x' 
+\end{bmatrix}
+=
+\begin{pmatrix}
+0 && 1 \\
+-6 && 5
+\end{pmatrix}
+\begin{bmatrix}
+y \\ x
+\end{bmatrix}
+\\
+(r - 2)(r - 3) = 0 \rightarrow r = 2, 3
+\\
+y = C_1 e^{2t} + C_2 e^{3t}
+\\
+4C_1 e^{2t} + 9C_2 e^{3t} - 10 C_1 e^{2t} - 15 C_2 e^{3t} + 6C_1 e^{2t} + 6C_2 e^{3t} = 0
+}
+
+
+\newpage
+\section{Theorems}
+
+
+\subsection{Existence and Uniqueness}
+\[
+\textrm{for } 
+\begin{cases}
+y' = F(t, y)
+\\
+y(t_{0}) = y_{0}
+\end{cases}
+\]
+if $\exists$ region around $(t_{0}, y_{0})$ where F is continuous $\Rightarrow$ a solution exists
+\\
+if $\frac{dF_{1}}{dy_{1}}, \frac{dF_{2}}{dy_{2}}, \ldots$ are continuous, then the solution is unique
+
+\subsection{Another thing}
+\[
+\begin{cases}
+\underline{y}' = A(t) \underline{y} +  \underline{y} (t)
+\\
+ \underline y (t_0) = \underline y_0
+\end{cases}
+\]
+if $A(t)$ and $\underline y (t)$ are continuous on an interval I around $t_0$, then $\exists$ 1 and only 1 solution to the Initial Value Problem around I.
+
+\section{Linear Homogeneous Solution}
+\[
+\underline y' = A(t) \underline y
+\]
+
+\subsection{Abel's Theorem}
+
+A(t) is an $n \times n$ matrix and we have $n$ solutions $v_1 \ldots v_n$.
+
+Take the Wronskian
+
+If $W(t) \neq 0 \Rightarrow v_1 \ldots v_n$ are linearly independent
+
+If $W(t) = 0 \Rightarrow v_1 \ldots v_n$ are linearly dependent
+
+\[
+\frac{dW}{dt} = Tr (A) \cdot W(t)
+\]
+
+
+\section{More Systems of Equations}
+\equations{
+y_1 ' = 2y_1 + 9y_2
+\hp
+y_2 ' = y_1 + 2y_2
+\\
+y_1(0) = 1 \hp y_2 (0) = 1
+\\
+\underline y' = A \underline y \hp 
+A =
+\begin{bmatrix}
+2 && 9 \\
+1 && 2
+\end{bmatrix}
+}
+Find $n$ linearly independent solutions to the system of equations $v_1 \ldots v_n$
+
+\equations{
+\underline v_1 ' = A \underline v_1 , \underline v_2 ' = A \underline v_2 , \ldots 
+\\
+W = \det (\underline v_1, \underline v_2, \ldots) \neq 0
+\\
+M(t) = \begin{pmatrix} \underline v_1 && \underline v_2 && \ldots \end{pmatrix} 
+\textrm{Fundamental Matrix}
+\\
+M' = AM
+\\
+\underline y = c_1 \underline v_1 + c_2 \underline v_2 + \ldots c_n \underline v_n = M \underline c
+\\
+\textrm{General Solution } \underline y = M \underline c
+}
+
+\subsection{Example}
+\equations{
+y'_1 = 2y_1 + 9y_2 \hp y'_2 = y_1 + 2y_2
+\\
+y_1(0) = 1, y_2(0) = 1
+\\
+A = \begin{pmatrix}
+2 && 9 \\
+1 && 2 
+\end{pmatrix}
+\\
+\textrm{Find eigenvalues and eigenvectors to get $v_1$ and $v_2$}
+\\
+A = \begin{pmatrix}
+2 - \lambda && 9 \\
+1 && 2 - \lambda
+\end{pmatrix}
+\rightarrow
+\lambda^2 - 4 \lambda - 5
+=
+(\lambda - 5)(\lambda + 1) = 0
+\\
+\begin{pmatrix}
+2 - 5 && 9 \\
+1 && 2 - 5
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\ v_2 
+\end{pmatrix}
+=
+0
+\rightarrow
+v_1 - 3v_3 = 0 
+\rightarrow 
+\begin{bmatrix}
+3 \\ 1
+\end{bmatrix}
+v_2
+\\
+\begin{pmatrix}
+2 + 1 && 9 \\
+1 && 2 + 1
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\ v_2 
+\end{pmatrix}
+=
+0
+\rightarrow
+v_1 + 3v_3 = 0 
+\rightarrow 
+\begin{bmatrix}
+-3 \\ 1
+\end{bmatrix}
+\\
+\underline v_1 = \begin{pmatrix} 3e^{5t} \\ e^{5t} \end{pmatrix}
+\hp
+\underline v_2 = \begin{pmatrix} 3e^{-t} \\ -e^{-t} \end{pmatrix}
+\\
+M = \begin{pmatrix}
+3e^{5t} && 3e^{-t} \\ 
+e^{5t} && -e^{-t}
+\end{pmatrix}
+\\
+\underline y = M \underline c = c_ 1 \begin{pmatrix} 3e^{5t} \\ e^{5t} \end{pmatrix}
+ + c_2 \begin{pmatrix} 3e^{-t} \\ -e^{-t} \end{pmatrix}
+ \\
+ \textrm{take inverse of M(0)}
+ \\
+ \underline c = M^{-1} (0) \twovec{1}{1}
+  \\
+ c_1 = \frac{2}{3}, c_2 = \frac{-1}{3}
+ \\
+ \underline y = M(t) \underline c = M(t) M^{-1}(0) \underline y_0
+}
+
+\subsection{Some Variation of Parameters Thing}
+\equations{
+\underline y' = A \underline y + f(t)
+\\
+\underline y = M \underline c \longrightarrow \underline y = M \underline u(t)
+\\
+(M \underline u)' = A M \underline u + \underline f
+\\
+\cancel{M' \underline u} + M \underline u' = \cancel{A M \underline u} + f
+\\
+\textrm{cancel out \sout{$M' \underline u$} and $A M \underline u$}
+\\
+M \underline u' = \underline f
+\\
+u' = M^{-1} \underline f
+\\
+\underline u = \int^t M^{-1} (s) \underline f(s) ds
+\\
+\textrm{work}
+\\
+\underline y(t) = M(t) \int^t_{t_0} M^{-1}(s) \underline f(s) ds + M(t) M^{-1} (t_0) \underline y_0
+}
+
+\section{More Eigenvalue Determinant Something}
+\equations{
+y_1' = -2y_1 + y_2 \hp y_2' = y_1 - 2y_2
+\\
+A =
+\begin{bmatrix}
+-2 && 1 \\
+1 && -2 
+\end{bmatrix}
+\
+\begin{vmatrix}
+-2 - \lambda && 1 \\
+1 && -2 - \lambda
+\end{vmatrix}
+=
+\lambda^2 + 4 \lambda + 3 = (\lambda + 1)(\lambda + 3)
+\\
+(A - \lambda_1I)x = 0 
+\rightarrow
+\xi_1 = 
+\begin{bmatrix}
+1 \\
+1 
+\end{bmatrix}
+\\
+(A - \lambda_2 I)x = 0 
+\rightarrow
+\xi_2 = 
+\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}
+\\
+v_1 = \xi_1 e^{\lambda_1 t}
+\hp
+v_2 = \xi_2 e^{\lambda_2 t}
+\rightarrow
+M = 
+\begin{bmatrix}
+v_1 && v_2
+\end{bmatrix}
+\\
+\underline y = c_1 v_1 + c_2 v_2
+}
+
+\subsection{Important Fundamental Matrix}
+\[
+\Phi(t): \Phi(0) = I
+\]
+
+\section{Something}
+\equations{
+\underline y' = A \underline y
+\\
+\underline y (t_0) = y_0
+\\
+\begin{cases}
+\Phi (t) = A \Phi
+\\
+\Phi (0) = I
+\end{cases}
+\\
+\Phi (t) = e^{At}
+\\
+e^{at} = 1 + at + \frac{(at)^2}{2!} + \frac{(at)^3}{3!} + \ldots
+\\
+e^{At} = I + At + \frac{A^2 t}{2!} + \frac{A^3 t}{3!} + \ldots 
+\\
+(e^{A t})' = 
+0 + \sum^{\infty}_{k = 1} \frac{A^k k t^{k - 1}}{k!}
+=
+A + \sum^{\infty}_{k = 2} \frac{A^k t^{k - 1}}{(k - 1)!}
+=
+A + A \sum^{\infty}_{k = 2} \frac{A^{k - 1} t^{k - 1}}{(k - 1)!}
+=
+\\
+A I + A \sum^{\infty}_{k = 1} \frac{A^{k} t^{k} } { (k)! }
+=
+% THIS ONE IS TH EIMPORTANT CORRECT ONE
+A \left( I + \sum^{\infty}_{k = 1} \frac{A^{k} t^{k} } { (k)! } \right) = e^{A t}
+\\
+\Phi (t) = e^{A t} = I + \sum^{\infty}_{k = 1} \frac{A^{k} t^{k} } { (k)! } 
+\\
+}
+
+\subsection{Matrix Exponential}
+\equations{
+\textrm{if } A = 
+\begin{pmatrix}
+a && 0 \\
+0 && b
+\end{pmatrix}
+\hp
+A^n = 
+\begin{pmatrix}
+a^n && 0 \\
+0 && b^n
+\end{pmatrix}
+\\
+e^{A t} = 
+\begin{pmatrix}
+e^{at} && 0 \\
+0 && e^{bt}
+\end{pmatrix}
+\\
+\textrm{If $A$ is not diagonal, but diagonalizable}
+\\
+\textrm{A is diagonalizable $\iff$ $A$ has $n$ linearly independent eigenvectors}
+\\
+A \underline \xi_1 = \lambda_1 \underline \xi_1
+\\
+U
+=
+\begin{pmatrix}
+\xi_1 && \xi_2 && \ldots 
+\end{pmatrix}
+\hp
+\Lambda = 
+\begin{pmatrix}
+\lambda_1 && 0 && \ldots \\
+0 && \lambda_2 && \ldots \\
+\ldots && \ldots && \lambda_3
+\end{pmatrix}
+\\
+A U = U \Lambda
+\Longrightarrow
+U^{-1} A U = \Lambda
+\\
+A^2 = U \Lambda U U^{-1} \Lambda U^{-1} = U \Lambda^2 U^{-1}
+\hp
+A^3 = U \Lambda^3 U^{-1}
+\\
+e^{A t} = I + \sum^{\infty}_{k = 1} \frac{A^{k} t^{k} } { (k)! } 
+=
+I + \sum^{\infty}_{k = 1} \frac{U \Lambda^{k} U^{-1} t^{k} } { (k)! } 
+=
+\\
+U I U^{-1} + U \sum^{\infty}_{k = 1} \frac{\Lambda^{k} t^{k} } { (k)! } U^{-1}
+=
+U \left( I + \sum^{\infty}_{k = 1} \frac{\Lambda^{k} t^{k} } { (k)! } \right) U^{-1}
+\\
+\Phi (t) = e^{A t} = U 
+\begin{pmatrix}
+e^{\lambda_{1} t} && 0 && \ldots \\
+0 && e^{\lambda_{2} t} && \ldots \\
+\ldots && \ldots && e^{\lambda_{3} t}
+\end{pmatrix}
+U^{-1}
+\\
+\underline y(t) = \Phi (t) \underline y_0
+\hp
+y(0) = y_0
+}
+
+
+\section{Putzer's Method}
+\equations{
+A_{N \times u}, \lambda_1, \lambda_2, \ldots
+\\
+e^{At}
+\\
+B_0 = I, B_1 = (A - \lambda_1 I) B_0 = A - \lambda_1 I,
+\\
+B_2 =  (A - \lambda_2 I) B_1 =( A - \lambda_1 I)(A - \lambda_1 I)
+\\
+B_{N - 1} = (A - I \lambda_{N - 1} I) B_{N - 2}
+\\
+r_1(t) = 
+\begin{cases}
+r_1' = \lambda_1 r_1
+\\
+r_1(0) = 1
+\end{cases}
+\\
+r_2 = 
+\begin{cases}
+r_2' = \lambda_2 r_2 + r_1
+\\
+r_2(0) = 0
+\end{cases}
+\\
+r_N = 
+\begin{cases}
+r_N' = \lambda_N r_N + r_{N - 1}
+\\
+r_N(0) = 0
+\end{cases}
+\\
+e^{At} = r_1 B_0 + r_2 B_1 + r_3 B_2 + \ldots + r_N B_{N - 1}
+}
+
+\subsection{Example}
+\equations{
+A = 
+\begin{bmatrix}
+1 && 2 && 0 \\
+2 && 1 && 0 \\
+0 && 0 && 3 
+\end{bmatrix}
+\lambda_1 = -1 , \lambda_2 = \lambda_3 = 3
+\\
+B_0
+\begin{bmatrix}
+1 && 0 && 0 \\
+0 && 1 && 0 \\
+0 && 0 && 1 
+\end{bmatrix}
+\\
+B_1 = A - \lambda_1 I = 
+\begin{bmatrix}
+1 && 2 && 0 \\
+2 && 1 && 0 \\
+0 && 0 && 3 
+\end{bmatrix}
+-
+\begin{bmatrix}
+1 && 0 && 0 \\
+0 && 1 && 0 \\
+0 && 0 && 1 
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 && 2 && 0 \\
+2 && 2 && 0 \\
+0 && 0 && 4
+\end{bmatrix}
+\\
+B_2 = (A - \lambda_2 I) B_1 = 
+(
+\begin{bmatrix}
+1 && 2 && 0 \\
+2 && 1 && 0 \\
+0 && 0 && 3 
+\end{bmatrix}
+-
+\begin{bmatrix}
+3 && 0 && 0 \\
+0 && 3 && 0 \\
+0 && 0 && 3
+\end{bmatrix}
+)
+\begin{bmatrix}
+2 && 2 && 0 \\
+2 && 2 && 0 \\
+0 && 0 && 4
+\end{bmatrix}
+=
+\\
+\begin{bmatrix}
+0 && 0 && 0 \\
+0 && 0 && 0 \\
+0 && 0 && 0
+\end{bmatrix}
+\\
+\textrm{unexpected behavior but it means everything else is 0's}
+\\
+r_1(t) = 
+\begin{cases}
+r_1' = -1 r_1
+\\
+r_1(0) = 1
+\end{cases}
+\rightarrow 
+r_1 = e^{-t}
+\\
+r_2(t) = 
+\begin{cases}
+r_2' = 3 r_2 + e^{-t}
+\\
+r_2(0) = 0
+\end{cases}
+\rightarrow 
+r_2 = -\frac{1}{4}e^{-t} + \frac{1}{4}e^{3t}
+\textrm{ integrating factor}
+\\
+e^{At} 
+=
+e^{-t} 
+\begin{bmatrix}
+1 && 0 && 0 \\
+0 && 1 && 0 \\
+0 && 0 && 1 
+\end{bmatrix}
++
+( -\frac{1}{4}e^{-t} + \frac{1}{4}e^{3t})
+\begin{bmatrix}
+2 && 2 && 0 \\
+2 && 2 && 0 \\
+0 && 0 && 4
+\end{bmatrix}
+=
+\textrm{something bad}
+}
+
+\chapter{Boundary Value Problem}
+Deflection on an Elastic Beam
+
+L = load
+\equations{
+I y'''' = I y^{IV} = -gx
+\\
+y^{IV} = -1, y(0) = 0, y''(0) = 0, y(L) = 0,y'(L) = 0
+\\
+y = \frac{-x^4}{24} + \frac{Ax^{3}}{6} + \frac{Bx^2}{2} + Cx + D
+}
+Just plug everything into everything else
+
+\subsection{Examples}
+\equations{
+y'' + y = 0
+\hp 
+y(0) = 0, y(\pi) = 1
+\\
+y = c_1 \cos (x) + c_2 \sin (x)
+\\
+\textrm{apply boundary conditions}
+\\
+y(0) = c_1 = 0
+\hp
+y(\pi) = -c_1 = 1
+\\
+\textrm{no solutions}
+\\
+y'' + y = 0
+\hp 
+y(0) = 1, y(\pi) = -1
+\\
+y = c_1 \cos (x) + c_2 \sin (x)
+\\
+\textrm{apply boundary conditions}
+\\
+y(0) = c_1 = 1
+\hp
+y(\pi) = -c_1 = -1
+\\
+y = \cos (x) + c_2 \sin (x)
+}
+
+\equations{
+y'' + y = 
+\hp 
+y(0) = 0, y(1) = 0
+\\
+y_c = c_1 \cos (x) + c_2 \sin (x)
+\\
+y_p = Ax + B \hp y_p' = A \hp y_p'' = 0
+\\
+y_p = x
+\\
+y = c_1 \cos (x) + c_2 \sin (x) + x
+\\
+\textrm{apply boundary conditions}
+\\
+y(0) = c_1 = 0
+\hp
+y(1) = 0 \cos (x) + c_2 \sin (x) + 1 \rightarrow c_2 = \frac{-1}{\sin(x)}
+\\
+y = \frac{- \sin (x)}{\sin (1)} + x
+}
+
+\subsection{Homogeneous Boundary Problem}
+\equations{
+y'' + 4y = 0
+\hp
+y(0) = 0
+\hp
+y(\pi) = 0
+\\
+y_c = c_1 \cos (2x) + c_2 \sin (2x)
+\\
+c_1 = 0
+\\
+y = c_2 \sin (2x)
+\textrm{ infinite solutions}
+\\
+y'' + 3y = 0
+\hp
+y(0) = 0
+\hp
+y(\pi) = 0
+\\
+y_c = c_1 \cos (\sqrt{3}x) + c_2 \sin (\sqrt{3}x)
+\\
+c_1 = 0
+\hp
+c_2 \sin (\sqrt{3} \pi)= 0 \rightarrow c_2 = 0
+\\
+y = 0
+\textrm{ one solution}
+}
+initial parameters are important
+
+\subsection{Finding non-trivial solutions}
+\equations{
+y'' + \lambda y = 0
+\hp
+y(0) = 0
+\hp
+y(\pi) = 0
+\\
+\textrm{find $\lambda$ such that solution is non-trivial}
+\\
+\textrm{call $\lambda$ an eigenvalue and the resulting solution an eigenfunction}
+\\
+\lambda = - \alpha^2: \alpha \neq 0
+\rightarrow
+y'' - \alpha^2 y = 0
+\rightarrow
+y = Ae^{\alpha x} + Be^{-\alpha x}
+\\
+\textrm{apply boundary conditions}
+\\
+A + B = 0 \rightarrow A = -B
+\\
+Ae^{\alpha \pi} + Be^{-\alpha \pi} = 0
+\rightarrow Ae^{\alpha \pi} - Ae^{-\alpha \pi} 
+\rightarrow 
+A (e^{\alpha \pi} - e^{-\alpha \pi} )
+\rightarrow 
+\alpha = 0
+\\ 
+\textrm{ that's not allowed, so there's only the trivial solution}
+}
+
+\section{42 is a final answer}
+
+\section{Eigenvalue Problems}
+just fuckin guess various things for $\gamma$ and hope for the best
+\equations{
+y'' + \lambda y = 0
+\hp
+y(0) = 0
+\hp
+y(L) = 0
+\\
+\lambda_N= \left( \frac{N \pi}{L} \right)^2 : N \in \mathbb{Z}
+\\
+\underline y_N = \sin (\frac{N \pi}{L}x)
+}
+memorize this thingy specifically
+
+\equations{
+y'' + 2y' + \lambda y = 0 \hp y(0) = 0 \hp y(1) = 0
+\\
+r^2 + 2r + \lambda = 0 \rightarrow r = -1 \pm \sqrt{1 - \lambda }
+\\
+\begin{cases}
+1 - \lambda < 0
+\\
+1 - \lambda = 0
+\\
+1 - \lambda > 0
+\end{cases}
+}
+
+\section{More Eigenvalue Shenanigans}
+
+\subsection{Sturm-Lionille Theorem}
+idk what it is
+
+\equations{
+p, p', q, r \in C[a, b] \&
+p, r > 0 \forall x \in [a, b]
+\Rightarrow
+}
+$\exists$ an infinite ordered sequence of eigenvalues and an eigenfunction for each eigenvalue
+
+The eigenvalues will form an orthogonal basis
+
+\chapter{Fourier Series}
+\subsection{Sine Fourier Series Expansion}
+\equations{
+f(x) = \sum^\infty_{k = 1} c_N y_N (x)
+\\
+<f, g> = \int^b_a f(x) g(x) r(x) dx
+\\
+\textrm{r(x) is a weight function}
+\\
+f(x) = \sum^\infty_{N = 1} B_N \sin(\frac{N \pi x}{L})
+\\
+B_N = \frac{
+\int^b_a f(x) \sin(\frac{N \pi x}{L}) dx
+}
+{
+\int^L_0 \sin^2(\frac{N \pi x}{L}) dx
+}
+\\
+B_N = \frac{2}{L} \int^L_0 f(x) \sin(\frac{N \pi x}{L}) dx
+}
+
+
+\section{FIGURE IT OUT LATER}
+Cosine Fourier Series Expansion
+\equations{
+f(x) = A_0 + \sum^\infty_{N = 1} A_N \cos ( \frac{N \pi x}{L})
+\\
+A_0 = \frac{1}{L} \int^L_0 f(x) \, dx
+\\
+A_N = \frac{2}{L} \int^L_0 f(x) \cos(\frac{N \pi x}{L}) \, dx
+}
+
+\subsection{Theorem}
+If f(x) and f'(x) are piecewise continuous in (a, b), then the fourier series expansion of f(x) converges to 
+$( f(x)^+ + f(x)^- ) / 2$
+\subsection{Eigenfunction something}
+idk
+
+
+\section{Trig shenanigans}
+\equations{
+\cos(x) = \frac{e^{ix} + e^{-ix}}{2}
+\hp
+\sin(x) = \frac{e^{ix} - e^{-ix}}{2}
+\\
+\cosh(x) = \frac{e^{x} + e^{-x}}{2}
+\hp
+\sinh(x) = \frac{e^{x} - e^{-x}}{2}
+\\
+\frac{d}{dx} \sinh(x) = \cosh(x)
+\hp
+\frac{d}{dx} \cosh(x) = \sinh(x)
+\\
+y' - \alpha^2 y = 0 \rightarrow 
+y = Ae^{\alpha x} + e^{-\alpha x} \rightarrow
+y = A \cosh(\alpha x) + B \sinh(\alpha x)
+}
+That's all you need to know about hyperbolic trig according to Manfroi
+
+\equations{
+y'' + \lambda y = 0 \hp y(-L) = y(L) \hp y'(-L) = y'(L)
+\\
+y = A \cosh(\alpha x) + B \sinh(\alpha x)
+\hp
+y' = \alpha A \sinh(\alpha x) + \alpha B \cosh(\alpha x) 
+}
+
+$y_0 = 1$
+
+
+\subsection{$y_N$ is orthogonal}
+\equations{
+f(x)  = \sum c_N y_N
+\hp
+c_n = \frac{<f_1, y_N>}{<y_N, y_N>}
+\\
+f(x) = A_0 + \sum(A_N \cos(\frac{N \pi x}{L}) + B_N \sin (\frac{N \pi x}{L}))
+}
+
+\subsection{Example}
+\equations{
+f(x) = x \hp -10 < x < 10 : L = 10
+\\
+A_0 = \frac{1}{20} \int^{10}_{-10} x dx = 0
+\\
+A_N = \frac{1}{10} \int^{10}_{-10} x \cos(\frac{N \pi x}{10}) dx = 0
+\\
+B_N = \frac{1}{10} \int^{10}_{-10} x \sin(\frac{N \pi x}{10}) dx = \frac{-20}{N \pi} \cos(N \pi) = \frac{-20}{N \pi} (-1)^N
+\\
+ff(x) = \frac{-20}{\pi} \sum \frac{(-1)^N}{N} \sin(\frac{N \pi x}{10})
+}
+
+\subsection{Even and Odd Functions}
+\equations{
+\int^L_{-L} \textrm{ odd } = 0
+\\
+\int^L_{-L} \textrm{ even } = 2 \int^L_{0} \textrm{ even } 
+\\
+F = A_0 + \sum^\infty_{N = 1} A_N \cos(\frac{n \pi x}{L}) + B_N \sin(\frac{n \pi x}{L})
+\\
+A_0 = \frac{1}{2L} \int^L_{-L} f(x) dx, 
+A_N = \frac{1}{L} \int^L_{-L} f(x) \cos(\frac{n \pi x}{L}) dx,
+\\
+B_N = \frac{1}{L} \int^L_{-L} f(x) \sin(\frac{n \pi x}{L}) dx,
+}
+knowing if a function is even or odd just saves a little bit of time
+
+its all just fourier series if you can do one of em you can do all of em
+
+\chapter{Partial Differential Equations}
+Finally something different holy shit
+
+heat equation example
+\equations{
+\mu(x, t) \hp \textrm{flux} \propto \frac{\del \mu}{\del x}
+\\
+\frac{\del \mu}{ \del t} = \kappa \frac{\del^2 \mu}{ \del x^2}
+\hp
+\textrm{$\kappa$ is diffusion constant}
+\\
+\textrm{do some boundary condition osmethings}
+\\
+\mu(0, t) = 0, \mu_x(0, t) = 0, \mu(L, t) = 0, \mu_x(0, t) = 0, 
+}
+
+\subsection{Separation of Variables}
+\equations{
+\mu(x, t) = X(x) T(t)
+\\
+\mu_t = XT' \hp \mu_{xx} = X''T 
+\\
+XT' = \kappa X'' T
+\\
+\frac{T(t)'}{\kappa T(t)} = \frac{X(x)''}{X(x)} = - \lambda
+\\
+ \frac{X(x)''}{X(x)} = - \lambda \longrightarrow X_n = \sin (\frac{n \pi x}{L})
+ \\
+ T(t)_N = e^{\frac{- \kappa n^2 \pi^2}{L^2}t}
+ \\
+ \mu (x, t) = \sum^\infty_{k = 1} c_N e^{\frac{- \kappa n^2 \pi^2}{L^2}t} \sin( \frac{n \pi x}{L})
+ \\
+c_N = \frac{2}{L} \int^L_0 f(x) \sin ( \frac{n \pi x}{L}) \, dx
+}
+
+\subsection{Diffusion Equation in 1 Dimension}
+fuckin idk
+
+\equations{
+T' = \frac{- \kappa n^2 \pi^2}{L^2}T
+\rightarrow
+T_N(t) = e^{ \frac{- \kappa n^2 \pi^2}{L^2}t}
+\\
+\mu = A_0 X_0 T_0 + A_1 X_1 T_1 \ldots
+\\
+\mu = A_0 = \sum^\infty_{k = 1} A_N e^{ \frac{- \kappa n^2 \pi^2}{L^2}t} \cos( \frac{n \pi x}{L} )
+}
+
+\section{2D Laplace Equation}
+\equations{
+u_{xx} + u_{yy} = 0
+}
+
+im not paying attention at all fuck this shit
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
