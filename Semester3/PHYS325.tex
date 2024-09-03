@@ -1,0 +1,275 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 325}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS325}
+I missed everything from the first 2 weeks because my laptop exploded whoopsies
+
+\chapter{Equations of motion}
+derive the equations of motion to solve for a trajectory $\vec r(t)$ which is a position vector 
+with respect to time
+
+\section{Newton's Second Law}
+\[
+\vec F = m \vec a = m \frac{d^2 \vec r(t)}{dt^2} 
+\hp
+\vec F = \frac{d \vec p(t)}{dt}
+\]
+
+\section{Strategy}
+\begin{enumerate}
+\item
+choose a reference frame and coordinates
+\item identify all the relevant forces (external forces)
+
+make a force diagram lol
+\item
+integrate N2 for a given force $\vec F(\vec r, \dot \vec r, t)$ to
+find $\vec r(t)$
+\item
+fix integration constants from inital or boundary conditions. 
+(e.g. $\vec v_0 = \vec v(t = 0) = 0)$ 
+
+\item 
+\equations{
+\vec F = 0
+\\
+from N2L 0 = \vec F = m \vec a = m \frac{d \vec v}{dt}
+\\
+\rightarrow \vec v =  const = \vec v_0
+\\
+\vec r(t) = \int v_0 dt = v_0 t + r_0
+}
+\item
+if F is constant
+\equations{
+\dot \vec v = \ddot \vec r = \vec a = \frac{\vec F_0}{m}
+\\
+\int dv = \int \frac{F_0}{m} dt \rightarrow \vec v(t) = 
+\frac{F_0}{m} t + \vec v_0
+\\
+\vec r(t) = \int dr = \int \vec v dt =
+\\
+\frac{1}{2} \frac{\vec F_0}{m} t^2 + \vec v_0 t + \vec r_0
+}
+
+only valid for constant force
+\end{enumerate}
+
+\subsection{Time Dependent Force}
+\equations{
+\frac{d \vec v}{dt} = \vec a = \frac{\vec F}{m}
+\\
+\textrm{separation of variables}
+\\
+d \vec v = \frac{\vec F(t)}{m} dt 
+\\
+\int d \vec v = \int \frac{\vec F(t)}{m} dt
+\\
+\vec v(t) = \frac{\vec F}{m} + \vec C \hp \vec F = \int F(t) dt
+\\
+\textrm{C is the integration constant}
+\\
+\vec v = \frac{d \vec r}{dt}
+\\
+\vec r = \int \vec v dt
+}
+
+\subsection{Example: Forced Harmonic Oscillator}
+A particle $m$ moves along $-\infty < x <\infty$. It is subjected to a force 
+$F = F_0 \cos(\alpha t)$.
+It starts at time $t = 0, x_0 = x(t = 0) = 0, v_0 = v(t = 0) = 0$
+
+\begin{enumerate}
+\item
+coordinate system is just 1D
+\item
+force is $F = F_0 \cos(\alpha t)$
+\item
+equation of motion from N2L is $\frac{dv}{dt} = a = \frac{F}{m}$
+\item
+separation of variables
+\equations{
+    dv = \frac{F}{m} dt = \frac{F_0}{m} dt = \frac{F_0}{m} \cos{\alpha t} dt
+    \\
+    v(t) = \int dv = \frac{F_0}{m} \int \cos(\alpha t) dt = 
+    \frac{F_0}{m} \frac{1}{2} \sin{\alpha t} + C_1
+    \\
+    x(t) = int dx = \int v dt =
+    \\
+    \int \frac{F_0}{\alpha m} \sin(\alpha t) + C_1 dt =
+    \\
+    - \frac{F_0}{\alpha^2 m} \cos(\alpha t) + C_1(t) + C_2
+}
+\item
+find initial conditions
+
+\equations{
+0 = v_0 = \frac{F_0}{\alpha m} \sin{\alpha 0} + C_1 \rightarrow C_1 = 0
+\\
+0 = x_0 = - \frac{F_0}{\alpha^2 m} \cos(\alpha 0) + 0 + C_2 \rightarrow 
+\\
+C_2 = \frac{F_0}{\alpha^2 m}
+\\
+x(t) = \frac{F_0}{\alpha^2 m} \left(1 - \cos(\alpha t) \right)
+\\
+v(t) = \frac{F_0}{\alpha m} \sin(\alpha t)
+}
+\end{enumerate}
+
+\section{Position Dependent Force}
+focusing on 1 dimension for simplicity
+
+get the equation of motion from Newton's 2nd Law
+
+\equations{
+F(x) = m a = m \frac{dv}{dt}
+\\
+\textrm{chain rule}
+\\
+\frac{dv}{dt} = \frac{dv}{dx} \frac{dx}{dt} = v \frac{dv}{dx}
+\\
+m v \frac{dv}{dx} = F(x)
+\\
+\textrm{separation of variables}
+\\
+mv \, dv = F(x) dx
+\\
+\textrm{Use definite integrals. relabel v = v' and x = x' (not derivatives)}
+\\
+m \int^v_{v_0} v' \, dv' = \int^x_{x_0} F(x') \, dx' 
+\\
+\frac{1}{2} m(v^2 - v_0^2) = \int^x_{x_0} F(x') \, dx'
+\\
+\textrm{solve for v}
+\\
+\textrm{It looks like change in kinetic energy and work}
+\\
+\Delta T = \frac{1}{2} m (v^2 - v_0^2) \hp W = \int F(x) \, dx
+\\
+\textrm{if force is conservative, it is path independent, }
+\\
+\textrm{and it can be written as a
+gradient of a potential $\vec F = -\nabla U$}
+\\
+F = -\frac{dU}{dx}
+\\
+T - T_0 = \int^x_{x_0} - \frac{dU}{dx} \, dx' = - \left( U(x) - U(x_0) \right)
+}
+\equations{
+E = T + U(x) = T_0 + U(x_0)
+\\
+\textrm{Conservation of Mechanical Energy}
+\\
+E = T + U(x) = \frac{1}{2} mv^2 + U(x)
+\\
+v = \pm \sqrt{\frac{2}{m} (E - U(x))}
+\\
+\textrm{use $v = \frac{dx}{dt}$ to find $x(t)$}
+}
+
+\section{Analyzing the Potential}
+infer velocity and position
+
+given energy, what is motion
+
+$E = E_0 = E(x_0) = T(x_0) + U(x_0)$
+
+$U(x_0) = E_0 =$ const $\rightarrow T(x_0) = 0 \rightarrow v(x_0) = C$
+
+\subsection{case 2: energy of particle is \_}
+\equations{
+    E = E_1 = T(x) + U(x)
+    \\
+    \textrm{particle can move between $x_{1a}$ and $x_{1b}$}
+    \\
+    x_0: E_1 = E = T + U(x_0) 
+    \\
+    \textrm{ potential energy is at minimum, kinetic at max}
+    \\
+    \textrm{$v(x_0)$ is maximal}
+}
+
+\subsection{Case 3: $E = E_2 = U(x_2)$}
+$T(x_2) = 0$ so $v = 0$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
