@@ -126,7 +126,7 @@ d \vec v = \frac{\vec F(t)}{m} dt
 \vec r = \int \vec v dt
 }
 
-\subsection{Example: Forced Harmonic Oscillator}
+\subsection{Forced Harmonic Oscillator}
 A particle $m$ moves along $-\infty < x <\infty$. It is subjected to a force 
 $F = F_0 \cos(\alpha t)$.
 It starts at time $t = 0, x_0 = x(t = 0) = 0, v_0 = v(t = 0) = 0$
@@ -244,11 +244,650 @@ $U(x_0) = E_0 =$ const $\rightarrow T(x_0) = 0 \rightarrow v(x_0) = C$
 \subsection{Case 3: $E = E_2 = U(x_2)$}
 $T(x_2) = 0$ so $v = 0$
 
+\section{Analyzing Extrema of Potential}
+To find the extrema points, find the derivative of the potential and set it 
+equal to 0.
 
+To find the type of extrema point, take the second derivative and then check the
+sign
 
+\subsection{Push Particle Towards Extrema}
+\begin{enumerate}
+\item
+$x = x_1$ is a minimum
 
+If the particle is slightly moved from the minimum, it will return to the minimum
+ because that is where the lowest energy point is. 
 
+This point is called stable for the particle.
+\item
+$x = x_2$ is a maximum
 
+The particle will move farther away from the equilibrium point.
+
+This point is unstable
+\item
+$x = x_3$ is a saddle point
+
+The particle is stable in one direction and unstable in the other
+
+marginally stable point 
+\end{enumerate}
+
+\section{Simple Harmonic Oscillator}
+Simple Harmonic Oscillator
+
+Figure out motion near the equilibrium point
+
+To approximate a function only near a specific point, use a Taylor Series
+
+Taylor expand potential around $x_0$
+\equations{
+    U(x) \approx U(x_0) + U'|_{x = x_0}(x - x_0) + \frac{1}{2} U''|_{x = x_0} (x - x_0)^2 + \ldots 
+    \\
+    \textrm{choose $U(x_0) = 0$ extremum}
+    \\
+    U(x) \approx \frac{1}{2} kx^2
+}
+
+Can also taylor expand force near $x_0$
+\equations{
+    F(x) \approx F(x_0) + F'|_{x = x_0} (x - x_0) + 
+    \frac{1}{2} F''|_{x_0} (x - x_0)^2
+    \\
+    -U'|_{x_0} = 0 \hp -U''|_{x_0} = -k \hp \textrm{rest is small}  
+}
+
+\newpage
+insert equation of motion 
+\equations{
+    m \ddot x = F(x) \approx F'|_{x_0} (x - x_0) = -kx
+    \\
+    m \ddot x + kx = 0
+    \\
+    \textrm{ansatz: guess the form of the solution (trig or exponent)}
+    \\
+    x(t) = A \sin(\omega t + \varphi)
+    \\
+    \dot x(t) = \frac{dx}{dt} = A \omega \cos (\omega t + \varphi)
+    \\
+    \ddot x(t) = -A \omega^2 \sin(\omega t + \varphi)
+    \\
+    \textrm{insert ansatz into equation of motion}
+    \\
+    m (-A) \omega^2 \sin(\omega t + \varphi) + 
+    k A \sin(\omega t + \varphi) = 0
+    \rightarrow 
+    \\
+    \omega = \sqrt{\frac{k}{m}}
+    \hp
+    \textrm{period = } T = \frac{2 \pi }{\omega} = 2 \pi \sqrt{\frac{m}{k}}
+}
+
+\section{velocity Dependent Force}
+$\vec F = \vec F(\vec v)$
+
+drag forces, friction, air resistance
+
+\subsection{Types of drag forces}
+\begin{enumerate}
+    \item
+    Stoke's drag (linear)
+    \[
+    \vec F = -c \vec v
+    \]
+    laminar flow, valid for small velocities and viscous fluids
+    \item
+    Newtonian Drag (nonlinear)
+    \[
+    \vec F(\vec v) = -k \vec v^2
+    \]
+    valid for larger velocities and less viscous fluids.
+\end{enumerate}
+
+The type of drag is applicable based of Reynold's Number
+\[
+R = \frac{\rho v L}{\mu} \hp
+\textrm{ density, fluid flow, size, viscosity}
+\]
+
+\section{Linear Drag}
+particle of mass $m$ and initial velocity $v_0$ in laminar flow
+
+goal, derive velocity after a long time (should be 0)
+
+choose coordinate system: 1D along x direction $v = \dot x$
+
+force $F(v) = -cv$
+
+introduce new constant $\kappa  = \frac{c}{m}$
+\[
+[k] = [\frac{F}{m * v}] = [\frac{1}{t}]
+\]
+
+\equations{
+    F = -cv = -m \kappa v
+    \\
+    F = m \ddot x = m \frac{dv}{dt} = -m \kappa v
+    \\
+    \textrm{separation of variables}
+    \\
+    \frac{1}{v} dv = - \kappa dt 
+    \\
+    \textrm{use definite integrals, relabel variables}
+    \\
+    \int^v_{v_0} \frac{1}{v'} dv' = - \kappa \int^t_{t_0} dt'
+    \\
+    - \kappa t = \ln(v') \Big |^v_{v_0} = \ln(\frac{v}{v_0})
+    \\
+    v(t) = v_0 \exp(- \kappa t)
+}
+exponential decay with a rate of $\kappa$
+
+For some sanity checks, you can try $t = \infty$ and $t = 0$ to 
+make sure they make sense
+
+\section{non-linear drag with gravity}
+motion is 1D along the z axis 
+
+drag force $F = -c v^2$ sgn(v)
+
+(sgn(v) is $\pm 1$ depending on if v is greater or less than 0)
+
+new constant 
+\[
+\sigma = \frac{c}{m}
+\]
+
+\equations{
+    F = -mg + cv^2
+    \rightarrow
+    -mg + \frac{C}{m}mv^2 \rightarrow
+    m(g - \sigma v^2)
+    \rightarrow
+    \\
+    \frac{dv}{dt} = -g + \sigma v^2
+    \rightarrow
+    \int^v_0 \frac{1}{-g + \sigma v^2} dv = \int^t_0 dt
+    \\
+    t = \frac{-1}{\sqrt{g \sigma}}
+    \tanh^{-1}(v \sqrt{\frac{\sigma}{g}})
+    \\
+    v = - \sqrt{\frac{g}{\sigma}} \tanh(\sqrt{gh} t)
+    \\
+    t \to \infty \hp v \to - \sqrt{\frac{g}{\sigma}}
+}
+You can see that $v$ asymptotically approaches a constant
+velocity with large time which you can kind of see 
+from the initial equation.
+
+For most cases $m \frac{dv}{dt} = \vec F(\vec r, \vec v, t)$ is 
+unsolvable. However, for some cases
+$F = f(v) g(t)$, you get
+$\int \frac{m}{f(v)} dv = \int g(t) dt$
+
+For another special case $F = f(v) h(x)$, you get
+\equations{
+    m \frac{dv}{dt} \frac{1}{f(v)} = h(x) 
+    \\
+    \frac{dv}{dt} = \frac{dv}{dx} \frac{dx}{dt} = v \frac{dv}{dx}
+    \\
+    m v \frac{dv}{dx} \frac{1}{f(v)} = h(x)
+    \rightarrow
+    \int \frac{mv}{f(v)} dv = \int h(x) dx 
+}
+
+\section{Time Varying Mass $M(t)$}
+$u$ is the speed of the mass being projected out.
+\equations{
+    P_i = M_i v_i
+    \\
+    P_f = dm(v - u)
+    \rightarrow
+    t(m_f v_f)
+    =
+    fm(v - u)
+    \\
+    P_i = P_f \Rightarrow Mv_i = -u dm + m_i v_i - dM dv 
+    \\
+    dM dv \approx 0 \textrm{ and cancel some stuff}
+    \\
+    Mdv = t u dm
+    \Longrightarrow
+    dv = \frac{-u}{M} dm
+    \rightarrow
+    \int dv = \int \frac{-u}{M} dm
+    \rightarrow 
+    \\
+    v - v_0 = -u \ln(\frac{M}{M_0})
+    \rightarrow
+    v = v_0 - u \ln(\frac{M}{M_0})
+}
+Because its logarithmic, its really hard to boost something by 
+chucking mass out the back.
+
+Conservation of momentum is not true in gravity 
+$P_i \neq P_f$
+
+\equations{
+    dp = P_f - P_i \neq 0
+    \\
+    dp = -Mg dt 
+    -Mg \, dt = M dv + u dM 
+    \\
+    \frac{dv}{dt} = -g - \frac{u}{M} \frac{dM}{dt}
+    \hp 
+    \textrm{ THIS IS THE IMPORTANT EQUATION}
+}
+$u, M$, and $dM/dt$ are all controllable by the rocket
+
+\subsection{velocity from acceleration}
+\[
+v(t) = v_0 -gt - u \ln(\frac{M_0 - dt}{M_0})
+\]
+
+\section{2D Rocket}
+\begin{gather*}
+    \vec F(\vec r, \dot \vec r, t) = m \vec a = m \ddot \vec r
+\end{gather*}
+Cartesian Coordinates 
+\equations{
+    F_x(\vec r, \dot \vec r, t) = m \ddot x
+    \hp
+    F_y(\vec r, \dot \vec r, t) = m \ddot y
+    \hp
+    F_z(\vec r, \dot \vec r, t) = m \ddot z
+}
+Consider a magnetic field $B e_z$
+\equations{
+    \vec F = q \vec v \times \vec B = q(\vec v \times \vec B)
+    \rightarrow
+    \\
+    qB(v_y e_x - v_x e_y)
+    \hp 
+    F_x = qBv_y = m \ddot x
+    \hp 
+    F_y = -qB v_x = m \ddot y 
+    \\
+    m \ddot z = 0 \Longrightarrow \dot z = \textrm{const}
+    \\
+    qB \dot y = m \ddot x
+    \hp 
+    qB \dot x = m \ddot y
+    \\
+    qB \ddot y = m \dddot x
+    \rightarrow
+    qB (\frac{-qB}{m}) \dot x = m \dddot x
+    \rightarrow
+    \ddot v_x = - \omega^2 v_x
+    \\
+    \textrm{this is the spring equation}
+    \\
+    \ddot x = \frac{k}{m} x
+    \longrightarrow
+    v_x = A \sin(\omega t + \phi)
+    \hp 
+    v_y = A \cos(\omega t + \phi)
+    \\
+    \textrm{it goes in a circle}
+}
+
+\subsection{something}
+\equations{
+    \ddot v_x = \omega \dot v_y
+    \\
+    \ddot v_x = -\omega^2 v_x
+    \hp 
+    \ddot v_y = - \omega^2 v_y
+    \\
+    \dot \nu = \dot v_x + i \dot v_y
+    \\
+    =
+    \omega v_y - i \omega v_x
+    \\
+    \dot \nu = -i \omega \nu 
+    \\
+    \textrm{and some stuff I missed}
+}
+
+\subsection{Particle in Field}
+Motion of a charged particle in a homogeneous magnetic field
+\equations{
+\dot v_x = \omega v_y
+\hp 
+\dot v_y = - \omega v_x
+\hp
+w / \omega = \frac{qB}{m}
+\mu = v_x + i v_y
+\\
+\dot mu = \dot v_x + i \dot v_y
+\longrightarrow
+\omega v_y - i \omega v_x
+\rightarrow
+-i \omega (v_x + i v_y)
+\\
+\dot \mu = -i \omega \mu
+\\
+\textrm{solve with separation of variables}
+\\
+\frac{1}{\mu} \, d \mu = - i \omega \, dt
+\rightarrow
+\ln(\mu) + \tilde{C} = \ln(\frac{\mu}{C})
+\\
+\mu = C \exp(-i \omega t)
+\hp
+C = A e^{i \delta}
+\\
+\mu = A \exp(i(\delta - \omega t))
+}
+Use the euler identity to keep doing math
+\equations{
+	\mu = A(\cos(\omega t - \delta) - i \sin(\omega t - \delta))
+	\\
+	\textrm{the signs reversed and im not entirely sure why or how}
+	\\
+	v_x = \Re(\mu) = A \cos(\omega t - \delta)
+	\hp
+	v_y = \Im(\mu) = -A \sin(\omega t - \delta)
+    \\
+    |v^2| = A^2 \cos(\omega t - \delta) + A_2 \sin(\omega t - \delta)
+    = A^2
+    \\
+    \textrm{double check this is true by 
+    showing derivative of $v$ is 0}
+    \\
+    \frac{1}{2} \frac{d}{dt}|v|^2 = 
+    \frac{1}{2}m 2v \cdot \frac{d}{dt}v
+    \\
+    = v \cdot q(v \times B) = 0
+    \\
+    = 0 \hp A = \textrm{constant}
+}
+
+Now you figure out the trajectory
+\equations{
+    \vec v = \frac{dr}{dt} \rightarrow v \, dt = dr 
+    \\
+    x(t) = \int v_x \, dt = \int A \cos(\omega t - \delta) \, dt 
+    =
+    \frac{A}{\omega} \sin(\omega t - \delta) + C_y
+    \\
+    z(t) = \int v_z \, dt = \int v_{z0} \, dt = 
+    v_{z0} t + z_0
+    \\
+    A = \sqrt{v_x^2 + v_y^2}
+}
+
+\section{Curvilinear Coordinates}
+non-Cartesian coordinates 
+
+\subsection{Examples}
+2d polar coordinates $(r, \theta)$
+\[
+x = r \cos(\phi(t)) \hp
+y = r \sin(\phi(t))
+\hp 
+r = \sqrt{x^2 + y^2}
+\]
+
+3d cylindrical coordinates $(r, \phi, z)$
+\[
+x \ r \cos(\phi) \hp y = r \sin(\phi) \hp z = z
+\]
+
+3d spherical coordinates $(r, \theta, \phi)$
+\[
+x = r \cos(\phi) \sin(\theta)
+\hp 
+y = r \sin(\phi) \sin(\theta)
+\hp 
+z = r \cos(\theta) 
+\]
+
+\section{Whirling Stick}
+A rigid stick whriling with fixed $\omega$
+
+use polar coordinates to have the easiest math 
+\equations{
+    \omega = \varphi t = \textrm{const}
+    \\
+    e_r = e_r (t) \hp e_{\varphi} = e_{\varphi} (t)
+    \\
+    \textrm{relate $r$ and $\varphi$ to $x$ and $y$ basis vectors}
+    \\
+    e_r(t) = \cos(\varphi(t)) e_x + \sin(\varphi(t))e_y
+    \\
+    e_{\varphi}(t) = -\sin(\varphi(t)) e_x + \cos(\varphi(t)) e_y
+    \\
+    \textrm{position vector } r(t) = r(t) e_r(t)
+}
+
+Determine the first derivatives
+\equations{
+    \dot e_r = \frac{d}{dt}\cos(\varphi(t)) e_x + \sin(\varphi(t))e_y
+    \rightarrow
+    \\
+    \frac{d}{dt}\cos(\varphi(t)) e_x + 
+    \cos(\varphi) \frac{d}{dt}e_x + 
+    \frac{d}{dt} \sin(\varphi(t))e_y + 
+    \sin(\varphi(t)) \frac{d}{dt} e_y
+    \\
+    \frac{d}{dt}\cos(\varphi(t)) e_x + 
+    \frac{d}{dt} \sin(\varphi(t))e_y 
+    \\
+    \dot e_r = - \dot \varphi \sin(\varphi) e_x + 
+    \dot \varphi \cos(\varphi) e_y = \dot \varphi e_\varphi
+    \\
+    \cdot e_{\varphi} = - \dot \varphi e_{\varphi}
+    \\
+    v(t) = \dot r(t) e_r + r \dot \varphi e_\varphi
+    =
+    v_r e_r + v_\varphi e_\varphi 
+}
+
+now acceleration lol
+\equations{
+    a = \frac{dv}{dt} = 
+    (\ddot r - r \dot \varphi^2) e_r + 
+    (r \ddot \varphi + 2 \dot r \dot \varphi) e_{\varphi}
+    \\
+    \varphi = \omega t \hp r \dot \varphi^2  = r \omega^2
+    \\
+    \textrm{centripetal force}
+}
+
+\section{Bead on a Whirling Rod}
+Use polar coordinates for sake of convenience. 
+Use basis vectors $e_r$ and $e_\phi$
+
+Rod whirls at a rate of $\omega$, so $\phi(t) = \omega t$
+
+Our general strategy is draw a sketch and then figure out 
+your coordinates and then write out position, velocity, and 
+acceleration vectors.
+
+Used Newton's 2nd law to to get a differential equation.
+
+Solve the differential equation.
+\equations{
+    a(t) = [\ddot r - r \dot \phi^2] \vec e_r + 
+    [r \ddot \phi + 2 \dot r \dot \phi] \vec e_\phi 
+    \\
+    F = ma 
+    \\
+    \textrm{no force in the radial direction because 
+    it's all normal force}
+    \\
+    F_{net} = F_n = F_n(t) e_\phi(t) + 0 e_r(t)
+    \\
+    F_n e_\phi (t) = m [\ddot r - r \dot \phi^2] \vec e_r + 
+    m[r \ddot \phi + 2 \dot r \dot \phi] \vec e_\phi 
+    \\
+    e_r = 0 = m (\ddot r - r \dot \phi^2)
+    \hp 
+    e_\phi = F_n = m (r \ddot \phi + 2 \dot r \dot \phi )
+    \\
+    0 = \ddot r - r \dot \phi^2 \rightarrow
+    \ddot r = r \dot \phi^2 \hp 
+    \phi(t) = \omega t, \dot \phi(t) = \omega
+    \\
+    \ddot r = \omega^2 r
+    \hp 
+    \textrm{use an ansatz/guess}
+    \\
+    r = e^{\lambda t} \hp 
+    \dot r = \lambda e^{\lambda t} \hp 
+    \ddot r = \lambda^2 e^{\lambda t}
+    \\
+    \lambda^2 e^{\lambda t} = \omega^2 e^{\lambda t}
+    \hp \lambda^2 = \omega^2
+    \hp \lambda = \pm \omega 
+    \\
+    r(t) = Ae^{\omega t} + B e^{- \omega t}
+    \hp \textrm{solve with initial condition}
+    \\
+    \dot r(t) = \omega A e^{\omega t} - \omega B e^{\omega t}
+    \\
+    r(t = 0) = r_0 
+    \hp v(t = 0) = v_0
+    \\
+    A + B = r_0
+    \hp A - B = 0
+    \rightarrow 
+    A = B
+    \hp A = B = \frac{r_0}{2}
+    \\
+    r(t) = \frac{r_0}{2} 
+    (e^{\omega t} + e^{-\omega t})
+    =
+    \frac{r_0}{2} \cosh(\omega t)
+    \\
+    F_n = m (r \ddot \phi + 2 \dot r \dot \phi)
+    \hp \phi = \omega t
+    \\
+    F_n = m2 \dot r \omega 
+    = m \omega^2 r_0 \sinh(\omega t) 
+}
+
+\subsection{Bead on Spinning Loop}
+Loop of fixed radius R spinning about vertical axis at fixed rate 
+$\Omega$. Bead of mass $m$, free to move along the loop. Everything 
+is in a gravitational field. 
+
+Use spherical coordinates for math convenience. 
+
+\equations{
+    x = r\sin(\theta) \cos(\phi)
+    \hp
+    y = r\sin(\theta) \sin(\phi)
+    \hp 
+    z = r \cos(\theta)
+    \\
+    r^2 = x^2 + y^2 + z^2
+    \hp 
+    \tan(\theta) = \frac{\sqrt{x^2 + y^2}}{x^2}
+    \\
+    \textrm{the coordinate vectors are real difficult to find}
+    \\
+    \textrm{coords, position, velocity, acceleration}
+    \\
+    e_r = \sin(\theta) \cos(\phi) e_x + 
+    \sin(\theta) \sin(\phi) e_y + 
+    \cos(\theta) e_z
+    \\
+    e_\theta = \cos(\theta) \cos(\phi) e_x + 
+    \cos(\theta) \sin(\phi) e_y -
+    \sin(\theta) e_z
+    \\
+    e_\phi = - \sin \phi e_x + \cos(\phi) e_y
+    \\
+    r(t) = R = \textrm{const}
+    \hp \phi(t) = \Omega t \hp \Omega = \textrm{const}
+    \hp
+    \theta(t)
+    \\
+    \dot e_r = \textrm{blah}
+    \dot e_\theta = \textrm{blah}
+    \dot e_\phi = \textrm{blah}
+    \\
+    r(t) = r(t) e_r(t)
+    \hp v(t) = \frac{d}{dt} \left( r(t) e_r(t) \right)
+    =
+    \dot r e_r + r \dot e_r 
+    =
+    \\
+    \dot r e_r + r \left( 
+    \dot \theta e_\theta + \dot \phi \sin(\theta) e_\phi
+    \right)
+    =
+    \dot r e_r + r \dot \theta e_\theta + 
+    r \sin(\theta) \dot \phi e_\phi
+    \\
+    a = \frac{dv}{dt} = \frac{d}{dt}
+    \dot r e_r + r \dot \theta e_\theta + 
+    r \sin(\theta) \dot \phi e_\phi
+    =
+    \\
+    \ddot r e_r + \dot r \dot e_r + 
+    \dot r (\dot \theta e_\theta) + r(\ddot \theta e_\theta + 
+    \dot \theta \dot e_\theta) + \\
+    \dot r (\sin(\theta) \dot \phi e_\phi) +
+    r (
+        \cos(\theta) \dot \phi e_\phi + 
+        \sin(\theta)(\ddot \phi e_\phi + \dot \phi \dot e_\phi)
+    )
+    \\
+    \textrm{what insanity}
+    \textrm{plug in all the coordinate vectors to the thingy}
+    \\
+    \vec a(t) = 
+    [\ddot r - r \dot \theta^2 - 
+    r \sin^2 \theta \dot \phi^2] e_r 
+    +
+    r[2 \dot r \dot \theta + r \ddot \theta  - 
+    r \sin(\theta) \cos(\theta) \dot \phi^2] e_\theta 
+    + \\
+    [2\dot r \sin(\theta) \dot \phi + 
+    2 r \cos(\theta) \dot \theta \dot \phi +
+    r \sin \theta \ddot \phi] e_\phi
+}
+
+\equations{
+    \textrm{now use $F = ma$ to do some bullshit}
+    \\
+    F = ma \hp F_g = -mg e_z = 
+    -mg (\cos \theta e_r - \sin(\theta) e_\theta )
+    \\
+    F_n = N_r e_r + N_\phi e_\phi
+    \\
+    F_{net} = F_G + F_n = 
+    F_n = N_r e_r + N_\phi e_\phi
+    -mg (\cos \theta e_r - \sin(\theta) e_\theta )
+    = \\
+    [N_r - mg \cos(\theta)] e_r +
+    mg \sin (\theta) e_\theta + 
+    N_\phi e_\phi
+    \\
+    F_\theta = m a_\theta
+    \\
+    mg \sin(\theta) = \\
+    [\ddot r - r \dot \theta^2 - 
+    r \sin^2 \theta \dot \phi^2] e_r 
+    +
+    r[2 \dot r \dot \theta + r \ddot \theta  - 
+    r \sin(\theta) \cos(\theta) \dot \phi^2] e_\theta 
+    + \\
+    [2\dot r \sin(\theta) \dot \phi + 
+    2 r \cos(\theta) \dot \theta \dot \phi +
+    r \sin \theta \ddot \phi] e_\phi
+    \\
+    g \sin(\theta) = r \ddot \theta -
+    R \sin(\theta) \cos(\theta) \Omega^2
+    = \\
+    \ddot \theta = - \frac{g}{R} \sin(\theta) + 
+    \Omega^2 \sin(\theta) \cos(\theta)
+    \hp \textrm{$r \rightarrow R$ because it's constant}
+}
 
 
 

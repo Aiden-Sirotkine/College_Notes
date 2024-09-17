@@ -1,0 +1,134 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{MATH 257}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{MATH 257}
+My laptop died and I skipped some lectures to go to a part time 
+job fair but I know every basic thing about matrices and vectors 
+so I should be fine 
+
+\chapter{Column Vectors and Basis Vectors} 
+If you take the columns of a vector, then you get a couple vectors 
+that span a space.
+
+Solving a linear system is the same as finding the linear combinations 
+that equal a certain result
+
+\section{Matrix Vector Multiplication}
+\[
+\begin{bmatrix}
+    c_1 && c_2 && c_3
+\end{bmatrix}
+\begin{bmatrix} a \\ b \\ c \end{bmatrix} =
+a c_1 + b c_2 + c c_3
+\]
+
+\section{Transformations}
+You can multiply a vector by a matrix to transform it in a certain 
+way
+
+\subsection{Rotation}
+\[
+\begin{bmatrix}
+\cos \theta && - \sin \theta \\
+\sin \theta && \cos \theta
+\end{bmatrix}
+\]
+
+\section{3d Rotation Matrix}
+the way to figure out transformations is just to think about how the matrix
+transforms the 3 unit vectors
+\equations{
+\begin{bmatrix}
+1 \\ 0 \\ 0 
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\cos \theta \\ \sin \theta \\ 0
+\end{bmatrix}
+\\
+\begin{bmatrix}
+0 \\ 1 \\ 0
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+-\sin \theta \\ \sin \theta \\ 0
+\end{bmatrix}
+\\
+\begin{bmatrix}
+0 \\ 0 \\ 1
+\end{bmatrix}
+\rightarrow
+\begin{bmatrix}
+\cos \theta \\ \sin \theta \\ 0
+\end{bmatrix}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
