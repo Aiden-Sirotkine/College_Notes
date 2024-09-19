@@ -129,22 +129,59 @@ a lower row.
     U = echelon form of original matrix that you already calculated
 \end{enumerate}
 
+\subsection{Solving a thingy}
+to solve $Ax = b$, you can solve $Ux = c$ such that $Lc = b$.
 
 
+\subsection{Inner Product}
+\[
+v \cdot w = v^{T} w
+\]
 
+\subsection{Norm}
+\[
+||v|| = \sqrt{v \cdot v}
+\]
 
+\subsection{Distance}
+\[
+\textrm{dist}(v, w) = ||v - w|| 
+\]
 
+\section{Orthogonality}
+if twe vectors are orthogonal or perpendicular to each other, then 
+\[
+v \cdot w = 0
+\]
 
+\subsection{Pairwise Orthogonal}
+A set of vectors is pairwise orthogonal if they are 
+all orthogonal to each other. 
 
+\subsection{Orthonormal Set}
+A set of unit vectors that are all orthogonal to each other. 
 
+\section{Subsets/ Subspaces}
+A non-subset $H$ of $\mathbb{R}^n$ is a subspace of $\mathbb R^n$
+if it satisfies the two following:
+\begin{itemize}
+    \item 
+    if $u, v \in H$, then $u + v \in H$ 
 
+    (closed under addition)
+    \item 
+    if $u \in H$ and $c$ is scalar, then $cu \in H$
 
+    (closed under scalar multiplication)
+\end{itemize}
 
+subspaces are pretty useful
 
+\subsection{Column Space}
+The space created by spanning the columns of a matrix
 
-
-
-
+\subsection{Null Space}
+The space created by all the solutions of the equation $Ax = 0$. 
 
 
 

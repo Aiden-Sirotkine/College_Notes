@@ -632,7 +632,7 @@ r = \sqrt{x^2 + y^2}
 
 3d cylindrical coordinates $(r, \phi, z)$
 \[
-x \ r \cos(\phi) \hp y = r \sin(\phi) \hp z = z
+x = r \cos(\phi) \hp y = r \sin(\phi) \hp z = z
 \]
 
 3d spherical coordinates $(r, \theta, \phi)$
@@ -882,12 +882,149 @@ Use spherical coordinates for math convenience.
     r \sin \theta \ddot \phi] e_\phi
     \\
     g \sin(\theta) = r \ddot \theta -
-    R \sin(\theta) \cos(\theta) \Omega^2
-    = \\
-    \ddot \theta = - \frac{g}{R} \sin(\theta) + 
-    \Omega^2 \sin(\theta) \cos(\theta)
-    \hp \textrm{$r \rightarrow R$ because it's constant}
+    R \sin(\theta) \cos (\theta) \Omega^2
 }
+
+\section{Types of Forces}
+
+\subsection{Conservative Forces in 2d and 3d}
+
+\subsection{Conservative Force}
+a force $\vec F( \vec r)$ is conservative if it can be written 
+as the gradient of a potential $\vec U(\vec r)$.
+\[
+\vec F(\vec r) = - \vec \nabla U(\vec r)
+\]
+
+\subsection{$\nabla$ operator}
+\equations{
+    \vec \nabla =
+    \vec e_x \frac{d}{dx} +
+    \vec e_y \frac{d}{dy} +
+    \vec e_z \frac{d}{dz}
+    \\
+    \textrm{if you have another coordinate system}
+    \\
+    \vec \nabla =
+    \vec e_r \frac{d}{dr} +
+    \vec e_\phi \frac{d}{d\phi} +
+    \vec e_z \frac{d}{dz}
+}
+
+\subsection{Curl of Conservative Force}
+\[
+\nabla \times \vec F(\vec r) = 
+\vec \nabla \times (- \nabla U) = 0
+\]
+
+NOT every force is conservative. 
+
+\equations{
+    F = F_{cons} + F_{diss} 
+    \\
+    \nabla \times F = \nabla \times F_{cons} +
+    \nabla \times F_{diss} \neq 0
+}
+
+If $\nabla \times F = 0$, then the forces can be written 
+as $F = - \nabla U$ (has a potential) and $\vec F$ is converative.
+(useful to check)
+
+\subsection{Work along a path}
+\equations{
+    w = \int_{p_2}^{p_1} \vec F \cdot d \vec r
+    = - \int_{p_2}^{p_1} \vec \nabla U \, dr 
+    \hp \nabla \approx \frac{d}{dr}
+    \\
+    - \int_{p_2}^{p_1} dU = -(U(p_2) - U(p_1))
+}
+
+If path is closed $-(U(p_1) - U(p_1)) = 0$
+
+
+A conservative force does NO work along a closed path. 
+
+\subsection{Energy Conservation} 
+If a force is conservative, $F = - \nabla U$, then the total 
+energy $\vec E = T + U =$ const. (constant of motion)
+
+How to show that this is true?
+\equations{
+    \frac{d}{dt} E = \frac{d}{dt} (T + U) = 0 = E = \textrm{const}
+    \\
+    \frac{d}{dt} T = \frac{d}{dt} \frac{1}{2}mv^2 = mv \cdot \frac{dv}{dt} = \vec v \cdot \vec F
+    \\
+    \textrm{2nd term}
+    \\
+    \frac{d}{dt} U(t, \vec r(t)) =
+    \frac{d}{dt} U + \frac{dx}{dt} \frac{dU}{dx} + 
+    \frac{dy}{dt} \frac{dU}{dy} + \frac{dz}{dt} \frac{dU}{dz}
+    \\
+    \frac{d}{dt} U(t, r(t)) = \frac{dU}{dt} + \frac{dr}{dt} \cdot \nabla U
+    = - \vec v \cdot \vec F + \frac{dU}{dt}
+    \\
+    \frac{dE}{dt} = 
+    \frac{dT}{dt} + \frac{dU}{dt} = \vec v \cdot \vec F - 
+    \vec v \cdot \vec F + \frac{dU}{dt} = 0
+}
+
+$E = T + U =$ const is conserved, if $\vec F$ is conservative, and 
+$U = U(\vec r)$ (ie, no explicit time dependence)
+
+\subsection{How to Find Potential}
+given some force $F$
+
+option a: show this with indefinite integrals
+\equations{
+	\vec F = - \vec \nabla U
+}
+
+
+option b: use indefinite integrals
+\equations{
+	F = - \nabla U 
+	\rightarrow U = \int^{p_2}_{p_1} = -\int^{p_2}_{p_1} \vec F \cdot \, dr
+}
+
+\subsection{example}
+\[
+	\vec F = (2xy + 1) \vec e_x + 
+	(x^2 + 2) \vec e_y
+\]
+find $U$
+
+\equations{
+	-U = \int \vec F \cdot d \vec r = 
+	\int (F_x dx + F_y dy + F_z dz)
+	\\
+	\int^x_0 F_x(x', 0, 0) dx + \int^y_0 F_y(x, y', 0) dy + \int^z_0 F_z(x,y, z') dz
+	\\
+	\int^x_0 1 dx' + \int^y_0 (x^2 + 2) dy' + \int^z_0 0 dz'
+	\rightarrow
+	\\
+	-U = x + (x^2 + 2)y + 0 =
+	-x - x^2y - 2y
+}
+
+\subsection{Central Forces}
+force that points towards or away from a point radially and is dependent on distance $r$
+\[
+	F = f(r, \theta, \phi) \vec e_r
+\]
+
+\subsection{Conservation of Angular Momentum}
+Define angular momentum $\vec L$ with respect to a reference point $\mathrm{o}$
+
+
+
+
+
+
+
+
+
+
+
 
 
 
