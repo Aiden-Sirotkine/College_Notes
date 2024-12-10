@@ -1,0 +1,223 @@
+\documentclass[fleqn]{article}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{gensymb}
+\usepackage{graphicx}
+
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\geometry{margin = 2cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\begin{document}
+\pagestyle{empty}
+
+\section{MIDTERM 1 IS ON THURSDAY}
+Luckily you're starting this monday night and you dont have any other homework for any other class until after the midterm (you do have a concert but like you'll survive)
+
+\section{COORDINATE SYSTEMS}
+HOLY SHIT THE GIVEN EQUATION SHEET DOES NOT GIVE YOU THE COORDINATE SYSTEM EQUATIONS FOR SPHERICAL AND CYLINDRICAL IT JUST GIVES YOU THE UNIT VECTORS WRITE THAT DOWN WRITE THAT DOWN WRITE THAT DOWN 
+
+also probably write down the derivatives of unit vectors if we're being so fr 
+
+okay wait so to find unit vectors of something all we need is 
+\equations{
+    \vec v(r, \theta, \phi) = x \vec e_x + y \vec e_y + z \vec e_z
+    \\
+    e_r = \frac{\del \vec v}{\del r} / |\frac{\del \vec v}{\del r}|
+    \hp
+    e_\theta = \frac{\del \vec v}{\del \theta} / |\frac{\del \vec v}{\del \theta}|
+    \hp
+    e_\phi = \frac{\del \vec v}{\del \phi} / |\frac{\del \vec v}{\del \phi}|
+}
+
+\section{Deriving Angular Momentum for Central Forces}
+This is a thing you missed in lecture but I think figuring it out yourself will be good practice. 
+
+\equations{
+    L = \vec r \times m \vec v
+    \\
+    \dot L = \frac{d}{dt} \vec r \times m \vec v = 
+    (\frac{d \vec r}{dt} \times m \vec v ) + (\vec r \times m \frac{d \vec v}{dt})
+    \\
+    \frac{d \vec r}{dt} = \vec v \hp \frac{d \vec v}{dt} = F
+    \\
+    \dot L = \vec v \times m \vec v + \vec r \times \vec F 
+    \\
+    \textrm{ because central force, $\vec F$ is in $\vec r$ direction}
+    \\
+    \dot L = 0 + 0 = 0 
+    \\
+    L = \vec r \times m(\dot r \vec e_r + r \dot \varphi \vec e_\varphi)
+    =
+    m(r \vec e_r \times \dot r \vec e_r) + m(r \vec e_r \times r \dot \varphi \vec e_\varphi)
+    =
+    \\
+    0 + mr^2 \dot \varphi = L
+}
+We can consider it as basically a constant because there's no motion in the direction of the angular momentum. 
+
+\subsection{Derive Effective Potential}
+\equations{
+    E = T + U \rightarrow 
+    \frac{1}{2} m \vec v^2 + U(r)
+    \\
+    \vec v^2 = \vec v \cdot \vec v 
+    \hp 
+    \vec v = \dot r \vec e_r + r \dot \varphi \vec e_\varphi
+    \hp 
+    \vec v \cdot \vec v = \dot r^2 \vec e_r + r \dot r \dot \varphi e_r e_\varphi + r^2 \dot \varphi^2 e_\varphi
+    \\
+    e_r e_\varphi = 0 \textrm{ because they're orthogonal by definition}
+    \\
+    v \cdot v = \dot r^2 \vec e_r + r^2 \dot \varphi^2 \vec e_\varphi
+    \\
+    E = T + U = \frac{1}{2} m \vec \dot r^2  + \frac{1}{2} mr^2 \dot {\vec \varphi}^2 + U(r)
+    \\
+    l = mr^2 \dot \varphi \textrm{ by definition}
+    \\
+    E = \frac{1}{2} m {\dot \vec r}^2 + \frac{l^2}{2mr^2} + U(r)
+}
+
+\section{Drag Forces}
+idk just like review everything 
+
+linear and non-linear drag. 
+
+\section{Time Varying Mass}
+I would bet there's at least 1 rocket equation on the midterm 
+
+\section{Conservative Force}
+A conservative force means you can just take the difference in potential between 2 points and that'll be the amount of work done to get there no matter the path taken. 
+
+\section{Orbits}
+I'm just gonna directly copy from my notes
+\subsection{Case: $E > 0$}
+
+
+$\frac{L^2}{2 m r^2}$
+
+particle moves towards $r = 0$ and then has a turning point where $\frac{dr}{dt} = 0$. The particle then returns back to $r \to \infty$
+
+This is a hyperbolic trajectory. 
+
+
+\subsection{Case: $E < 0$}
+$\frac{K}{r} > (\frac{L^2}{2 m r^2} + T_r)$
+
+$E$ is stuck in a potential well and will oscillate between turning points in the potential. 
+
+elliptical orbit. 
+
+\subsection{Case: $E < 0$ and $U_{eff}' \Big|_{r = r_c} = 0$}
+$U_{eff}' = \frac{dU_{eff}}{dr}$
+
+orbit is circular with radius $r_c$
+
+\equations{
+    r = r_c = \const \hp 
+    T_r = \frac{1}{2} m \dot r^2 = 0
+    \\
+    \textrm{because the radius never changes.}
+}
+
+$E = 0$ is a parabolic orbit but eh.
+
+\section{Eccentrity}
+you just have to like kind of know eccentricity and the latus rectum but like you'll be fine. 
+
+\subsection{Circular Orbits}
+angular momentum and velocity and whatnot all have nice equations when you have a circular orbit so those would be good to have down just in case. 
+
+
+\section{Graviatational Force and Potential}
+The main thing was figuring out the spherical integral to get a spherical shell which then allows the rest of the shortcuts 
+
+The reason $R^2 dr \sin(\theta) d \theta \, d\varphi$ is in the integral is if you think about the a slice of a shell it has a thickness of $dr$, a width of $r \sin(\theta) d \varphi$, and a length of $r d \theta$
+
+you ARE allowed to use Gauss's Law for gravity on the exam. 
+
+
+
+\section{MISC}
+write out dot and cross product identities and also maybe some useful derivations in Curvilinear Coordinates. 
+
+Probably write down some methods of solving differential equations for Newton's 2nd Law 
+
+\[
+\frac{dv}{dt} = \frac{dr}{dt} \frac{dv}{dr}
+\]
+
+\subsection{CALC 3 REVIEW }
+Know youre curl and divergence and whatnot esPECIALLY BECAUSE THE CURL OF A CONSERVATIVE FORCE IS 0 
+
+KNOW DOT AND CROSS PRODUCT IDENTITIES
+
+integration by parts just in case 
+\subsection{Work}
+idk see if you need it or could use it anywhere. 
+
+\section{OH MY GOD KNOW YOURE UNITS}
+UNIT ANALYSIS HAS SAVED YOUR ASS ON SO MANY OCCASIONS
+
+GRAVATATIONAL CONSTANT 
+
+ANGULAR MOMENTUM 
+
+ENERGY 
+
+$\dot \varphi$ 
+
+FORCE 
+
+\subsection{Taylor series}
+idk it might be useful to write down some of the extra things like sine and cosine or whatever maybe like $(1 + x)^n$ idk
+
+
+
+
+
+
+\end{document}

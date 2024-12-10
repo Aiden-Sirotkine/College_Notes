@@ -22,6 +22,8 @@
 
 \newcommand{\hp}{\hspace{1cm}}
 
+\newcommand{\const}{\textrm{const}}
+
 \newcommand{\del}{\partial}
 
 \newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
@@ -34,6 +36,12 @@
 \begin{gather*}
 #1
 \end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
 }
 
 \newcommand{\twovec}[2]{ 
@@ -618,14 +626,14 @@ Now you figure out the trajectory
     A = \sqrt{v_x^2 + v_y^2}
 }
 
-\section{Curvilinear Coordinates}
+\chapter{Curvilinear Coordinates}
 non-Cartesian coordinates 
 
 \subsection{Examples}
 2d polar coordinates $(r, \theta)$
 \[
-x = r \cos(\phi(t)) \hp
-y = r \sin(\phi(t))
+x = r \cos(\theta(t)) \hp
+y = r \sin(\theta(t))
 \hp 
 r = \sqrt{x^2 + y^2}
 \]
@@ -885,7 +893,7 @@ Use spherical coordinates for math convenience.
     R \sin(\theta) \cos (\theta) \Omega^2
 }
 
-\section{Types of Forces}
+\chapter{Types of Forces}
 
 \subsection{Conservative Forces in 2d and 3d}
 
@@ -1006,7 +1014,7 @@ find $U$
 	-x - x^2y - 2y
 }
 
-\subsection{Central Forces}
+\section{Central Forces}
 force that points towards or away from a point radially and is dependent on distance $r$
 \[
 	F = f(r, \theta, \phi) \vec e_r
@@ -1015,35 +1023,3129 @@ force that points towards or away from a point radially and is dependent on dist
 \subsection{Conservation of Angular Momentum}
 Define angular momentum $\vec L$ with respect to a reference point $\mathrm{o}$
 
+\subsection{YOUR LAPTOP DIED FIGURE OUT LATER}
+I still don't get anything about orbits or angular momentum of anything like that.
+
+You missed the last half of the friday lecture on like september 20th ish
+
+\section{Conservative Central Forces}
+\[
+\vec L = \vec r \times m \vec v
+\]
+If you have a conservative central force, you have conservation of angular momentum.
+
+\equations{
+    L = \textrm{const}
+    \\
+    \textrm{to prove, take the derivative with respect to time}
+    \\
+    \frac{dL}{dt} = \frac{d}{dt} \left( \vec r \times m \vec v \right)
+    =
+    \dot \vec r \times m \vec v + \vec r \times m \frac{dv}{dt}
+    \\
+    \left( m \frac{dv}{dt} = \vec F \right)
+    \hp \dot \vec r \times m \vec v = \vec v \times m \vec v = 0
+    \\
+    F = f(r, \theta, \phi) \vec e_r \hp \vec r = r \vec e_r
+    \\
+    =
+    r \vec e_r \times m f(r, \theta, \phi) \vec e_r = 0
+    \textrm{ because the unit vectors are the same}
+}
+
+\subsection{useful math}
+\equations{
+    f(r, \theta, \phi) \hp 
+    e_r \times e_\phi = - \vec e_\theta 
+    \hp
+    e_\theta = - e_z
+}
+
+
+\subsection{Consequences}
+\begin{itemize}
+    \item
+Motion remains in $\vec r - \vec v$ plane 
+\item
+can rotate coords s.t. $\theta = \pi/2 \hp \dot \theta = 0$
+\item 
+consider 
+\equations{
+    \vec r = r(t) \vec e_r \hp v = 
+    \dot r \vec e_r + 
+    r \dot \theta e_\theta + 
+    r \dot \phi \sin(\theta) e_\phi
+    =
+    \dot r \vec e_r + 
+    r \dot \phi e_\phi
+    \\
+    \vec L = \vec r \times m \vec v = m r \vec e_r \times 
+    ( \dot r \vec e_r + r \dot \phi e_\phi) =
+    \\
+    mr \vec e_r \times \dot r \vec e_r \approx \vec e_r \times e_r = 0
+    \\
+    \vec L = - mr^2 \dot \phi \vec e_\theta
+    \hp
+    L \vec e_z = + mr^2 \dot \phi \vec e_z
+    \\
+    \textrm{magnitude } L = m r^2 \dot \phi 
+    \\
+    \textrm{ direction in $e_z$} 
+    \\
+    \textrm{transformed our 3d equation to 2d because of }
+    \\
+    \textrm{conservation of angular momentum}
+}
+\end{itemize}
+
+\subsection{Conservative, Central Force}
+\equations{
+    \vec F = f \vec e_r = - \nabla U
+    \\
+    \textrm{no dependence in $\vec e_\phi, \vec e_\theta$}
+    \\
+    \frac{dU}{d\theta} = 0 \hp \frac{dU}{d\phi} = 0
+    \\
+    \vec F = - \frac{dU}{dr} \vec e_r \rightarrow 
+    U = - \int f \, dr 
+}
+
+Examples of Conservative, Central Forces:
+gravity, coulomb potential, Yukawa potential (nuclear force)
+
+\subsection{IMPORTANT}
+\[
+L =  m r^2 \dot \phi 
+\]
+
+
+\subsection{back to example}
+\equations{
+    \vec F = - \frac{K}{r^2} \vec e_r \hp K > 0
+    \\
+    U = - \int -\frac{K}{r^2} \, dr = \frac{-K}{r} (\lim_{r \to \infty} = 0)
+    \\
+    L = \textrm{const}
+    \\
+    \textrm{choose $L = L e_z, \theta = \pi/2, \dot \theta = 0$}
+    \\
+    \dot \phi = \frac{L}{mr^2}
+    \hp 
+    E = T + U = \const
+    \\
+    T = \frac{1}{2} m |\vec v|^2 \hp 
+    \vec v = \dot r \vec e_r + r \dot \phi \vec e_\phi
+    \\
+    T = \frac{1}{2} m (\dot r \vec e_r + r \dot \phi \vec e_\phi)
+    =
+    \frac{1}{2}m \dot r^2 + \frac{1}{2} m \left(\frac{r^2 L^2}{m^2 r^4} \right)
+    =
+    \frac{1}{2} m \dot r^2 + \frac{L^2}{2 m r^2} 
+    \\
+    E = T + U
+    =
+    \frac{1}{2} m \dot r^2 + \frac{L^2}{2 m r^2} - \frac{K}{r}
+    \\
+    T = \frac{1}{2} m \dot r^2
+    \hp 
+    U_{eff} = \frac{L^2}{2 m r^2} - \frac{K}{r}
+    \\
+    \textrm{EFFECTIVE POTENTIAL IS IMPORTANT} 
+    \\
+    U_{eff} = \frac{L^2}{2 m r^2} + U
+}
+
+\section{Analyze Effective Potential}
+\equations{
+    U_{eff} = \frac{L^2}{2 m r^2} - \frac{K}{r}
+    \hp K > 0
+}
+
+You can circular, elliptical, parabolic, and hyperbolic orbits. 
+
+\subsection{Case: $E > 0$}
+
+
+$\frac{L^2}{2 m r^2}$
+
+particle moves towards $r = 0$ and then has a turning point where $\frac{dr}{dt} = 0$. The particle then returns back to $r \to \infty$
+
+This is a hyperbolic trajectory. 
+
+
+\subsection{Case: $E < 0$}
+$\frac{K}{r} > (\frac{L^2}{2 m r^2} + T_r)$
+
+$E$ is stuck in a potential well and will oscillate between turning points in the potential. 
+
+elliptical orbit. 
+
+\subsection{Case: $E < 0$ and $U_{eff}' \Big|_{r = r_c} = 0$}
+$U_{eff}' = \frac{dU_{eff}}{dr}$
+
+orbit is circular with radius $r_c$
+
+\equations{
+    r = r_c = \const \hp 
+    T_r = \frac{1}{2} m \dot r^2 = 0
+    \\
+    \textrm{because the radius never changes.}
+}
+
+$E = 0$ is a parabolic orbit but eh.
+
+
+\chapter{Gravity}
+It's a pretty important thing in our day to day life. 
+
+Need to think about both gravitational force and potential. 
+
+2 masses a distance $r$ apart experience a force in the $\vec e_r$ direction
+\[
+\vec F_G = - \frac{G m_1 m_2}{r^2} \vec e_r
+\hp G = 6.67 * 10^{-11} \frac{N m^2}{kg^2}
+\]
+
+consider extended mass $m_1$
+\equations{
+    m_1 = \int dm_1 = \int^{V_1} \rho_1 (\vec r_1) d \vec r_1
+    \\
+    F_G = -Gm_2 \int \frac{\rho_1 (r_1)}{|r_2 - r_1|^3}(r_2 - r_1) dr_1
+    \\
+    \vec g = \frac{\vec F_G}{m_2} = 
+    -G \int \rho (\vec r_1) 
+    \frac{(\vec r_2 - \vec r_1)}{|\vec r_2 - \vec r_1|^3} d^3 r
+    \\
+    \frac{1}{|r_2 - r_1|^2} \cdot \frac{\vec r_2 - \vec r_1}{|\vec r_2 - \vec r_1|}
+    \\
+    \frac{1}{|r_2 - r_1|^2} \equiv "\frac{1}{r^2}"
+    \hp  \frac{\vec r_2 - \vec r_1}{|\vec r_2 - \vec r_1|} = \vec e_r
+}
+
+\section{Gravitational Potential}
+\equations{
+    \vec g = - \nabla \Phi 
+    \\
+    \textrm{analogous to $U = m_2 \Phi$, $\vec F_G = - \nabla U$}
+    \\
+    U = \frac{G m_1 m_2}{r}
+    \hp 
+    \Phi = \frac{U}{m_2} = \frac{-G m_1}{r}
+    \\
+    \Phi = -G \int \limits_{V} \frac{\rho (\vec r_1)}{|\vec r_2 - \vec r_1|} d^3 r
+}
+
+\subsection{$\Phi$ of a Spherical Shell}
+Setup: given a uniform spherical shell with mass $M$, radius $R$, thickness $h$, mass density $\phi = H/V = M / (4 \pi R^2 h)$.
+
+Compute $\Phi$
+
+What we do is make an arbitrary point $p$ in the mass such that the distance from that point to $m_2$ is $\vec r$ and for some point $R$ away from $p$, we can see the distance from that point to $m_2$ is $\vec r - \vec r_1$.
+We also make a function $s$ such that $s(\theta) = |\vec r - \vec r_1|$
+
+the thickness is very small so $h = dr$
+Strategy:
+\[
+\Phi = \int d \Phi \hp d \Phi = \frac{-G}{|\vec r - \vec r_1|} dm
+\]
+
+\equations{
+    dm(\vec r_1) = \rho (\vec r_1) d^3 \vec r_1 = \rho R^2 dr \sin (\theta) d \theta d \phi 
+    \\
+    R^2 dr = \textrm{radius} \hp \sin (\theta) d \theta d \phi = \textrm{Surface of sphere}
+    \\
+    d \Phi = \frac{G dm}{|\vec r - \vec r_1|} = \frac{-G}{s(\theta)} dm 
+}
 
 
 
+\equations{
+    \Phi = \int d \Phi = - G \int \frac{dm}{s(\theta)}
+    =
+    -G \rho h R^2 \int^\pi_{\theta = 0} \int^{2 \pi}_{\phi = 0} \frac{\sin (\theta)}{s(\theta)} d \theta d \phi  
+    =
+    \\
+    -2 \pi G h \rho R^2 \int^{\pi}_{0} \frac{\sin(\theta)}{s(\theta)} d \theta
+    \\
+    \textrm{solve integral (substitute $\int d \theta \to \int ds)$}
+    \\
+    s(\theta) = |\vec r - \vec r_1| 
+    \hp 
+    s^2(\theta) = |\vec r - \vec r_1|^2 = {r}^2 - 2 \vec r \cdot \vec r_1 + \vec r_1^2
+    =
+}
+okay so how $s$ works is $\vec r$ is a vector at the radius of the sphere that moves constantly in order for you to integrate over the whole sphere and $\vec r_1$ is a vector that point solely to $x$ which is the point that you are trying to find the potential at. 
+\equations{
+    x^2 + R^2 - 2R x \cos(\theta)
+    \\
+    \textrm{why is that $\theta$ the same as spherical coords $\theta$ (angle from $\vec z$ line)}
+    \\
+    \frac{d (s^2)}{d \theta} = 2 s \frac{ds}{d\theta} = 2 R x \sin (\theta)
+    \\
+    \frac{\sin (\theta)}{s} \, d \theta = \frac{1}{Rx} ds 
+    \\
+    \int^\pi_0 \frac{\sin (\theta)}{s} \, d \theta = 
+    \int^{s_{max}}_{s_{min}}\frac{1}{Rx} ds 
+    \\
+    s_{min} = s(\theta = 0) = \pm (R - x) > 0
+    \\
+    s_{max} = s(\theta = \pi) = (R + x) > 0
+    \\
+    \Phi = - 2 \pi G \frac{\rho h R}{x} (s_{max} - s_{min})
+}
+
+\subsection{case: $m_2$ outside of mass}
+\equations{
+    s_{min} = -(R - x) = x - R 
+    \hp
+    s_{max} = (R + x) 
+    \\
+    \Phi = - 4 \pi G \frac{\rho h R^2}{x} = 
+    \frac{-GM}{x}
+}
+Outside of an extended mass, the gravitational potential is the same as $\Phi$ of a point mass with the same $M$
+
+\subsection{case: $m_2$ inside of mass}
+\equations{
+    s_{min} = (R - x) 
+    \hp
+    s_{max} = (R + x)
+    \\
+    \Phi = - 4 \pi G \rho h R = 
+    \frac{-GM}{R} = \const
+}
+
+\section{$\Phi$ of a uniform sphere}
+Radius $R$, mass $M$, constant mass density $\rho = \begin{cases} \rho^* , r < R \\ 0 , r > R \end{cases}$
+
+Find $\Phi = \Phi (x)$
+
+Strategy: Use infinitely many thin shells 
+
+\equations{
+    d \phi = 
+    \begin{cases}
+    -4 \pi G \frac{\rho r^2}{x} dr \hp x > r
+    \\
+    -4 \pi G \rho r dr \hp x < r
+    \end{cases}
+    \\
+    \Phi = \int d \phi = -4 \pi G \int^R_{0} \frac{\rho r^2}{x} dr 
+    =
+    -4 \pi G \int^R_{0} \frac{\rho^* r^2}{x} dr
+    =
+    \frac{- GM}{x}
+}
+
+\subsection{inside sphere}
+\equations{
+    \Phi = \int^{x}_{0} d \Phi_{inner} + \int^{R}_{x} d \Phi_{out}
+    =
+    \\
+    -4 \pi G \frac{\rho^*}{x} \int^x_0 r^2 dr -
+    -4 \pi G \rho^* \int^R_x r dr 
+    =
+    \\
+    \frac{1}{2} GM \frac{3 R^2 - x^2}{R^3}
+}
+
+\section{Gravitational Orbits}
+\subsection{Kepler's Laws}
+\begin{itemize}
+    \item 
+    Everything orbits in planar ellipses
+    \item 
+    the line between the sun and a planet sweeps equal areas in equal times 
+    \item 
+    The orbital period around the sun is proportional to the 3/2 power of the semimajor axis
+\end{itemize}
+
+\equations{
+    L = m r^2 \dot \varphi \textrm{ conservation of angular momentum}
+    \\
+    \textrm{per unit mass } l = \frac{L}{m} = r^2 \dot \varphi = \const 
+    \\
+    \textrm{energy (per unit mass) conservation}
+    \\
+    \varepsilon = \frac{E}{m}
+    =
+    \frac{1}{m} (T + U_{grav})
+    \hp 
+    U_{grav} = - \frac{GMm}{r} 
+    \\
+    \varepsilon = \frac{1}{2} \vec v^2 - \frac{GM}{r}
+    \\
+    \vec v = \dot r \vec e_r + r \dot \varphi e_{\varphi}
+    \hp 
+    v^2 = \vec v \cdot \vec v = \dot r^2 + r^2 \dot \varphi^2
+    \\
+    \varepsilon = \frac{1}{2} \dot r^2 + \frac{l^2}{2r^2} - \frac{GM}{r}
+    =
+    T + U_{eff}
+}
+
+Now I should be able to write out the orbit as a 1d equation. 
+
+perigee $r_p$ is the minimal distance from $M$
+
+apogee $r_a$ is the maximal distance from $M$
+
+velocity vectors $v_p$ and $v_a$ perpendicular to the eerigee and apogee 
+
+$v_p \cdot v_a = 0$ and the angle between $r_p$ and $r_a$ is $\pi / 2$
+
+angular momentum 
+\equations{
+    \vec l = \vec r \times \vec v \hp l = |\vec r| |\vec v| \sin(\alpha)
+    \\
+    \textrm{in perigee and apogee, $\sin(\alpha) = 1$}
+    \\
+    l = r_p v_p = r_a v_a = \const
+}
+
+\subsection{Energy (per unit mass)}
+\equations{
+    \varepsilon = \frac{l^2}{2 r_{p, a}^2} - \frac{GM}{r_{p, a}}
+    \\
+    = \frac{1}{2} v_{p, a} - \frac{GM}{r}
+    \\
+    \varepsilon = 
+    \frac{1}{2} v_{p, a}^2 - \frac{GM}{l} v_{p, a}
+    \\
+    v_{p, a} = \frac{GM}{l} \pm \sqrt{\left(\frac{GM}{l}\right)^2 + 2 \varepsilon}
+    \\
+    \textrm{$+$ is perigee and $-$ is apogee}
+    \\
+    r_{p, a} = \frac{l}{v_{p, a}} = 
+    l \left( \frac{GM}{l} \pm \sqrt{\left( \frac{GM}{l}\right)^2 + 2 \varepsilon}\right)^{-1}
+}
+
+\section{Effective Potential and Orbits}
+type of orbit depends on the sign of the total energy of the particle 
+\[
+\varepsilon = \frac{1}{2} \dot r^2 + U_{eff} 
+\hp 
+U_{eff} = \frac{l^2}{2r^2} - \frac{GM}{r}
+\]
+
+\subsection{case: $\varepsilon < 0$ and $U_{eff}' = 0$}
+Circular orbit. Absolute minimum in effective potential 
+
+if $U_{eff}'' > 0$
+Find speed 
+
+\equations{
+    -m \frac{v^2}{r} \vec e_r = -ma_c \vec e_r = m \vec a = - \frac{GMm}{r^2} \vec e_r
+    \\
+    v = \sqrt{\frac{GM}{r}}
+}
+
+Find orbital period 
+\equations{
+    p = \frac{2 \pi}{\omega} = \frac{2 \pi r}{v} = 
+    2 \pi \sqrt{\frac{r^3}{GM}}
+}
+
+Angular momentum per unit mass 
+\equations{
+    l = |\vec r||\vec v| \sin(\alpha) = rv 
+    \\
+    v = \frac{GM}{l} \hp r = \frac{l^2}{GM}
+}
+
+energy 
+\equations{
+    \varepsilon = \frac{1}{2} v^2 - \frac{GM}{r} \hp v^2 = \frac{GM}{r}
+    \\
+    \varepsilon = - \frac{1}{2} v^2 = - \frac{1}{2} \left( \frac{GM}{l^2} \right)^2
+    < 0
+}
+
+escape velocity (velocity such that $E = 0$)
+\[
+v_{esc} = \sqrt{\frac{2GM}{r}}
+\]
+
+\subsection{case: Elliptic Orbit}
+\[
+- \frac{1}{2} \left(\frac{GM}{l}\right)^2 = \varepsilon_c < \varepsilon < 0
+\]
+
+particle moves between perigee and apogee determined by $(\varepsilon, l)$
+
+\subsection{case: $\varepsilon = 0$}
+parabolic orbit 
+
+perigee $v_p = \frac{2GM}{l}$
+
+$r_p = \frac{l}{v_p} = \frac{l^2}{2GM}$
+
+at the "apogee", $v_a \to 0$, $r_a = \frac{l}{v_a} \to \infty$
+
+marginally unbound orbit 
+
+\subsection{case: $\varepsilon > 0$}
+hypoerbolic orbit 
+
+\equations{
+    v_{p, a} = \frac{GM}{l} \pm \sqrt{\left( \frac{GM}{l} \right)^2 + 2 \varepsilon}
+}
+$v > 0, r > 0$ hyperbola $v < 0$ unphysical speed 
+
+
+\[
+    v_{p, a} = \frac{GM}{l} \pm \sqrt{\left( \frac{GM}{l} \right)^2 + 2 \varepsilon}
+\]
+
+if $\varepsilon > 0$ then it has to be plus 
+
+if $\varepsilon = 0$ then $v_p = \frac{2GM}{l}, v_a = 0$
+
+if $\varepsilon < 0$ then you can have $+$ or $-$
 
 
 
+\section{2 body problem}
+\equations{
+    F = m_1 \ddot r_1 = - \frac{Gm_1 m_2}{|\vec r_2 - \vec r_1|^2} 
+    \frac{(\vec r_1 - \vec r_2)}{|\vec r_1 - \vec r_2|}
+    \\
+    F = m_2 \ddot r_1 = - \frac{Gm_1 m_2}{|\vec r_2 - \vec r_1|^2} 
+    \frac{(\vec r_2 - \vec r_1)}{|\vec r_1 - \vec r_2|}
+}
+
+where $(\vec r_1 - \vec r_2)$ is the distance between the two masses. 
+
+Instead of dealing with 6 differential equations. We can use the center of mass frame to treat the 2 body problem as a 1 body problem. 
+
+1 mass of total mass $M = m_1 + m_2$
+
+1 orbiting object of reduced mass $\mu = \frac{m_1 * m_2}{M}$
+
+Center of mass 
+\[
+\vec C = \frac{m_1 \vec r_1 + m_2 \vec r_2}{M}
+\]
+
+Check that there is not external force so this reference frame is inertial 
+\equations{
+    F_{net} = ma + ma = m_1 \ddot r_1 + m_2 \ddot r_2 = 
+    \\
+    \frac{Gm_1 m_2}{|r_1 - r_2|^2} \frac{\vec r_2 - \vec r_1}{|r_2 - r_1|} + 
+    \frac{Gm_1 m_2}{|r_1 - r_2|^2} \frac{\vec r_1 - \vec r_2}{|r_2 - r_1|}
+    =
+    0
+}
+
+\subsection{Equations of Motion}
+\equations{
+    \ddot \vec r = \frac{GM}{|r|^2} \frac{\vec r}{|r|}
+}
+
+The relative position vector $\vec r$ is governed by the same equations of motion 
+as a test mass $\mu$ in the gravitational field of $M$.
+
+\subsection{Energy}
+\equations{
+    E = T + U =
+    \frac{1}{2} m_1 \dot r_1^2 + \frac{1}{2} m_2 \dot r_2^2 - 
+    \frac{G m_1 m_2}{|r_2 - r_1|}
+    \\
+    \rightarrow 
+    \\
+    E = 
+    \frac{1}{2} \mu \dot r^2 - \frac{GM \mu}{|\vec r|} + 
+    \frac{1}{2} M \dot {\vec C}^2
+    \\
+    \frac{1}{2} M \dot {\vec C}^2 = \const
+    \hp
+    \frac{1}{2} \mu \dot r^2 - \frac{GM \mu}{|\vec r|} = \const
+}
+
+\subsection{Trajectory}
+Choose Spherical coordinates $(r, \theta, \varphi)$
+
+For a central force, angular momentum is conserved. $\dot L = 0$
+
+Choose $\vec L = L \vec e_z$ so that $\theta = \frac{\pi}{2}, \dot \theta = 0$
+
+$\vec v = \dot r \vec e_r + r \dot \varphi \vec e_\varphi$
+
+\equations{
+    l = \frac{L}{\mu} = |\frac{1}{\mu} r \times \mu \vec v| = \const
+    \ldots = r^2 \dot \varphi 
+    \\
+    \dot \varphi = \frac{l}{r^2}
+    \\
+    T = \frac{1}{2} m {\vec v}^2 = \frac{1}{2} \mu (\dot r^2 + r^2 \dot \varphi)
+    =
+    \frac{1}{2} \mu (\dot r^2 + \frac{l^2}{r^2})
+    \\
+    \varepsilon = \frac{E}{\mu} = \frac{1}{2} \dot r^2 + U_{eff} = 
+    \frac{1}{2} \dot r^2 + \frac{l^2}{2r^2} - \frac{GM}{r}
+    \\
+    \ldots 
+    \\
+    - \dot r = \sqrt{2 (\varepsilon - U_{eff})} = \frac{dr}{dt}
+    \rightarrow 
+    \int dt = \int \frac{dr}{\sqrt{2 (\varepsilon - U_{eff})}}
+    \\
+    \textrm{calculate and invert to get $r(t)$}
+}
+
+\subsection{Kepler's Orbits $r(\varphi)$}
+Goal: find orbits parameterized by $r(\varphi)$. 
+
+Introduce a new variable that's the inverse of $r$ and then write down Newton's Second Law (N2L) to get a new differential equation and then solve it. 
+
+\equations{
+    u = \frac{1}{r}
+    \\
+    e_r: \ddot r - \frac{l^2}{r^3} = - \frac{GM}{r^2}
+    \\
+    e_\varphi : \frac{1}{r} \frac{d}{dt} (r^2 \dot \varphi) = 0
+}
+Derivation is left as an exercise to the reader (fucking killing myself)
+
+Now we have to relate the time derivatives of $r$ and $u$
+
+\equations{
+    \dot r = \frac{d}{dt} \frac{1}{u} = 
+    -u^{-2} \dot u = -u^{-2} \frac{du}{d \varphi } \frac{d \varphi}{dt}
+    = \ldots =
+    -l u'
+    \\
+    \ddot r = - l^2 u^2 u''
+    \\
+    \textrm{insert $e_r$}
+    \\
+    \frac{d^2 u}{d \varphi^2} + u = \frac{GM}{l^2}
+    \\
+    \textrm{solution}
+    \\
+    u(\varphi) = D \cos(\varphi - \varphi_0) + \frac{GM}{l^2}
+}
+
+choose coords such that $\varphi_0 = 0$
+
+Get $D$ from $\varepsilon = \const$ 
+\[
+D = \sqrt{\frac{2 \varepsilon}{l^2} + \left(\frac{GM}{l^2}\right)^2}
+\]
+
+put $D$ into $u$ and then invert to get $1/u = r$
+
+$\epsilon$ and $\varepsilon$ are different things 
+\equations{
+    r =
+    \frac{\alpha}{1 + \epsilon \cos (\varphi)}
+    \\
+    \alpha = \frac{l^2}{GM} \textrm{ latus rectum}
+    \hp
+    \epsilon = \sqrt{1 + \frac{2 \varepsilon l^2}{G^2M^2}}
+    \textrm{ eccentricity}
+    \\
+    r_{perigee} = 
+    \frac{\alpha}{1 + \epsilon }
+    \hp
+    r_{apogee} = 
+    \frac{\alpha}{1 - \epsilon }
+}
+
+\subsection{Cases: $\epsilon > 1$}
+the eccentricity is greater than 1 so we get a hyperbola 
+
+the critical angle is that such $1 + \epsilon \cos \varphi = 0$ because thats where the particle asymptotically reaches
+
+\subsection{Case: $\epsilon = 1$}
+parabolic tragectory 
+
+perigee of $\alpha / 2$ at the turning point 
+
+the critical angle is $\pi$ because the object reaches that largest angle asymptotically. 
+
+If you write $r$ in cartesian coordinates you get 
+\equations{
+    x = \pm \left( -\frac{y^3}{2 \alpha } + \frac{\alpha}{2} \right)
+}
+
+\subsection{Case: $\epsilon < 1$}
+Elliptic Orbit 
+\equations{
+    \frac{-1}{2} \left( \frac{GM}{l} \right)^2 = \epsilon_{min} < \epsilon < 0
+    \\
+    0 < \varepsilon < 1
+    \\
+    r = \frac{\alpha}{1 + \varepsilon \cos(\varphi)}
+    \\
+    a = \textrm{ semimajor axis } = \frac{r_{min} + r_{max}}{2}
+    \\
+    b = \textrm{ semiminor axis } = a \sqrt{1 - \varepsilon^2} = 
+    \frac{\alpha}{\sqrt{1 - \varepsilon^2}} = \frac{l}{\sqrt{|2 \varepsilon |}}
+    \\
+    \frac{\alpha}{1 - \varepsilon^2} = \frac{GM}{2 |\epsilon|}
+}
 
 
+\subsection{Case: Circulat Orbit}
+$\varepsilon < 0$ and $U_{eff}' \Big|_{r = r_c} = 0$
+
+\equations{
+    r_c = \frac{l^2}{GM}
+    \hp
+    \epsilon = \frac{-1}{2} \left( \frac{GM}{l} \right)^2
+    \hp
+    \varepsilon = 0
+}
+
+\section{More with Kepler's Laws}
+
+\subsection{2nd Law}
+\equations{
+    dA = \frac{1}{2} r d \varphi
+    \\
+    \frac{dA}{dt} = \frac{1}{2} r \frac{d \varphi}{dt}
+    =
+    \frac{1}{2} r^2 \frac{l}{r^2} = \frac{l}{2} = \const
+}
 
 
+\subsection{3rd Law}
+\equations{
+    a^3 \equiv p^2
+    \textrm{ (a is semimajor axis and p is period)}
+    \\
+    \textrm{ area of ellipse } A = \pi a b 
+    \\
+    \int dA = \frac{l}{2} \int dt 
+    \rightarrow 
+    \pi a b = \frac{l}{2} p
+    \\
+    p^2 = \frac{4 \pi^2 a^2 b^2}{l^2} = \frac{4 \pi^2}{GM} a^3
+    \\
+    \frac{p^2}{a^3} = \frac{4 \pi^2}{GM}
+}
+
+\chapter{Harmonic and Damped Motion}
+
+\section{Equations of Motion}
+carm of mass $m$ attached to a spring with spring constant $k$ and length $l$.
+
+$x(t)$ is the time dependent position 
+
+$x = 0$ wall, $x_0 = L$ equilibrium. 
+
+\equations{
+    \textrm{ spring force } \vec F_s = -k (x(t) - L)
+    \\
+    m \vec a = \vec F_s
+    \hp 
+    m \ddot x = -k (x(t) - L)
+    \rightarrow
+    m \ddot x + k(x - L) = 0
+}
+
+You can also derive it from energy conservation 
+
+\equations{
+    E = T + U = 
+    \frac{1}{2} m \dot x^2 + \frac{1}{2} k (x - L)^2
+    \\
+    \textrm{derive with respect to time}
+    \\
+    \frac{dE}{dt} = 0 = 
+    \frac{1}{2}m * 2 \dot x * \ddot x + \frac{1}{2} k * 2(x - L) \dot x 
+    \rightarrow
+    \\
+    \dot x (m \ddot x  + k(x - L)) = 0
+    \hp 
+    \dot x \neq 0 
+    \\
+    m \ddot x  + k(x - L) = 0
+}
+
+\subsection{Solving EoM}
+Choose reference frame such that the equilibrium point is at $x = 0$ 
+
+\equations{
+    x = x_0 = L \rightarrow y = 0 = x - L, \hp \ddot y = \ddot x
+    \\
+    \textrm{ make an ansatz for the solution }
+    \\
+    y(t) \approx e^{\lambda t}
+    \hp 
+    \dot y(t) = \lambda e^{\lambda t}
+    \hp
+    \ddot y(t) = \lambda^2 e^{\lambda t}
+    \\
+    \textrm{insert}
+    \\
+    m \lambda^2 e^{\lambda t} + k e^{\lambda t} = 0
+    \\
+    \lambda^2 = - \frac{k}{m} \rightarrow y = 
+    \pm i\sqrt{\frac{k}{m}} = \pm i \omega
+    \\
+    y(t) = D_1 e^{i \omega t} + D_2 e^{- i \omega t}
+    \hp D_1, D_1 \in \mathbb{C}
+    \\
+    \textrm{use Euler's Identity}
+    \\
+    y(t) = A \cos(\omega t) + B \sin(\omega t)
+    \hp 
+    A = D_1 + D_2, B = i(D_1 - D_2)
+    \\
+    y(t) = C \cos(\omega t + \phi)
+}
+period $= \frac{2 \pi}{\omega}$ and $\omega = \sqrt{\frac{k}{m}}$ 
 
 
+\subsection{Energy}
+\equations{
+    U = \frac{1}{2} k y^2 = \frac{1}{2} kC^2 \cos^2(\omega t - \phi)
+    \\
+    U \geq 0 
+    \hp 
+    U_{max} = \frac{1}{2} kC^2
+    \\
+    T = \frac{1}{2} m \dot y^2 
+    =
+    \frac{m}{2} C^2 \omega^2 \sin^2(\omega t - \phi)
+    \\
+    T \geq 0 \hp T_{max} = \frac{m}{2} C^2 \omega^2
+    \\
+    E = T + U = 
+    \frac{1}{2} mC^2 \omega^2 \sin^2(\omega t - \phi)
+    +
+    \frac{1}{2} k C^2 \cos^2(\omega t - \phi)
+    =
+    \const
+    \\
+    E = T_{max} = U_{max} = \const
+}
+
+\section{Harmonic Oscillator}
+
+simple harmonic oscillator
+\equations{
+    m_{eff} \ddot x + k_{eff}x = 0
+    \hp 
+    \ddot x + \omega^2 x = 0
+    \hp 
+    \omega = \sqrt{\frac{k_{eff}}{m_{eff}}}
+}
+
+The spring constant and mass are now effective because we're in a dampened oscillator instead of an ideal one. 
+
+\subsection{EOM}
+Consider a vertical spring with height equation $h = \alpha (s - x)^2$
+
+Use conservation of energy 
+
+\equations{
+    U = U_{spring} + U_{g}
+    \hp 
+    U_{spring} = \frac{1}{2} k (x - L)^2
+    \\
+    U_g = mgh = mg \alpha (s - x)^2
+    \\
+    \frac{dU}{dx} = 0
+    \rightarrow 
+    x_{eq} = \frac{kL + 2 \alpha m g s}{k + 2 \alpha mg}
+    \hp 
+    \textrm{do yourself :(}
+}
+
+Now find the effective spring constant
+
+Taylor expand $U$ near $x_{eq}$
+
+\equations{
+    U = U(x_{eq}) + U' \Big|_{xeq} (x - x_{eq}) + \frac{1}{2} U'' \Big|_{xeq} (x - x_{eq})^2
+    \hp 
+    U'(x_{eq}) = 0
+    \\
+    =
+    U(x_{eq}) + \frac{1}{2} U''(x_{eq}) (x - x_{eq})^2
+    \hp 
+    k_{eff} = U''(x_{eq})
+    \\
+    k_{eff} = U''(x_{eq}) = k + 2 \alpha mg 
+}
+
+Now to find kinetic energy 
+
+\equations{
+    T = \frac{1}{2} m \vec v^2 = 
+    \frac{1}{2} m (\dot x^2 + \dot y^2)
+}
+
+if $h$ is small you can Taylor expand around $\frac{\dot y^2}{\dot x^2} = 4 \alpha^2 (x - s)^2 << 1$
+
+\equations{
+    T \approx \frac{1}{2} m \dot x^2
+    \\
+    E = T + U = 
+    \frac{1}{2} m \dot x^2 + U_{x_{eq}} + \frac{1}{2}k_{eff}(x - x_{eq})^2
+}
+
+Shift the coordinates for convenience
+
+\equations{
+    \bar x = x - x_{eq} 
+    \hp 
+    \dot \bar x = \dot x 
+}
+
+back to the equation of motion
+
+\equations{
+    \frac{1}{2} m \dot \bar x^2 + \frac{1}{2} k_{eff} \bar x^2 
+    =
+    E - U(x_{eq}) = \const
+    \\
+    \textrm{take the derivative}
+    \\
+    m \ddot {\bar x} + k_{eff} \bar x = 0
+    \rightarrow 
+    \ddot \bar x + \omega^2 \bar x = 0
+    \\
+    \omega = \sqrt{\frac{k_{eff}}{m}}
+    =
+    \sqrt{\frac{k + 2 \alpha m g}{m}}
+}
+
+some stuff with $\dot y$ and $\dot x$
+
+\equations{
+    y = h = \alpha (s -x)^2
+    \hp 
+    \dot y = 2 \alpha (s - x)(-x) \dot x
+    \\
+    \textrm{take derivative}
+    \\
+    \frac{d}{dt} (\frac{1}{2} m \dot {\bar x}^2 + \frac{1}{2} k_{eff} \bar x^2)
+    \rightarrow 
+    \frac{1}{2} m 2 \dot {\bar x} \ddot {\bar x} + \frac{1}{2} k_{eff} 2 \bar x \dot {\bar x} = 0
+}
+
+\section{Simple Pendulum}
 
 
+choose polar coordinates 
+\[
+r = L = \const \hp \vec v = \dot r \vec e_r + r \dot \theta e_\theta = L \dot \theta \vec e_\theta
+\]
+
+Use energy consevation to find equation of motion 
+\equations{
+    U = mgh = mgL(1 - \cos(\theta))
+    \\
+    T = \frac{1}{2} m \vec v^2 = \frac{1}{2} m L^2 \dot \theta^2
+    \\
+    \frac{dE}{dt} = \frac{d}{dt} (\frac{1}{2} m L^2 \dot \theta^2 +  mgL(1 - \cos(\theta)) )
+    \rightarrow 
+    \\
+    L \ddot \theta + g \sin(\theta) = 0 
+    \\
+    \textrm{small angle approximation}
+    \\
+    \ddot \theta + \omega^2 \theta = 0
+    \hp 
+    \omega = \sqrt{\frac{g}{L}}
+    \\
+    \theta(t) = A \cos(\omega t - \phi)
+}
+$A$ is amplitude and $\phi$ is the phase which are both derived from initial conditions 
+
+\section{Physical Pendulum}
+Let the pendulum have like an actual mass distribution with a center of mass and a pivot that it rotates around. 
+
+choose coordinate system (polar coordinates)
+\[
+r = L \hp \theta = \theta(t) \hp \vec v = L \dot \theta \vec e_\theta 
+\]
+
+use kinetic energy (but you have to use moment of inertia and whatnot instead of just regular kinetic energy)
+
+\equations{
+    T = \frac{1}{2} I_p \dot \theta^2
+    \hp 
+    U = mgh = mgL(1 - \cos(\theta))
+    \\
+    \frac{dE}{dt} = \frac{d}{dt} (T + U) = I_p \ddot \theta + mgL\sin(\theta) = 0
+    \\
+    \textrm{small angle}
+    \\
+    I_p \ddot \theta + mgL\theta = 0
+    \rightarrow 
+    \ddot \theta + \omega^2 \theta = 0 
+    \hp 
+    \omega = \sqrt{\frac{mgL}{I_p}}
+}
+
+\section{Dampened}
+oscillator that's damped due to friction. $E$ is no longer conserved 
+
+Imagine a spring connected to a cart with friction force $\vec F = -C \vec v$
+
+\subsection{EOM}
+\equations{
+    \frac{dE}{dt} = P_{lost} = \frac{dE_{lost}}{dt} 
+    =
+    \vec F \frac{dx}{dt} = \vec F \cdot \vec v = -c \vec v^2
+    \\
+    \textrm{mechanical energy}
+    \\
+    E = T + U_s = \frac{1}{2} m \dot x^2 + \frac{1}{2} k (x - L)^2
+    \\
+    \textrm{something?}
+    \\
+    -c \dot x^2 = P_{lost} = \frac{dE}{dt} =
+     \frac{m}{2} 2 \dot x \ddot x + k (x - L) \dot x \rightarrow 
+     \\
+     m \ddot x  + c \dot x + k (x - L) = 0
+}
+Translate the coordinates such that $y = x - L$ 
+
+\equations{
+    m \ddot y + c \dot y + ky = 0
+    \hp 
+    \ddot y + 2 \zeta \omega_N \dot y + \omega^2_N y = 0
+}
+That's the equation for a damped harmonic oscillator $\omega_N^2 = \frac{k_{eff}}{m_{eff}}$ and a damping parameter $\zeta = \frac{c}{2m \omega_N}$
+
+Take an ansatz $y = e^{\lambda t}, \dot y = \lambda e^{\lambda t}, \ddot y = \lambda^2 e^{\lambda t}$
+
+\equations{
+    \lambda^2 + 2 \zeta \omega_N \lambda + \omega_N^2 = 0
+    \rightarrow 
+    \lambda_\pm = -\omega_N(\zeta \pm \sqrt{\zeta^2 - \lambda})
+    \\
+    y = A e^{\lambda_+ t} + B e^{\lambda_- t}
+}
+
+\subsection{$\zeta = 0$}
+undamped
+\equations{
+    \ddot y + \omega^2_N y = 0 \hp \lambda = \pm i \omega_N
+    \\
+    y(t) = 
+    A e^{i \omega_N t} + B e^{-i \omega_N t}
+}
 
 
+\subsection{$\zeta > 1$}
+overdamped 
+
+\equations{
+    \lambda_\pm = \omega_N(\zeta \pm \sqrt{\zeta^2 - 1}) < 0
+    \\
+    y(t) = 
+    A e^{-|\lambda_+|t} + Be^{-|\lambda_-| t}
+}
+
+\subsection{$\zeta = 1$}
+critically damped 
+
+\equations{
+    \lambda_\pm = - \omega_N
+    \\
+    y(t) = 
+    A e^{- \omega_N t} + Bt e^{- \omega_N t}
+}
 
 
+\subsection{$0 < \zeta < 1$}
+Underdamped
+
+\equations{
+    \lambda_\pm = -\omega_N (\zeta \pm \sqrt{\zeta^2 - 1})
+    =
+    \omega_N \zeta \pm i \omega_N \sqrt{1 - \zeta^2}
+    =
+    - \zeta \omega_N \pm i \omega_d
+    \\
+    y(t) = e^{-\zeta \omega_N t} (D_1 e^{i \omega_d t} + D_2 e^{-i \omega_d t})
+    \hp 
+    \textrm{ or }
+    \\
+    y(t) = e^{-\zeta \omega_N t} (A \cos(\omega_d t) + B \sin(\omega_d t))
+    \hp 
+    \textrm{ or }
+    \\
+    y(t) = Ce^{- \zeta \omega_N t} \cos(\omega_d t - \phi)
+}
+$\omega_d$ is the damping frequency 
+
+\subsection{$\zeta < 0$}
+accelerated oscillator?
+
+\equations{
+    \lambda_\pm = +\omega_N |\zeta| \pm \sqrt{\ldots}
+    \\
+    y(t) \approx e^{\omega_N |\zeta| t} \ldots 
+}
+It's gonna blow up exponentially 
 
 
+\section{Forced Oscillator}
+oscillator with external driving force 
+
+Energy is NOT conserved 
+
+\equations{
+    \frac{dE}{dt} + P_{diss} = (\frac{dW}{t})_{ext} = 
+    \ldots = \vec F_{ext} \cdot \vec v
+    \\
+    m_{eff} \ddot {\vec x} + c_{eff} \dot {\vec x} + k_{eff} \vec x = F_{ext}
+}
+That's the equation for a damped harmonic oscillator in 3d 
+
+\subsection{EOM}
+no damping 
+
+use coordinates $(r, \theta)$ 
+
+use modified energy method 
+
+\equations{
+    \dot E + P_{diss} = \vec F_{ext} \cdot \vec v
+    \\
+    P_{diss} = 0 \hp T = \frac{1}{2} m \vec v^2 
+    \hp 
+    v = L \dot \theta \vec e_{\theta} 
+    \\
+    U = mgh = mgL(1 - \cos(\theta))
+    \\
+    \vec F_{ext} \cdot \vec v = 
+    L \dot \theta \vec F \cdot e_\theta 
+    =
+    L \dot \theta F \cos(\theta)
+    \\
+    \dot E = \frac{1}{2} m L^2 2 \dot \theta \ddot \theta + 
+    mgL \dot \theta \sin(\theta)
+    =
+    FL \dot \theta \cos(\theta)
+    \rightarrow 
+    \\
+    mL \ddot \theta + mg\sin(\theta) = F(t) \cos(\theta)
+}
+
+Figure out the eom for small $\theta$ so $\sin(\theta) = \theta$ and $\cos(\theta) \approx 1$
+
+\equations{
+    mL \ddot \theta + mg\theta = F(t)
+    \rightarrow 
+    m_{eff} \ddot \theta + k_{eff} \theta = F(t)
+}
+
+\subsection{example}
+cart on a cart 
+
+spring of constant $k$ and length $L$ is connected to cart of mass $m$ with position $x(t)$ and that whole thing is on a bigger cart with position $y(t)$ 
+
+net displacemen of cart = $x(t) + y(t)$. Spring force $\vec F_s = -k \vec x$
+
+use N2L 
+\equations{
+    \vec F = m \vec a \rightarrow -kx = m (\ddot x + \ddot y)
+    \rightarrow 
+    m \ddot x + kx = -m \ddot y
+}
+
+\section{Forced Harmonic Oscillator}
+\[
+m_{eff} \frac{d^2 \vec x}{dt^2} + c_{eff} \frac{d \vec x}{dt} + k_{eff} \vec x = \vec F_{ext}(t)
+\]
+
+How to solve: introduce linear operator $\mathcal{L}[x] = F$
+
+The linear operator is a map of a function into a function 
+\[
+\mathcal{L} f(t, x) \rightarrow g(t, x) = \mathcal{L}[f(t, x)]
+\]
+Follows linear property
+\[
+\mathcal{L}[a f(t, x) + b f_2(t, x)] = a \mathcal{L}[f(t, x)] + b \mathcal{L}[f_2(t, x)]
+\]
+
+for example 
+\[
+\mathcal{L} = A \frac{d}{dx}
+\rightarrow 
+L[g] = A \frac{dg}{dx}
+\]
+
+\equations{
+    \mathcal{L} = 
+    m_{eff} \frac{d^2}{dt^2} + c_{eff} \frac{d}{dt} + k_{eff} 
+    \\
+    \mathcal{L}[\vec x(t)] = 
+    m_{eff} \frac{d^2 \vec x}{dt^2} + c_{eff} \frac{d \vec x}{dt} + k_{eff} \vec x 
+}
+
+so for a forced oscillator 
+\[
+\mathcal{L}[\vec x(t)] = \vec F_{ext}(t)
+\]
+
+\subsection{General Solution}
+\[
+x(t) = x_h(t) + x_p(t)
+\]
+where $x_n(t)$ is the homogeneous solution without the external force and $x_p(t)$ is the particular solution of just the external force 
+
+homogeneous solution solves $\mathcal{L}[x(t)] = 0$
+
+particular solution needs just a single solution to $\mathcal{L}[x(t)] = F_{ext}$
+
+\equations{
+    \omega_n = \sqrt{\frac{k_{eff}}{m_{eff}}}
+    \hp 
+    \zeta = \frac{c_{eff}}{2 m_{eff} \omega_n}
+    \hp 
+    \omega_N \sqrt{1 - \zeta^2}
+}
+$\omega_n$ is natural frequency. $\zeta$ is dimensionless damping parameter. $\omega_d$ is dampened frequency. 
+
+\subsection{Force as a power series}
+\[
+F_{ext} = a + bt + ct^2 + \ldots
+\]
+\equations{
+    m_{eff} \ddot x + c_{eff} \dot x + k_{eff} x 
+    =
+    a + bt + ct^2 + \ldots
+}
+Strategy 
+\begin{itemize}
+    \item
+    solve for $x_h(t)$
+    \item 
+    determine 1 possible $x_p(t)$
+    \item 
+    find initial conditions 
+\end{itemize}
+
+ansatz for $x_p(t)$
+\equations{
+    x_p(t) = \alpha + \beta t + \gamma t^2
+}
+and then just solve 
+
+\subsection{Example}
+\equations{
+    F_{ext} = t^2 \hp \textrm{ no damping}
+    \\
+    c_{eff} = 0 \hp k_{eff} = 1 \hp m_{eff} = 1
+    \hp 
+    \ddot x + \omega_n x = 0
+    \\
+    x(0) = 0 \hp \dot x(0) = 0
+    \\
+    \textrm{solve particular solution}
+    \\
+    x(t) = \alpha + \beta t + \gamma t^2 
+    \hp 
+    \dot x = \beta + 2 \gamma t 
+    \hp 
+    \ddot x = 2 \gamma 
+    \\
+    2 \gamma + \alpha + \beta t + \gamma t^2 = t^2
+    \hp 
+    \beta = 0 \hp \gamma = 1 \hp \alpha = -2 
+    \\
+    x_p = -2 + t^2
+    \\
+    \textrm{find general solution (simple harmonic oscillator)}
+    \\
+    x_h(t) = A \cos(\omega_n t) + B\sin(\omega_n t)
+    \\
+    x = x_h(t) + x_p(t) = A \cos(\omega_n t) + B \sin(\omega_n t) + t^2 - 2
+    \\
+    \textrm{initial conitions}
+    \\
+    x(0) = 0 \rightarrow A = 2
+    \\
+    \dot x(0) = 0 \rightarrow B = B = 0
+    \\
+    x(t) = 2 \cos(\omega_n t) + t^2 - 2
+}
+
+\subsection{Exponential Force}
+\equations{
+    m_{eff} \ddot x + c_{eff} \dot x + k_{eff} x = F_0 e^{\alpha t}
+    \\
+    \textrm{$x_p$ ansatz $x_p = A e^{\alpha t}$}
+    \\
+    m_{eff} \alpha^2 A e^{\alpha t} + c_{eff} A \alpha e^{\alpha t} + k_{eff} A e^{\alpha t} = F_0 e^{\alpha t}
+    \rightarrow 
+    \\
+    m_{eff} \alpha^2 A + c_{eff} A \alpha + k_{eff} A  
+    = F_0 
+    \rightarrow
+    A = 
+    \frac{F_0}{m_{eff} \alpha^2 + c_{eff} \alpha + k_{eff}}
+    \\
+    x = x_h + x_0 = 
+    \\
+    e^{-\zeta \omega_n t} (A \cos(\omega_d t) + B \sin(\omega_d t)) + 
+    \frac{F_0}{m_{eff} \alpha^2 + c_{eff} \alpha + k_{eff}} e^{\alpha t}
+}
+
+\subsection{Harmonic Force}
+\[
+    F = F_0 \cos(\omega t - \theta)
+\]
+$F_0$ is amplitude, $\omega$ is angular speed, $\theta$ is phase 
+
+\equations{
+    m \ddot x + x \dot x + kx = F_0 \cos(\omega t - \theta)
+    \\
+    \textrm{ansatz $x_p = D \cos(\omega t - \psi)$}
+}
+
+That does work but theres a trick 
+\equations{
+    e^{i \Omega t} = \cos(\Omega t) + i \sin(\Omega t)
+    \\
+    F(x) = \Re (F_0 e^{i(\omega t - \theta)})
+    \\
+    \textrm{ansatz $x_p = \Re (X e^{i \omega t}) X \in \mathbb{C}$}
+    \\
+    \Re (-m \omega^2 X e^{i \omega t} + i \omega c X e^{i \omega t} + k X e^{i \omega t}) = \Re (F_0 (e^{i \omega t} e^{-i \theta }))
+    \rightarrow 
+    \\
+    X = \frac{F_0 e^{-i \theta}}{-m \omega^2 + i \omega c + k}
+    =
+    \frac{F_0}{k} e^{-i \theta} \left[
+        1 + 2 i \zeta \frac{\omega}{\omega_N} - 
+        \left( \frac{\omega}{\omega_N}\right)^2
+    \right]^{-1}
+    \\
+    =
+    \overset{N}{G}(\omega) F_0 e^{-i \theta}
+    \\
+    \overset{N}{G}(\omega) = \frac{1}{k} \left(
+        1 + 2 i \zeta \frac{\omega}{\omega_N} - \left( \frac{\omega}{\omega_N}\right)^2
+    \right)^{-1}
+    =
+    G(\omega) e^{i \phi(\omega)}
+    \\
+    G(\omega) = |\overset{N}{G}(\omega)| = \frac{1}{k} 
+    \left[
+        \left(
+            1 - \frac{\omega^2}{\omega_N^2}
+        \right)^2
+        +
+        \left(
+            2 \zeta \frac{\omega}{\omega_N}
+        \right)^2
+    \right]^{-1/2}
+    \\
+    \phi(\omega) = Arg(\overset{N}{G}(\omega))
+    =
+    \arctan(\frac{2 \zeta \omega \omega_N}{\omega_N^2 - \omega^2})
+    \hp 
+    0 \leq \phi < \pi 
+    \\
+    x_p(t) = \Re
+}
+
+trying this again because it's a new lecture 
+
+\equations{
+    m \ddot x + c \dot x + k x = F_0 \cos(\omega t - \theta)
+    \\
+    x_p(t) = F_0 G(\omega) \cos(\omega t - \theta - \phi(t))
+    \\
+    G(\omega) = 
+    \frac{1}{k}
+    \left[
+        \left(
+            1 - (\frac{\omega}{\omega_N})^2
+        \right)^2
+        +
+        \left(
+            2 \zeta \frac{\omega}{\omega_N}
+        \right)^2
+    \right]^{-1/2}
+    \\
+    \phi(t) = \arctan(\frac{2 \zeta \omega \omega_N}{\omega_N^2 - \omega^2})
+}
+I get to derive this at home oh boy such fun 
+
+$x_p(t)$ is oscillating with a frequency $\omega \neq \omega_N$ 
+that is the same as the driving force.
+
+The amplitude $|x_p(t)| = F_0 G(\omega)$ is frequency dependent. 
+
+The phase $\phi(\omega)$ also depends on the frequency. 
+
+At late times, the oscillation will be just the driven force because the 
+regular oscillator will have been dampened to nothing. $x_p(t)$ is the 
+"steady state" solution. 
+\equations{
+    e^{- \zeta \omega_N t} = e^{- t / \tau} 
+    \hp
+    \tau = \frac{1}{\zeta \omega_N}
+}
+
+\section{Analyzing $x_p(t)$}
+
+\subsection{peak (resonance)}
+at the peak, the system is in resonance (critical point)
+\equations{
+    \frac{d G(\omega)}{d \omega} \Big|_{\omega = \omega_R} = 0
+    \hp 
+    \omega_R = \pm \omega_N \sqrt{1 - 2 \zeta^2}
+}
+
+magnitude of the peak 
+\equations{
+    G(\omega = \omega_R) = \frac{1}{2k \zeta \sqrt{1- \zeta^2}}
+}
+for a small damping parameter, the peak magnitude is very large. $\omega_R \approx \omega_N$
+
+\subsection{small $\omega$}
+$\omega / \omega_N << 1$ and $\omega < \omega_R$
+\equations{
+    G(\omega) \approx \frac{1}{k} + 
+    \frac{1 - 2 \zeta^2}{k} \left( \frac{\omega}{\omega_N} \right)^2
+    \approx 
+    \frac{1}{k} + O (\frac{\omega}{\omega_N})^2
+    \\
+    \phi(t) \simeq 2 \zeta \frac{\omega}{\omega_N} \approx 0
+}
+
+\subsection{very large $\omega$}
+\equations{
+    G(\omega) \simeq 
+    \frac{1}{k} \frac{\omega_N}{\omega} + O(\frac{\omega_N}{\omega})^3
+    \\
+    \phi(\omega) \approx - 2 \zeta \frac{\omega_N}{\omega} + n \pi \simeq \pi
+    \\
+    x_p(t) = 
+    \frac{F_0}{k} (\frac{\omega_N}{\omega})^2 \cos(\omega t - \theta)
+    \hp 
+    \omega_N^2 = \frac{k}{m}
+    \\
+    x_p \approx \frac{F_0}{m \omega^2} \cos(\omega t - \theta)
+}
+
+for the different phases 
+\begin{itemize}
+    \item 
+    at resonance 
+
+    $\phi(\omega_R) \simeq \pi/2$ so $x$ is $\pi/2$ behind force 
+    \item 
+    $\omega << \omega_N$
+
+    $\phi \simeq 0$ so
+    x and F are in phase 
+    \item
+    $\omega >> \omega_N$
+    
+    $\phi \simeq \pi$ so $x$ is $\pi$ behind the force 
+\end{itemize}
 
 
+\chapter{Periodic Forces and Fourier Series}
+The force can be all sorts of wacky as long as it's periodic along a period $T$
+
+$F(t + T) = F(t)$ and $T = \frac{2 \pi}{\Omega}$ where $\Omega$ is the frequency of 
+the periodic force. 
+
+Describe the solution for the periodic force as a superposition of 
+harmonic functions (sin and cos). 
+We can do this because the differential operator 
+$\mathcal{L} = m \frac{d^2}{dt^2} + c \frac{d}{dt} + k$ is linear 
+
+\section{Fourier Series}
+\equations{
+    F(t) = \frac{a_0}{2} + \sum^{\infty}_{n = 1} a_N \cos(n \Omega t) + 
+    \sum^{\infty}_{p = 1} b_p \sin(p \Omega t)
+    \\
+    n, p \in \mathbb{N}
+    \hp 
+    a_n, b_p = \textrm{ Fourier Coefficients}
+}
+An even function is a function such that $f(t) = f(-t)$ (like cos)
+
+$f_{even}(t) = \frac{1}{2} (F(t) + F(-t))$
+
+odd function $f(-t) = - f(t)$ (like sin)
+
+$f_{odd} = \frac{1}{2} (F(t) - F(-t))$
+
+if your function is even, the fourier series will have 0 for all sin coefficients.
+
+If it's odd, then all the cos coefficients will be 0
+
+\subsection{Coefficients}
+\equations{
+    a_0 = \frac{2}{T} \int^T_0 F(t) dt 
+    \\
+    a_N = \frac{2}{T} \int^0_T F(t) \cos(n \Omega t) dt 
+    \\
+    b_p = \frac{2}{T} \int^0_T F(t) \sin(p \Omega t) dt 
+}
+The way the integral bounds work is you just need to integrate for 1 period of $T$.
+
+Verify the coeffients 
+
+\equations{
+    \int \cos(p \Omega t) \cos(n \Omega t) dt 
+    =
+    \\
+    \frac{1}{2} \int \cos((n + p) \Omega t) dt  + 
+    \int \cos((n - p) \Omega t) dt 
+}
+it vanishes so I think something's good 
+
+\section{Fouier Series}
+This is just a new lecture so I'm writing all the stuff 
+
+\equations{
+    F(t) = 
+    \frac{a_0}{2} + 
+    \sum^\infty_{p = 1} a_p \cos(p \Omega t)
+    + \sum^\infty_{p = 1} b_p \sin(p \Omega t)
+    \\
+    a_0 = \frac{2}{T} F(t) dt 
+    \\
+    a_p = \frac{2}{t} \int_T F(t) \cos(p \Omega t) \, dt 
+    \hp 
+    b_p = \frac{2}{t} \int_T F(t) \sin(p \Omega t) \, dt 
+}
+In order to verify $a_0, a_p, b_p$, we need to show that the thing is orthogonal 
+
+\equations{
+    \int \limits_T \cos(m \Omega t) \cos(p \Omega t) \, dt = 
+    \begin{cases}
+    0 \hp m \neq p \\
+    \frac{T}{2} \hp m = p
+    \end{cases}
+    \\
+    \int \limits_T \sin(m \Omega t) \sin(p \Omega t) \, dt = 
+    \begin{cases}
+    0 \hp m \neq p \\
+    \frac{T}{2} \hp m = p
+    \end{cases}
+    \\
+    \int \limits_T \cos(m \Omega t) \sin(p \Omega t) \, dt = 0
+}
+
+insert $F(t)$ to get something 
+
+\equations{
+    a_m = \frac{2}{T} \int \limits_T F(t) \cos(m \Omega t) \, dt 
+    = 
+    \\
+    \frac{2}{T} \int \limits_T dt \cos(m \Omega t) 
+    \left[
+        \frac{a_0}{2} + 
+        \sum^\infty_{p = 1} a_p \cos(p \Omega t)
+        + \sum^\infty_{p = 1} b_p \sin(p \Omega t)
+    \right]
+    \\
+    a_m = \frac{2}{T} \int \limits_T dt \left[
+        \frac{a_0}{2} \cos(m \Omega t)
+        + 
+        \cos(m \Omega t) \sum^\infty_{p = 1} a_p \cos(p \Omega t)
+    \right]
+    \\
+    \textrm{if } m = 0: a_0 = \frac{2}{T} \int \limits_T dt 
+    \rightarrow \frac{a_0}{2} = a_0
+    \\
+    \textrm{if } m \neq 0 : a_m = \frac{2}{T} \int \limits_T
+    dt \cos(m \Omega t) \sum_p  a_p \cos(p \Omega t) = a_p = m
+}
+
+\subsection{Example: Square Wave}
+it's 1 from $\frac{-T}{2}$ to 0 and -1 from 0 to $\frac{T}{2}$
+ 
+because the function is odd, $a_n = 0$
+
+Also because the function is odd, \\
+$a_0 = \langle F(t) \rangle = 
+\frac{1}{T} \int \limits_T F(t) dt = 0$
+
+$b_p$ is the only one that involves actual calculation 
+
+\equations{
+    b_p = \frac{2}{T} \int \limits_T F(t) \sin(p \Omega t) \, dt 
+}
+integrate from $-\frac{T}{2}$ to $\frac{T}{2}$ 
+
+use integration by parts as well 
+
+\equations{
+    u = F(t) \rightarrow u' = 0 
+    \hp 
+    v' = \sin(p \Omega t) \rightarrow v = 
+    \frac{-1}{p \Omega} \cos(p \Omega t) 
+    \\
+    b_p = 
+    \frac{2}{T}
+    \left[
+        F(t) (\frac{-1}{p \Omega}) \cos(p \Omega t)
+    \right]
+    \Big|^{T/2}_{-T/2} - 
+    \int \limits_T 0 * \frac{-1}{p \Omega} \cos(p \Omega t) dt 
+    \rightarrow \\
+    \frac{2}{T} 
+    \left[
+        \frac{-1}{p \Omega} F(t) \cos(p \Omega t) \Big|^0_{-T/2} + 
+        \frac{-1}{p \Omega} F(t) \cos(p \Omega t) \Big|^{T/2}_{0}
+    \right]
+}
+
+You're going to get 
+\equations{
+    b_p = 
+    \begin{cases}
+        0 \hp \textrm{p is even} \\
+        \frac{-4}{p \pi} \hp \textrm{p is odd}
+    \end{cases}
+    \\
+    F(t) = \sum^\infty_{p = 1} b_p \sin(p \Omega t)
+}
+That is the truncated series 
+
+If you take only the first $n$ terms of a fourier series, youre going to get a noticeably wave-y function but it will look closer to your original function that just a sine or cosine wave. 
+
+\subsection{Gibb's Phenomenon}
+When doing the fourier series of a square wave, the edges of the square are going to have little horns becauseidk math. 
+
+This is characteristic of a truncated series. 
+
+\subsection{Summary}
+equation of motion 
+\[
+m \ddot x + c \dot x + kx = F(t) 
+\]
+with periodic force $F(t)$ 
+
+Fourier series 
+\[
+    F(t) = 
+    \frac{a_0}{2} + 
+    \sum^\infty_{p = 1} a_p \cos(p \Omega t)
+    + \sum^\infty_{p = 1} b_p \sin(p \Omega t)
+\]
+
+with coefficients 
+\equations{
+    a_p = \frac{2}{T} \int \limits_T F(t) \cos(p \Omega t) \, dt
+    \hp 
+    b_p = \frac{2}{T} \int \limits_T F(t) \sin(p \Omega t) \, dt
+    \\
+    a_0 = \frac{2}{T} \int \limits_T F(t) \, dt \hp 
+    \textrm{ time average } 
+}
+
+Some shenanigans 
+
+equation of motion with linear operator $\mathcal L = F(t)$
+
+with homogeneous solution $x_h(t)$ for $\mathcal L(x) = 0$
+
+and a general solution $x(t) = x_h(t) + x_p(t)$
+
+How to find the particular solution? 
+
+\equations{
+    \mathcal L(x) = 
+    \left(
+        m \frac{d^2}{dt^2} + c \frac{d}{dt} + k
+    \right)
+    x
+    =
+    \sum_q F_q(t)
+    \\
+    x(t) = x_1(t) + x_2(t) + \ldots = \sum^\infty_{f= 1} x_f(t)
+    \hp 
+    m \ddot x_1 + c \dot x_1 + k x_1 = F_1(t) 
+    \\
+    m \ddot x_q + c \dot x_q + k x_q = F_q(t)
+}
+each $F_q(t)$ is a harmonic function 
+
+\equations{ 
+    x_q(t) = f(q) \cos(q \Omega t - \theta - \phi(q \Omega))
+    \hp 
+    q \Omega = \omega
+    \\
+    x_{p}(t) = 
+    \\
+    \frac{a_0}{2k} + 
+    \sum^\infty_{q = 1} a_q G(q \Omega)
+    \cos(q \Omega t - \phi(q \Omega)) + 
+    \sum^\infty_{q = 1} b_q G(q \Omega) 
+    \sin(q \Omega t - \phi(q \Omega))
+    \\
+    G(q \Omega) = 
+    \frac{1}{k} 
+    \left[
+        \left( 
+            1 - \left( \frac{q \Omega}{\omega_N}\right)^2
+        \right)^2
+        +
+        \left(
+            2 \zeta \frac{2 \Omega}{\omega_n}
+        \right)^2
+    \right]^{-1/2}
+    \\
+    \phi(q \Omega) = \arctan(\frac{2 \zeta q \Omega \omega_N}{\omega_n^2 - (q \Omega)^2})
+}
+
+\section{Steady State Solution}
+$x(t)$ at late times $(t \to \infty)$
+
+for an undamped oscillator 
+\[
+x(t) = A \cos(\omega_n t) + B \sin(\omega_n t) + x_p(t) 
+\]
+
+for a damped oscillator 
+\[
+x(t) = x_p(t) 
+\]
+Can there be resonance? Yes. 
+if 
+$q \Omega = \omega_R = \omega_n\sqrt{1 - 2 \zeta^2} \approx
+ \omega_n (\textrm{ if $\zeta << 1$})$
+
+$q \simeq \omega_R / \Omega$
+
+$G = \sum G(q \Omega)$
+
+You can have resonance for each $q$
+
+\chapter{Impulse Response and Green's Function}
+Consider a force that exerts an impulse 
+
+The function is $0$ everywhere except for the time of impulse in which it is instantaneously non-zero and then it goes back to $0$
+
+\section{Math Break: Delta Distribution}
+
+Describe this with a \textbf{Delta Distribution} or "delta function". 
+
+\equations{
+    F(t) = \delta (t - a) = 
+    \begin{cases}
+    \infty \hp t = a 
+    \\
+    0 \hp \textrm{otherwise}
+    \end{cases}
+}
 
 
+consider a rectangle with width $\epsilon$ and height $1 / \epsilon$ at time $t = a$. and take the limit as $\epsilon \to 0$
+
+This gets you the delta distribution $\delta(t - a)$
+\[
+f(t = a) = \int^{\infty}_{- \infty} f(t) \delta(t - a) \, dt
+\]
+for functions continuous at $t = a$ and with limits 
+
+$\delta(\infty), \delta(- \infty) = 0$.
+
+\subsection{example}
+\[
+\int^{\infty}_{- \infty} \sin(t) \delta(t - \frac{3}{2} \pi ) =
+sin(3/2)
+\]
+
+You can do a $u$ sub to get to the right form of the thing 
+you want. 
+
+There's also a thing you can do with integration by parts 
+\equations{
+\int^{\infty}_{-\infty} f(t) \frac{d}{dt} \delta(t - a)dt 
+\rightarrow 
+f(t) \delta(t - a)  
+\Big|^{\infty}_{-\infty}
+-
+\int^{\infty}_{-\infty} (\frac{df}{dt}) \delta(t - a) dt 
+\\
+=
+- \frac{df}{dt} 
+\Big|_{t = a}
+}
+
+\subsection{Impulse Forces}
+Consider a force acting for $\Delta t << \omega_N$
+
+It can be described using a delta distribution. 
+
+\equations{
+    F(t) = I \delta(t)
+    \hp 
+    I = \Delta p = \Delta(F * t)
+}
+Response to impulse force 
+
+\subsection{Green's Function}
+Let force be at $t = 0$ with impulse of $1$ and 
+$x(t = 0) = 0$ and $\dot x(t = 0) = \frac{1}{m}$. 
+
+\equations{
+    G(t) = \begin{cases}
+    0 \hp t < 0 \\ 
+    \exp(- \frac{C}{2m} t) \frac{\sin(\omega_d t)}{m \omega_d}
+    \end{cases}
+}
+
+That is the response for 
+\[
+m \ddot x + c \dot x + kx = \delta(t - a)
+\hp
+\omega_N = \sqrt{\frac{k}{m}}, \omega_d = \omega_N \sqrt{1 - \zeta^2}, \zeta = \frac{c}{2m \omega_N}
+\]
+
+\subsection{Math Break: Heaviside}
+It's just a step function 
+\[
+H(y - y_0) = \begin{cases}
+1 \hp y > y_0 \\ 
+0 \hp y < y_0 
+\end{cases}
+\]
+
+\subsection{Back to Green's Function}
+
+\equations{
+    G(t) = \begin{cases}
+    0 \hp t < 0 \\ 
+    \exp(- \frac{C}{2m} t) \frac{\sin(\omega_d t)}{m \omega_d}
+    \end{cases}
+    =
+    H(t) 
+    \exp(- \frac{C}{2m} t) \frac{\sin(\omega_d t)}{m \omega_d}
+    \\
+    \textrm{at late times }
+    \\
+    x(t) = \begin{cases}
+    0 \hp t < a \\ 
+    \exp(- \frac{C}{2m} (t - a)) \frac{\sin(\omega_d (t - a))}{m \omega_d}
+    \end{cases}
+    =
+    \\
+    =
+    H(t - a) 
+    \exp(- \frac{C}{2m} (t - a)) \frac{\sin(\omega_d (t - a))}{m \omega_d}
+    \\
+    = G(t - a)
+}
+
+recognize response to impulse as Green's Function $G(t - a)$
+
+satisfies equation of motion 
+\equations{ 
+    \mathcal L(G(t - a)) = 
+    (m \frac{d^2}{d^2 t} + c \frac{d}{dt} + k) 
+    G(t - a) = \delta(t - a)
+}
+
+\section{Arbitrary Forcing and Convolution}
+Imagine a force with 2 consecutive impulses 
+$I_1(t = t_1)$ and $I_2(t = t_2)$
+
+Goal: figure out the forces and the particular solution 
+
+\equations{
+    F(t) = I_1 \delta(t - t_1) + I_2 \delta(t - t_2)
+    \\
+    x_p(t) = I_1 G(t - t_1) + I_2 G(t - t_2)
+}
+
+to generalize 
+\equations{
+    F(t) = \sum^N_{q = 1} I_q \delta(t - t_q)
+    \rightarrow
+    \\
+    x_p(t) = 
+    \sum^N_{q = 1} I_q G(t - t_q)
+    \\
+    =
+    \sum^N_{q = 1} I_q H(t - t_q) \exp(\frac{c}{2m}(t - t_q)) 
+    \frac{\sin(\omega_d (t - t_q))}{m \omega_d}  
+}
+
+consider a continuous force 
+\[
+F(t) = \sum^{N}_{q = 1} I_q \delta(t - t_q)
+=
+\sum^{N}_{q = 1} F(t_q) \delta(t - t_q) \Delta t
+\]
+
+if we consider the limits $\Delta t \to 0$
+
+\[
+F(t) = \int^{\infty}_{- \infty} F(t') \delta(t - t') dt'
+\]
+
+the response $x_p(t)$ is 
+\[
+x_p(t) = \int^{\infty}_{- \infty} F(t') G(t - t') dt'
+\]
+solution for a damped oscillator with an arbitrary driving force. 
+
+verify 
+\equations{
+    \mathcal L[x] = 
+    \mathcal L_t \left[
+        \int^{\infty}_{- \infty} F(t') G(t - t') dt'
+    \right]
+    =
+    \int^{\infty}_{- \infty} F(t') \mathcal L_t 
+    \left[ 
+        G(t - t') dt' 
+    \right]
+    =
+    \\
+    \int^{\infty}_{- \infty} F(t') \delta(t - t') = F(t)
+}
+
+G(t) is called Green's Function 
+
+x(t) is called convolution 
+
+\equations{
+    x = F \otimes G = 
+    \int^{\infty}_{- \infty} F(t') G(t - t') dt'
+    =
+    \int^{\infty}_{- \infty} F(t'') G(t'') dt''
+    =
+    G \otimes F
+}
+Its commutative
+
+\subsection{Integration Bounds}
+if F is off for $t - t' < 0$
+\[
+G(t - t') = \begin{cases}
+    = 0 \hp t - t' < 0 \\
+    \neq 0 \hp t - t' > 0
+\end{cases}
+\]
+
+this means that 
+\equations{
+    x(T) = \int^{\infty}_{- \infty} F(t') G(t - t') dt' 
+}
+integrate to where $t' = t$
+
+If the force starts at $t = t_0$ then $F(t) = 0$ for $t < t_0$
+so our lower integration boundary can be $t_0$
+
+so our new integral is 
+\equations{
+    x(T) = \int^{t' = t}_{t = t_0} F(t') G(t - t') dt' 
+}
+
+motion depends on the entire past. 
+
+new lecture
+
+Green's function is the solution to 
+\[
+\mathcal L[G(t - t')] =
+\left(
+    m \frac{d^2}{dt^2} + c \frac{d}{dt} + k 
+\right) 
+[G(t - t')]
+=
+\delta(t - t')
+\]
+
+\equations{
+    x(t) = F \otimes G =
+     \int^{\infty}_{-\infty}
+    F(t') G(t - t') dt'
+    =
+    \\
+    \int^{\infty}_{-\infty}
+    F(t') H(t - t') \exp({- \frac{c (t - t')}{2m}})
+    *
+    \frac{\sin(\omega_d (t - t'))}{m \omega_d}
+    dt'
+    \\
+    H = \begin{cases}
+        1 \hp t > t' \\
+        0 \hp t < t'
+    \end{cases}
+    \\
+    \omega_d = \omega_n \sqrt{1 - \zeta^2}
+    \hp 
+    \omega_n = \sqrt{\frac{k}{m}}
+    \hp 
+    \zeta = \frac{c}{2m \omega_n}
+}
 
 
+\section{Undamped Oscillator}
+constant force $F = F_0$ switched on at $t = 0$
+
+$x(0) = 0$ and $\dot x(0) = 0$
+
+find $x(t)$
+
+Green's Function Approach 
+\equations{
+    x(t) = \int^{\infty}_{- \infty} F_0 * H(t - t') * 
+    \exp(\frac{-c (t - t')}{2m}) * 
+    \frac{\sin(\omega_d (t - t'))}{m \omega_d}
+    \\
+    \textrm{undamped oscillator means $c = 0$ plus fix bounds}
+    \\
+    \int^{t}_{0} F_0(t) 
+    \frac{\sin(\omega_d (t - t'))}{m \omega_d}
+    \, dt 
+    =
+    \frac{F_0}{m \omega_n^2} (1 - \cos(\omega_n t))
+}
+
+\section{Fourier Transform}
+Tranform a function of time into a function of frequency 
+
+rewrite differential equation of $t$ into algebraic equation of $\omega$
+
+fourier transform = trafo lmao 
+
+\equations{
+    \tilde f(\omega) = 
+    \int^{\infty}_{- \infty} f(t) e^{-i \omega t}
+}
+
+Inverse trafo 
+\[
+f(t) = \frac{1}{2 \pi} \int^{\infty}_{- \infty} 
+\tilde f(t) e^{+i \omega t} \, d \omega
+\]
+
+$*$ and $**$ are the trafo pair 
+
+convention: 
+
+$*$ = prefactor = $1$
+
+$** = \frac{1}{2 \pi}$
+
+or 
+
+$* = \frac{1}{\sqrt{2 \pi}}$
+
+$** = \frac{1}{\sqrt{2 \pi}}$
+
+\subsection{Example}
+$f(t) = \delta(t)$
+
+\equations{
+    \tilde f(\omega) = 
+    \int^{\infty}_{- \infty} \delta(t - 0) e^{-i\omega t}
+    = 1
+}
+
+inverse 
+\equations{
+    \delta(t) = \frac{1}{2\pi} \int^{\infty}_{- \infty} 
+    1 e^{i \omega t} d\omega 
+}
+
+\subsection{Square pulse}
+$f(t) = 1$ for $-T < t < T$ and 0 everywhere else 
+
+\equations{
+    f(t) = H(T + t) * H(T - t)
+    \\
+    \delta f(\omega) = 
+    \int^{\infty}_{- \infty} f(t) e^{-i \omega t} \, dt 
+    =
+    \int^{\infty}_{- \infty} 
+    H(T + t) * H(T - t) e^{-i \omega t} \, dt 
+    =
+    \\
+    \int^{T}_{-T} 
+    e^{-i \omega t} \, dt  
+    =
+    \frac{2}{\omega} \sin(\omega t)
+}
+
+That function has zeroes at $\omega = n \frac{\pi}{T}$
+
+\subsection{Differential vs Algebraic}
+\equations{
+    \mathcal L = m \ddot x + c \dot x + kx = F(t)
+    \\
+    \tilde f(\omega) = 
+    \\
+    m \int^{\infty}_{- \infty} \ddot x e^{-i \omega t} +
+    c \int^{\infty}_{- \infty} \dot x e^{-i \omega t} +
+    k \int^{\infty}_{-\infty}  x e^{-i \omega t} =
+    \int^{\infty}_{-\infty} F(T) e^{-i \omega t} dt
+    \\
+    FT[x] = \int^{\infty}_{-\infty} e^{- i\omega t} dt 
+    \\
+    \textrm{integration by parts}
+    \\
+    x e^{- \omega t} 
+    \Big|^{\infty}_{-\infty} - 
+    \int^u x (- i \omega ) e^{- i \omega t} dt 
+    = 
+    \int^u x (i \omega ) e^{- i \omega t} dt = \tilde x(\omega)
+    \\
+    -m \omega^2 \tilde x(\omega) + 
+    i c \omega \tilde x(\omega)  + k \tilde x(\omega) = 
+    \tilde F(\omega)
+}
+
+if $F(t) = \delta(t)$ then $x(t) = G(t)$
+\[
+F(\omega) = \int \delta(t) e^{- i \omega t} = 1
+\]
+
+\equations{
+    \mathcal L_\omega [\tilde G(\omega)] = (-m \omega^2 + i \omega c + k) \tilde G(\omega) = 1
+    \\
+    \tilde G(\omega) = 
+    \frac{1}{-m \omega^2 + i \omega c + k}
+    =
+    \frac{1}{k} \left(
+        1 - (\frac{\omega}{\omega_n})^2 + 2 i \zeta \frac{\omega}{\omega_n}
+    \right)^{-1}
+    \\
+    \mathcal L[x(t)] = F(t)
+    \rightarrow 
+    x(t) = \int^{\infty}_{-\infty} F(t') G(t - t') dt
+    \\
+    -m \omega^2 \tilde x(\omega) + 
+    i c \omega \tilde x(\omega)  + k \tilde x(\omega) = 
+    \tilde F(\omega)
+    \rightarrow 
+    \tilde x(\omega) = \tilde F(\omega) \tilde G(\omega)
+}
+
+If you want to find $x$ given the fourier transform, you 
+just do the inverse fourier transform. 
+\[
+x(t) = \frac{1}{2 \pi} \int^{\infty}_{- \infty} 
+\tilde x(\omega) e^{i \omega t} \, d \omega 
+\]
+
+\section{Interpretation}
+FT (fourier tranform) variable $\omega$ is frequency, 
+
+In acoustics, $\omega$ is vibration frequency. 
+
+$\tilde x$ is a spectrum, or distribution of frequency. 
+
+in quantum mechanics, $\omega$ is related to energy $E = \hbar \omega$ so $\tilde x(\omega)$ is an energy spectrum 
+
+\subsection{Example}
+\[
+x(t) = \cos(3 t)
+\]
+
+recall euler identity and do FT 
+\equations{
+    \cos(\omega_0 t) = 
+    \frac{1}{2} (e^{i \omega_0 t} + e^{-i \omega_0 t})
+    \hp 
+    \omega_0 = 3
+    \\
+    FT: \tilde x(\omega) =
+    \int^{\infty}_{-\infty} \cos(3t) e^{-i \omega t}
+    =
+    \int^{\infty}_{-\infty} e^{-i \omega t}
+    \frac{1}{2} (e^{i 3 t} + e^{-i 3 t})
+    =
+    \\
+    \frac{1}{2} \int^{\infty}_{-\infty} e^{i (3 - \omega) t}
+    +
+    \frac{1}{2} \int^{\infty}_{-\infty} e^{-i (3 + \omega) t}
+    =
+    \tilde x(\omega)
+    =
+    \pi (\delta(\omega - 3) + \delta(\omega + 3))
+}
+2 spikes of size $\pi$ at $\omega = 3$ and $\omega = -3$
+
+if $x(t)$ has a long duration then 
+its FT $\tilde x(\omega)$ is narrow.
+
+if $x(t)$ is of finite short length then the spikes will be 
+wider. 
+
+\subsection{Gaussian Wave Packet}
+\[
+f(t) = e^{i \alpha t} \exp(- \frac{(t - t_0)^2}{T^2})
+\]
+It's just an oscillation times a Gaussian (normal distribution)
+
+centered around $t = t_0$ with a width of $T$ 
+
+\[
+FT \approx \exp(\frac{(\omega - \alpha)^2}{\Omega^2})
+\hp 
+\Omega = \frac{2 \pi}{T}
+\]
+
+\chapter{Noninertial Reference Frames}
+In a regular inertial frame, Newton's 2nd Law works,
+$F = ma$ and $F = \sum F_{real}$
+
+non-inertial reference frames have either rotation or linear 
+acceleration or both. 
+
+Acceleration can be described as "fictitious" force
+
+The mass in $F = ma$ is an inertial mass 
+\equations{
+    \vec F = m_I \vec a
+    \hp 
+    \vec F_a = m_g \vec g \textrm{ gravitational mass}
+    \\
+    m_I \approx m_g \hp |\frac{m_I}{m_g} - 1| \leq 10^{-15}
+}
+some relativity shenanigans
+
+\section{Equivalence Principle}
+inertial and gravitational mass are the same. 
+
+consider 2 uniformly accelerating frames 
+(1 in a gravitational field, 1 not near any field)
+
+The 1st elevator is in NO gravity, so the acceleration is just 
+upwards, so the force is downwards. with a force $F_N$
+
+The 2nd elevator both accelerates upwards AND has a gravitational 
+force, 
+\equations{
+    F_{net} = \vec F_N - m \vec g = 0 
+    \rightarrow 
+    \vec F_N = m \vec g
+}
+The physical descriptions are equivalent. A force and being in 
+an accelerated reference frame are the same. 
+
+Locally, an observer cannot distinguish an experiment done 
+in a uniform gravitational field compared to a uniformly 
+accelerated reference frame. 
+
+\section{Non-rotating Kinematics}
+Consider 2 frames accelerated relative to each other 
+
+$O$ is the rest frame $(\vec e_x, \vec e_y, \vec e_z)$ with $\dot e = 0$
+
+$O'$ is the accelerated frame $(\vec e_{x'}, \vec e_{y'}, \vec e_{z'})$
+
+position of $A$ in the rest frame $O$ is given by 
+$r_{OA} = r_{OO'} + r_{O' A}$
+
+the position of $O'$ in $O$ and the position of $A$ in $O'$
+
+The velocity of $A$ in the rest frame $O$, also known as the "true" velocity, 
+is $v_{OA} = v_{O O'} + v_{O' A}$
+
+$a_{O A} = a_{O O'} + a_{O' A}$
+
+In rest frame, $F = m a_{O A} = m(a_{O O'} + a_{O' A})$
+
+In accelerated frame 
+\[
+F_{true} - m a_{O O'} = m a_{O' A}
+\]
+
+N2L in accelerated frame 
+\[
+    F_{net} = F_{true} + F_{fict} = m a_{O' A} 
+\]
 
 
+\section{Rotating Frame}
+rest frame $O$ and rotating frame $O'$ with a frequency $\omega$
 
+position vector $L$ appears fixed in $O'$ is seen in 
+$O$ with $\frac{dL}{dt} = \omega \times L$
+
+\equations{
+    \omega = \frac{d \theta}{dt}
+    \\
+    r_{OA} = r_{O O'} + r_{O' A}
+    \\
+    v_{OA} = v_{O O'} + v_{O' A}
+    \\
+    v_{O O'} = 
+    \frac{d}{dt} r_{O O'} = \frac{d}{dt} 
+    \left(
+        r_{O O' x} e_x + 
+        r_{O O' y} e_y + 
+        r_{O O' z} e_z 
+    \right)
+    \\
+    v_{OA} = \frac{d}{dt} r_{OA} =
+    \frac{d}{dt}
+    \left(
+        x' e_{x'} + 
+        y' e_{y'} + 
+        z' e_{z'} 
+    \right)
+    \\
+    =
+    \left(
+        \dot x' e_{x'} + 
+        \dot y' e_{y'} + 
+        \dot z' e_{z'} 
+    \right)
+    +
+    \left(
+        x' \dot e_{x'} + 
+        y' \dot e_{y'} + 
+        z' \dot e_{z'} 
+    \right)
+    \\
+    =
+    v_{apparent} + \omega \times r_{O' A}
+    \hp 
+    \dot e_{x'} = \omega \times e_{x'}
+    \\
+    V_{O A} = V_{O O'} + v_{apparent} + \omega \times r_{O' A}
+}
+
+the velocity in a rest frame equals the velocity of the rotating frame in the 
+rest frame + the apparent velocity of $A$ in $O'$ + $\omega \times r_{O' A}$
+
+\subsection{Example}
+person is a radius $b$ away from the center of a turntable of frequency $\omega$ 
+inside a moving train with linear velocity $v_{train}$
+
+\[
+v_{O A} = v_{train} + u + \omega \times b
+\]
+$u$ is the velocity of the person in the rotating frame (same-ish frame as person)
+
+\subsection{Acceleration}
+
+\equations{
+    a_{O A} = \frac{d}{dt} v_{O O'} + \frac{d}{dt} v_{app} 
+    + \frac{d}{dt} (\omega \times r_{O' A})
+    \\
+    \frac{d}{dt} v_{app} = 
+    \frac{d}{dt} ( v_{app x'} e_{x'} + \ldots ) 
+    =
+    a_{app} + \omega \times v_{app}
+    \\
+    \frac{d}{dt} (\omega \times r_{O' A})
+    =
+    \dot \omega \times r_{O' A} + \omega \times \dot r_{O' A}
+    =
+    \\
+    \dot \omega \times r_{O' A} + 
+    \omega \times (v_{app} + \omega \times r_{O' A})
+    \\
+    a_{O A} = 
+    a_{O O'} + a_{app} + \omega \times (\omega \times r_{o' A})
+    + 2 \omega \times v_{app} + \dot \omega \times r_{O' A}
+}
+
+$a_{O O'}$ acceleration between $O$ and $O'$
+
+$a_{app}$ apparent acceleration of object as seen in $O'$
+
+$\omega \times (\omega \times r_{O' A})$ is centripetal acceleration. 
+for example, if $\omega \perp r_{O' A}$, then $\omega \times r_{O' A} = \omega r_{O' A} e_{\perp}$.
+$\omega \times (\omega \times r_{O' A}) = - \omega^2 r_{O' A} e_{O' A}$
+
+$2 \omega \times v_{app}$ is the coriolis effect 
+
+$\dot \omega \times r_{O' A}$ is the Euler Term 
+
+
+\subsection{Example (cont.)}
+recall $v_{O A} = v_{train} + u + \omega \times b$
+
+let $u, v_{train}, \omega = \const$
+
+\equations{
+    u = \const \rightarrow a_{app} = 0
+    \\
+    v_{train} = \const \rightarrow a_{O O'} = 0
+    \\
+    \omega = \const \rightarrow \dot \omega = 0
+    \\
+    a_{O A} = 
+    a_{O O'} + a_{app} + \omega \times (\omega \times r_{o' A})
+    + 2 \omega \times v_{app} + \dot \omega \times r_{O' A}
+    =
+    \\
+    a_{O A} = 
+    0 + 0 + \omega \times (\omega \times r_{o' A})
+    + 2 \omega \times v_{app} + 0
+    \\
+    v_{app} = u = \const \sim e_x
+    \\
+    r_{O' A} = b \sim e_x
+    \\
+    a_{O A} = - \omega^2 b \vec e_x + 2 \omega u \vec e_y
+}
+centripetal + coriolis effects 
+
+
+\section{Dynamics}
+N2L in non-inertial reference frames works by adding fictitious forces. 
+\[
+F_{true} = m a_{O A} - F_{fict}
+\]
+insert what you find and rearrange 
+\[
+F_{true} + F_{fict} = m a_{app}
+\]
+
+
+\equations{
+    m a_{app} = 
+    \\
+    F_{true} - m a_{O O'} - m \omega \times (\omega \times r_{O' A})
+    - 2 m \omega \times v_{app} - m \dot \omega \times r_{O' A}
+    \\
+    \textrm{\hspace{1.5cm} elevator, \hp centrifugal, \hp coriolis, \hp azimuthal}
+}
+
+\subsection{Puck on Icy Disk}
+Rotating disk moving counterclockwise with speed $\omega$. Puck launched from perimeter towards $B$. 
+Initial conditions $x(0) = 0$, $\dot x(0) = 0$, $y(0) = -R$, $\dot y(0) = u$
+
+\equations{
+    F_{true} = 0
+    \hp 
+    a_{O O'} = 0
+    \hp 
+    \dot \omega \times r_{O' A} = 0
+    \\
+    \textrm{centrifugal force } \omega \times (\omega \times r_{O' A})
+    = -\omega^2 (x e_x + y e_y)
+    \\
+    \vec \omega = \omega \vec e_{z}
+    \hp 
+    r_{O' A} = x e_x + y e_y
+    \\
+    \textrm{coriolis force } \omega \times v_{app} = 
+    \omega \times (\dot x e_x + \dot y e_y)
+    =
+    \omega \dot x e_y - \omega \dot y e_x
+    \\
+    m (\ddot x e_x + \ddot y e_y) = 
+    m a_{app} = m \omega^2 (x e_x + y e_y) - 
+    2 m \omega (\dot x e_y - \dot y e_x)
+    \\
+    \ddot x = \omega^2 x + 2 \omega \dot y 
+    \hp
+    \ddot y = \omega^2 y + 2 \omega \dot x
+}
+coupled 2nd order diff eq to solve 
+
+use a complex function and it somehow works 
+%
+\equations{
+    \ddot \psi + 2 i \omega \dot \psi - \omega^2 \psi = 0
+    \hp
+    \psi = x(t) + i y(t) \in \mathbb C
+    \\
+    \textrm{ansatz $e^{\lambda t}$}
+    \\
+    \lambda^2 e^{\lambda t} + 2 i \omega \lambda e^{\lambda t} 
+    - \omega^2 e^{\lambda t} = 0
+    \\
+    \lambda = - \frac{2 i \omega}{2} \pm \sqrt{- \omega^2 + \omega^2} = - i \omega 
+    \\
+    \psi(t) = A e^{- i \omega t} + Bt e^{- i \omega t}
+    \\
+    \textrm{$A, B$ from initial conditions}
+    \\
+    A \rightarrow \psi(0) = 0 = x(0) + i y(0) = 0 - iR
+    \\
+    B \rightarrow \dot \psi(0) = 0 = \dot x(0) + i \dot y(0) = 0 = R \omega + iu
+    \\
+    \phi(t) = - i R e^{- i \omega t} + (R \omega + iu) e^{- i \omega t}
+    \\
+    x = \Re (\psi(t)) = R t \omega \cos(\omega t) + (ut - R) \sin(\omega t)
+    \\
+    y = \mathbb C (\psi (t)) = 
+    (ut - R) \sin(\omega t) - Rt \omega \cos(\omega t)
+}
+
+
+\subsection{Motion on Earth}
+Let the Earth be a sphere of radius $R$ spinning with radius $\omega$. 
+Someone is an angle $\theta$ above the equator
+
+\equations{
+    \vec \omega = \omega \vec p 
+    \hp
+    v_{lab} =  \omega R \cos(\theta)
+    \hp 
+    \dot \omega = \frac{1.7 ms}{\textrm{century}}
+    \approx 0
+    \\
+    \textrm{relative acceleration } 
+    \vec a_{O O'} = \frac{d^2 R}{dt^2} = \omega \times (\omega \times R)
+    \\
+    |\vec a_{O O'}| = \omega^2 R \cos(\theta)
+    =
+    0.034 \frac{m}{s^2} \approx 0
+    \\
+    \textrm{centripetal force } \omega \times (\omega \times r_{O' A}) = \omega^2 r
+    \\
+    r << R
+    \omega^2 r << \omega^2 R << g \hp \textrm{ neglect }
+}
+only need to consider coriolis force 
+\[
+m \vec a_{app} = F_{true} - 2 m \omega \times v_{app}
+\]
+
+\subsection{Coriolis Force on Earth}
+use coordinates $(e, n, u)$ where $e$ is east, $n$ is north, $u$ is upwards 
+
+$\hat p = \cos(\theta) \hat n + \sin(\theta) \hat u$
+
+\equations{
+    m \ddot r_{app} = \sum F_{true} + F_{fict}
+    \\
+    m \ddot r = F_{true} - 2 m \vec \omega \times \dot r 
+    \hp 
+    F_{true} = -mg \hat u 
+    \\
+    m \ddot r = - mg \hat u - 2 m \omega \hat p \times \dot r 
+    \hp 
+    \dot r = (\dot x \hat e + \dot y \hat n + \dot z \hat u)
+    \\
+    m \ddot r =
+    m (\ddot x \hat e + \ddot y \hat n + \ddot z \hat u) = 
+    \\
+    - mg \hat u - 2 m \omega \left[
+        (\dot z \cos(\theta) - \dot y \sin(\theta)) \hat e + 
+        \dot x \sin(\theta) \hat n - \dot x \cos(\theta) \hat u
+    \right]
+    \\
+    \ddot x = 2 \omega \dot z \cos(\theta) + 2 \omega \dot y \sin(\theta) 
+    \\
+    \ddot y = -2 \omega \dot x \sin(\theta) 
+    \\
+    \ddot z = -g + 2 \omega \dot x \cos(\theta)
+}
+
+\section{Perturbation Theory}
+Consider something dropping down on the direction with intitial conditions,
+$\dot x(0) = \dot y(0) = \dot z(0) = x(0) = y(0) = 0$ and $z(0) = h$
+
+because $F_{cor} << F_{g}$, we can treat it as a small perturbation $\epsilon$
+\equations{
+    F_{total} = F_{g} + \epsilon F_{cor}
+    \hp
+    x(t) = x_0(t) + \epsilon x_1(t)
+    \\
+    y(t) = y_0(t) + \epsilon y_1(t)
+    \hp
+    y(t) = y_0(t) + \epsilon y_1(t)
+    \\
+    \textrm{ eom for $F_g + \epsilon F_{cor}$ }
+    \\
+    \ddot x = 
+    2 \epsilon \omega \dot z \cos(\theta) + 2 \epsilon \omega \dot y \sin(\theta) 
+    \\
+    \ddot y = 
+    -2 \epsilon \omega \dot x \sin(\theta) 
+    \\
+    \ddot z = 
+    -g + 2 \epsilon \omega \dot x \cos(\theta)
+    \\
+    \ddot x_0 + \epsilon \ddot x_1 = 
+    2 \epsilon \omega (\dot z_0 + \epsilon \dot z_1) \cos(\theta) + 
+    2 \epsilon \omega (\dot y_0 + \epsilon \dot y_1) \sin(\theta) 
+    \\
+    \ddot y_0 + \epsilon \ddot y_1 = 
+    -2 \epsilon \omega (\dot x_0 + \epsilon \dot x_1) \sin(\theta) 
+    \\
+    \ddot z_0 + \epsilon \ddot z_1 = 
+    -g + 2 \epsilon \omega (\dot x_0 + \epsilon \dot x_1) \cos(\theta)
+}
+treat everything order-by-order in $\epsilon$
+
+% because $\dot x(0) = \dot y(0) = \dot z(0)$, our equation is 
+
+in $\epsilon^0$
+\equations{
+    \ddot x_0 + \epsilon \ddot x_1 = 0
+    \hp
+    \ddot y_0 + \epsilon \ddot y_1 = 0
+    \hp
+    \ddot z_0 + \epsilon \ddot z_1 = -g
+    \\
+    x_0(t) = 0
+    \hp 
+    y_0(t) = 0
+    \hp 
+    z_0(t) = h - \frac{1}{2} gt^2
+}
+
+in $\epsilon^1$
+\equations{
+    \ddot x_1 = 
+    -2 \omega \dot z_0 \cos(\theta) +
+    2 \omega \dot y_0 \sin(\theta)
+    \\
+    \ddot y_1 = -2 \omega \dot x_0 \sin(\theta)
+    \\
+    \ddot z_1 = 2 \omega \dot x_0 \cos(\theta)
+    \\
+    \dot x_0 = 0
+    \hp 
+    \dot y_0 = 0 
+    \hp 
+    \dot z_0 = -gt 
+    \hp
+    \textrm{ from $e^0$}
+    \\
+    \ddot x_1 = 2 \omega gt \cos(\theta)
+    \hp
+    \ddot y_1 = 0
+    \hp 
+    \ddot z_1 = 0
+    \\
+    \dot x_1 = \int 2 \omega gt \cos(\theta) dt = 
+    \omega gt^2 \cos(\theta) + C_1
+    \\
+    x_1(t) = \frac{1}{2} \omega gt^3 \cos(\theta) + C_2
+}
+
+insert into initial equation (9.58 - 9.59) in $\epsilon^1$
+\equations{
+    x(t) = x_0(t) + \epsilon x_1(t) =
+    0 + \frac{1}{2} \omega gt^3 \cos(\theta) 
+    \\
+    y(t) = 0
+    \\
+    z(t) = h - \frac{1}{2} gt^2
+}
+
+The thingy moves eastward.
+
+This is because when the object is "up", its actually closer to the equator,
+so as it falls to the ground, it goes closer to the axis of rotation while 
+keeping its initially faster eastward inertia. 
+
+\subsection{Foucault Pendulum}
+If you have a pendulum that's not affected by the rotation of the earth, 
+then the earth will rotate under the pendulum and it will go 
+in a circle. 
+
+Goal: solve 
+
+Consider a pendulum of length $L$ with an angle $\beta$ and height $h$.
+
+However, this pendulum is 3d so we have to consider every movement direction $d$
+\equations{
+    d = \sqrt{x^2 + y^2}
+    \hp 
+    \cos(\beta) = \frac{h}{L}
+    \hp 
+    \sin(\beta) = \frac{d}{L}
+}
+
+use fictitious forces 
+
+\equations{
+    m a_{app} = \sum F_{true} + F_{fict}
+    \\
+    \textrm{get } F_{net} = \sum F_{true} \textrm{ from } F_{net} = -\nabla U
+    \\
+    U = -mgh = -mgL \cos(\beta)
+    \\
+    \textrm{assume $\beta$ is small}
+    \\
+    U = \const + \frac{mg}{2L}(x^2 + y^2)
+    \\
+    F_{net} = - \nabla U = - \frac{mg}{L} (x \hat e + y \hat n)
+    \\
+    \textrm{fictitious forces}
+    \\
+    F_{cor} = -2m \vec \omega \times \vec v_{app}
+    \hp 
+    \vec \omega = \omega \hat p = 
+    \omega (\cos(\theta) \hat n + \sin(\theta) \hat u)
+    \\
+    v_{app} = \dot x \hat e + \dot y \hat n
+    \\
+    F_{cor} = 
+    -2m \omega 
+    \left(
+        -\dot x \cos(\theta) \hat u + 
+        \dot x \sin(\theta) \hat n -
+        \dot y \sin(\theta) \hat e
+    \right)
+    \\
+    \textrm{N2L}
+    \\
+    \ddot x = - \frac{g}{L} x + 2 \omega \dot y \sin(\theta)
+    \\
+    \ddot y = - \frac{g}{L} y - 2 \omega \dot x \sin(\theta) 
+    \\
+    \ddot z = 0 + 2 \omega \dot x \cos(\theta) 
+    \\
+    \textrm{introduce } \omega_z = \omega \sin(\theta)
+    \\
+    \ddot x = 
+    - \frac{g}{L} x + 2 \omega_z \dot y
+    \\
+    \ddot y = 
+    - \frac{g}{L} y - 2 \omega_z \dot x
+    \\
+    \ddot z = 0 + 2 \omega \dot x \cos(\theta) 
+}
+
+Case 1: $\theta = 0$ (equator) meaning $\omega_z = 0$
+
+simple harmonic oscillator 
+
+\equations{
+    \ddot x + \omega_n^2 x = 0
+    \hp 
+    \omega_n = \sqrt{\frac{g}{L}}
+}
+
+Case not 1: do some solving junk 
+
+\equations{
+    \psi = x + iy 
+    \hp
+    \dot \psi = \dot x + i \dot y 
+    \hp
+    \ddot \psi = \ddot x + i \ddot y 
+    \\
+    \ddot \psi = 
+    \left(
+        - \frac{g}{L} x + 2 \omega_z \dot y
+    \right)
+    + i
+    \left( 
+        - \frac{g}{L} y - 2 \omega_z \dot x
+    \right)
+    =
+    - \frac{g}{L} \psi - 2 i \omega_z \dot \psi 
+    \\
+    \ddot \psi + \frac{g}{L} \psi + 2 i \omega_z \dot \psi 
+    =
+    \ddot \psi + 2 i \omega_z \dot \psi + \omega_n^2 \psi 
+    = 0
+}
+ansatz $\psi = e^{\lambda t}$
+%
+\equations{
+    \lambda^2 + 2 i \omega_z \lambda + \omega_n^2 = 0
+    \hp 
+    \lambda = 
+    \frac{ -2i \omega_z \pm \sqrt{-4 \omega_z^2 - 4 \omega_n^2}}{2}
+    =
+    \\
+    -i \omega_z \pm \sqrt{\omega_z^2 + \omega_n^2}
+    \\
+    \lambda = i \omega_z \pm i \omega_n
+    \\ 
+    \psi(t) = e^{i \omega_z \pm i \omega_n}
+    =
+    e^{-i \omega_z t} (C_1  e^{i \omega_n} + C_2 e^{-i \omega_n})
+    \\
+    x = iy = e^{-i \omega_z t} (x_{NR}(t) + i y_{NR}(t))
+    \\
+    e^{i \omega_z t} = \cos(\omega_z t) + i \sin(\omega_z t)
+    \\
+    \begin{pmatrix}
+        x(t) \\ y(t)
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \cos(\omega_z t) && \sin(\omega_z t) \\
+        - \sin(\omega_z t) && \cos(\omega_z t)
+    \end{pmatrix}
+    \begin{pmatrix}
+        x_{NR}(t) \\ y_{NR}(t)
+    \end{pmatrix}
+}
+rotates counterclockwise by $\phi = \omega_z$
+
+\chapter{Analytical Mechanics}
+Lagrangian and Hamiltonian shenanigans 
+
+based on "least action" principle 
+
+introduce configuration for "phase space" with a smooth function $\mathcal L$, 
+the Lagrangian.
+
+Define an action that is a functional- integral of the Lagrangian.
+
+Find the extrema of the Lagrangian "stationary points" of the action 
+("least action")
+
+Get equations of motion from the stationary point. 
+
+\subsection{Snell's Law and Fermat's Principle}
+Snell's Law is how light refracts through a medium. 
+
+Setup: consider 2 media with refraction indices from $A \to B$
+
+Determine the path of light that minimizes the time from $A \to B$.
+Special case of Fermat's Principle where light will take the path 
+between 2 points that takes the elast time.
+
+We need the relationship between refraction indices and the angles of incidence. 
+
+Speed of light in a medium: $v = c / n$ where $n$ is the refraction index. and 
+$c = 3 * 10^8$
+
+\equations{
+    t = t_1 + t_2 = \frac{l_1}{v_1} + \frac{l_2}{v_2} = 
+    \frac{l_1n_1}{c} + \frac{l_2n_2}{c}
+    \\
+    l_1^2 = d^2 + h^2 
+    \hp 
+    l_2^2 = (x - d)^2 + (y - h)^2
+}
+Find $h$ that minimizes $t$
+\equations{
+    t = \frac{l_1}{v_1} + \frac{l_2}{v_2} = 
+    \frac{l_1n_1}{c} + \frac{l_2n_2}{c}
+    =
+    \frac{\sqrt{d^2 + h^2} n_1}{c} + \frac{\sqrt{(x - d)^2 + (y - h)^2} n_2}{c}
+    \\
+    t' = 
+    \frac{2h n_1}{c\sqrt{d^2 + h^2}} + 
+    \frac{2 (y - h) n_2}{c\sqrt{(x - d)^2 + (y - h)^2}}
+    = 0
+    \\
+    2h n_1 + 
+    2 (y - h) n_2
+    = 0
+    \rightarrow 
+    2h n_1 + 
+    2 y n_2 - 2 h n_2
+    = 0
+    \rightarrow 
+    \\
+    2h n_1 + 
+     - 2 h n_2
+    = -2 y n_2
+    \\
+    h = \frac{y n_2}{n_2 - n_1}
+}
+plus some trig stuff that I took pictures of but did not 
+put in my notes 
+
+\section{More Stuff}
+introduce generalized coordinates $\{ q_i \} = \{ q_1, q_2, q_3, \ldots \}$
+and a generalized velocity $\dot q_i = \frac{d}{dt} q_i$
+
+denote path $\vec q(t)$ with fixed endpoints $q(t_1)$ and $q(t_2)$.
+
+introduce action 
+\[
+    S[q(t)] = 
+    \int^{t_2}_{t_1} \mathcal L(q_i(t), \dot q_i(t),  t)
+\]
+
+
+\subsection{total vs partial derivatives}
+$\del$ has explicit dependence.
+
+total derivative of a function $f(q(t), \dot q(t), t)$
+\equations{
+    \frac{d}{dt} f = \frac{\del}{\del t} f(q, \dot q, t) + 
+    \frac{\del q}{\del t} \frac{\del f}{\del q} +
+    \frac{\del \dot q}{\del t} \frac{\del f}{\del \dot q}
+}
+
+\section{Finding the Least Path}
+
+let $\{\vec q(t), \dot \vec q(t) \}$ be the extremal path. Consider 
+small deviations $\delta \vec q(t)$. 
+
+$S[\vec q]$ should be stationary- $\delta S[\vec q] = 0$
+\[
+\delta S[\vec q] = S[\vec q + \delta \vec q] - S[\vec q]
+=
+\int^{t_2}_{t_1} dt \mathcal L(q_i + \delta q_i, \dot q_i + \delta q_i, t) - 
+\int^{t_2}_{t_1} dt \mathcal L(q_i, \dot q_i, t) 
+\]
+taylor expand term 1
+\equations{
+    \mathcal L(q_i + \delta q_i, \dot q_i + \delta q_i, t) 
+    = 
+    \\
+    \mathcal L(q_i, \dot q_i, t) +
+    \sum_i \frac{\del \mathcal L(q_i, \dot q_i, t)}{\del q_i} \delta q_i + 
+    \sum_i \frac{\del \mathcal L(q_i, \dot q_i, t)}{\del q_i} \delta \dot q_i
+    + O(\delta q^2)
+    \\
+    \delta S[\vec q] = \int^{t_2}_{t_1}
+    dt \{
+        \sum_i \frac{\del \mathcal L}{\del q} \delta q +      
+        \sum_i \frac{\del \mathcal L}{\del \dot q} \delta \dot q 
+    \}
+    = 0
+    \\
+    \frac{d}{dt} \left(
+        \frac{\del \mathcal L}{\del \dot q} \delta q
+    \right)
+    = 
+    \frac{d}{dt}
+    \left(
+        \frac{\del \mathcal L}{\del \dot q} \delta q
+    \right)
+    +
+    \frac{\del \mathcal L}{\del \dot q} \delta \dot q
+    \\
+    \int^{t_2}_{t_1}
+    \frac{d}{dt} \left(
+        \frac{\del \mathcal L}{\del \dot q} \delta q
+    \right) 
+    =
+    \int^{t_2}_{t_1}
+    dt 
+    \frac{d}{dt}
+    \left(
+        \frac{\del \mathcal L}{\del \dot q} \delta q
+    \right)
+    -
+    \int^{t_2}_{t_1}
+    \frac{d}{dt}
+    \left( 
+    \frac{\del \mathcal L}{\del \dot q} \delta q
+    \right)
+    =
+    \\
+    \frac{\del \mathcal L}{\del \dot q} \delta q \Big|^{t_2}_{t_1} 
+    - 
+    \int^{t_2}_{t_1}
+    dt 
+    \left[
+        \frac{d}{dt}
+        \left(
+            \frac{\del \mathcal L}{\del \dot q}
+        \right)    
+        \delta q
+    \right]
+    \hp
+    \frac{\del \mathcal L}{\del \dot q} \delta q \Big|^{t_2}_{t_1} 
+    = 0
+    \\
+    \int^{t_2}_{t_1}
+    dt 
+    \left[
+        \frac{d}{dt}
+        \left(
+            \frac{\del \mathcal L}{\del \dot q}
+        \right)    
+        \delta q
+    \right]
+    \rightarrow 
+}
+
+idk im missing the derivation but 
+
+\subsection{Euler-Lagrange Euquation}
+\[
+\frac{\del \mathcal L(q, \dot q, t)}{\del q} - 
+\frac{d}{dt} \frac{\del L(q, \dot q, t)}{\del \dot q} = 0
+\]
+
+\section{New Lecture}
+\equations{
+    S[\vec q_i(t)]
+    =
+    \int^{t_2}_{t_1} dt \mathcal L(q_i(t), \dot q_i(t); t)
+}
+Where $S$ is defined as the path integral of the system, or the action 
+of the system. 
+
+\begin{itemize}
+    \item
+    Find the Lagrangian and set up the action/path integral 
+    \item 
+    Identify quantities $(q, \dot q, t, \mathcal L)$
+    \item 
+    Find and solve the E.L. equation
+\end{itemize}
+Euler-Lagrange Euquation (again lol)
+\[
+\frac{\del \mathcal L(q, \dot q, t)}{\del q} - 
+\frac{d}{dt} \frac{\del L(q, \dot q, t)}{\del \dot q} = 0
+\]
+
+\subsection{Path between 2 points}
+Setup:2 fixed points $A(x_1, y_1)$ and $B(x_2, y_2)$ in $\mathbb R^2$
+
+Goal: Find a curve with the shortest length sonnecting $A$ and $B$ 
+
+Consider an infinitesimally small path $dl = dx^2 + dy^2$
+
+The length of the curve is an integral 
+\equations{
+    L = \int^B_A \sqrt{dx^2 + dy^2}
+    \rightarrow  
+    \int^B_A \sqrt{1 + (\frac{dy}{dx})^2} dx
+    \rightarrow  
+    \int^B_A \sqrt{1 + (y')^2} dx
+    \\
+    q_i = y, \hp \dot q_i = \frac{dy}{dx}, \hp t = x
+    \hp 
+    \mathcal L = 
+    \sqrt{1 + (y')^2}
+}
+now we plug that into the E-L equation 
+\equations{
+    \frac{\del \mathcal L(q, \dot q, t)}{\del q} - 
+    \frac{d}{dt} \frac{\del L(q, \dot q, t)}{\del \dot q} = 0
+    \rightarrow 
+    \frac{\del \mathcal L}{\del y} - 
+    \frac{d}{dx} \frac{\del L}{\del y'} 
+    =
+    \\
+    \frac{\del}{\del y}
+    \sqrt{1 + (y')^2}
+    -
+    \frac{d}{dx} \frac{\del}{\del y'}  
+    \sqrt{1 + (y')^2}
+    =
+    -
+    \frac{d}{dx} \frac{\del}{\del y'}  
+    \sqrt{1 + (y')^2}
+    =
+    \\
+    -
+    \frac{d}{dx} 
+    \frac{y'}{\sqrt{1 + (y')^2}}
+    = 0
+    \rightarrow 
+    \frac{y'}{\sqrt{1 + (y')^2}}
+    = c
+    \rightarrow 
+    \\
+    y'
+    = c \sqrt{1 + (y')^2}
+    \rightarrow 
+    y'^2
+    = c^2 + c^2 (y')^2
+    \rightarrow 
+    \\
+    y'^2 - c^2 y'^2
+    = c^2 
+    \rightarrow
+    y' = \frac{c}{\sqrt{1 - c^2}}
+    = a = \const
+    \\
+    y = ax + b
+}
+a straight line woo 
+
+\section{More Calculus of Variations}
+functional 
+\equations{
+    S[\vec q_i]
+    =
+    \int^{t_2}_{t_1}
+    \mathcal L(q_i, \dot q_i, t)
+    dt 
+}
+fix the end points $q(t_1), q(t_2)$
+
+extremize $s[\vec q_i]$ by the path $\vec q$ that 
+satisfies the EL equation $\rightarrow$ leads you to 
+a differential equation for the system $q(t)$ with boundary conditions.
+
+if $q(t_1)$ is bounded but $q(t_2)$ is undefined, then 
+the term not involving 
+\[
+"\int" : \frac{\del \mathcal L}{\del \dot q_i} 
+\delta q_i \Big|^{t_2}_{t_1} \neq 0
+\]
+thus we need to require that $\frac{\del}{\del \dot q_i} \mathcal L = 0$
+
+\subsection{Higher Derivatives}
+what if $\mathcal L$ is $\mathcal L(q, \dot q, \ddot q, t)$?
+
+then some math happens 
+\equations{
+    \frac{\del}{\del q} \mathcal L - \frac{d}{dt} \frac{\del L}{\del \dot q} + 
+    \frac{d^2}{dt^2} \frac{\del L}{\del \ddot q} 
+    = 0
+}
+
+\subsection{Brachisochrone}
+A particle is sliding down a curve without friction but with gravity. 
+
+Goal: Find the path that takes the least time 
+
+First: set up the action/path integral (action)
+
+Our function will be $T$ because we're trying to minimize $T$
+
+\equations{
+    dt = \frac{dl}{v} \hp dl^2 = dx^2 + dy^2
+}
+energy conservation 
+\equations{
+    \frac{1}{2} mv^2 = mgy \rightarrow 
+    v = \sqrt{2gy}
+    \\
+    T
+    =
+    \int \frac{dl}{v} = 
+    \int^B_A \frac{\sqrt{dx^2 + dy^2}}{\sqrt{2gy}}
+    =
+    \int^B_A \frac{\sqrt{1 + (\frac{dy}{dx})^2}}{\sqrt{2gy}} dx
+    \\
+    \mathcal L = \frac{\sqrt{1 + (\frac{dy}{dx})^2}}{\sqrt{2gy}}
+    \hp 
+    q = y, \hp \dot q = \frac{dy}{dx}, \hp t = x
+}
+ig that's actually wrong so im just gonna follow lecture 
+
+\equations{
+    \mathcal L =  
+    \frac{\sqrt{1 + x'^2}}{\sqrt{2gy}}
+    \\
+    \frac{\del}{\del x}
+    \frac{\sqrt{1 + x'^2}}{\sqrt{2gy}}
+    -
+    \frac{d}{dy}
+    \frac{\del}{\del x'}
+    \frac{\sqrt{1 + x'^2}}{\sqrt{2gy}}
+    = 0
+    \rightarrow 
+    \\
+    \frac{d}{dy}
+    \frac{1}{\sqrt{2gy}} \frac{x'}{\sqrt{1 + x'^2}}
+    = 0
+    \rightarrow
+    \frac{1}{\sqrt{2gy}} \frac{x'}{\sqrt{1 + x'^2}}
+    = c
+    \\
+    \frac{x'}{\sqrt{2gy}}
+    = c\sqrt{1 + x'^2}
+    \rightarrow
+    \frac{x'^2}{2gy}
+    = c^2 + c^2 x'^2
+    \rightarrow 
+    x' = \frac{\sqrt{2gy} c}{\sqrt{1 - 2gy c^2}}
+    \\
+    x(y) = \frac{1}{2c} \sqrt{\frac{2}{gy} - 4c^2}
+    +
+    \frac{1}{2gc^2} \arctan(\sqrt{\frac{1}{2gyc^2} - 1})
+}
 
 
 
