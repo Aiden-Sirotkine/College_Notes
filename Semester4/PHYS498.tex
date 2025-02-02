@@ -1,0 +1,252 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 498}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS498}
+a whoooole lotta data analysis and fun stuff like that. 
+
+\section{Clustering}
+group together sample data points that are a certain distance from each other 
+\[
+d(i, k) = \sum\limits_{\textrm{features } i} (x_{ji} - x_{ki})^2
+\]
+
+However, what if data points have different units?
+
+ML algorithms are "unit-agnostic", which means they don't really care about units. 
+
+\section{Whitening Transformation}
+\[
+x \rightarrow \frac{x - \mu}{\sigma}
+\]
+it makes the mean 0 and the standard deviation 1
+
+It just removes the white noise from a dataset. 
+
+a whitening transformation is a linear transformation that 
+transforms a vector of random variables with a known covariance matrix 
+into a set of new varariables whose covariance is the identity matrix, 
+meaning that they are uncorrelated and each have unit variance. 
+
+whitening the inputs is useful because machine learning likes standardized data. 
+
+\section{Examples}
+you slam bags of apples together and columnated jets of walnuts come out 
+
+\subsection{Atlas}
+We look at the random jets of energy and we cluster the data to figure out 
+what particles are where. 
+
+\subsection{Gamma Ray Bursts}
+We can look into the universe and see random bursts of gamma rays 
+
+We find clusters of bursts at the galactic plane and around the center of 
+the galaxy. 
+
+We cluster the data and discover the Fermi Bubble. 
+
+They're produced by colliding neutron stars and collapsing normal stars 
+into black holes. 
+
+\section{K-means Clustering}
+fast and robust decent algorithm. Assume you data consists of roughly 
+round clusters of roughly the same size. 
+\[
+\textrm{
+a\_fit = cluster.KMeans(n\_clusters=2).fit(a\_data)
+}
+\]
+
+\section{Hyperparameters}
+parameters that have to be pre-set that determine how the data is going 
+to be analyzed. 
+
+For example, the number of clusters that we want as a result from K-means 
+
+\section{ML Algorithms}
+Maximize the goal functions given the data. 
+
+The goal function $\mathcal L$ of the KMeans algorithm is 
+\[
+\mathcal L(c_j) = \sum^n_{i = 1} \sum_{c_j = i} |x_j = \mu_i|^2
+\]
+where $c_j = 1$ if the sample $j$ is assigned to cluster $I$ or otherwise 
+$c_j = 0$ and 
+\[
+\mu_i = \sum_{c_j = i} x_j
+\]
+
+\subsection{Expectation-Maximization}
+real important for alot of algorithms but I don't fully understand it. 
+
+\section{Curse of Dimensionality}
+$r^D$ is the volume of a D-dimensional hypercube with each dimension subdivided 
+by $r$ partitions. 
+
+a $3 \times 3$ rubix cube has 27 mini cubes in it because $3^3$
+
+It basically means that the more dimension you have, the more cooked you are to process all of it. 
+
+The curse of dimensionality. 
+
+If we have 30 dimensional data, we need over 1 billion data points in order 
+to get a sample in each partition. 
+
+If there's a functional dependence between demensions, you can use a 
+transformation to get rid of it and then you're working with less 
+dimensions which is a win. 
+
+In the slides, 500 dimensional data can get transformed into 2 dimensional data. 
+
+\section{Linear Decompositions}
+solve the eigenvector eigenvalue problem and delete the unimportant vectors and 
+boom removed the most useless dimensions. 
+
+Principle Component Analysis (PCA) was developed in 1901 and is 
+basically just removing the smallest/least impactful eigvenvectors 
+
+\subsection{Covariance Matrix}
+\equations{
+    C = \frac{1}{N - 1} X^T X
+}
+is an estimate of the true covariance matrix using the data $X$ 
+comprised of $N$ samples that are $D$-dimensional. 
+
+$M$ is matrix where each row is an eigenvector 
+
+$Y$ is a matrix such that $X = Y M$
+
+Remove dimensions from $D$ to $d$ with the smallest eigenvalues. 
+
+Now you have a much smaller matrix with most of the same data. 
+
+\subsection{Eigenmatrix of $X^T X$}
+\equations{
+    M^T = M^{-1}
+    \hp 
+    M M^T = I
+    \\
+    X^T X = M^T \Lambda M 
+}
+Where $\Lambda$ is the diagonal matrix of decreasing eigenvalues. 
+
+The resulting latent variables are not correlated to each other, 
+which means 
+\equations{
+    \rho(j, k) = \frac{Y_J \cdot Y_k}{|Y_j||Y_k|} \simeq 0
+}
+
+\section{Factor Analysis}
+another good way to reduce data 
+
+\subsection{Non-negative Matrix Factorization}
+another thing 
+
+\section{Independent Component Analysis}
+another thing 
+
+These aren't really important but like depending on what data you're 
+doing you might need more than PCA. 
+
+\section{Kernel Functions}
+If you add a bunch of random ass dimensions to your data, you 
+can observe a number of correlations that you would 
+not have seen otherwise 
+\equations{
+    \phi(x_0, x_1)
+    =
+    \begin{bmatrix}
+        x_0^2 \\
+        x_0 x_1 \\
+        x_1 x_0 \\
+        x_1^2 \\
+        \sqrt{2c} x_0 \\
+        \sqrt{2c} x_1 \\
+        c 
+    \end{bmatrix}
+}
+This kernel function yields shenanigans 
+\equations{
+    \phi(X_i) \cdot \phi(X_j) = (X_i + X_j + c)^2
+}
+This allows you to embed your data into higher dimensional space 
+without actually using a bunch of math. 
+
+Our kernel function will be written as 
+\equations{
+    K(X_i, X_j) = 
+    \phi(X_i) \cdot \phi(X_j)
+}
+A kernel function is a similarity measure, since it measures the 
+similarity between samples $i$ and $j$, with identical values being 
+maximal and orthogonal values being minimal. 
+
+This is known as the kernel trick. 
+
+Sadly there are not an infinite number of kernel functions $K$ 
+\equations{
+    K(X_i, X_j) = (\gamma X_i \cdot X_j + c)^d
+}
+is called the polynomial kernel 
+
+
+\end{document}

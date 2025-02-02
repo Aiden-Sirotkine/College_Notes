@@ -1,0 +1,403 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 435}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS435}
+This goddamn professor is half retired im so cooked 
+
+\section{Coulomb's Law}
+\equations{
+    \vec E(\vec r) = \frac{1}{4 \pi \epsilon_0} \frac{q}{r^2} \hat r 
+    \\
+    \vec E(\vec r) = \sum \frac{1}{4 \pi \epsilon_0} \frac{q}{r^2} \hat r 
+    \rightarrow 
+    \frac{1}{4 \pi \epsilon_0} 
+    \int 
+    d^3 r' 
+    \frac{\vec r - \vec r'}{|\vec r - \vec r'|^3} \rho(\vec r')
+}
+
+\section{Gauss's Law}
+The flux of $\vec E$ throuhg a closed surface equations to the enclosed charge $C_0$
+
+\equations{
+    \frac{1}{C_0} \int_V d^3 r \rho(\vec r) = \int_{\del V} d a \rho(\vec r)
+}
+
+\section{Divergence Theorem}
+\equations{
+    \vec \nabla E = \del_x E_x + \del_y E_y + \del_z E_z
+    \\
+    \int_V d^3 r \vec \nabla \vec E(\vec r) = \int_{\del V} d \vec a \cdot \vec E(\vec r)
+    \\
+    \vec \nabla \vec E(\vec r) = \frac{\rho(\vec r)}{\epsilon_0}
+}
+
+\section{Faraday's Law}
+The circulation of $\vec E$ around any closed path $N$ is equal to $(-1) \times$ 
+the time derivative of the magnetic flux  through ANY surface bounded by 
+the closed path.
+
+\equations{
+    \int_{\del S} d \vec l \cdot \vec E = - \frac{d}{dt} \int_S d \vec a \vec B 
+}
+
+\section{Stoke's Theorem}
+\equations{
+    \int_{\del S} d \vec l \cdot \vec E = 
+    \int_S d \vec a \vec \nabla \times \vec E 
+}
+
+\subsection{Differential Laws}
+\equations{
+    \vec \nabla \times \vec E = - \frac{\del}{\del t} \vec B 
+    \\
+    \textrm{Gauss}
+    \\
+    \vec \nabla \cdot \vec E = - \frac{\rho(\vec r)}{\epsilon_0}
+    \hp 
+    \vec \nabla \cdot \vec B = 0
+    \\
+    \textrm{Ampere}
+    \\
+    \vec \nabla \times \vec B = \mu_0 J
+}
+
+\section{Electric Potential}
+Start with Maxwell's Equations
+\equations{
+    \vec \nabla \cdot \vec E(\vec r) = \frac{ \rho(\vec r)}{\epsilon_0}
+    \\
+    \vec \nabla \times \vec E(\vec r) = - \frac{\del}{\del t} \vec B(\vec r, t)
+    \\
+    \vec \nabla \cdot \vec B(\vec r) = 0
+    \\
+    \vec \nabla \times \vec B = 
+    \mu_0 \vec J + \mu_0 \epsilon_0 \frac{\del}{\del t} \vec E
+}
+remove the time dependent equations 
+\equations{
+    \vec \nabla \cdot \vec E(\vec r) = \frac{ \rho(\vec r)}{\epsilon_0}
+    \\
+    % \vec \nabla \cdot \vec B(\vec r) = 0
+    % \\
+    \vec \nabla \times \vec E(\vec r) = 0
+}
+the curl of $\vec E$ is 0 which means the electric field is conservative? 
+A scalar potential function convenience.
+
+consider the path integral 
+\equations{
+    \int\limits_P d \vec l \cdot \vec E 
+}
+We can show that the integral is path independent (because the curl is 0)
+\equations{
+    \int\limits_{P1} - \int\limits_{P2} = 
+    \oint\limits_{\del S} d \vec l \cdot \vec E(\vec r)
+    =
+    \int\limits_S d \vec a \cdot \vec \nabla \times \vec E
+    = 0
+    \\
+    \int\limits_{P1} d \vec l \cdot \vec E = \int\limits_{P2} d \vec l \cdot \vec E
+}
+That's actually a really smart proof damn 
+
+Now we do actual potential stuff 
+\equations{
+    V(\vec r) = - \int^{\vec r}_{\vec 0_r} d \vec l \cdot \vec E(\vec r)
+}
+Where $\vec 0_r$ is the vector where the potential is 0
+\equations{
+    U(\vec a) - U(\vec b) = - \int^b_a d \vec l' \cdot \vec F(\vec r)
+    \\
+    \vec F_{Lorentz} = q \vec E(\vec r) + q \vec v(\vec r) \times \vec B(\vec r)
+}
+$q \vec E(\vec r)$ can do work, but $q \vec v(\vec r) \times \vec B(\vec r)$ 
+cannot do any work (always in opposite direction of motion)
+
+\equations{
+    W 
+    =
+    q \int^{\vec r}_{\vec 0_{r}} d \vec l \cdot 
+    \vec v \times \vec B 
+    = 
+    q \int^{\vec r}_{\vec 0} d \vec l \cdot 
+    \frac{d \vec l}{dt} \times \vec B(\vec r)
+    =
+    \\
+    q \int^{\vec r}_{\vec 0} dt \frac{d \vec l}{dt} \cdot 
+    (\frac{d \vec l}{dt} \times \vec B(\vec r))
+    = 0
+}
+That part cannot do any work 
+\equations{
+    W_{other} = U(\vec r) - U(\vec 0)
+    \\
+    \frac{U(\vec r) - U(\vec 0)}{q} = \Delta V
+}
+More Stuff 
+\equations{
+    V(\vec r) = - \int^{\vec r}_{\vec 0_r} d \vec l' \cdot \vec E(\vec r)
+    \\
+    - \vec \nabla V(\vec r) 
+    =
+    -
+    \left[
+        \hat x \frac{\del}{\del x} V(\vec r) + 
+        \hat y \frac{\del}{\del y} V(\vec r) +
+        \hat z \frac{\del}{\del z} V(\vec r)
+    \right]
+    \\
+    d \vec r = \hat x dx + \hat y dy + \hat z dz 
+    =
+    r + dx 
+}
+consider the slightest motion $dx$ in the $\hat x$ direction so that 
+$\vec r \to \vec r + \hat x dx$
+\equations{
+    V(\vec r + \hat x dx) = V(\vec r) + dx \hat x \cdot \vec E(\vec r)
+    \hp 
+    E_x(\vec r) = \hat x \cdot \vec E(\vec r)
+    \\
+    \frac{V(\vec r + \hat x dx) - V(\vec r)}{dx} = E_x(\vec r)
+}
+That gives us 
+\[
+\vec E(\vec r) = - \nabla V(\vec r)
+\]
+real important equation 
+
+\subsection{Potential Equation}
+consider a point mass 
+\equations{
+    \vec E(\vec r) = 
+    \frac{1}{4 \pi \epsilon_0} q \frac{\vec r}{r^3} = 
+    \frac{1}{4 \pi \epsilon_0} \frac{q}{r^2} \hat r
+    \\
+    V(\vec r) = - \int^{\vec r}_{\vec 0_r} d \vec l \cdot \vec E 
+    \\
+    E_y = \frac{1}{4 \pi \epsilon_0} \frac{q}{y^2}
+    \hp 
+    - \int^y_\infty dy' \frac{1}{4 \pi \epsilon_0} \frac{q}{y^2}
+    \\
+    V(\vec r) = \frac{1}{4 \pi \epsilon_0} \frac{q}{r}
+}
+Use the principle of superposition to get the general answer 
+\equations{
+    V(\vec r) = \frac{1}{ 4 \pi \epsilon_0} 
+    \int d^3 r' \frac{\rho(\vec {r'})}{|\vec r - \vec {r'}|}
+}
+
+\subsection{Infinite Line Charge}
+Consider a straight line of infinite length and constant charge density. 
+
+Where should $\vec 0_{r}$ be?
+
+I think we just pick an arbitrary point 
+
+\equations{
+    \vec E(s) = \frac{\lambda}{2 \pi \epsilon_0} \frac{1}{s}
+    \\
+    V(\vec r) = - \int d \vec l \vec E(s) = V(s) = 
+    - \int^s_{O_r} ds \frac{1}{2 \pi \epsilon_0} \frac{\lambda}{s'}
+    \\
+    =
+    - \frac{\lambda}{2 \pi \epsilon_0} \ln(s') \Big|^s_{\vec O_r}
+    =
+    \frac{\lambda}{2 \pi \epsilon_0} \ln(\frac{O_r}{s})
+}
+
+What PDE governs $V(\vec r)$
+
+\equations{
+    \vec \nabla \cdot \vec E = \frac{\rho}{\epsilon_0}
+    \hp 
+    \vec E = - \vec \nabla V 
+    \\
+    \vec \nabla \cdot \vec \nabla V(\vec r) = -\frac{\rho}{\epsilon_0}
+    \\
+    (\del_x^2 + \del_y^2 + \del_z^2) V = -\frac{\rho}{\epsilon_0}
+    \\
+    \nabla^2 V(\vec r) = -\frac{\rho(\vec r)}{\epsilon_0}
+}
+
+
+\section{Work}
+If you move 1 charge, there is no work done because there are no other 
+fields. 
+
+If you bring in a 2nd charge, you get a total work of 
+$
+\frac{1}{4 \pi \epsilon_0} \frac{q_1 q_2}{|\vec r_1 - \vec r_2|}
+$
+
+If you bring in a third charge you just sum the things together 
+
+\equations{
+    U_{1 \to N} = \frac{1}{2} \sum^N_i \sum^N_{j > i} 
+    \frac{1}{4 \pi \epsilon_0} \frac{q_i q_j}{|\vec r_i - \vec r_j|}
+    =
+    \frac{1}{2} \int d^3 r d^3 r' \frac{1}{4 \pi \epsilon_0} 
+    \frac{\rho(\vec r) \rho(\vec{r'})}{|\vec r - \vec{r'}|}
+    \\
+    =
+    \frac{1}{2} \frac{1}{4 \pi \epsilon_0} 
+    \int d^3 r' \rho(\vec{r'}) V(\vec{r'})
+    \hp 
+    \rho(\vec{r'}) = - \epsilon_0 \nabla^2 V(\vec{r'})
+    \\
+    U = - \frac{\epsilon_0}{2} \int d^3 r V(\vec r) \nabla^2 V(\vec r)
+}
+
+\subsection{X-component}
+Let's consider just the $x$-component for a little bit 
+
+\equations{
+    - \frac{\epsilon_0}{2} 
+    \int d^3 r V(\vec r) \del_x \left[ \del_x V(\vec r) \right]
+    \\
+    \del_x \left[ V(\vec r) \del x V(\vec r) \right]
+    =
+    \del_x V \cdot \del_x V + V \del_x^2 V 
+    \\
+    \del_x \left[ V(\vec r) \del x V(\vec r) \right]
+    - \del_x V \cdot \del_x V 
+    =
+    V \del_x^2 V 
+}
+So with that you get 
+\equations{
+    - \frac{\epsilon_0}{2} 
+    \int d^3 r V(\vec r) \del_x \left[ \del_x V(\vec r)\right]
+    =
+    - \frac{\epsilon_0}{2} 
+    \int d^3 r \del_x \left( V(\vec r) \del_x V (\vec r)\right)
+    - E_x^2
+}
+generalize 
+\equations{
+    \frac{\epsilon_0}{2} 
+    \int d^3 r \, \vec \nabla \cdot V(\vec r) \vec E(\vec r) + 
+    \vec E \cdot \vec E 
+}
+
+The main point of all of this is that it goes to $0$ for large $r$ 
+\equations{
+    \int d^3 r \vec \nabla \cdot V \vec E 
+    \rightarrow 
+    \int d^3 r \vec \nabla \cdot \frac{C}{r} \frac{1}{r^2} \hat r 
+    \rightarrow 
+    \\
+    \int da \frac{C}{r^3}
+    \rightarrow 
+    \frac{1}{r}
+    \rightarrow \lim_{r \to \infty} = 0
+}
+
+So our potential somehow gets to 
+\equations{
+    U  =
+    \int d^3 r \frac{\epsilon_0}{2} E^2 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

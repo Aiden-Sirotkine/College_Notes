@@ -1,0 +1,263 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{CS 482}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{CS 482}
+This'll be an interesting class lets hope I can figure out stats.
+
+\begin{itemize}
+    \item 
+    building complex models 
+    \item 
+    algorithmic randomness 
+    \item 
+    statistically analyzing data
+\end{itemize}
+
+Chuck data into a black box of modelling code and get result data out. 
+
+Simulations give the most realistic answers for complex systems that cannot be 
+linearly solved. 
+
+Simulation is only good for basically unsolvable problems. 
+
+\chapter{Terminology}
+
+\section{System}
+A collection of \textit{entities} that interact with a common 
+purpose according to sets of \textit{laws} and \textit{policies}
+
+example: a store, airport terminal, etc. \hp most things 
+
+\section{Entities}
+The components/objects that define a system
+
+Physical or Logical objects 
+
+Temporary or Permanent 
+
+\section{Attributes}
+The traits that define an entity 
+
+static or dynamic
+
+qualitative or quantitative 
+
+A cashier in a store :
+\begin{itemize}
+    \item 
+    has a high school diploma (static, qualitative)
+    \item 
+    has an IQ of 104 (static, quantitative)
+    \item 
+    can be busy or idle (dynamic, qualitative)
+    \item 
+    can process customers at a rate from 6/hour to 20/hour (dynamic, quantitative)
+\end{itemize}
+
+\section{Entity-Attribute Hierarchy}
+determines the level of detail in the simulation 
+\begin{itemize}
+    \item 
+    Regional Plants 
+    \item 
+    Production Lines 
+    \item 
+    Work Areas 
+    \item 
+    Machines, Tools, Operators 
+\end{itemize}
+
+The \textit{level of detail} in the simulation model 
+is set by the entity/attribute hierarchy boundary, 
+which is determined by the \textit{objectives of the study}. 
+
+Attributes become entities if you want more detail in a system 
+
+The boundary between attribute/entity determines the level of detail 
+in the simulation. 
+
+\section{Laws and Policies}
+Both Laws and Policies govern the behavior of the system, but Laws cannot 
+be changed while Policies can be changed. 
+
+Laws are followed, Policies are set. 
+
+\section{Model}
+The thing that we're trying to do in this class 
+
+A simplification of a system 
+
+there are many ways to model a system 
+\begin{enumerate}
+    \item 
+    Events List 
+    \item 
+    Difference Equations 
+    \item 
+    Markov Chains 
+\end{enumerate}
+
+\subsection{State Space}
+A Collection of variables that represent and measure the condition of the system 
+(busy, idle, broken, etc.)
+
+The state space is the \textit{film} for a photo snapshot of a system.
+
+\section{Event}
+An instant of time when one of the following occurs 
+
+\begin{itemize}
+    \item
+    the state(s) change(s)
+    \item 
+    other events are caused (scheduled) or prevented (cancelled)
+    (i.e. other states change)
+    \item 
+    data is collecte dand statistics may be compiled 
+    (based on or uses states)
+\end{itemize}
+
+examples:
+\begin{itemize}
+    \item
+    a part arrives 
+    \item
+    A machine starts or stops or breaks down 
+    \item
+    The end of day of operation 
+\end{itemize}
+
+\section{Process}
+An indexed set of states of events 
+
+Let $N_t$ be hte number of customers in the system at time $t$ 
+
+Let $B_j$ be a $0-1$ indicator of whether or not that $j$th customer does 
+or doesn't get on hold. 
+
+\section{Discrete-Event Simulation}
+A model where the state $S$ changes at \textit{discrete} points in time 
+
+what/when/how/what impact of changes 
+
+\section{Single Server Queue}
+$\lambda$ is the rate at which parts arrive 
+
+$\mu$ is the rate at wich the server can process parts 
+
+Number in system = number in queue + number in service. 
+
+events schedule other events.
+
+\section{Building Simulation Models}
+\begin{itemize}
+    \item 
+    define states 
+    \item 
+    identify when and how the state change 
+    \item 
+    define events 
+    \item 
+    define initialization 
+\end{itemize}
+
+\begin{itemize}
+    \item
+    ALL simulation models have an initialization event. 
+    \item
+    assume a random number generator is available 
+    \item
+    a new random variable value must be generated each time a 
+    random variable is used or called 
+    \item
+    arrival events schedule more arrival events (self-generating)
+\end{itemize}
+
+\subsection{When executing an event:}
+
+\begin{itemize}
+    \item
+    State changes occur first 
+    \item
+    Events scheduled or cancelled occur second 
+\end{itemize}
+
+Once you have all of the states and changes and whatever, coding 
+the simulation itself is not actually that hard. 
+    
+hop from most recent event to most recent event until done, 
+changing the event queue as needed. 
+
+\subsection{Dynamic Simulation}
+Events are scheduled and executed in \underline{time sequence}
+
+States are changed as each event is executed 
+
+Data can be colelcted as events to do stats and math stuff 
+
+Know where to collect data and what type of data to collect. 
+
+    
+
+ 
+\end{document}
