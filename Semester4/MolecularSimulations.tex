@@ -1,0 +1,1278 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{Molecular Simulations Abridged Textbook}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{Introduction}
+This textbook is not meant to actually teach a ton, but to instead 
+give you the general physics to understand the already used algorithms 
+in molecular dynamics. 
+
+
+\chapter{Statistical Mechanics}
+Apparently its easy to derive the laws of statistical mechanics using 
+quantum mechanics and the eigenvectors of hamiltonians $\mathcal H$.
+
+Consider a system of energy $E$, number of particles $N$, and volume $V$. 
+A system with these constants has an equally likely chance to be in any 
+of $\Omega(E)$ eigenstates. 
+
+If you have two \textit{weakly} interacting systems, then the sum of the energies 
+is $E = E_1 + E_2$ and the total number of degenerate states is 
+$\Omega_1(E_1) * \Omega_2(E_2)$.
+
+If we take the logarithm, we get:
+\equations{
+    \ln(\Omega(E_1, E - E_1)) 
+    =
+    \ln(\Omega(E_1))
+    +
+    \ln(\Omega(E - E_1))
+}
+
+If we find the combined energy level that is most likely, then we maximize 
+the function $\ln(\Omega(E_1, E - E_1))$. The condition for a maximum is 
+\equations{
+    \frac{\del \ln(\Omega(E_1, E - E_1)) }{\del E_1}
+    =
+    0
+}
+or 
+\equations{
+    \frac{\del \ln(\Omega_1(E_1)) }{\del E_1}
+    =
+    \frac{\del \ln(\Omega_2(E_2)) }{\del E_2}
+}
+We can introduce the shorthand 
+\equations{
+    \beta(E, V, N)
+    \equiv
+    \frac{\del \ln(\Omega(E, V, N)) }{\del E}
+}
+So the maximized function is equivalent to 
+\equations{
+    \beta(E_1, V_1, N_1)
+    =
+    \beta(E_2, V_2, N_2)
+}
+This function is the entropy of the system, and maximized entropy is the same as 
+thermal equilibrium. 
+\equations{
+    S(N, V, E) = k_b \ln(\Omega(N, V, E))
+}
+Where $k_b$ is Boltzmann's Constant. 
+
+Thermodynamic equilibrium is better known as the temperatures being the same, 
+so we get 
+\equations{
+    \frac{1}{T} 
+    =
+    \left(
+        \frac{\del S}{\del E})
+    \right)
+    \rightarrow 
+    \beta = \frac{1}{k_b T}
+}
+
+The \textbf{degeneracy} of a certain state is defined by the probability 
+of getting that state.
+
+There are some equations here but I doubt I'll need them till 427. pg 32 
+in the pdf. 
+
+\section{Classical Mechanics}
+The average energy of a system is just the weighted average of the energies 
+of each eigenstate, but that's impossible to solve analytically, so 
+we use Hamiltonians instead 
+\equations{
+    \langle A \rangle 
+    =
+    \frac{\Tr \exp(- \mathcal H / k_b T) A} {\Tr \exp(- \mathcal H / k_b T)}
+}
+We can then use a simplification 
+\equations{
+    \Tr \exp(-\beta \mathcal H)
+    \approx
+    \Tr \exp(-\beta \mathcal K) \exp(- \beta \mathcal U)
+}
+We do some crazy math and get a big integral and sum that yields the same numerical 
+results as the maximization of the entropy 
+
+\section{Ergodicity}
+In Molecular Dynamics, we find the averages by simulating a system over time 
+and taking measurements at each timescale. 
+
+To get the average density of a system of atoms 
+\equations{
+    \overline{\rho_i(r)}
+    =
+    \lim_{t \to \infty} \frac{1}{t} \int^t_0 dt' \rho_i(r; t')
+}
+With this comes the assumption that the initial conditions do not affect 
+the long-term system.
+
+Just take the average over many initial condtiions to find a better average. 
+
+If we consider 100\% of initial conditions, we can use an integral instead of 
+a discrete sum. 
+
+We can also take the average of a system by looking at all initial conditions and 
+taking the \textit{ensemble average} instead of the \textit{time average}.
+
+The time average and the ensemble average should yield the same results.
+
+\chapter{Monte Carlo Simulations}
+Trying to solve a partition function $Q$ and a net energy function 
+$\langle A \rangle$ analytically or numerically is really inaccurate or hard. 
+
+The Monte Carlo method is a sampling algorithm 
+
+\section{Importance Sampling}
+The average of a function can be calculated as 
+\equations{
+    I = \int^b_a dx \, f(x)
+    =
+    (b - a) \langle f(x) \rangle
+}
+Where $ \langle f(x) \rangle$ is the unweighted average of the function 
+by taking a random evenly distributed sample. 
+
+We can use this same method for doing statistical mechanics, but most 
+eigenstates have such a small chance of happening that they arent computationally 
+worth picking. 
+
+Therefore we can use some weighting function $w(x)$ that's the derivative 
+of of a non-negative, monotonic $u(x)$
+\equations{
+    I 
+    =
+    \int^b_a dx \, w(x) \frac{f(x)}{w(x)}
+    =
+    \int^b_a du \, \frac{f(x(u))}{w(x(u))}
+}
+
+Now if we take a random uniformly distributed sample over $u$, we get 
+\equations{
+    I 
+    \approx 
+    \frac{1}{L}
+    \sum^{L}_{i = 1} \frac{f(x(u_i))}{w(x(u_i))}
+}
+
+Now all you have to do is figure out a half decent weight function $w$.
+
+The standard deviation can be written as 
+\equations{
+    \sigma^2 
+    =
+    \frac{1}{L^2}
+    \sum^L_{i=1}
+    \langle
+        \left(
+            \frac{f(x[u_i])}{w(x[u_i])}
+            -
+            (\frac{f}{w})^2
+        \right)
+    \rangle
+    =
+    \frac{1}{L}
+    \left(
+        \langle
+            (\frac{f}{w})^2
+        \rangle
+        -
+        \langle
+            \frac{f}{w}
+        \rangle^2
+    \right)
+}
+The more similar $w$ is to $f$ the less the variance becomes.
+
+\section{Metropolis Method}
+According to a paper, we can use Monte Carlo sampling to e
+
+I'm also looking at my PHYS498 notes to figure out Metropolis things. 
+
+You choose a stochastic process that you think is representative of the 
+function and you iterate through a random walk of that process. 
+
+regular monte carlo sampling would sample across the entire domain of 
+our probability density, while this sampling narrows our domain drastically, 
+letting it be only the stochastic random walk based on our criteria. 
+
+\section{A Basic Monte Carlo Algorithm}
+Let's consider a many-body classical system, and we're trying to simulate 
+the equilibrium properties. 
+
+Let's have our Metropolis condition, from $r$ to $r'$, be:
+\equations{
+    \min(1, \exp \left(
+        -\beta [U(r'^N) - U(r^N)])
+        \right)
+}
+Basically if the energy of the new step is far greater than the old step, 
+we do not accept the move. 
+
+\section{Technical Jargon}
+not entirely useful to the simulation itself 
+
+
+\subsection{Boundary Condition}
+Because we work with such small numbers of atoms, the boundary conditions 
+will probably affect the outcome of the simulation. 
+
+For a bulk phase of a finite lattice, we let that lattice be a smaller portion of 
+an infinite lattice, 
+
+we also let intermolecular forces be negligible if they're a certain 
+distance away. 
+
+periodic boundary conditions can also be used, but they might mess 
+up your simulation. 
+
+\subsection{Truncation of Interactions}
+Just make it so far away particles don't interact with each other. 
+
+If $r$ is large enough then your error is negligible.
+
+However, often the number of atoms outside of a radius is quadratic as well as 
+their energy contributions, so you might end up with a non-negligible tail 
+of potential energy from the truncation. 
+
+There are 3 types of truncation 
+\begin{itemize}
+    \item 
+    simple truncation 
+
+    Ignore all interactions beyond $r_c$.
+
+    Not useful for MD, yes useful for MC
+    \item 
+    truncation and shift 
+
+    Manipulate the energy data such that the potential is continuous 
+    and still 0 at $r_c$ 
+
+    \equations{
+        u^{tr - sh}(r) = u(r) - u(r_c)
+    }
+
+    Your tail will be significant but it can be brought back with a 
+    relatively easy calculation. 
+    \item 
+    minimum image conversion 
+
+    NEVER USED IN MD SIMULATIONS. The interaction 
+    with the nearest image of all particles is calculated 
+\end{itemize}
+
+\subsection{Initialization}
+The equilibrium states shouldn't depend on the intitial conditions, so 
+your initial positions of particles shouldn't matter a ton, but 
+the closer you can get the better. 
+
+\subsection{Reduced Units}
+Make everything average out to close to 1 so that you don't end up 
+with giant or tiny numbers that yield floating point or overflow errors. 
+
+
+\subsection{Detailed Balance vs Balance}
+Detailed balance between the probability of a trial equals the probability 
+of its reverse \textit{a priori} (for like a random walk or something)
+
+Balance is important 
+
+\section{Trial Moves}
+We have to figure out the actual Markov chain for the Metropolis Algorithm 
+to get our random sample. 
+
+\subsection{Translations}
+Consider moving the molecular centers of mass around. 
+
+Add random coordinates $-\Delta/2 < \delta \Delta/2$ to each of 
+the $x$, $y$, and $z$ coordinates.
+
+However, our sampling has to be reasonably efficient because computer time 
+is expensive. 
+
+Our efficiency will calculated by the sum of squares of all our trial 
+displacements divided by the compute time. 
+
+We want each step to move as far as possible with the highest acceptance. 
+
+\subsection{Orientation}
+It's harder to change the orientation in a way that's balanced/has 
+not bias. 
+
+\subsection{Rigid, Linear Molecules}
+Make a random vector $v$ and a scale factor $\gamma$ and then 
+\equations{
+    u' = \gamma v + u
+}
+
+
+\subsection{Rigid, Nonlinear Molecules}
+Use quaternion parameters and a big ass matrix 
+
+\subsection{Nonrigid Molecules}
+Carry out regular translation moves on individual atoms. 
+If atoms are very stiff, just make them rigid. 
+
+\section{Applications}
+skipped. It talks about my the pre-trial moves are useful and 
+why balancing is important and whatnot.  
+
+\chapter{Molecular Dynamics Simulations}
+Just a way to simulate many-body systems that follow the laws of 
+Classical Mechanics. 
+
+Take a small sample of $N$ particles out of a system and solve Newton's 
+equations until we reach equilibrium. 
+
+You can use the Verlet equations to integrate velocity 
+and acceleration. 
+
+You can use other algorithms it doesn't really matter as long 
+as you get something to calculate the steps in position/velocity/etc 
+
+\section{Higher Order Schemes}
+You can use schemes that implement higher order derivatives to either 
+increase your step length or increase your accuracy.
+
+\subsection{Louisville Formula of Time-Reversible Algos}
+You just do a bunch of math. 
+
+\subsection{Lyapunov Instability}
+You have to decrease the acceptable error in your time step depending on 
+how long you simulation is. 
+
+\section{Computer Experiments}
+A number of thermodynamic and structural properties are not 
+time-dependent, and become constant once equilibrium is reached. 
+These are static equilibrium properties.
+
+They can be obtained with both MD and MC. 
+
+There are also dynamic equilibrium properties, that describe the time-depedent
+system in equilibrium when slightly perturbed. 
+
+These dynamic equilibrium properties are important 
+
+\subsection{Diffusion}
+The flux of diffusion is the negative gradient of concentration
+
+\equations{
+    j = - D \nabla c
+}
+
+So we have to combine that law with come probability distribution that 
+conserves the total material
+
+You can do a bunch of math and get a time dependent something 
+
+\subsection{Order-n Algorithm to Measure Correlation}
+page 113 in the pdf
+
+We do some course graining stuff and get an equation that 
+gives the correlation. 
+
+If you take block sums of smaller time steps of velocities, you 
+can use those larger steps to determine long-time correlations. 
+
+define block sums recursively as 
+
+\equations{
+    v^{i}(j) = \sum^{jn}_{l = (j - 1)n + 1} v^{i - 1}(l)
+    \hp 
+    v^0(j) = v(j)
+}
+
+you can use the block sums to easily calculate displacement over a long 
+time.
+
+We can use the time-block velocities to calculate the diffusion coefficient. 
+
+
+\subsection{Applications}
+You can block data points and find their standard deviation until the 
+error reaches a plateau and that's how you know you've found equilibrium. 
+
+
+\chapter{Monte Carlo Simulations in Various Ensembles}
+You can pick all sorts of shenanigans for either MD or MC 
+
+\section{General Approach}
+\begin{itemize}
+    \item 
+    Figure out the distribution 
+    \item 
+    make sure detailed balance (reversibility) is satisfied
+    \item 
+    Determine the probabilities of getting a configuration 
+    \item 
+    Derive the conditions that need to be fulfilled 
+\end{itemize}
+
+\subsection{Canonical Ensemble}
+Temperature, Volume, and number of particles are constant. 
+
+There's a nice equation 
+
+\subsection{Monte Carlo Simulations}
+Sampling is pretty simple 
+
+\begin{itemize} 
+    \item 
+    Select a random particle and calculate it's energy 
+    \item 
+    Randomly displace it by $\pm \Delta/2$
+    \item 
+    The move is accepted with a probability 
+    \[
+    \min(1, \exp(-\beta\{ U(o+1) - U(o)\}))
+    \]
+    This looks suspiciously close to the Hasting ratio 
+    used in PHYS498. 
+\end{itemize}
+
+\subsection{Microcanonical Monte Carlo}
+N, V, E is held constant 
+
+Instead of using random numbers to sample the system, we 
+pick our starting configuration, and we add an extra energy portion/
+degree of freedom such that $U + E_D = E$.
+
+we make a move and we only accept new moves if 
+the change in potential energy is negative of if $E_D$ can make up 
+for the increase is potential energy.
+
+\section{Isobaric/Isothermal Ensemble}
+constant $N, P, T$ is widely used in MC. It is also used for systems 
+close to phase transition because the transition (lowest energy state)
+will always occur. 
+
+\subsection{Statistical Mechanics Shenanigans}
+It's just a bunch of math giving us an acceptance rate and a walk 
+algorithm. 
+
+\section{Monte Carlo Simulations}
+The frequency that we accept moves should be dependent on how efficiently 
+we sample volume. 
+
+What we should do is have a $1/N$ chance that a volume trial is done instead 
+of a particle move so that it averages to 1 volume move every $N$ position moves. 
+
+THere's a bunch of math and some sample code 
+
+\subsection{Applications}
+description description description blah blah blah
+
+\section{Isotension-Isothermal}
+Good for in-homogeneous systems, like crystalline solids. 
+
+You have some transformation matrix and moves something from 
+something. 
+
+\section{Grand-Canonical Ensemble}
+$\mu, V, T$ constant ($\mu$ is chemical potential)
+
+Use for when a gas is getting absorbed by another gas because the 
+equilibrium condition is that the chemical potentials are equal. 
+
+We only need to know the imposed thermal and chemical potential that 
+gets imposed on a gas as it travels through the absorbent gas to figure 
+out the equilibrium concentration. 
+
+math math math 
+
+\subsection{Monte Carlo Simulations}
+displacement trials are basically the same 
+
+you can add or remove a particle from the absorbent when a trial probability 
+of all sorts of math.
+
+The chemical potential is by far the most important quantity 
+in grand-canonical Monte-Carlo Simulations 
+
+It's best if the acceptance rate is not super low because it limits how 
+dense your fluids can be.
+
+It works best for inhomogeneous systems like interfaces. 
+
+\chapter{MD in Various Ensembles}
+You would guess that you need constant energy to perform 
+Newtonian mechanics a bunch, but you actually don't. 
+
+\section{Constant Temperature}
+In regular conserved energy systems, the temperature (kinetic energy) 
+can fluctuate, but often the difference is negligible (i think)
+
+\subsection{Andersen Thermostat}
+Consider your system is thermally constant by having it connected to a heat bath, 
+and that heat bath distributes its energy via stochastic collisions 
+on random particles. 
+
+The MD mixed with the random stochastic process of the heat bath turns it 
+into a Markov Chain. 
+
+The collision rate needs to be relatively small in order or the 
+system to remain realistic. 
+
+Static properties, however, are independent of the collision frequency 
+no matter what. 
+
+\subsection{Nose-Hoover Thermostat}
+Use an extended Lagrangian with artificial coordinates and velocities. 
+
+You do some crazy math and you get something 
+
+The Nose-Hoover scheme does not yield a canonical structure because it 
+abandons some silly conservation law. 
+
+However, you can chain a Nose-Hoover thermostat with other thermostats 
+to then yield a canonical distribution. 
+
+\section{Constant Pressure}
+Very useful for homogeneous liquids. Just add a little 
+bit of math and it works. 
+
+\chapter{Free Energy Calculations}
+Learn stuff about only first-order phase transitions. 
+The easiest way to simulate a phase change is to just change the 
+temperature/pressure until the phase transition occurs. 
+
+The main issue with this method is appreciable hysteresis. This 
+happens because there is a large free energy barrier between 
+phases. 
+
+Direct simulations will either make the interface already present 
+or get rid of it altogether.
+
+There are a couple methods that work, but they all have drawbacks.
+
+\section{Thermodynamic Integration}
+The free energy of a system cannot be directly measured from a simulation, but 
+its derivative can be, so you integrate the simulated data and boom 
+free energy calculated.  
+
+There's alot of talking here and idk what it's fully about 
+
+\section{Chemical Potentials}
+There are a couple ways in both MD and MC to measure the chemical potential.
+
+We can't directly measure the free energy of a system. 
+
+we CAN calculate the difference between 
+teh chemical potential of the examined system and an ideal gas under 
+the same conditions. 
+
+\subsection{Particle Insertion Method}
+math math math I don't actually know.
+
+Called the Widom Method?
+
+You can compute an integral with some normal Monte Carlo sampling.
+
+\section{Other Ensembles}
+Page 198 of the pdf-ish
+
+It just tells you how to do stuff. You can use like a Metropolis Scheme 
+and some math nothing's too crazy 
+
+\subsection{Overlapping Distribution Method}
+This method is useful if we need to find the chemical potential 
+of a simulation that has both insertions and removals. 
+
+Consider two systems 0 and 1. 
+
+You do some math and take some results and you get a more 
+accurate answer than if you did only 1 simulation. 
+
+\section{Other Free Energy Methods}
+Consider the free energy barrier between two phase 
+changes or a free energy landscape with many big peaks and valleys. 
+
+\subsection{Multiple Histograms}
+The original methods had only 2 simulations that overlapped a little, now 
+we consider $n$ simulations such that only adjacent ones need to overlap. 
+
+You then do some math and some error correction and maybe 
+something good happens 
+
+\subsection{Self-Consisten Histogram Method}
+A histogram with steps $\Delta$ is basically an un-normalized 
+probability density, so you can take the ratio of histograms to not worry 
+about normalization factors and do some math to get Free Energy. 
+
+\subsection{Acceptance Ratio Method}
+It's just a bunch of math with ratios 
+
+\subsection{Umbrella Sampling}
+It's another way to find the difference in free energy between two simulations. 
+You should sample the configuration space available to both simulations 0 and 1. 
+
+Replace the Boltzmann factor by a nonnegative weight function. 
+
+This weight function acts such that both systems now have considerable 
+overlap. 
+
+There's a bunch of math shenanigans to optimize your weight to make 
+the umbrella as good as possible but psh 
+
+\subsection{Non-equilibrium Free Energy Methods}
+It's a bunch of Hamiltonian math shenanigans. 
+
+However, it's not efficient and not statistically accurate because there's a 
+small portion of negative-work events that greatly affect the free energy. 
+
+However, we can do some math shenanigans, and if the forward and reverse work 
+show some overlap, then we can calculate the difference in free energy 
+semi-reliably.
+
+\chapter{The Gibbs Ensemble}
+Phase transitions are easy to do experimentally but hard to simulate 
+(because you're simulating such few atoms). The Gibbs method uses particle 
+insertions (so it doesn't work well for a very dense liquid).
+
+The Gibbs Method works by exchanging particles between two phases. 
+
+\section{Technique}
+The way to have two phases coexists is such that 
+their temperatures, pressure, and chemical potentials are all equal. 
+
+However, a constant $\mu, P, T$ ensemble doesn't exist because then the 
+extensive parameters have to be unbounded. So instead, the intensive 
+parameters are linearly independent.
+
+The Gibbs ensemble works by making sure that the difference 
+in chemical potential between the 2 phases is 0 while 
+not determining the actual values of the chemical potential. 
+
+Consider a constant $V$ Gibbs ensemble. 
+
+\subsection{The Partition Function}
+A bunch of math to show that a constant $V$ Gibbs ensemble 
+is equivalent to a canonical ensemble 
+
+\section{Monte Carlo Simulations}
+Consider three trials 
+\begin{itemize}
+    \item 
+    Displacement 
+    \item 
+    Change in volume such that the total volume is constant 
+    \item 
+    transfer of a particle from one box to another 
+\end{itemize}
+
+Make sure that you have detailed balance. 
+
+do a bunch of math that's in the textbook (page 228 of the pdf or 209 of the book
+itself)
+
+Just do a certain amount of each of those trials and you get data. 
+
+\section{Analysing the Results}
+There will be a significant amount of statistical error, so we 
+can't guarantee that the pressure and potential are immediately constant. 
+
+Instead, we use a graphical technique, and the peaks/groups are your 
+different phases. 
+
+\subsection{Critical Point}
+Determining the critical point is possible, but it doesn't work well 
+when modelling a finite system. 
+
+There are more details in the book. 
+
+\section{Applications}
+Useful for studying the phase behavior of systems (all sorts of fluids and 
+mixtures and whatnot)
+
+\chapter{Other Methods to Study Coexistence}
+Specifically the coexistence between two phases. 
+
+Here we'll talk about two alternative ensembles for looking at phases:
+The semigrand ensemble and Gibbs-Duhem Integration.
+
+These methods avoid the need to create an interface. 
+
+\section{Semigrand Ensemble}
+Semi-grand canonical ensemble simulation
+
+Takes advantage of the fact that once the chemical potential of 
+a mixture is fixed, the chemical potential of everything else 
+can be imposed with trial moves. 
+
+Consider a binary mixture. 
+
+You can use thermal integration to find the chemical potential of 
+one half of the mixtuer. Instead of using a computationally expensive 
+particle insertion method, you can just use some math and it will 
+get you decent numbers. 
+
+Without particle insertion, it means that you can find the chemical potential 
+of stuff like crystalline solids. 
+
+There's also a thing called semi-grand canonical Monte Carlo (SGCMC), which uses 
+particle interchanges where normal GC MC fails.
+
+You use fugacity and some sort of big sum.
+
+SGCMC is useful for finding the chemical potentials of multi-component systems 
+because of the relations between fugacities. 
+
+It can also be used for polydisperse systems. It can also be combined 
+with the Gibbs ensemble. 
+
+\section{Tracing Coexistence Curves}
+Some scientist calls it Gibbs-Duhem integration. 
+
+Once you know a single point on a coexistence curve, the rest of it 
+can be calculated. 
+
+You can essentially use numerical integration by moving a little to the 
+left or right and computing the slope lol.
+
+This method is prone to statistical error and there isn't a supe good 
+way to correct for it. 
+
+There's some more math here. 
+
+\chapter{Free Energies of Solids}
+Most of the techniques that we just learned don't work for the phase 
+transition from solid to liquid because of the increased density of the system 
+meaning the accpetance rate of insertions/exchanges is far lower.
+
+\section{Thermodynamic Integration}
+This is the most common method used in Solid-liquid phase transitions. 
+
+Start with a very hot system and cool it at a constant density. 
+
+The Single-Occupancy Cell Method considers the solid as a lattice of 
+gases that can't move very far. 
+
+You can also cool down the solid enough for it to act as a harmonic solid, for 
+which the free energy can be calculated analytically. 
+
+However, there's evidene that a single occupancy cell is prone to 
+hysteresis (equilibrium being dependent on initial conditions)
+
+The solid also need to be able to be cooled reversibly to low temperatures.
+
+If the harmonic solid is affected by a non-continuous potential, then 
+this method doesn't work either. 
+
+There's supposedly a method that bypass all of these 
+
+\section{Free Energy of Solids}
+When an atom acts like a harmonic crystal, or an Einstein crystal, then 
+the calculations are easy, so all we need to do is cool it down sufficiently 
+
+\section{Atomic Solids with Continuous Potentials}
+We can just Thermodynamic Integration. 
+
+Let all the lattice sites act as springs and calculate all the potential 
+
+\section{Molecular Solids}
+Molecules have multiple degrees of freedom that are both translational and 
+internal, leading to all sorts of structures. 
+
+What we do is say that there are coupled springs to each 
+lattice site, but keep the intermolecular forces included. In the low-density 
+limit, the intermolecular interactions disappear so it acts like a 
+regular Einstein crystal. 
+
+This is referred to as the \textit{lattice coupling expansion method}
+
+\section{Discontinuous Potentials}
+Consider atoms that interact with a hard-core potential $U_0$ 
+
+There is not a linear way to transition from this system to an Einstein Crystal.
+
+We can use the same lattice expansion method. 
+
+We can also consider a system where we turn on the springs whilst not touching 
+the hard-core potentials. 
+
+With a large enough spring constant, the hardcore potential is mitigated.
+It can't be too big though or we lose accuracy. 
+
+\subsection{Implementation Issues}
+If $\lambda$ is too small, then the particles will drift away from their 
+crystal spots. 
+
+If we fix the center of mass of the system, then we have to make sure everything is 
+shifted when doing Monte Carlo sampling, or we have to move the center of mass 
+after every displacement trial. 
+
+This works but has some shenanigans to deal with which is all in the book 
+
+\subsection{Constraints and Finite-size Effects}
+If we fix the center of mass, the free energy changes because the 
+degrees of freedom change. 
+
+You have to compare the center-fixed Einstein crystal to a non-einstein 
+crystal for important uncalculable factors to cancel out but then 
+you can do a regular Monte Carlo scheme to get the free energy difference.
+
+\section{Vacancies and Interstitials}
+Holes and deformitiies will exist in basically every crystal ever. If 
+a crystal is too deformed, the lattice sites lose their meaning, but some holes 
+in a mostly normal crystal will have an effect on the free energy. 
+
+\subsection{Free Energy w/ Vacancies}
+Because the hole density of most crystals is low, we assume that they 
+do not interact with each other. 
+
+First, we consider the change in free energy from just a single vacancy. 
+
+We then take that difference and average it over the equilibrium 
+vacancy concentration. 
+
+\subsection{Numerical Calculations}
+It's just some math 
+
+\subsection{Interstitials}
+An interstitial in an atom between two lattice sites. Idk how it got 
+there either.
+
+Easiest considered with thermodynamic integration. 
+
+First, consider a lattice with a single interstitial. We do some witchcraft 
+with particle growing and something happens and you'll get a reversible 
+amount of work that relates to the new free energy of the lattice with the 
+interstitial. 
+
+\chapter{Free Energy of Chain Molecules}
+Particle insertion schemes don't work very well for molecules vs atom systems. 
+
+However, we've come up with decent solutions to find the chemical potential 
+and free energy of long chain molecules. These improve the efficiency 
+of the original Widom scheme. 
+
+The most common scheme is just thermodynamic integration. 
+
+There's also an algorithm related to the Rosenbluth algorithm, and there's a 
+recursive algorithm. 
+
+\section{Chemical Potential as Reversible Work}
+The work of a whole molecule is just the sum of putting each atom in its place, 
+and the order does not matter. 
+
+You have to do multiple simulations to find the difference in potential between 
+things, but there are ordering schemes that work to find the potential of 
+a chain molecule 
+
+\section{Rosenbluth Sampling}
+Page 291 of the pdf or 271 of the book 
+
+How to find the chemical potential of a single simulation. 
+It works with both discrete molecules and continuously deformable molecules. 
+
+\subsection{Macromolecules with Discrete Conformations}
+The way we learned how to do this before is with the Widom technique 
+and taking the ratio of two potentials to achieve a difference. 
+
+The way the Rosenbluth scheme works is by making the molecule from scratch 
+by choosing the most likely connections and then multiplying them by a weight 
+factor. 
+
+You construct the whole chain like this and do some neat sums. 
+
+After some math, we see that the Rosenbluth Factor is directly related 
+to the excess chemical potential of the system. 
+
+\subsection{Continuously Deformable Molecules}
+Consider a flexible molecule with intramolecular forces. 
+
+Consider a semi-flexible chain. We do the same thing is normal which 
+is computing the potential energy piece by piece. 
+
+We do something similar with Rosenbluth sampling which really is just 
+a weighted probability distribution for Monte Carlo sampling. 
+
+A common issue with the Rosenbluth scheme is that the Rosenbluth weights 
+are not actually equal to the Boltzmann factor. If the distributions do not 
+have significant overlap, then all your stats are cooked. 
+
+\subsection{Overlapping Distribution Rosenbluth Method}
+You can mix the Rosenbluth Method with the Overlapping Distributions 
+method to check if your numbers are reliable. 
+
+If your two histograms do not have significant overlap, then your chemical 
+potential is not reliable. 
+
+\section{Recursive Sampling}
+It is possible to unbiasedly sample the chemical potential of a system using only a 
+single simulation. 
+
+It also uses segment-by-segment growth of whatever polymer you're examining. 
+
+You generate a population of trial conformations, and the chemical 
+potential is related to the number of molecules that have survived. 
+
+There's some math and some choosing of constants but generally this method 
+is pretty good and usually faster than a Rosenbluth scheme 
+
+\section{Pruned-Enriched Rosenbluth}
+It's a mix of Rosenbluth and Recursive algorithms. If a comformation has a 
+very high Rosenbluth factor, it has a high chance of not failing, 
+and low weight Rosenbluth factor conformations have a chance to be discarded 
+early, saving computer energy. 
+
+We have to figure out what threshhold we want to determine whether 
+or not a Rosenbluth conformation should be tossed or supported. 
+
+The main downside is this is a static Monte Carlo scheme, so each conformation 
+has to be developed from scratch. 
+
+\chapter{Long Range Interactions}
+As we get bigger and bigger simulations, we have to find a better way to determine 
+the long-distance effects (Coulombic and dipole interactions; anything 
+stronger than $1/r^3$) of the system to avoid error. 
+
+There are 3 decent techniques: Enwald summation, fast multipole methods, and 
+particle-mesh based systems. Ewald summation is the most common, but it 
+still becomes prohibitively expensive for large systems. 
+
+\section{Ewald Sums}
+\subsection{Point Charges}
+Consider all the background charges as a continuous charge distribution 
+and do some fourier analysis (take a fourier series of a bunch of 
+dirac deltas and get something nice)
+
+\subsection{Self-Interaction Correction}
+The formula is in the book, just subtract it from the total energy sum. 
+
+\subsection{Dipoles}
+Not bad math
+
+\subsection{Accuracy and Complexity}
+You have to calculate the energy in both the real part and the Fourier space, and 
+you have to have decent parameters for you point charge Gaussian thingies. 
+
+You do a bunch of CS big O notation math and you get that this algorithm 
+is $O(N^{3/2})$ where $N$ is the number of particles and all things considered 
+that's not terrible.
+
+\section{Fast Multiple Method}
+The big O is $O(N)$ which is really pretty dang good. 
+
+Groups of particles far away can be considered one big cluster.
+Instead of the cluster being a single point charge, it is a multipole expansion 
+to increase accuracy.
+
+\subsection{Algorithm}
+You use octal trees. 
+
+You split the system in half in every dimension (so 3 cuts and 8 parts total).
+
+Repeat until a level $R$ has been obtained. 
+
+You can perform a multipole expansion on each child of the parent all the way 
+up to the center of the cell (idk what a multipole expansion is)
+
+You calculate the energies with some math and you get a thing 
+
+\section{Particle Mesh Approaches}
+The Poisson equation can be solved more easily if charges are distributed on 
+a mesh. 
+
+The first iteration of a mesh algorithm used a discretized mesh that could 
+be solved with a fast fourier transform. This method was fast, but not 
+super accurate. 
+
+We then split the mesh into a short and long range mesh, and we directly 
+calculated the short range particle interactions. 
+
+There's a bajillion other ways to make a particle mesh, but they are 
+beyond the scope of this textbook. 
+
+Works for MC but not well for MD 
+
+\section{Ewald Summation in Slab Geometry}
+Consider a geometry that's finite in one dimension but infinite 
+in the other. 
+
+The way to do this is to only consider the periodicity in 2 dimensions. 
+
+Apparently its very computationally expensive. 
+
+I didn't understand anything in this chapter 
+
+\textbf{REREAD IF NECESSARY}
+
+\chapter{Biased Monte Carlo Schemes}
+MD is useful in a heck of alot of cases over MC, but MC still 
+shines in some scenarios. However, MD is the main tool used nowadays. 
+
+Systems with many-body forces or no natural dynamics may be calculated 
+with MC effectively. 
+
+MC can perform unphysical moves that end up being paramount to the 
+equilibrium of a system. 
+
+MC is used where either MD can't be used at all or the system moves too 
+slowly for MD to be practical on any good timescale.
+
+Gibbs ensembles and grand-canonical MC simulations are good examples. 
+
+\section{Biased Sampling Techniques}
+We change our sampling technique such that we get trials that fit our 
+configuration better. 
+
+We also have to change our acceptance formula to make sure that we 
+have detailed balance. 
+
+Our code will be more complex, but hopefully it'll be more efficient. 
+
+\section{Beyond Metropolis}
+We can add an arbitrary function to our sampling scheme and keep a valid 
+random sample while making sure that our trials are far closer to our 
+conformations. 
+
+This bias allows us to increase our acceptance rate by a potentially wide 
+margin without violating detailed balance. 
+
+\section{Orientational Bias}
+If you're dealing with a system when the orientation of each molecule makes 
+a large difference on the potential of that molecule, then you need to consider 
+that as well as the position. 
+
+We can implement a bias to make sure our orientations are decent if there is 
+a low chance of getting a valid orientation by chance. 
+
+You calculate a number of potential orienations, find their Rosenbluth 
+factors, and we use a formula for the new acceptance rate. 
+
+This new acceptance rate will favor energetically favorable orientations. 
+
+\subsection{Continuous System}
+We can't calculate the Rosenbluth factor the normal way because there's 
+now an infinite number of orientations. 
+
+However, there's an algorithm that uses some subset of orientations and still 
+works. 
+
+Your statistical accuracy depends on your subset size. 
+
+\section{Chain Molecules}
+Building chains takes a lot of computer time using MD, so people have come 
+up with "unphysical" moves that work better.
+
+\subsection{Configurational Bias MC}
+You use a Rosenbluth scheme but biased so that the acceptance rate 
+is actually related to the Boltzmann weight. 
+
+Works for lattices and non-lattices, but they have different algorithms.
+
+\section{Generation of Trial Orientations}
+It's just a bunch of math. 
+
+\subsection{Generation of Branched Molecules}
+It's all math but this math is harder than making a single chain 
+
+\subsection{Fixed Endpoints}
+You can regrow a chain from its endpoints. 
+
+blah blah blah math math math 
+
+\section{Beyond Polymers}
+You can use the same method to 
+
+\subsection{Other Ensembles}
+You can use biasing in both Grand-canonical Monte Carlo and Gibbs ensembles. 
+
+\section{Recoil Growth}
+One issue with the previous MC schemes is if you grow a molecule into a 
+corner, you lose the ability to make new trial moves. 
+
+This algorithm looks several trial steps ahead, and if it reaches a "dead 
+alley" it rejects that series of trial moves. 
+
+\chapter{Accelerating MC Sampling}
+Advanced Monte Carlo techniques 
+
+\section{Parallel Tempering}
+Good for simulating a free energy landscape with a bunch of local minima. 
+
+We perform $n$ simulations each at different constant temperatures and see 
+how each of then go over or fall into local minima. 
+
+It also has trials of "swapping" two systems of different temperature states, 
+and if the difference in temperature is very large, the probability of 
+getting accepted is very low. Therefore, we make very small temperature 
+swaps. 
+
+\section{Hybrid Monte Carlo}
+Combination of MD and MC. 
+
+You use MD to generate MC trial moves. This allows you to be very liberal 
+with you you design your MD moves. 
+
+The particle velocities are chosen at random. 
+
+The trial move time steps can't be crazy long, so hybrid MC is not far 
+better than just using regular MD. 
+
+Hybrid MC is best for small to mid-size systems, but MD is the best 
+for very large systems. 
+
+\section{Cluster Moves}
+One of the main problems of simulating complex liquids with MD is that it 
+is very slow. 
+
+Clustering allows for Monte Carlo trial moves that bypass potential 
+energy barriers entirely. 
+
+\subsection{Clusters}
+We use some math bias formula that allows our trial steps to have a 100 \% 
+chance of being accepted. 
+
+\subsection{Ising Model}
+It's just a bunch of math 
+
+\subsection{General Cluster Moves}
+It is not always possible to generate cluster moves that have a 100\% chance 
+of being accepted. However, we can use clustering to enhance the acceptance rate 
+of certain moves. 
+
+\subsection{Early Rejection Scheme}
+It's generally cheaper to perform MC of a hard-core potential model than a 
+continuous model because you don't have to calculate all the interactions 
+every time. 
+
+We can often say that for certain distances, continuous potentials effectively 
+become hard-core potentials. 
+
+You do some math and get something that is similar but not equivalent to 
+a Metropolis scheme 
+
+\chapter{Tackling Time-Scale Problems}
+Free atoms move on a much smaller time scale that molecules, so it would 
+be very expensive to treat molecular dynamics as the dynamics of a bunch 
+of atoms. 
+
+Multiple-time-scale MD is based on the fact that you can describe the 
+intramolecular vibrations with a different time step than the 
+intermolecular forces.
+
+You can also treat the bonds between atoms as rigid and solve the equations 
+of motion under that restraint. 
+
+Lastly, there's some extended Lagrangian math shenanigans 
+
+\section{Constraints}
+Add forces such that the atoms in the molecule can only move in 
+certain dimensions. 
+
+You do some math and get something 
+
+\subsection{Constrained and Unconstrained Averages}
+Hard constraints and rigid but flexible springs will yield different 
+averages. 
+
+You do a bunch of math involving Lagrangians 
+
+\section{Car-Parrinello Approach}
+Used to compute the energies of valence electrons "on the fly"
+
+It's a bunch of math to turn a tedious iterative process into a cheap 
+dynamical process 
+
+\section{Multiple Time Steps}
+Change the force into "short" and "long" forces, and have time steps 
+for the vibrations and larger time steps for the larger movements. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
