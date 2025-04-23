@@ -1,0 +1,597 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{esint}
+
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 435 Midterm 1}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS435 Midterm 2}
+All magneto and electrostatics and maybe a little bit of electrodynamics 
+with Ampere's Law. 
+
+REMEMBER YOU MAGNETIC DIPOLE EQUATIONS
+
+and you magnetic field from a current equations 
+
+If you have both a current and a magnetization density, 
+you can just put them together and try to solve. 
+
+All you do is solve both parts independently. 
+
+Solve the perma-magnetic with the magnetic pseudopotential and solve 
+the moving current with the other math. 
+
+This midterm is open book open note so if I just write down 
+absolutely every topic ever then I can look back at this notebook 
+and be absolutely set 
+
+This midterm goes over basically all of electrostatics and magnetostatics
+\section{Calculus Junk}
+Know my Divergence and curls and junk 
+
+\subsection{Divergence Theorem}
+Connects a volume to a surface 
+\equations{
+    \iiint\limits_V \, d^3 V \, 
+    \nabla \cdot F 
+    =
+    \iint\limits_{S} \, d^2 S \, 
+    \hat n \cdot F
+}
+
+\subsection{Poisson's Equation and Green's Functions (Magnetic Pseudopotential)}
+We also do have a kind of Green's function approach 
+with the magnetic pseudo-potential 
+\equations{
+    \div \vec H 
+    =
+    - 
+    \div \vec M 
+    \hp 
+    \vec H 
+    =
+    - \vec \nabla \phi_M(\vec r)
+    \\
+    \nabla^2 \phi_m(\vec r)
+    =
+    - \rho_m(\vec r)
+    =
+    + \div \vec M 
+}
+
+\section{Multipoles}
+They're like a just a heuristic thing to figure out roughly what you 
+distance dependence is.
+
+It's based off of a taylor series that I'm sure you can derive if you really 
+want to. 
+
+monopole is 1/r, dipole is $1/r^2$, quadrupole is $1/r^3$
+
+\section{Dielectrics}
+I genuinely have no idea but there's some indentities and some polarizability 
+stuff. 
+
+Dielectrics are not conductors, but are made of atoms that can conduct 
+electricity. 
+
+Each atom has a symmetric charge distribution 
+
+Now apply an electric field so that the dielectric has a dipole moment. 
+\equations{
+    \vec p = \alpha \vec E
+}
+Where $\alpha$ is the polarizability coefficient.
+
+\subsection{Spring Model of Atoms}
+
+The dipole moment is proportional to the displacement of the positive 
+and negative charges relative to each other. 
+
+\subsection{Polarization Density}
+Because dielectrics are like continuous 
+
+\equations{
+    \vec P = \vec p \cdot \textrm{atomic density} = pn
+    \\
+    \vec P = n \alpha \vec E 
+}
+
+Consider an electronic suscebtilibility factor $X$ 
+
+\equations{
+    \vec P = \epsilon_0 X \vec E 
+    \hp 
+    X = \frac{n q^2}{\epsilon_0 \kappa}
+}
+
+We find the polarizability constants of single atoms but I doubt that's super 
+necessary 
+
+\subsection{Bound Charge Density}
+I think this is finding the new charge density from a polarized dielectric 
+
+\equations{
+    V(\vec r) = 
+    \frac{1}{4 \pi \epsilon_0}
+    \frac{\vec p \cdot \vec r }{|\vec r - \vec{r'}|^3}
+}
+consider polarization density and $\vec p = \int \, d^3 r \, \vec P$
+
+\equations{
+    V(\vec r) = 
+    \frac{1}{4 \pi \epsilon_0}
+    \int\limits_{V} \, d^3 r' \, 
+    \frac{\vec P \cdot \vec r }{|\vec r - \vec{r'}|^3}
+}
+
+we know that the derivative of $1/r$ is $-1/r^2 = -r/r^3$, so 
+
+\equations{
+    V(\vec r) = 
+    \frac{1}{4 \pi \epsilon_0}
+    \int\limits_{V} \, d^3 r' \, 
+    \vec P
+    \cdot 
+    -\vec \nabla_r
+    \frac{1 }{|\vec r - \vec{r'}|}
+    =
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{V} \, d^3 r' \, 
+    \vec P
+    \cdot 
+    \vec \nabla_{r'}
+    \frac{1 }{|\vec r - \vec{r'}|}
+}
+
+You do some math 
+\equations{
+    \vec \nabla_{r'}
+    \cdot 
+    \frac{\vec P }{|\vec r - \vec{r'}|}
+    =
+    \frac{\vec \nabla \cdot \vec P }{|\vec r - \vec{r'}|}
+    +
+    \vec P
+    \cdot 
+    \vec \nabla_{r'}
+    \cdot 
+    \frac{1 }{|\vec r - \vec{r'}|}
+}
+
+and then get 
+\equations{
+    V(\vec r)
+    =
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{V} \, d^3 r' \, 
+    \vec P
+    \cdot 
+    \vec \nabla_{r'}
+    \frac{1 }{|\vec r - \vec{r'}|}
+    =
+    \\
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{V} \, d^3 r' \, 
+    \vec \nabla_{r'}
+    \cdot 
+    \frac{\vec P }{|\vec r - \vec{r'}|}
+    -
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{V} \, d^3 r' \, 
+    \frac{\vec \nabla \cdot \vec P }{|\vec r - \vec{r'}|}
+}
+
+Then do divergence theorem 
+
+\equations{
+    V(\vec r)
+    =
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{\del V} \, d a \, 
+    \frac{\hat n \cdot \vec P }{|\vec r - \vec{r'}|}
+    -
+    \frac{1}{4 \pi \epsilon_0} 
+    \int\limits_{V} \, d^3 r' \, 
+    \frac{\vec \nabla \cdot \vec P }{|\vec r - \vec{r'}|}
+}
+
+With all of this shenanigans, we can say that 
+\equations{
+    V 
+    =
+    \frac{1}{4 \pi \epsilon_0}
+    \int\limits_V \, d^3 r' \, 
+    \frac{p_b(\vec{r'})}{|\vec r - \vec{r'}|}
+}
+
+Where the bound charge density is given by 
+\equations{
+    p_b(r) = - \vec \nabla \cdot \vec P(\vec r)
+}
+% Where $\vec P(\vec r)$ is the bound volume charge density????
+
+and the surface bound charge density is given by 
+\equations{
+    \sigma_b(\vec r)
+    =
+    \hat n \cdot \vec p(\vec r)
+}
+
+So the total potential is given by integrating over the bulk bound charge 
+and the surface bound charge. 
+
+\subsection{$\vec E$ inside Dielectric}
+Consider a linear dielectric 
+
+\equations{
+    \vec p = \alpha \vec E 
+    \hp 
+    \vec P = n \alpha \vec E 
+    =
+    \frac{\alpha}{a^3} \vec E 
+}
+Define the susceptibility to polarization $X$ 
+\equations{
+    \vec P = \epsilon_0 X_E \vec E 
+    \hp 
+    X_E = \frac{n \alpha}{\epsilon_0}
+    =
+    \frac{q^2 n}{\epsilon_0 \kappa}
+}
+
+A capacitor with a dielectric has both an external charge and a bound 
+charge and a bound surface charge, the latter two are induced by both itself 
+and the external charge. 
+
+\equations{
+    E = \frac{\sigma_{total}}{\epsilon_0}
+    \hp 
+    \sigma_{tot} = \sigma_{Free} - p 
+    \\
+    E = \frac{1}{\epsilon_0}
+    \left(
+        \sigma_{free} - p
+    \right)
+    =
+    \frac{1}{\epsilon_0}
+    \left(
+        \sigma_{free} - \epsilon_0 X \vec E 
+    \right)
+    \\
+    \vec E 
+    = 
+    \frac{\sigma_{Free}}{\epsilon_0 (1 + X)}
+    =
+    \frac{\sigma_{Free}}{\epsilon_0 \kappa }
+}
+
+There's some capacitance shenanigans but I don't really care at all 
+
+Consider a 3d bulk charge density 
+\equations{
+    p_b(\vec r) = - \vec \nabla \cdot \vec p 
+}
+This happens if $X$, the polarize susceptibility function, is position dependent. 
+
+The bound charges come from the dipole moment $\vec p = \epsilon_0 X \vec E$, 
+which comes from the external electric field. 
+
+consider a total charge density 
+\equations{
+    p_{tot} = p_{free} + p_{bound}
+}
+
+use Gauss's Law 
+\equations{
+    \vec \nabla \cdot \vec E(\vec r)
+    =
+    \frac{1}{\epsilon_0}
+    \left(
+        p_{free}(\vec r) + p_{bound}(\vec r)
+    \right)
+    =
+    \frac{1}{\epsilon_0}
+    \left(
+        \vec p_{free}(\vec r) + \vec \nabla \cdot \vec P(\vec r)
+    \right)
+    \\
+    \nabla \cdot 
+    \left(
+        \vec E(\vec r) + \frac{1}{\epsilon_0} \vec P(\vec r)
+    \right)
+    =
+    \frac{p_f(\vec r)}{\epsilon_0}
+}
+
+This equation is why we make the "Displacement field"
+
+\equations{
+    \vec D(\vec r)
+    =
+    \epsilon_0 \vec E + \vec P(\vec r)
+}
+I think that's the polarization density and not the dipole moment 
+
+\equations{
+    \vec \nabla \cdot \vec D(\vec r) = \rho_{free}
+}
+In general nothing here should equal 0
+
+\subsection{Helmholtz Theorem}
+If you know the curl and divergence of a function, and the function does 
+not diverge anywhere, then you know the function.
+
+Consider a linear dielectric 
+\equations{
+    \vec p = \epsilon_0 X \vec E 
+    \hp 
+    \kappa = 1 + X 
+    \\
+    \vec D 
+    = 
+    \epsilon_0 \vec E + \epsilon_0 X \vec E 
+    =
+    \epsilon_0 \vec E (1 + X)
+    =
+    \epsilon_0 \vec E \kappa 
+}
+
+$\vec D$ doesn't actually do anything, it just lets us do math easier. 
+
+If we have a parallel plate capacitor, and we consider the boundary between 
+the bound charge density and the free charge density, we get 
+\equations{
+    \hat n \cdot \vec D_1 - \hat n \cdot \vec D_2 = \sigma_{free}
+}
+
+If we have no external potential and thus $\sigma_{free} = 0$, then 
+\equations{
+    \hat n \cdot \vec D_1 = \hat n \cdot \vec D_2 
+    \rightarrow 
+    \kappa_1 \hat n \cdot \vec E_1  = \kappa_2 \hat n \cdot \vec E_2
+}
+
+This lets you determine the electric fields of dielectrics given 
+both of their spring constants and some other stuff. 
+
+That is the end of lecture 16. 
+
+\chapter{NEW STUFF}
+
+
+\section{Various Magnetic Fields}
+Everything can be solve with either Gauss's Law, superposition, or both. 
+
+\begin{itemize}
+    \item 
+    So you have your magnetic field $\vec B$ 
+    \item 
+    You have your volume current density $\vec J$
+    \item 
+    you have your surface current density $\vec J_b$ 
+    \item 
+    you have your magnetization density $\vec M$ 
+    \item 
+    You have your magnetic field density $\vec A$ 
+    \item 
+    You have you helper field $\vec H$ 
+    \item 
+    You have your magnetic pseudopotential $\phi_m$
+    \item 
+    You have a magnetic dipole susceptibility $X_m$
+\end{itemize}
+
+I think that covers all of it. 
+
+Then you use all the random equations that we learned to 
+put them together 
+
+\subsection{Coulomb Gauge}
+That just means that 
+\equations{
+    \nabla^2 \vec A = - \mu \vec J
+    \hp 
+    \div \vec A = 0
+}
+
+know that 
+\equations{
+    \vec B 
+    =
+    \curl \vec A 
+}
+
+\section{Magnetic Multipoles}
+I'm just gonna worry about the dipole moment for now 
+
+\equations{
+    \vec A 
+    =
+    \frac{\mu_0}{4 \pi}
+    \frac{\vec m \times \vec r }{r^3}
+}
+
+dipole moment is calculated by 
+\equations{
+    \vec m 
+    =
+    \int \, d^3 r \, 
+    \frac{\vec r \times \vec J}{2}
+}
+
+and if we consider a current we get 
+\equations{
+    \vec m 
+    =
+    I * Area * \hat n
+}
+
+Consider a magnetization density vector field 
+\equations{
+    \vec M 
+    =
+    n(\vec r) 
+    \vec m(\vec r)
+}
+Where $n$ is the local density 
+
+\equations{
+    \vec A 
+    =
+    \int \, d^3 \, 
+    \frac{\vec M \times \vec r}{r^3}
+}
+
+and we get the important 
+\equations{
+    J_{bound}
+    =
+    \curl \vec M 
+    \hp 
+    K_{bound surface}
+    =
+    \vec M \times \hat n 
+}
+
+\section{Boundary Value Problems}
+This one is connected to the homework 8 that I did and that I have the answers for 
+
+\equations{
+    \curl \vec B 
+    =
+    \mu_0
+    \left(
+        \vec J_{free}
+        +
+        \vec J_{bound}
+    \right)
+}
+That gets us the helper field 
+\equations{
+    \vec H 
+    = 
+    \frac{1}{\mu_0}
+    \vec B 
+    -
+    \vec M
+    \hp 
+    \curl \vec H 
+    =
+    \mu_0 \vec J_{free}
+}
+
+That curl equation gives us some important stuff 
+\equations{
+    \vec H_{1, //}
+    +
+    \vec H_{2, //}
+    =
+    \vec K_{free}
+    \times \hat n 
+}
+Where $\vec K_f$ is the free current density I think? 
+
+And, since $\div \vec B = 0$, we get the other important 
+\equations{
+    \hat n(\vec B_{1, \perp} + \vec B_{2, \perp}) = 0 
+    \rightarrow 
+    \vec B_{1}
+    \cdot \hat n
+    =
+    \vec B_{2}
+    \cdot \hat n
+}
+
+For an ideal ferromagnet, there are no free currents and the bound 
+currents are wholly determined by $\vec M$ 
+
+There's a thingy 
+\equations{
+    \vec M 
+    =
+    X_m \hat H_{in}
+    \hp 
+    X_m 
+    =
+    \frac{M}{H_{in}}
+}
+So for a linear paramagnet we get 
+\equations{
+    \vec B_{in}
+    =
+    \mu_0 (\vec H_{in} + \vec M )
+    =
+    \mu_0 (1 + X_m) \vec H_{in}
+}
+
+okay I get it now 
+so $\vec J$ is the volume current density which is amperes/m$^2$ and 
+$\vec K$ is the surface current density which is just teslas / m. 
+
+\section{Magnetic Pseudopotential}
+It's just a thing that connects to $\vec H$ that allows you to get 
+something that looks like a Green's function. 
+
+\section{UNITS}
+$\vec B$ is Volt-second / meters$^2$
+
+\end{document}

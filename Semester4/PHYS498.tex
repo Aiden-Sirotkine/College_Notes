@@ -1609,4 +1609,373 @@ specific traits.
 You actually use Variational Inference to make the de-noiser because the 
 denoising algorithm itself involves a 1000 dimensional integration. 
 
+\section{Normalizing Flows}
+This is a mathematical method that turns a simple probability distribution 
+to a more complex multimodal distribution. 
+
+You transform the simple distribution into a more complex one 
+by using a sequence of invertible nonlinear transforms. 
+
+You use neural networks to figure out the invertible transformations/mappings 
+that work best to change the distribution. 
+
+\subsection{Benefits}
+Other NN's do not explicitly learn the probability distribution.
+
+Variational Autoencoders only model and minimize the Evidence Based Lower Bound 
+(ELBO), and GAN's generate new data without telling us where on the probability 
+distribution that data lies. 
+
+Because all the transformations are invertible, the math for the NN 
+is shockingly simple compared to every other NN we've looked at. 
+
+\subsection{Different Types of Flows}
+Planar flows are also a type of transform that is commonly used. 
+
+It is invertible and fast to compute. 
+
+Idk if the NN optimizes each transform sequencially or all 
+at the same time 
+
+\chapter{Simulation Based Inference}
+Also called LFI 
+
+It allows you to figure out something (make in inference) 
+even if it has an intractable likelihood. 
+
+Approximate Bayesian Computation is another thing worth looking at. 
+
+We used a thing called a bump hunt to figure out the Higgs Boson. 
+
+\section{Explicit Likelihood Calculator}
+You can use a Poisson Distribution over the mean returned by the 
+forward model to realize the explicit likelihood. 
+
+\section{Implicit Likelihood}
+You can figure out a likelihood without explicit calculation using the 
+
+\section{Approximate Bayesian Computation}
+The idea behind Approximate Bayesian Computation (ABC) is to realize samples 
+from the forward model (with the parameters
+drawn from a prior) and compare it to the dataset of interest. 
+If the data and realized samples are close enough to each other according 
+to some criterion, we keep the parameter points.
+
+\section{Neural Likelihood Ratio Estimation}
+
+\section{Explicit Likelihood}
+
+\section{Test of Statistical Coverage}
+
+
+\chapter{Reinforcement Learning}
+Instead of labelling all of your data, there is seeding that will guide 
+how the NN acts depending on its reponses. 
+
+It's a robot that maximizes some reward function. 
+
+Supervised learning has the goal already connected to the datapoints. 
+
+Reward(i), State(i + 1)
+=
+Interact(State, Action)
+
+And the action can be tweaked depending on the subsequent rewards. 
+
+\section{Temporal Difference (TD) Learning}
+a class of model-free reinforcement learning methods.
+
+There was a back-gammon Reinforcement Learning NN that learned by just 
+playing against itself and maximizing the reward function. 
+
+Reinforcement Learning is real good at learning to play videogames. 
+
+It also works for locomotion. 
+
+Example: AlphaGo 
+
+\section{Deep Q-Learning Network (DQN)}
+This is just the name of a prototypical Reinforcement Learning NN 
+
+\subsection{Setup}
+There a Markov Decision Process 
+with time steps where the agent makes some action to change the environment.
+
+The value of a new state is based off of a value function. 
+
+\equations{
+    V^{\pi}(s)
+    =
+    \sum_{s'}
+    P_{\pi(s)}(s, s')
+    *
+    (
+    R_{\pi(s)}(s, s')
+    +
+    \gamma V^{\pi}(s')
+    )
+}
+Where $s$ is the current state and $s'$ is the new state. 
+
+\subsection{Q Learning}
+Learn a policy $\pi(s)$ that optimizes $V^{\pi}(s)$ for all states, 
+using no prior knowledge of either the state transition probabilities or the 
+reward function. 
+
+Take random actions until something good happens. 
+
+\section{Challenges}
+\begin{itemize}
+\item
+If there are too many states and actions, then your NN will wander 
+around and rarely ever change, so it improves reaaaally slowly. 
+\item
+If the episode can end without reward, then your NN will not change 
+\item
+If there is a narrow path to the reward, then there is a low change 
+your NN will find it and improve 
+\end{itemize}
+
+\subsection{Reward Shaping}
+Instead of just having the big reward at the end, you should place a bunch 
+of little bread crumbs to help the NN learn with a little big of guidance. 
+
+\subsection{Memory}
+You can retrain on previous explorations instead of running a bajillion more 
+simulations. 
+
+It allows you to leverage each episode as much as possible if it is hard 
+to get the reward. 
+
+\section{Gym}
+It's a toolkit for reinforcement learning so you don't have to do all the silly 
+math yourself.
+
+\section{Policy Gradients}
+You get a game-state / frame 
+
+If you win, you make all of your actions more likely. 
+
+If you lose, you make all of your actions less likely. 
+
+\chapter{AI Explainability and Uncertainty Quantification}
+Deep Learning networks get better and better with more data no matter what. 
+
+Tradition machine learning saturates after a bit. 
+
+Deep Learning saturates much much later, and only gets better with more layers. 
+
+Deep Learning has a large number of parameters and they use 
+non-linear representations. 
+
+Deep Learning takes an incomprehensible amount of data and layers to understand 
+intuitively. The ATLAS Software might as well be magic. 
+
+\section{Benefits}
+Explainability allows us to improve NN's and make them more robust 
+against bias or noise or whatever. 
+
+Explainable AI is hard to define and even harder to evaluate 
+
+XAI is important if you AI is actually doing something useful compared 
+to like game design or whatever. 
+
+\section{Tools}
+Simpler AI methods like linear regression are highly explainable. 
+
+There's a bunch of tools that work and none of them are crazy better than the 
+others. 
+
+\subsection{Performance Deviation}
+Very fast, but not super accurate. 
+
+It just goes feature by feature and looks at what affects the results. 
+
+\section{Layerwise Relevance Propogation}
+You're back-propogating through the network and figuring out the importance 
+of each node relative to the entire model. 
+
+\subsection{TopoDNN}
+This is a NN that the prof made that was able to distinguish particles from 
+their jet tracks. 
+
+\section{Neuron Activation Pattern}
+It's like doing an MRI of the NN. 
+
+You basically look at what neurons do what when. 
+
+\section{PCA}
+You can make a PFN Latent Space that distinguishes that largest traits 
+that the NN also sees. 
+
+\section{Probabilistic Learning}
+If the input is unlike anything during training, the output will be nonsense. 
+
+\subsection{Aleatoric Uncertainty }
+
+Describes the confidence in the input data
+Large when input data is noisy 
+
+Cannot be reduced by simply adding more data.
+
+This can be learned directly using neural networks. 
+
+\subsection{Epistemic Uncertainty }
+This is the model uncertainty. 
+
+Describes the confidence in the prediction. 
+
+Large when insufficent training data 
+
+Can be reduced by adding more data. 
+
+This is hard to estimate. 
+
+\section{Bayesian NN}
+It's a neural network that solves a Bayesian Inference problem.
+
+These types of problems are not tractable and need approximations. 
+
+There are a number of sampling methods that can be used to approximate 
+the NN (Monte Carlo Dropout)
+
+Can we just learn the probability distribution of the sample data?
+
+\section{Evidential Deep Learning}
+treats learning as evidence acquisition, and more data leads 
+to a greater confidence. 
+
+\subsection{Conjugate Priors (IMPORTANT CONCEPT)}
+Choice of evidential distributions is closely related to 
+conjugate priors in the context of Bayesian inference
+
+\subsection{Training}
+Train the network to output the parameters of an 
+evidential distribtuion. 
+
+Perform multi-objective training. 
+
+\section{Conformal Prediction}
+it allows us to construct statistically rigorous uncertainty bands around 
+our predictions, without requiring any modifications to our prediction model. 
+This is achieved by comparing true and predicted values on out-of-sample data 
+(more precisely we are looking at inductive conformal prediction)
+
+\section{Misc AI Shenanigans}
+Quantum Computing, AI Bias, General AI 
+
+\chapter{Unsupervised Learning and Anomaly Detection}
+Supervised learning is just your regular classification structure 
+that has "answers" for each individual datapoint. 
+
+Unsupervised learning just finds patterns in the data that you give it. It 
+finds structure and learns how certain samples are the same/different to 
+other samples. 
+
+The main benefit of unsupervised learning is that it can find hidden patterns 
+that humans have missed.
+
+There are two main types of unsupervised learning:
+Clustering and Dimensionality Reduction 
+
+Both are just ways of finding patterns in large datasets 
+
+\subsection{Clustering}
+Divide the dataset into groups 
+
+\subsection{Partitioning Clustering}
+This is the clustering that we discussed before with KMeans 
+
+Divides the data into non-hierarchical groups 
+
+\subsection{Density Based Clustering}
+Highly dense areas are put into clusters 
+
+This method is good because it can make arbitrary shaped clusters 
+
+\subsection{Distribution Based Clustering}
+This uses the Expectation Maximization algorithm, but for Gaussian Mixture Models, 
+which makes it different to KMeans 
+
+\subsection{Hierarchical Clustering}
+The clustering is tree-like, where one datapoint can be in multiple clusters.
+This is called a dendrogram
+
+The most common algorithm is called the agglomerative Hierarchical algorithm. 
+
+\subsection{Fuzzy Clustering}
+It is similar to KMeans clustering, but datapoints can be in 
+multiple clusters, so its called "soft" clustering. 
+
+\subsection{Dimensionality Reduction}
+Get rid of data that is not helpful to the actual information of the 
+dataset. 
+
+\section{Training Paradigms}
+Specifically in high energy physics 
+
+You can use supervised learning and data from simulations
+
+\subsection{Semi-supervised}
+Use a small amount of labeled data and a large amount 
+of unlabeled data 
+
+\subsection{Weakly-supervised}
+use noisy or imprecise sources to label the data.
+
+In your labels, have a small fraction of labels be wrong 
+
+
+\subsection{Self-supervised}
+take advantage of the underlying structure in the data to label it instead 
+of labeling it externally.
+
+\chapter{Anomaly Detection}
+
+\section{Autoencoders}
+Compress the data into a smaller latent space and then decode it back 
+to the original state. 
+
+If the event is an anomaly the reconstruction loss can be used as an anomaly 
+score. 
+
+\subsection{LSTM}
+Long Short-Term Memory 
+
+It's a type of RNN good for handing long-term dependencies
+
+For an AE or VAE (variational autoencoder), you should have a higher 
+latent space compared to if you want it to be an anomaly detector. 
+
+Anomaly detectors do not need high latent spaces because they do 
+not need to accurately reconstruct the data, just 
+
+LSTM RNN's utilize memory cells to store long-term information 
+and gates to control the flow of memory. 
+
+LSTM's are especially good at mitigating vanishing gradients. 
+
+The prof is also looking at Evidential Deep Learning for anomaly detection. 
+\section{Anomalies}
+% Bro is talking about hybrid butterflies. 
+
+% An AI will give an answer with equal confidence to every other answer 
+% given data that's completely irrelevant to everything. 
+
+An anomaly is a discovery returned from an AI that was not 
+observed by humans, so they're pretty neat. 
+
+However, most of the time, anomalies are just bugs in the AI. 
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

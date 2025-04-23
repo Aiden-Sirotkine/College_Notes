@@ -3443,5 +3443,1659 @@ If we consider a surface of charge and make a Gaussian pillbox around it, then
     \vec B 
 }
 
+\section{Discussion 9}
+Lecture stuff 
+
+\equations{
+    \vec A(\vec r)
+    =
+    \frac{\mu_0}{4 \pi}
+    \frac{\vec m \times \hat r}{r^2}
+    \hp 
+    \vec m 
+    =
+    \gamma \vec cA 
+    \hp 
+    \vec M 
+    =
+    \frac{\vec m}{V}
+    \\
+    \vec U 
+    =
+    0 \vec m \cdot \vec B 
+    \hp 
+    \vec \tau 
+    =
+    \vec m \times \vec B
+    \\
+    P^i  
+    =
+    \alpha^{ij}
+    E^j_{external}
+}
+
+Apparently we will be talking about paramagnetism and diamagnetism today. 
+
+ferromagnets and anti-ferromagnets are the normal magnets that we think 
+about when we think magnets. 
+
+\equations{
+    vec A(\vec r)
+    =
+    \frac{\mu_0}{4 \pi}
+    \int\limits_{\Sigma} \, d^3 x' \, 
+    \frac{\vec M(\vec{r'}) \times (\hat{r} - \hat{r'})}{|\vec r - \vec{r'}|^2}
+    =
+    \\
+    \frac{\mu_0}{4 \pi}
+    \int\limits_{\Sigma} \, d^3 x' \, 
+    \vec M(\vec{r'}) \times \vec{\nabla'} \frac{1}{|\vec r - \vec{r'}|}
+    \\
+    =
+    \frac{\mu_0}{4 \pi}
+    \int\limits_{\Sigma} \, d^3 x' \, 
+    \vec{\nabla'} \times \frac{\vec M(\vec{r'})}{|\vec r - \vec{r'}|}
+    -
+    \frac{\vec{\nabla'} \times \vec M(\vec{r'})}{|\vec r - \vec{r'}|}
+    \\
+    =
+    \frac{\mu_0}{4 \pi}
+    \int\limits_{\Sigma} \, d^3 x' \, 
+    \frac{\vec{\nabla'} \times \vec M(\vec{r'})}{|\vec r - \vec{r'}|}
+    -
+    \frac{\mu_0}{4 \pi}
+    \oint\limits_{\del \Sigma} \, d^2 a' \, 
+    \frac{\vec M(\vec{r'}) \times \hat n}{|\vec r - \vec{r'}|}
+    \\
+    =
+    \frac{\mu_0}{4 \pi}
+    \int\limits_{\Sigma} \, d^3 x' \, 
+    \frac{\vec J_b(\vec{r'})}{|\vec r - \vec{r'}|}
+    -
+    \frac{\mu_0}{4 \pi}
+    \oint\limits_{\del \Sigma} \, d^2 a' \, 
+    \frac{\vec K_b}{|\vec r - \vec{r'}|}
+    \\
+    \vec J_b(\vec{r'}) 
+    = 
+    \vec{\nabla'} \times \vec M(\vec{r'})
+    \hp
+    \vec K_b
+    =
+    \vec M(\vec{r'}) \times \hat n
+}
+
+That's the derivation 
+
+And then there's some more math 
+
+\equations{
+    \frac{1}{\mu_0}
+    (\nabla \times \vec B)
+    =
+    \vec J_b + \vec J_f 
+    =
+    \nabla \times \vec M + \vec J_f 
+    \Rightarrow 
+    \nabla \times 
+    \left(
+        \frac{\vec B}{\mu_0}
+        -
+        \vec M 
+    \right)
+    =
+    \vec J_f
+    \\
+    \frac{\vec B}{\mu_0}
+    -
+    \vec M 
+    =
+    \vec H 
+}
+
+So now we have the silly new helper function $\vec H$ 
+
+\equations{
+    H^{\perp}_{above}
+    -
+    H^{\perp}_{below}
+    =
+    -
+    \left(
+        M^{\perp}_{above}
+        -
+        M^{\perp}_{below}
+    \right)
+    \\
+    \vec{H^{||}_{above}}
+    -
+    \vec{H^{||}_{below}}
+    =
+    \vec K_{free}
+    \times 
+    \hat n 
+}
+
+
+\section{$\vec A$ From a Magnetized Object}
+We have fundamental results and computational tools 
+
+Consider the fundamental results 
+\equations{
+    \vec A(\vec r)
+    =
+    \frac{\mu_0}{4 \pi}
+    \int \, d^3 r' \, 
+    \frac{\vec M(\vec r') \times (\vec r - \vec{r'})}
+    {|\vec r - \vec{r'}|^3}
+}
+That is a physics based something or other.
+
+Then we have the computational convenience 
+\equations{
+    \vec A(\vec r)
+    =
+    \frac{\mu_0}{4 \pi}
+    \int \, d^3 r' \, 
+    \frac{\vec \nabla \times \vec M(\vec r')}
+    {|\vec r - \vec{r'}|}
+    \hp
+    \vec J_B = \vec \nabla \times \vec M 
+    \hp 
+    \vec K_b = \vec M \times \hat n 
+}
+
+And you can pull some Ampere's Law shenanigans to get 
+\equations{
+    \curl \vec B = \vec J_f + \vec J_b
+    \hp 
+    \vec H = \frac{\vec B}{\mu_0} - \vec M 
+    \Rightarrow 
+    \vec \nabla 
+    \times 
+    \vec H 
+    =
+    \vec J_{free}
+}
+
+There's an equivalence in electrics and magnetostatics 
+\equations{
+    \vec D = \epsilon_0 \vec E + \vec P 
+    \hp 
+    \vec B 
+    =
+    \mu_0 
+    \left( 
+        \vec H 
+        + 
+        \vec M 
+    \right)
+    \hp 
+    \vec M = X_m \vec H 
+}
+
+If we consider the magnetic field from a spherical surface 
+we can use the Laplacian and some differential equations to get 
+\equations{
+    A_x (r, \theta, \phi)
+    =
+    \sum_{l = 0}^{\infty}
+    \sum_{m = -l}^{\infty}
+    \left(
+        A_{lm}
+        r^l 
+        +
+        \frac{B_{lm}}{r^{l + 1}}
+    \right)
+    Y_{lm}(\theta, \phi)
+}
+
+But that's going to take forever to solve even if technically correct. 
+
+Let's define a magnetic scalar potential 
+
+\equations{
+    \vec \nabla \times \vec B 
+    =
+    \mu_0 \vec J 
+    \hp 
+    \vec H 
+    =
+    - \vec \nabla 
+    \phi_m(\vec r)
+}
+
+So with that object $\vec H$, and no free currents, we get the properties 
+
+\equations{
+    \vec \nabla \cdot \vec B - 0 
+    =
+    \vec \nabla \cdot mu_0 (\vec H + \vec M)
+    \hp 
+    \vec \nabla \cdot \vec H
+    +
+    \vec \nabla \cdot \vec M
+    \rightarrow 
+    \\
+    \nabla^2 \phi_m 
+    = 
+    \vec \nabla \cdot \vec M 
+}
+
+now we get some nice equivalent electricity vs magnetism properties 
+\equations{
+    (\vec D_1 - \vec D_2) \hat n 
+    =
+    \sigma_{free}
+    \hp 
+    \hat n \cdot 
+    (\vec B_1 - \vec B_2)
+    =
+    0
+    \hp 
+    \vec H_{||, 1}
+    =
+    \vec H_{||, 2}
+}
+
+If we consider a uniformly magnetized sphere, the way we find the field 
+is by constructing a parameterized solution 
+region by region 
+
+\equations{
+    B_{in}
+    =
+    \mu_0 (1 + X_m) H_0 
+    \hp 
+    B_{out}
+    =
+    \mu_0 H_0 
+}
+
+Consider a spherical paramagnetic in an external magnetic field 
+with azimuthal symmetry. 
+\equations{
+    \phi_m(\vec r)
+    =
+    \sum_l
+    \left(
+        \alpha_l r^l 
+        +
+        \frac{\beta_l}{r^{l+1}}
+    \right)
+    P_l(\cos(\theta))
+    \\
+    \phi_{m, out}(\vec r)
+    =
+    \alpha_{1, out} r \cos(\theta)
+    +
+    \beta_{1, out}
+    \frac{1}{r^2} \cos(\theta)
+    \\
+    \phi = Hz 
+    \hp 
+    - \vec \nabla \phi = \vec H 
+    \\
+    \alpha_{1, out}
+    =
+    - \frac{B}{\mu_0}
+    \hp 
+    \phi_{in}
+    =
+    \alpha_{in} r \cos(\theta)
+    \hp 
+    \vec B_{out} \cdot \hat n 
+    =
+    \vec B_{in} \cdot \hat n 
+    \\
+    - \frac{B_0}{\mu_0}
+    -
+    \frac{2 B_{out}}{R^3}
+    =
+    (1 + X_m)
+    \alpha_{in}
+    \rightarrow 
+    - \frac{B_0}{\mu_0}
+    +
+    \frac{B_{out}}{R^3}
+    =
+    \alpha_{in}
+    \\
+    \phi_{in} 
+    =
+    \alpha_{in} r \cos(\theta) 
+    \hp 
+    \vec H_{in} = - \vec \nabla \phi_{in}
+    \\
+    B_{in} 
+    =
+    \mu_0 (1 + X_m) H_{in}
+    =
+    \hat z 
+    B_{out} \frac{1 + X_m}{1 + \frac{1}{3} X_m}
+}
+
+I think I got down all the equations, but you have to figure out 
+how to put them together. 
+
+\section{Dielectric Boundary Problems}
+We have our helper functions and scalar potentials $\vec H$ and $\phi$. 
+
+\equations{
+    \nabla^2 \phi_m(\vec r)
+    =
+    + \vec \nabla \cdot \vec M 
+}
+
+A vibrating sample magnetometer is a thing. 
+
+As two plates get farther apart, $\vec H$ goes to $0$ so $\vec B$ is 
+determined by $\vec M$ 
+
+\section{Magnetic Circuits}
+idk
+
+\section{Magnetic Materials}
+idk
+
+\section{Helmholtz Theorem}
+\equations{
+    \div \vec F(\vec r) = D(\vec r)
+    \hp
+    \curl \vec F(\vec r) = C(\vec r)
+    \hp 
+    \vec F 
+    =
+    - \vec \nabla U 
+    +
+    \curl \vec W 
+    \\
+    U 
+    =
+    \int \, d^3 \, r' \, 
+    \frac{D(\vec r )}{|\vec r - \vec{r'}|}
+    \hp 
+    \vec W 
+    =
+    \frac{C(\vec r )}{|\vec r - \vec{r'|}}
+}
+
+It just shows that there's math that gives you a vector field given 
+its curl and divergence 
+
+\chapter{Electrodynamics}
+Time-dependent math 
+
+We're first gonna work with Faraday's Law 
+
+Consider a cylinder with some resistance $R = \rho L / A$ and a current $I$ 
+such that $V_1 - V_2 = IR = V = EL$ and an energy $E = J \cdot \rho$ and 
+$\vec J = \sigma \vec E$ and $\sigma = 1/\rho$ 
+
+\equations{
+    m \dot{v} = F = q E 
+}
+
+$\int dl \cdot E$ for some closed circuit is called the electromotor force (EMF). 
+
+I think we're just going over all of the stuff that comes with 
+electrons moving around in a circuit. 
+
+\equations{
+    q \cdot EMF = q V B W 
+}
+
+So we get a big string of things 
+\equations{
+    \oint d \vec l \cdot q \vec v \times \vec B 
+    = 
+    q v B \cdot w 
+    =
+    q 
+    \oint_{\del S}
+    d \vec l \cdot \vec E 
+    =
+    q \int \, da \, 
+    \curl \vec E 
+}
+
+So we get 
+\equations{
+    \frac{d}{dl} \phi_m 
+    = 
+    \frac{d}{dl}
+    \int \, d\vec a \, \vec B 
+}
+
+So Faraday's Law is 
+\equations{
+    \curl \vec E 
+    =
+    - \frac{d}{dt} \vec B 
+}
+
+\section{Discussion 11}
+\equations{
+    \vec A(\vec r)
+    =
+    \frac{\mu_0}{4 \pi}
+    \left(
+        \int_{\Sigma}
+        \frac{\vec J_b(\vec{r'})}{|\vec r - \vec{r'}|}
+        \, d^3 r' 
+        +
+        \oint 
+        \frac{\vec K_b(\vec{r'})}{|\vec r - \vec{r'}|}
+        \, d a'
+    \right)
+    \\
+    \vec J_b = \curl \vec M 
+    \hp 
+    \vec K_b = \vec M \times \hat n 
+    \hp 
+    \curl \vec H 
+    =
+    \vec J_{f}
+}
+
+And we consider a linear polarization 
+\equations{
+    \vec M = X_m \vec H 
+    =
+    \mu_0 (1 + X_m) \vec B 
+    =
+    \mu \vec B 
+}
+
+And with some math we get some nice identities 
+\equations{
+    H_{above} H^{\perp}_{above}
+    =
+    H_{below} H^{\perp}_{below}
+    \hp 
+    \vec H^{\perp}_{above}
+    -
+    \vec H^{\perp}_{below}
+    =
+    \vec K_f \times \hat n 
+}
+
+\subsection{Problem 1}
+Find the magnetic field between two hollow tubes. 
+
+\section{EMF}
+In statics, Voltage was defined as 
+\equations{
+    V 
+    =
+    -
+    \int^{\vec r}_{\vec 0}
+    d \vec l \cdot \vec E 
+}
+
+Now we have a new equation 
+\equations{
+    \curl \vec E 
+    =
+    - \frac{d}{dt} \vec B 
+    \\ 
+    \int^{\vec r}_{\vec 0}
+    d \vec l \cdot \vec E 
+    =
+    \int\limits_S 
+    d \vec a \cdot \curl \vec E 
+    =
+    -
+    \int\limits_S 
+    d \vec a \cdot 
+    \frac{d}{dt} \vec B 
+    = 
+    \frac{d}{dt} \vec \Phi_m
+    \\
+    -\int^{\vec r}_{\vec 0}
+    d \vec l \cdot \vec E 
+    =
+    \frac{d}{dt} \vec \Phi_m
+    =
+    V_0
+}
+
+Given a constant EMF, we can see that the flux increases linearly. 
+
+The units of $\frac{d}{dt} \vec \Phi_m$ is 
+$T m^2 / s$ = $\frac{V s}{m^2} \frac{m^2}{s} = V$ 
+
+\section{More Circuit Stuff}
+\equations{
+    \Phi_m 
+    =
+    I \cdot L 
+    \hp 
+    V = L \cdot \frac{dI}{dt}
+}
+Where $L$ is the inductance. 
+
+\equations{
+    \frac{d}{dt} V 
+    =
+    \frac{d}{dt} Q / C 
+    =
+    \frac{I}{C}
+}
+
+Let's consider if both the current and voltage are both driven by 
+something that's sinusoidal. 
+
+\equations{
+    I = I_0 e^{i \omega t}
+    \hp
+    V = V_0 e^{i \omega t}
+}
+
+Then when we take our time derivatives we get 
+\equations{
+    \frac{d}{dt} 
+    V_0 e^{i \omega t}
+    =
+    \frac{I_0 e^{i \omega t}}{C}
+    \rightarrow 
+    i \omega V_0 = \frac{I_0}{C} 
+    \rightarrow 
+    V_0 = \frac{I_0}{i \omega C} 
+    \rightarrow 
+    V_0 = \mathbb Z_C I_0 
+}
+
+So we can see that the voltage and current are phase shifted from each other. 
+
+\equations{
+    V_0 e^{i \omega t}
+    =
+    L \cdot 
+    i \omega I_0 e^{i \omega t}
+    \rightarrow 
+    V_0 = i \omega L I_0 
+    \hp 
+    \mathbb Z_L = i \omega L 
+}
+
+We put some stuff together to get an impedance 
+\equations{
+    Z 
+    =
+    \frac{1}{i \omega C }
+    + i \omega L 
+    =
+    \frac{1 - \omega^2 L C }{i \omega C }
+}
+We have a resonance at $\omega = 1 / \sqrt{LC}$
+
+Z is either positive imaginary or negative imaginary. 
+
+\equations{
+    \frac{1}{Z}
+    =
+    i \omega C 
+    +
+    \frac{1 - \omega^2 LC }{i \omega L}
+    \hp 
+    Z_{//} = \frac{i \omega L}{1 - \omega^2 L C}
+}
+
+\section{Magnet in a Copper Tube}
+So there's a gravational force and there's a magnet that gives off a magnetic 
+field. 
+
+We have a changing magnetic field which generates an EMF in the tube. 
+
+The flux above the magnet is increasing
+
+The flux below the magnet is decreasing
+
+The magnetic field makes a current in the tube, and that tube current then 
+induces its own magnetic field. That induced magnetic field pushes 
+against gravity and thus the magnet falls slower than expected. 
+
+\section{Field Energy Density}
+We know that magnetic fields do no work on objects,
+\equations{
+    U = QV 
+    \hp 
+    U(\vec r_[1])
+    +
+    U(\vec r_[2])
+    =
+    Q \left(
+        V(\vec r_1) + V(\vec r_2)
+    \right)
+    \\
+    I = qn \vec v 
+    =
+    \frac{dQ}{dt}
+    \hp 
+    \frac{dU}{dt} 
+    =
+    \frac{dQ}{dt}
+    V 
+    =
+    I V
+    \\
+    \Delta U 
+    =
+    \int^{t2}_{t1} \, dt \, 
+    \frac{dU}{dt} 
+}
+
+Construct circuit elements that have $\vec E$ and/or $\vec B$ in them. 
+
+\equations{
+    Q = V * C 
+    \hp 
+    \frac{dU}{dt}
+    =
+    I * V 
+    =
+    \int^{t}_{0} \, dt \, 
+    \frac{dQ}{dt} V 
+    =
+    \int^{t}_{0} \, dt \, 
+    \frac{dQ}{dt} 
+    \frac{Qd}{\epsilon_0 A}
+    \\
+    =
+    \frac{1}{C}
+    \int^{Q}_{0} \, dQ \, 
+    Q 
+    =
+    \frac{1}{C}
+    \frac{Q^2}{2}
+    =
+    \frac{1}{2} CV^2
+}
+
+That's our math stuff 
+\equations{
+    \Delta U 
+    =
+    \frac{1}{2}
+    \frac{\epsilon_0 A L(?)}{d^2}
+    =
+    \frac{\epsilon_0}{2}
+    A d E^2 
+    =
+    U_{E}
+    *
+    \textrm{volume}
+    \hp
+    U_{E}
+    =
+    \frac{\epsilon_0 E^2}{2}
+}
+
+If we consider a solenoid, where $\vec B = \mu_0 n I$ 
+
+\equations{
+    U(t)
+    =
+    \int^{t}_{0} \, dt \, 
+    V(t) * I(t) 
+    =
+    \int^{t}_{0} \, dt \, 
+    L * \frac{dI}{dt} * I 
+    =
+    \frac{1}{2} L I^2 
+    =
+    \frac{1}{2} \frac{\phi_{B}^{2}}{L}
+    \\
+    \phi_{B}
+    =
+    L * I 
+    \hp 
+    L 
+    =
+    \frac{\phi_{net}}{I}
+    =
+    \frac{1}{I}
+    \mu n I * \pi R^2 * nh 
+    =
+    \mu_0 \pi n^2 R^2 h
+    \\
+    \phi_{B} 
+    =
+    B \pi R^2 n h 
+    \hp 
+    U 
+    =
+    \frac{1}{2}
+    \frac{B n h \pi R^2}{\mu_0 n^2 \pi R^2 h}
+    = 
+    \frac{1}{2 \mu_0}
+    B^2 * h \pi R^2 
+}
+ta da 
+
+\section{Repairing Ampere's Law}
+Imagine a circuit with just a resistor and capacitor (RC circuit)
+
+\equations{
+    V_{Battery}
+    = 
+    \frac{Q}{C}
+    +
+    I(t) R 
+    \hp 
+    RC \frac{dQ}{dt} 
+    + Q 
+    =
+    \frac{V_0}{C}
+    \\
+    Q 
+    =
+    C V_0 
+    (1 - e^{-t / RC})
+    \hp 
+    I(t) 
+    =
+    \frac{V}{R} 
+    e^{-t / RC}
+    \\
+    I_0 = \frac{V}{R} 
+    \hp 
+    \int\limits_{\del S} \, d \vec l \, 
+    \vec B 
+    =
+    \mu_0 I(t) 
+    \hp
+    \vec B 
+    =
+    \hat \phi
+    \frac{\mu_0 I(t)}{2 \pi s }
+    \\
+    \curl \vec B 
+    =
+    \mu_0 \vec J 
+}
+
+% Ampere's law states that you can make a curve of any direction and 
+% use the equation, but that means you can get different answers with different 
+% amperian loops, so we need to fix that. 
+
+Ampere's Law contradicts Stoke's Theorem because if the amperian loop changes, the 
+answer changes, when Stoke's Theorem says that shouldn't be the case. 
+
+Let's imagine a capacitor 
+\equations{
+    \vec J * A 
+    =
+    \vec I 
+    \hp 
+    J 
+    =
+    \frac{d \sigma}{dt}
+    =
+    \epsilon_0 
+    \frac{d}{dt}
+    E 
+    \hp 
+    E = \frac{\sigma}{\epsilon_0}
+    \\
+    \int\limits_S \, d\vec a \,
+    \curl \vec B 
+    =
+    \int\limits_{\del S} \, d \vec l \, 
+    \cdot \vec B 
+    \\
+    \curl \vec B 
+    = 
+    \mu_0 
+    \left( 
+        \vec J(\vec r, t)
+        +
+        \epsilon_0 
+        \frac{d}{dt}
+        \vec E(\vec r, t)
+    \right)
+}
+
+The divergence of the magnetic field is always $0$ no matter what. 
+
+\equations{
+    \div \vec B = 0 
+    \hp
+    \curl \vec E 
+    =
+    -
+    \frac{d}{dt}
+    \vec B 
+    \hp 
+    \div \vec E(\vec r, t)
+    =
+    \frac{\rho(r, t)}{\epsilon_0}
+    \\
+    U_E(\vec r )
+    =
+    \frac{\epsilon_0}{2} 
+    E^2 
+    \hp 
+    U_B 
+    =
+    \frac{1}{2 \mu_0}
+    B^2
+}
+
+We know for a fact that fields have energy. Do field conserve their energy 
+though?
+
+\equations{
+    U_{E}(\vec r, t)
+    =
+    \frac{\epsilon_0}{2} 
+    E^2 
+    \hp 
+    U_{B}(\vec r, t)
+    =
+    \frac{1}{2 \mu_0}
+    B^2
+    \\
+    \curl \vec B(\vec r, t)
+    =
+    \mu_0 \vec J_{total}(\vec r, t)
+    +
+    \mu_0 \epsilon_0 \frac{\del}{\del t} \vec E(\vec r, t)
+    \\
+    \div \vec B = 0 
+    \hp 
+    \curl \vec E(\vec r, t)
+    =
+    - \frac{d}{dt} \vec B
+    \hp 
+    \div \vec E 
+    =
+    \frac{\rho(\vec r, t)}{\epsilon_0}
+    \\
+    \frac{d}{dt} U_{Q}(\vec r, t) 
+    =
+    -\frac{d}{dt} 
+    \int\limits_{V} \, d^3 r' \, 
+    \left(
+        \frac{\epsilon_0}{2} E^2 
+        +
+        \frac{1}{2 \mu_0} B^2
+    \right)
+    =
+    \\
+    - \frac{1}{\mu_0}
+    \int\limits_{\del V} \, d^2 a' \, 
+    \vec E \times \vec B
+}
+
+That's basically us showing how conservation of energy is kept for fields 
+
+Now let's consider the work done by a field 
+
+\equations{
+    W = \Delta U 
+    = 
+    \int^{tf}_{ti} \, dt \, 
+    \frac{d \vec l}{dt} \vec F(\vec r, 0)
+    =
+    \\
+    \int^{tf}_{ti} \, dt \, 
+    \vec V(t)
+    \cdot 
+    \left(
+        q \vec E(\vec r, t)
+        +
+        q \vec V(t)
+        \times 
+        \vec B(\vec r, t)
+    \right)
+    =
+    \int^{tf}_{ti} \, dt \, 
+    \vec V(t)
+    \cdot 
+    q \vec E(\vec r, t)
+    \\
+    \rightarrow 
+    \frac{dU_{Q}}{dt}
+    = 
+    \int \, d^3 r \, 
+    q n(\vec r, t) \cdot \vec V(\vec r, t) \cdot \vec E(\vec r, t)
+    \\
+    =
+    \int \, d^3 r \, 
+    \vec J(\vec r, t) \cdot \vec E(\vec r, t)
+    \\
+    =
+    \int\limits_{V} \, d^3 r \, 
+    \frac{1}{\mu_0}
+    \left(
+        \curl \vec B(\vec r, t)
+        -
+        \mu_0 \epsilon_0 
+        \frac{\del}{\del t}
+        \vec E(\vec r, t)
+    \right)
+    \cdot 
+    \vec E(\vec r, t)
+}
+
+Now we look at both parts of the $\vec J$ equation and see how they work 
+in fields 
+
+\equations{ 
+    -\mu_0 \epsilon_0 
+    \frac{\del}{\del t}
+    \vec E(\vec r, t)
+    =
+    - \epsilon_0 
+    \int \, d^3 r \, 
+    \vec E(\vec r, t)
+    \cdot 
+    \frac{\del}{\del t}
+    \vec E(\vec r, t)
+    \\
+    =
+    - \frac{\epsilon_0}{2} 
+    \frac{\del}{\del t}
+    \int\limits_{V} \, d^3 r \, 
+    E^2(\vec r, t)
+    \\
+    \curl \vec B(\vec r, t)
+    =
+    \int\limits_{V} \, d^3 r \, 
+    \vec E 
+    \cdot 
+    \curl \vec B 
+    =
+    \int\limits_{V} \, d^3 r \, 
+    \varepsilon_{ijk}
+    E_{i}
+    \del_{j}
+    B_{k}
+    =
+    \\
+    \del_{j}
+    E_{i}
+    B_{k}
+    =
+    B_{k} 
+    \del_{j}
+    E_{i}
+    +
+    E_{i}
+    \del_{j}
+    B_{k} 
+    \\
+    \curl \vec B(\vec r, t)
+    = 
+    \frac{1}{\mu_0}
+    \int\limits_{V} \, d^3 r \, 
+    \varepsilon_{ijk}
+    \left(
+        \del_{j}
+        E_{i}
+        B_{k} 
+        -
+        B_{k} 
+        \del_{j}
+        E_{i}
+    \right)
+    \\
+    = 
+    -
+    \frac{1}{\mu_0}
+    \int\limits_{V} \, d^3 r \, 
+    \varepsilon_{jik}
+    \del_{j}
+    E_{i}
+    B_{k} 
+    +
+    \varepsilon_{kji}
+    B_{k} 
+    \del_{j}
+    E_{i}
+    \\
+    =
+    \frac{1}{\mu_0}
+    \int\limits_{V} \, d^3 r \, 
+    \left( 
+    - \curl 
+    (\vec E \times \vec B)
+    +
+    \vec B
+    \cdot 
+    \curl \vec E 
+    \right)
+}
+
+We have our two parts of the integral, now we can put it all together 
+\equations{
+    - 
+    \frac{1}{\mu_0}
+    \int\limits_{V} \, d \vec a \cdot 
+    \vec E 
+    \times 
+    \vec B 
+    -
+    \frac{1}{\mu_0}
+    \int \, d^3 r \, 
+    \vec B(\vec r, t)
+    \cdot 
+    \frac{\del}{\del t}
+    \vec B(\vec r, t)
+    \\
+    =
+    - 
+    \frac{1}{\mu_0}
+    \int\limits_{V} \, d \vec a \cdot 
+    \vec E 
+    \times 
+    \vec B 
+    -
+    \frac{1}{2\mu_0}
+    \int \, d^3 r \, 
+    \frac{\del}{\del t}
+    B^2(\vec r, t)
+    \\
+    \frac{dU_{Q}}{dt}
+    =
+    \int\limits_{V} \, d^3 r \, 
+    \vec J_{Total}(\vec r, t)
+    \cdot 
+    \vec E(\vec r, t) 
+    \\
+    =
+    - 
+    \frac{\del}{\del t}
+    \int\limits_{V} \, d^3 r \, 
+    \left(
+        U_{E}(\vec r, t)
+        +
+        U_{B}(\vec r, t)
+    \right)
+    -
+    \frac{1}{\mu_0}
+    \int\limits_{\del V} \, d \vec a \cdot 
+    \vec E \times \vec B 
+}
+
+That's a thing and there are other things 
+\equations{
+    \vec S(\vec r, t)
+    =
+    - \frac{1}{\mu_0}
+    % \int\limits_{\del V} \, d \vec a \cdot 
+    \vec E \times \vec B 
+}
+
+That is called Pointing's Vector 
+
+
+
+\section{MIDTERM 2}
+2d current density $K_B$ has units amps per meter because the amps are 
+through a cross section of the 2d space. 
+
+Magnetic boundary value problems have like 2 important equations
+\equations{
+    \vec H_{1, ||}
+    -
+    \vec H_{2, ||}
+    =
+    \vec K_{free}
+    \times 
+    \hat n
+    \hp 
+    \vec B_{\perp, 1}
+    =
+    \vec B_{\perp, 2}
+}
+
+We also do have a kind of Green's function approach 
+with the magnetic pseudo-potential 
+\equations{
+    \div \vec H 
+    =
+    - 
+    \div \vec M 
+    \hp 
+    \vec H 
+    =
+    - \vec \nabla \phi_M(\vec r)
+    \\
+    \nabla^2 \phi_m(\vec r)
+    =
+    - \rho_m(\vec r)
+    =
+    + \div \vec M 
+}
+
+
+REMEMBER YOU MAGNETIC DIPOLE EQUATIONS
+
+and you magnetic field from a current equations 
+
+If you have both a current and a magnetization density, 
+you can just put them together and try to solve. 
+
+All you do is solve both parts independently. 
+
+Solve the perma-magnetic with the magnetic pseudopotential and solve 
+the moving current with the other math. 
+
+\section{Conservation of Energy}
+The rate at which kinetic energy in a volume $V$ increases 
++
+rate at which EM field energy in $V$ increases 
+=
+rate at which field energy enters $V$
+
+\equations{
+    \int\limits_V \, d^3 r \, 
+    \vec J \cdot \vec E
+    +
+    \frac{d}{dt}
+    \int\limits_V \, d^3 r \, 
+    \left(
+        \frac{\epsilon_0}{2} E^2 
+        + 
+        \frac{1}{2 \mu_0}
+        B^2
+    \right)
+    =
+    \frac{1}{\mu_0}
+    \int \, d^2 a \, 
+    \vec E \times \vec B
+}
+
+Where the last object is Pointing's Vector 
+
+Given an increasing polarization in a dielectric, part of the 
+current driving energy is a polarization current 
+
+\equations{
+    \curl \frac{\vec B}{\mu_0}
+    -
+    \curl \vec M 
+    =
+    \vec J_F 
+    \ldots 
+    \ldots 
+    \ldots 
+    \ldots 
+}
+
+
+\equations{
+    \curl \vec H 
+    =
+    \vec J_F 
+    +
+    \frac{\del}{\del t }
+    \vec D 
+}
+
+You do a whole bunch of math to get 
+\equations{
+    \frac{dU_Q}{dt}
+    =
+    \int\limits_V \, d^3 r \, 
+    \vec J_F \cdot \vec E 
+    \\
+    =
+    - \int \, d \vec a \,
+    \vec E \times \vec H
+    -
+    \left(
+        \int \, d^3 r \, 
+        \vec E \cdot \frac{d}{dt} \vec D 
+        +
+        \int \, d^3 r \, 
+        \vec H \cdot \frac{d}{dt} \vec B 
+    \right)
+}
+
+the rate at which fields do work on matter 
+plus the rate which field energy goes up 
+=
+the rate energy is added to the field. 
+
+Consider all of Maxwell's equations 
+\equations{
+    \div \vec E(\vec r, t) = \frac{\rho(\vec r, t)}{\epsilon_0}
+    \hp 
+    \curl \vec E(\vec r, t)
+    =
+    - \frac{\del}{\del t}
+    \vec B(\vec r, t)
+    \\
+    \div \vec B(\vec r, t)
+    =
+    0
+    \hp 
+    \curl \vec B(\vec r, t)
+    =
+    \mu_0 \vec J(\vec r, t)
+    +
+    \mu_0 \epsilon_0 \frac{\del}{\del t}
+    \vec E(\vec r, t)
+}
+
+You can do some math to uncouple the E and B fields 
+\equations{
+    \curl (\curl \vec E)
+    = 
+    - \frac{\del}{\del t} \curl \vec B 
+    \hp 
+    \curl \vec B 
+    =
+    \mu_0 \frac{\del}{\del t} \vec J_F 
+    +
+    \mu_0 \epsilon_0 \frac{\del^2}{\del t^2} \vec E 
+    \\
+    - \vec \nabla (\div \vec E )
+    +
+    \nabla^2 \vec E 
+    =
+    \mu_0 \frac{\del}{\del t}
+    \vec J 
+    +
+    \mu_0 \epsilon_0 \frac{\del^2}{\del t^2} \vec E 
+    \\
+    ------------------------
+    \\
+    \left(\nabla^2 - \epsilon_0 \mu_0 \frac{\del^2}{\del t^2} \right)
+    \vec E 
+    =
+    \mu_0 \frac{\del}{\del t}
+    \vec J 
+    +
+    \vec \nabla \frac{\rho}{\epsilon_0}
+    \\
+    \left(\nabla^2 - \epsilon_0 \mu_0 \frac{\del^2}{\del t^2} \right)
+    \vec B 
+    =
+    -
+    \mu_0 
+    \curl \vec J
+}
+The two inhomogeneous wave equations for $E$ and $B$
+
+The homogeneous wave equation would be 
+\equations{
+    \left(\nabla^2 - \epsilon_0 \mu_0 \frac{\del^2}{\del t^2} \right)
+    \vec E(\vec r, t)
+    =
+    0
+}
+
+Let's consider the $x$ component of an E field that only accelerates 
+in the $z$ direction 
+
+\equations{
+    \left(\frac{\del^2}{\del z^2} 
+    - 
+    \epsilon_0 \mu_0 \frac{\del^2}{\del t^2} \right)
+    E_x(z, t)
+    =
+    0
+}
+
+There's some witchcraft 
+\equations{
+    \sqrt{\frac{1}{\mu_0 \epsilon_0}} = c
+}
+That's the speed of light 
+
+So our equation as actually 
+\equations{
+    \left(
+        \del_z 
+        - 
+        \frac{1}{c^2}
+        \frac{\del^2}{\del t^2}
+    \right)
+    \vec E 
+}
+
+So if our field only has a z component, then we should get that 
+there is not change in the z component for the wave
+
+plane waves are transverse 
+    
+If we use a lens to make a focused wave we get 
+\equations{
+    B_y 
+    =
+    \frac{E_x}{c}
+}
+
+volts per meter are cheap and easy to get 
+
+teslas are hard to get 
+
+\section{HW Problems}
+
+\subsection{Magnet Falling Through Pipe}
+We have to know 
+\equations{
+    U = - \vec m \cdot \vec B 
+    \hp 
+    \vec F 
+    =
+    - \vec \nabla U 
+    =
+    - \vec m 
+    \cdot 
+    \frac{d}{dt} B_z
+}
+
+And then you can treat the outside copper pipe as a current loop. 
+
+\section{Plane Waves}
+Consider the equations 
+\equations{
+    \curl \vec E = -\frac{\del}{\del t} \vec B 
+}
+
+And the plane wave equations
+\equations{
+    \vec E(\vec z, t) 
+    = 
+    \hat x E_x(z - ct) 
+    =
+    \hat x E(s)
+}
+
+You take the cross product of that E field equation to get 
+\equations{
+    E_z 
+    =
+    c B_y
+}
+$c$ is a big number so its easy to remember that electric fields are 
+much easier to make than magnetic fields. 
+
+We can consider wave propogation with the unit vectors 
+\equations{
+    \hat e 
+    \times 
+    \hat b 
+    =
+    \hat n
+}
+
+We can find the energy densities 
+\equations{
+    U_B 
+    =
+    \frac{1}{2 \mu_0} B^2
+    \hp 
+    U_E 
+    =
+    \frac{\epsilon_0}{2} E^2 
+    =
+    \frac{\epsilon_0}{2} \frac{1}{\epsilon_0 \mu_0} B^2 
+    =
+    \frac{1}{2 \mu_0} B^2
+}
+The magnetic and electric fields carry half of the energy of the total 
+system each (despite the magnetic field having less strength)
+
+Now we can find $S$
+\equations{
+    S 
+    =
+    \frac{1}{\mu_0} \vec E \times \vec B 
+    =
+    \hat n \frac{1}{\mu_0} E \cdot \frac{E}{c} 
+    ===
+    \hat n c \epsilon_0 E^2 
+}
+
+Which is $\hat n \cdot c \cdot$ energy density of lightwave
+
+There's a picture of the light wave fields propogating through space. 
+
+Consider an Amperian loop through the light fields as it propogates through 
+$\Delta z$.
+
+Doing that and calculating gives us 
+\equations{
+    \frac{\del E_x}{\del z}
+    =
+    c \frac{\del B_y}{\del z}
+    =
+    \frac{\del B_y}{\del t}
+}
+$\vec B / dt$ induces $\vec E$ via Faraday's Law 
+
+$\vec E / dt$ induces $\vec B$ via Ampere's Law 
+
+\section{Polarizing Light}
+$hat e$ and $\hat b$ can be $360 \deg$ worth of directions with 
+$\hat e \times \hat b$ being in the same spot. 
+
+\section{Sinusoidal Waves}
+
+\section{Complex Harmonic Functions}
+
+\section{Discussion 12}
+Consider all the same electrodynamics equations we've been talking about forever 
+\equations{
+    \div \vec E 
+    = 
+    \frac{\rho}{\epsilon_0}
+    \hp 
+    \curl \vec E 
+    = 
+    0 
+    \hp 
+    \div \vec B 
+    = 
+    0 
+    \hp 
+    \curl \vec B 
+    = 
+    \mu_0 \vec J 
+}
+
+The continuity equation is 
+\equations{
+    \div \vec J 
+    =
+    - \del_t \rho
+}
+
+Faraday's Law can be written as 
+\equations{
+    \curl \vec E 
+    =
+    - \del_t \vec B 
+    \hp 
+    \oint \vec D \cdot d \vec l \equiv \varepsilon 
+    \hp 
+    \varepsilon 
+    =
+    - \frac{d \phi_B}{dt}
+    \\
+    \div 
+    (\curl \vec B)
+    =
+    \mu_0 \div \vec J
+    =
+    - \mu_0 \del_t \rho 
+}
+
+Consider a displacement current 
+\equations{
+    \div \vec J_d 
+    =
+    \del_t \rho 
+}
+
+This has an actual physical meaning and isn't just a mathematical model 
+
+\equations{
+    \del_t \rho 
+    =
+    \del_t 
+    (\frac{1}{\epsilon_0}) \div \vec E 
+    \Rightarrow 
+    \vec J_d 
+    \equiv 
+    \del_t \vec E 
+    \Rightarrow 
+    \curl \vec B 
+    =  
+    \mu_0 
+    (\vec J + \epsilon_0 \vec J_d)
+}
+
+All of magnets is equivalent to all of electrics because its all just fields. 
+\equations{
+    \div \vec D 
+    =
+    0
+    \hp 
+    \div \vec B 
+    = 0 
+    \hp 
+    \curl \vec H 
+    = \vec J_f
+}
+
+So we do some new stuff to get 
+\equations{
+    - \del_t \rho_b 
+    \equiv 
+    \div \vec J_p 
+    \hp 
+    \vec J 
+    =
+    \vec J_b 
+    +
+    \vec J_f 
+    \hp 
+    \vec J_b 
+    =
+    \curl \vec M 
+    \\
+    - \del_t \rho 
+    =
+    - \del_t 
+    (\rho_b + \rho_f)
+    \equiv 
+    \vec P \cdot \hat n
+}
+
+So now we get the last of Maxwell's equations 
+\equations{
+    \curl \vec B 
+    =
+    \mu_0 
+    \left(
+        \vec J_f 
+        +
+        \vec J_b
+        +
+        \vec J_p
+        +
+        \epsilon_0 
+        \del_t \vec E 
+    \right)
+}
+Know that 
+\equations{
+    \vec J_b = \curl \vec M 
+    \hp 
+    \vec J_p = \del_t \vec P 
+    \hp 
+    \vec J_d = \epsilon_0 \vec E 
+}
+
+Move some stuff around and use the rest of our equations to get 
+\equations{
+    \curl 
+    \left(
+        \frac{\vec B}{\mu_0}
+        -
+        \vec M 
+    \right)
+    =
+    \vec J_f 
+    +
+    \del_t 
+    (\vec P + \epsilon_0 \vec E)
+}
+
+So now we have all our electrostatic but magnet equivalences 
+\equations{
+    \curl \vec D = - \del_t \vec B 
+    \hp 
+    \curl \vec H 
+    =
+    \vec J_f + \del_t \vec D 
+}
+
+Now we can use these to get our boundary conditions equations 
+\equations{
+    D_{1}^{\perp}
+    -
+    D_{2}^{\perp}
+    =
+    \sigma_f 
+    \hp 
+    B_{1}^{\perp}
+    =
+    B_{2}^{\perp}
+    \\
+    \vec{E_{1}^{//}}
+    -
+    \vec{E_{2}^{//}}
+    = 
+    0
+    =
+    \frac{\del \phi_B}{\del t}
+    \hp 
+    \vec{H_{1}^{//}}
+    -
+    \vec{H_{1}^{//}}
+    =
+    \vec K_f 
+    \times \hat n 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}

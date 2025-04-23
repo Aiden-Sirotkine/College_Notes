@@ -1431,10 +1431,523 @@ is what an inversion algorithm would do.
 
 The algorithm is pretty neat. 
 
+\subsection{Alias Algorithm}
+LOOK AT SLIDES AND FIGURE IT OUT 
 
+\section{Marsaglia's Method}
+For discrete random variables with denominators as powers of 2 
 
+Use when there's a large number of values and we need alot of them. 
 
+Requires a single U(0, 1) variable 
 
+\subsection{Algorithm}
+for urns 1/2, 1/4, 1/8, etc. place segments in each urn for the amount of items 
+with probabilities in those segments. 
+
+Then apply the law of total probabilty to the segments in each urn. 
+
+\begin{itemize}
+    \item 
+    Pick an urn with probability $q_i$
+    \item 
+    Pick a value from the urn using a discrete uniform 
+\end{itemize}
+THAT'S WHY YOU NEED THE PROBABILITY TO HAVE A DENOMINATOR THATS A POWER 
+OF 2. 
+
+There's some math to turn the one variable into the variable for the alias 
+probability. 
+
+\section{Normal Random Variable}
+There is a better way to do it than the acceptance-rejection method we went 
+over earlier 
+
+\subsection{Crude Method}
+This is also known as the Central Limit Theorem Method 
+
+If you take a bunch of uniform variables, you get a standard normal distribution 
+
+consider taking $n=12$ U(0, 1) variables 
+
+\equations{
+    (Y - n/2) / (n / 12)^{1/2}
+    \rightarrow 
+    N(0, 1)
+    \hp 
+    n \to \infty 
+}
+
+This doesn't work well for $n=12$ because $n$ is too small. 
+
+\subsection{Bivariate Method }
+If we take a standard normal and square and sum them, it'll be distributed 
+chi squared with 2 degrees of freedom, which is distributed exponentially 
+with mean $1/2$. 
+
+You use inversion to get an exponential generator 
+\equations{
+    D^2 = X^2_1 + X^2_2 = \chi^2_2 \equiv \textrm{exponential(1/2)}
+    \\
+    D^2 
+    =
+    -2 \ln(U)
+}
+
+So you do some math and get some stuff that yield's you a good 
+normal distribution. 
+
+The issue is the variables are not super independent which sucks. 
+
+\subsection{Polar Method}
+Let $U_1$ and $U_2$ be U(0, 1) variables 
+
+\equations{
+    V_i = 2U_i - 1 
+    \hp 
+    W = V_1^2 + V_2^2
+}
+
+If $W > 1$, then we do a thing 
+
+If $W < 1$, then 
+
+\equations{
+    Y = (-2 \ln(W) / W)^{1/2}
+    \hp 
+    X_1 = V_1 Y 
+    ,
+    X_2 = V_2 Y 
+    =
+    N(0, 1)
+    \\
+    X_1^2 + X_2^2 = -2 \ln(W)
+}
+
+\section{ALIAS AND URNS MAYBE ON EXAM 2}
+
+\section{BASIC CALCULUS ON MIDTERM PROBABLY FOR A PROOF OR 2}
+
+That's the end of the Unit 
+
+\chapter{Statistical Analysis}
+The slides are going over a bunch of terms that we should know. 
+
+\section{Variance}
+A random variable with a variance of 0 is deterministic. It's just a value. 
+
+\equations{
+    Var(cX) = c^2 Var(X)
+}
+
+Random Sampling is also important 
+
+Confidence Intervals, convergence, etc etc etc 
+
+Normal stats only works if all your variables are IID 
+
+That doesn't work in simulation stats. 
+
+\section{Project}
+You have to write an 8-10 page paper and an 8-10 minute youtube video. 
+
+The goal is to estimate, with a 95\% confidence interval, the number 
+of card draws necessary to get a matching pair. 
+
+But the cards are banknotes and a match is the serial numbers. 
+
+You CANNOT just check every card to every other card. Your time complexity 
+will be absurd because you're working with a bajillion cards.
+
+\subsection{Intended Solution Hints}
+\begin{itemize}
+    \item
+    What information is necessary to store? Can we store it more efficiently? 
+    \item
+    How can we estimate variance efficiently? 
+    (Keep this one in mind for the next set of slides)
+    \item
+    Can we substitute empirical work with theory?
+\end{itemize}
+
+\section{Confidence Intervals}
+Because simulations can be repeated, we can repeat tests multiple times to create 
+a variety of confidence intervals to figure out the true mean. 
+
+\section{Correlation Coefficient}
+-1 is inverse correlation, +1 is positive correlation, 0 is no correlation. 
+
+The fun thing about doing stats with simulation data is that our numbers are 
+absolutely correlated, while in stats, we're meant to be taking random samples. 
+
+Simulation data tends to be positively correlated and biased. 
+    
+\section{Simulation Stats}
+What you need to do is treat full simulations as just singular observations. 
+
+Once you have a full sample size of simulations, then you can start getting 
+real numbers. 
+
+\section{Performance Measures}
+What are the numbers that we want to take out of the simulation 
+
+\subsection{Transient}
+Measures that change over time 
+
+\subsection{Steady-State}
+Measures that converge to a data point given more and more time. 
+
+\section{Types of Simulations}
+
+\subsection{Terminating}
+Simulations that close after a day and thus "end" at some point. 
+
+\subsection{Steady-State}
+Simulations that can run forever if they really want to. 
+
+\section{Performance Stats}
+If we take data from individual runs, it will be correlated, but if we take 
+the mean of multiple datapoint from multiple runs, our numbers will be IID 
+and the stats should work fine. 
+
+\subsection{Ratio Estimates}
+If we're looking at the ratios of two different numbers, there are two ways to 
+get your data. 
+
+You can find the average of each ratio, which gives you the average 
+ratio in a certain time frame. 
+
+You can add up all the numerators and denominators, which will then give 
+you a long running average. 
+
+\section{Steady State Simulation Issues}
+\begin{itemize}
+    \item 
+    The simulation can run forever 
+    \item 
+    How long do you need it to run to stabilize? 
+    \item 
+    Initial condition shouldn't affect the steady state 
+    \item 
+    a Steady State does NOT mean a single value, but instead
+    it means that the distribution of values becomes time invariant 
+\end{itemize}
+
+\section{Steady State Measures}
+Given any set of initial conditions, all the steady state values should 
+converge to the same steady state distribution. 
+
+Many systems do NOT have a steady-state. Steady states only exist in systems 
+that do not terminate and have the potential to reach a steady state. 
+
+Steady state features have to last forever ( no closing), but transient 
+measures can have steady-state like features. 
+
+For a terminating system. The wait time for a certain time of day is never 
+a steady system, but the average wait time on any given day can converge 
+to a steady state system. 
+
+\subsection{Steady State Initial Conditions}
+It would work in theory, but we don't know those conditions. 
+
+What we do instead is leave a "warm up" time and discard the first few 
+values so that the system is in a steady state by the time we start recording. 
+
+The sum is still biased because of correlations in adjacent customers/datapoints. 
+
+\section{Transient Behavior}
+The effect that initial conditions have on the output. 
+
+If the initial transient approaches 0 over a very long time, then the 
+simulation can reach a steady state. 
+
+\section{Welch's Test}
+Run the simulation $n$ times with the same initial conditions and calculate 
+$m$ datapoints. 
+
+We take the average of the datapoints at a specific time from every simulation. 
+(The vertical average)
+
+This essentially gives us a smoothing effect of the transient. 
+
+All of the randomness of the simulation will cancel out so the steady 
+state becomes far more clear (because the simulation itself is the only 
+thing bringing in noise).
+
+\subsection{Steady State Point Estimate}
+Consider $\mu$ as the long-run expected value for $Y_i$. 
+
+Set 
+\equations{
+    \bar{Y}(m) 
+    =
+    \frac{1}{m} 
+    \sum_{i = 1}^{m} Y_i
+}
+
+The simulation output is typically truncated to get rid of the initial data. 
+
+$\bar Y(m)$ is a consistent estimator for $\mu$ 
+
+\subsection{Steady State Confidence Interval}
+$\bar{Y}(m)$ is an observation of dependent variables, so there is not 
+a good way to directly calculate the variance of the data. 
+
+\section{Methods}
+\subsection{ Method of Replication }
+
+Make $b$ independently seeded runs with $m$ observations per run. 
+(removing transient data)
+
+Take the sum of the sum of the observations 
+
+\equations{
+    E(Y_{ij})
+    =
+    \bar Z \pm t_{b-1, 0.25} s/ b^{1/2}
+}
+where $t$ is the t-value of the confidence interval. 
+
+The total number of observations is $bm = n$ 
+
+increase $m$ to increase normality 
+
+Each run has initialization bias and 
+there is correlation within each individual run. 
+
+What you can do is warm up a single run and use those steady state conditions 
+as the initial conditions. 
+
+But will using the same steady state conditions for every run cause biases 
+and correlations?
+
+\subsection{Batch Means Method }
+A variation of the replication method 
+
+consider a sequence of dependent data $Y_i$
+
+If, instead of using $i$ and $i+1$, we use $i+k$ for some large-ish $k$ instead, 
+then our steady state datapoints are going to be almost independent. 
+
+We take only a single run, and we split it up into batches 
+$1, 1+b, \ldots$, and $2, 2+b, \ldots$, $\ldots$
+
+The main bias will be within adjacent batches. 
+
+You use the batch means to estimate the variance of the steady state. 
+
+The optimal way to do it is a small number of very large batches. 
+
+Some possible batch variants are 
+\begin{itemize}
+    \item 
+    put gaps between batches 
+    \item 
+    have batches overlap (which somehow works)
+\end{itemize}
+
+There's some math to calculate the covariance between two batches to double 
+check if they are correlated or not. 
+
+\section{COVARIANCE AND CORRELATION WILL BE ON THE EXAM}
+ 
+\section{Regenerative Method }
+\begin{itemize}
+    \item
+    Takes advantage of the regenerative structure of a system 
+    \item
+    A system that regenerates has points in which the system resets and future 
+    events are not affected by past events. 
+    \item
+    (Image when a queue empties out for a single server queue, then the future 
+    runs don't impact the past runs because the queue emptied out)
+    \item
+    THe processes between regenerative points are IID 
+    \item
+    Consider a sequence of correlated data. 
+    \item
+    For each sample of data between regenerative cycles. Take the total 
+    simulation output $Z$ and the total number of samples $N$ from each cycle. 
+    \item
+    You can then use both $Z$ and $N$ to make a confidence interval for the 
+    expected value of the system. 
+    \item
+    Because $Z$ and $N$ are IID, you can find $E(Z)$ and $E(N)$ trivially, and then 
+    $E(Y) = E(Z) / E(N)$ 
+    \item
+    as the number of regenerative cycles $r \to \infty$, the bias and variance 
+    of the system both go to 0.
+\end{itemize}
+
+\subsection{Pros and Cons}
+Advantages :
+\begin{itemize}
+    \item 
+    No initial transient 
+    \item 
+    Independent observations 
+    \item 
+    Simple 
+    \item 
+    Asymptotically Exact 
+\end{itemize}
+
+Distadvantages 
+\begin{itemize}
+    \item 
+    Unknown cycle lengths 
+
+    What do you do with the last unfinished cycle?
+    \item 
+    Simulation may have veery very long cycles 
+    \item 
+    Strong bias of estimates 
+
+    This is an issue for finite $r$ 
+\end{itemize}
+
+\section{Blood Bank Example}
+Donors and Recipients arrive and donors give a consistent amount 
+while recipient request a poisson distribution. 
+
+You can estimate the data with any method. 
+
+The regenerative cycle occurs when the inventory is 0 
+
+Replication uses 40000 days and discards 10000
+
+Batch uses 20000 and discards 500 
+
+Regenerative method uses 7793 cycles (because thats the number 
+of days it took to get 50 regenerative cycles)
+
+Each gives a different daily inventory but the average is roughly 23 pints 
+
+The reason the daily inventory is so large is because blood expires. 
+
+\section{Variance Reduction Techniques}
+VRT improves the quality of estimators 
+(reduces variance while remaining unbiased)
+
+Variance can usually be decreased by increasing $N$. 
+This may be slow (Var($\bar Y$) = O(1/N))
+
+The simulation is a blackbox that takes in arrivals and services and returns 
+output processes (wait times)
+
+Generally, the more people that show up, the more you'll have to wait. 
+
+\subsection{Antithetic Random Numbers}
+Just turn $U_i$ into $(1 - U_i)$ to flip the dependency 
+
+\section{CAN BE ON EXAM 2}
+The relationship between random variables and their outputs(?)
+
+If you use both the random variance and its Antithetic variate then 
+you have double the data to make some numbers. 
+
+The covariance between $U$ and $1-U$ is perfect negative correlation 
+$-1$
+
+\subsection{EXAM QUESTION MAYBE}
+Find the covariance between $F^{-1}(U)$ and $F^{-1}(1 - U)$ 
+
+Let $F = 1 - \exp(-\lambda x)$
+
+There's a bunch of math in the slides but you should get $-1$, which makes sense. 
+
+\section{Control Variates}
+You can do thing to induce negative dependency. 
+
+Let $E(Y) = \Theta$ and a correlated variable $M$ with $E(M) = \mu$
+
+Let $R = Y + \alpha (M - \mu)$ 
+With $E(Y) = E(R)$ and some math for the covariance 
+
+A good choice for $M$ is to have the correlation be either 1 or -1 
+
+\subsection{How to Choose}
+Since we know that the arrival time the wait times are negative correlated, we 
+can use that. 
+
+$S$ and $W$ are positively correlated, so we can use those as well. 
+
+You should be able to use Control Variate (CV) shenanigans as 
+unbiased estimators. 
+
+Control Variates can be combined together. 
+
+\subsection{Variance Reduction Through Conditioning}
+let $Y$ be a simulation output and $V$ be a random vraiable that 
+can be used to decompose the output.
+
+Let $Y$ be the waiting times for a queue with 2 distinguishable servers $V$. 
+
+\equations{
+    E(Y)
+    =
+    E(E(Y | V))
+}
+
+The conditioned estimator has lower variance 
+than the unconditioned estimator. 
+
+You can get free lunch (something for nothing) just by messing with 
+the numbers. 
+
+\subsection{Bank Example}
+Look at the slides 
+
+Basically you get look at the exact same data but from the variance 
+from 2.7 to like 0.05
+
+The solution to the project can be done analytically. 
+
+\section{Monte Carlo Simulation}
+Characteristics of Monte Carlo Techniques 
+\begin{itemize}
+    \item 
+    Underlying problem is deterministic or stochastic 
+    \item 
+    There's a stochastic model with the same expected value as the original 
+    \item 
+    can solve problems that are really hard/impossible to solve analytically 
+    \item 
+    Can be more efficient than deterministic techniques 
+    \item 
+    Allows you to sample from a pdf (probability density function) previously 
+    unknown 
+\end{itemize}
+
+\subsection{Applications}
+Literally everything 
+
+Any sort of estimates of anything 
+
+You literally use this for your research. 
+
+\subsection{Buffon Needle Problem}
+If you randomly drop a needle, what are the chances that it intersects a line 
+given a random position and angle. 
+
+Find the number of crosses / the number of tosses. 
+
+You can estimate pi with a monte carlo simulation 
+
+There are a bunch of other simulation examples in the slides. 
+
+\section{EXAM 2}
+Using common and antithetic variance to calcualte covariance. 
+
+I went to office hours and was told 
+\begin{itemize}
+    \item 
+    If you know everything in slides 2 you should be good 
+    \item 
+    If you're told to make a confidence interval, you're probably 
+    going to be given the values. You won't be expected to do a whole 
+    bunch of stupid math 
+\end{itemize}
 
 
 \end{document}

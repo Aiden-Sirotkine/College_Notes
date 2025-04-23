@@ -1,0 +1,417 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{CS 482}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\graphicspath{ {../Images/} }
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{CS 482}
+\section{EXAM 2}
+Using common and antithetic variance to calcualte covariance. 
+
+I went to office hours and was told 
+\begin{itemize}
+    \item 
+    If you know everything in slides 2 you should be good 
+    \item 
+    If you're told to make a confidence interval, you're probably 
+    going to be given the values. You won't be expected to do a whole 
+    bunch of stupid math 
+\end{itemize}
+
+\chapter{PRNG}
+Pseudo Random Number Generators 
+
+They make pretty random U(0, 1) numbers without any sort of shenanigans 
+
+\subsection{Desirable Properties}
+\begin{itemize}
+    \item 
+    Independent 
+    \item 
+    Uniform (E = 1/2, Var = 1/12)
+    \item 
+    Reproducable 
+    \item 
+    Long Period 
+    \item 
+    Computationally convenient 
+\end{itemize}
+
+You can use tables or actual simulation data or a couple algorithms 
+
+\section{Linear Congruential Generators}
+These use modulus math to make pseudo random numbers 
+
+\equations{
+    V_{i}
+    =
+    (a * V_{i - 1}
+    + c)
+    \mod (m)
+}
+divide by $m$ to get a U(0, 1)
+
+\subsection{Full Period}
+a full period LCG goes over all values 0 to m-1 before cycling 
+
+% CRITERIA 
+% \begin{itemize}
+%     \item
+%     If q is a prime that divides m, then q divides a-1
+%     \item
+%     The only positive integer that divides both m and c is 1 
+%     (c $>$ 0)
+%     \item
+%     If 4 divides m, then 4 divides a-1
+% \end{itemize}
+
+I'll remember it better as 
+
+CRITERIA 
+\begin{itemize}
+    \item
+    If q (prime or 4) divides m, then q divides a-1
+    \item
+    m and c are relatively prime
+\end{itemize}
+
+
+\subsection{Multiplicative Generator}
+Literally just set $c = 0$ and that's what it is. 
+
+Also called a power residue 
+
+Power residues CANNOT have a full period 
+
+\subsection{E and Var}
+1/2 and 1/12 for full period LCG's 
+
+\section{Uniformity Tests}
+\subsection{Chi-Squared}
+
+\subsection{Kolmogorov-Smirnov}
+order all of your datapoints and map them 
+to the cumulative distribution (CDF) of whatever you think it is.
+
+Check the max upwards and downwards deviations to see if it actually matches the 
+CDF.
+
+There's a table for the critical values. 
+
+the Andersen-Darling test is similar but you take the mean squared 
+difference instead of looking at the max differences in both directions. 
+
+\section{Independence Tests}
+\subsection{Sign Test}
+Looking at runs of numbers above or below the median 
+
+should be normally distributed 
+\equations{
+    \mu 
+    =
+    1 + \frac{N}{2}
+    \hp 
+    \sigma^2
+    =
+    \frac{N}{2}
+}
+
+\subsection{Runs Test}
+Number of runs of increasing or decreasing numbers.
+
+Normally distributed but with some wack mean and variance 
+\equations{
+    \mu 
+    =
+    \frac{2N - 1}{3}
+    \hp 
+    \sigma^2 
+    =
+    \frac{16N - 29}{90}
+}
+
+for $N > 30$ you can use a $Z$ test instead of a t-test 
+
+\chapter{Driving a Simulation}
+\section{Trace}
+Use actual data from whatever system you're simulating 
+
+Easy to model and trustworthy
+
+however 
+
+not able to be generalized and very expensive 
+
+\section{Empirical Distributions (Histograms)}
+Pretty similar to the trace argument, plus easy to replicate 
+
+\section{Parametric Distributions}
+Fit a probability distribution to the data 
+
+Results are generalized and replicable, but may not be representative 
+of the real system 
+
+\section{Input distributions}
+make a list of reasonable ones (exponential, normal, poisson, uniform, whatever)
+
+Then test what's best with a couple methods 
+
+\begin{itemize}
+    \item 
+    look at mean and variance 
+    \item 
+    chi-squared or Kolmogorov-Smirnov test 
+    \item 
+    maximum likelihood estimator 
+    \item 
+    expert opinion
+\end{itemize}
+
+\chapter{Non-Uniform RNG}
+More often than not your probability distribution will not be a straight line 
+
+however 
+
+you can make all non-uniform distributions with uniform random numbers 
+
+\subsection{Comparing Algorithms}
+Does the seed work well 
+
+is it efficient and stable 
+
+\subsection{U(a, b)}
+Just shift the min and max 
+\equations{
+    x(b - a) + a
+}
+
+That's it its not hard 
+
+\section{Inversion}
+This is the best way to do it because it gives you just like a straight 
+formula. If you can do it at least 
+
+if the CDF is F(X) = Y, then find $F^{-1}(Y)$ and $Y$ is a $U(0, 1)$ 
+
+This works because of the nature of CDF's and the fact that they need to go 
+from 0 to 1 because that is the min and max of a probability 
+
+\subsection{Exponential}
+
+The PDF is given by 
+\equations{
+    f(x) = \frac{1}{\mu} e^{-x / \mu}
+}
+So the CDF is given by 
+
+\equations{
+    F(X)
+    =
+    \int^{X}_{- \infty} f(x) dx 
+    =
+    1 - e^{-x / \mu}
+}
+
+So our inversion is given by 
+\equations{
+    1 - e^{-x / \mu}
+    =
+    U 
+    \Rightarrow
+    \Rightarrow
+    \Rightarrow
+    x 
+    =
+    -\mu \ln(1 - U)
+}
+
+Where $U$ is a $U(0, 1)$ variable and $x$ is your exponential random variate 
+
+\subsection{Triangular Distribution}
+It's obnoxious but I feel confident in myself to BS something good 
+
+\section{Bernoulli Variables}
+It's just related to Bernoulli trials which have success rate $p$ and fail rate 
+$(1 - p)$ 
+
+\subsection{Geometric Random Variable}
+Number of Bernoulli trials until first success 
+
+\equations{
+    PDF 
+    =
+    p (1 - p)^{j - 1}
+    \hp 
+    CDF 
+    =
+    \sum_{j \leq k}
+    p (1 - p)^{j - 1}
+    =
+    1 - (1 - p)^k = U
+}
+
+Then you can invert that and then $k$ given $U$ 
+
+\section{Pros and Cons of Inversion}
+You can't always use inversion depending on the CDF 
+
+But 
+
+\begin{itemize}
+    \item 
+    Handle truncated distributions easily 
+    \item 
+    You can use variance reduction 
+    \item 
+    it only uses a single U(0, 1)
+    \item 
+    order statistics are easy 
+\end{itemize}
+
+speaking of 
+
+\section{Truncation}
+You just make a smaller part of a CDF go from 0 to 1 and it works 
+
+\section{Order Statistics}
+Consider $n$ ordered data points $x_1, x_2, \ldots , x_n$ 
+
+$x_1$ is the failure time in a serial system 
+
+$x_n$ is the failure time in a parallel system 
+
+Basically is a bunch of machines are running simultaneously and each have 
+some failure time 
+
+If the machines are sequential, the first failure time is the system failure 
+
+If they're parallel, the last failure time is the system failure. 
+
+\subsection{Parallel System Failure}
+Given the individual component failure CDF, you get 
+\equations{
+    F_n(a) = F(a)^{n} = u 
+    \rightarrow 
+    a = F^{-1}(u^{1/n})
+}
+The equation is just the chance of every single component failing 
+
+This kind of makes sense because $u$ is going to be very small for the whole 
+parallel system to fail because every machine needs to fail first. 
+
+\subsection{Sequential System Failure}
+Given the failure chance of an individual component 
+\equations{
+    F_1(a)
+    =
+    1 - (1 - F(a))^n = u
+    \rightarrow 
+    a 
+    =
+    F^{-1}
+    (1 - (1 - u)^n)
+}
+The equation is essentially the inverse of every component succeeding 
+
+The inside thing is going to be a function close to 1 for large $n$ which 
+makes sense because only a single component needs to fail for the whole 
+system to go under 
+
+
+\section{Special Properties}
+\subsection{Erlang(r, $\mu$)}
+It's the sum of $r$ IID exponentials 
+
+\subsection{Binomial(n, p)}
+It's connected to Bernoulli trials 
+
+The probability distribution is given by 
+\equations{
+    f(X = k)
+    =
+    {n \choose k } p^k (1 - p)^{n-k}
+}
+
+You can do this with a legit Bernoulli algorithm 
+
+for $n$ trials, make U(0, 1) and if $U < p$ increment $X$.
+
+$X$ will then be distributed Binomial(n, p)
+
+\subsection{Geometric}
+We talked about this one, but you can also use a legit Bernoulli approach 
+
+while forever, generate a random variable, and increment X for every failure.
+When there's a success, return X. 
+
+\section{Acceptance-Rejection}
+Generate an $x$, generate a $y$, see if its in your PDF. That's it. If you 
+repeat enough forever then like you're balling.
+
+You can optimize it in a couple ways but like that's the gist. 
+
+\section{Poisson($\lambda$) Random Variable}
+The number of IID Exponentials under some value 
+
+
+
+
+\end{document}
