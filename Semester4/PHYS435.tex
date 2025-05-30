@@ -5067,35 +5067,824 @@ Now we can use these to get our boundary conditions equations
     \times \hat n 
 }
 
+\section{SKIPPED APRIL 23RD LECTURE}
+
+\section{Angular Momentum and Polarization Stuff}
+Imagine the band gaps of a hydrogen atom with n=1 state and n=2 state. 
+
+the -1 state and the 1 state have opposite angular momentums. 
+
+\equations{
+    E_{RCP} 
+    =
+    \frac{E_0}{2}
+    \left(
+        \hat x 
+        \cos(-\omega t)
+        -
+        \hat y
+        \sin(-\omega t)
+    \right)
+}
+
+RCP has positive L in the z direction 
+
+LCP has negative L in the z direction 
+
+LCP  + RCP is just linearly polarized light
+
+\subsection{Mini Quantum Mechanics}
+\equations{
+    E = \hbar \omega = \frac{h c}{\lambda}
+    \hp 
+    p 
+    =
+    \hbar \vec h
+}
+Where $p$ is momentum 
+
+energy packets are quantum, momentum transfer is classical. 
+
+\section{Light Through Dielectrics}
+Some if it reflects and some of it goes through 
+
+consider the wave equation 
+\equations{
+    \left(
+        \nabla^2 
+        -
+        \frac{1}{c^2}
+        \frac{\del^2}{\del t^2}
+    \right)
+    \vec E(\vec r, t)
+    =
+    \mu_0 \frac{\del}{\del t} \vec J(\vec r, t)
+}
+
+We have free currents, magnetic currents, and polarization currents. 
+
+We have no free or magnetic currents, so the only current we have to 
+consider is the polarization current. 
+
+\equations{
+    \rho_b 
+    =
+    - \curl \vec P 
+    \hp 
+    \vec P 
+    =
+    \epsilon_0 X \vec E 
+    \\
+    \left(
+        \nabla^2 
+        -
+        \frac{1}{c^2}
+        \frac{\del^2}{\del t^2}
+    \right)
+    \vec E(\vec r, t)
+    =
+    \frac{1}{c^2}
+    X 
+    \frac{\del^2}{\del t^2}
+    \vec E 
+    \rightarrow 
+    \\
+    \left(
+        \frac{d^2}{d z^2}
+        -
+        \frac{(1 + X)}{c^2}
+        \frac{\del^2}{\del t^2}
+    \right)
+    \vec E(\vec r, t)
+    =
+    0
+}
+
+Inside the dielectric 
+\equations{
+    V 
+    =
+    \frac{C}{\sqrt{1 + X}}
+    =
+    \frac{C}{\sqrt{k}}
+    =
+    \frac{C}{n}
+}
+
+Given all of this shenanigans, our solution should look like 
+\equations{
+    \vec E(r, t)
+    =
+    f(s)
+    =
+    f(\vec \Omega \cdot \vec r - \frac{c}{n} t)
+    =
+    \sin(h s)
+    =
+    \sin(h \vec \Omega \cdot \vec r - \frac{h c}{n} t)
+    \\
+    \vec h = \vec \Omega k
+    \\
+    k_{dielectric}
+    =
+    n k_{vacuum}
+}
+
+Consider a light packet 
+\equations{
+    U_{E}
+    =
+    \frac{\epsilon_0}{2} E^2
+    \hp 
+    U_B 
+    =
+    \frac{1}{2 \mu_0} B^2
+    \hp 
+    \curl \vec E 
+    =
+    - \frac{\del}{\del t}
+    \vec B
+    =
+    f(s)
+    \\
+    E, B =
+    f(k \left( \vec \Omega \cdot \vec r - \frac{c}{n} t \right) )
+    \hp
+    \frac{\del}{\del t}
+    =
+    \frac{\del S}{\del t}
+    \frac{\del }{\del S}
+    \\
+    B \cdot \frac{c}{n}
+    =
+    E
+    \hp 
+    U_E 
+    =
+    \frac{1}{2} \vec D \cdot \vec E 
+    \hp
+    U_B 
+    =
+    \frac{1}{2} \vec B \cdot \vec H 
+    \\
+    \vec H = \frac{1}{\mu_0} \vec B 
+    \hp 
+    U_B 
+    =
+    \frac{1}{2}
+    \frac{n^2}{\mu_0 c^2} E
+    \hp 
+    B 
+    =
+    \frac{n}{c} E 
+    \\
+    \vec D 
+    =
+    \epsilon_0 
+    (1 + X) \vec E 
+    \hp 
+    U_E 
+    =
+    \frac{1}{2} \epsilon_0 k E^2
+    \\
+    U_B 
+    =
+    \frac{\epsilon_0 k}{2}
+    E^2 
+}
+
+$B/E$ is bigger inside a dielectric. 
+
+\equations{
+    U 
+    = 
+    \epsilon_0 k E^2 * \frac{c}{n} 
+    =
+    \epsilon_0 n E^2
+}
+
+thingy 
+\equations{
+    S_{in}
+    =
+    \vec E_{in}
+    \times 
+    \vec H_{in}
+    \hp 
+    k_{dielectric}
+    =
+    n k_{vacuum}
+}
+
+\section{Inhomogeneous Wave Equation}
+\equations{
+    \left(
+        \nabla^2 
+        -
+        \frac{1}{c^2}
+        \frac{\del^2}{\del t^2}
+    \right)
+    \vec E(\vec r, t)
+    =
+    0
+}
+
+and for dielectrics you have 
+\equations{
+    \vec J_{pol}
+    =
+    \frac{\del}{\del t}
+    \vec p
+}
+
+\subsection{Homogeneous Wave Equation}
+\equations{
+    \left(
+        \nabla^2 
+        -
+        \frac{1 + X}{c^2}
+        \frac{\del}{\del t^2}
+    \right)
+    \vec E(\vec r, t)
+    =
+    0
+}
+
+\section{Energy}
+Let's let
+\equations{
+    x = \frac{q}{h} \vec E 
+}
+Because it's related to the spring constant 
+
+\equations{
+    \frac{1}{2} k x^2
+    =
+    \frac{1}{2}
+    \frac{q^2}{k^2} E^2 
+    =
+    \frac{\epsilon_0}{2}
+    \frac{q^2 n}{\epsilon_0 k} E^2 
+    =
+    \frac{1}{2} \epsilon_0 X E^2
+}
+
+Without matter, we can consider the energy as 
+\equations{
+    E = \int\limits_V \, d^3 r \, 
+    \frac{\epsilon_0}{2} E^2
+    =
+    E = \int\limits_V \, d^3 r \, 
+    \frac{1}{2} E \cdot D
+}
+
+Consider the dipole moment 
+\equations{
+    \vec P 
+    =
+    n \vec p
+    =
+    n q x 
+    =
+    \frac{q^2 n}{k} \vec E 
+    =
+    \epsilon_0 X \vec E 
+    \hp 
+    X 
+    =
+    \frac{q^2 n}{\epsilon_0 k}
+}
+
+So the total energy of the system is 
+\equations{
+    \frac{\epsilon_0}{2}
+    (1 + X)
+    E^2 
+    =
+    \frac{1}{2}
+    \vec E \cdot \vec D 
+}
+
+\section{Energy}
+I'm going to call pointing's vector PV 
+\equations{
+    PV = \frac{1}{\mu_0} \vec E \times \vec B 
+    \hp 
+    \vec B = \frac{n}{c} \vec E
+    \\
+    PV 
+    =
+    \frac{1}{\mu_0}
+    \frac{n}{c} E^2
+}
+
+Pointing's Vector is the same as energy density times speed 
+
+\section{2 Materials}
+Consider light going from 1 material to another 
+\equations{
+    \frac{c}{n_1}
+    \Rightarrow 
+    \frac{c}{n_2}
+}
+
+We can describe the electric field from light as 
+\equations{
+    E_1 = E_0 \cdot e^{i(kz - \omega t)}
+    \hp 
+    k 
+    =
+    n k_0 
+    =
+    n \cdot \frac{2 \pi}{\lambda}
+}
+
+and we know that 
+\equations{
+    \hat n \cdot \vec D 
+    \textrm{ is continuous if no $\sigma_{free}$}
+    \hp 
+    \hat n \cdot \vec B
+    \textrm{ is continuous}
+}
+
+So it's just a matter of boundary matching. 
+
+\equations{
+    E_{incident}
+    -
+    E_{reflective}
+    =
+    E_{transmitted}
+    \\
+    B_{incident}
+    +
+    B_{reflective}
+    =
+    B_{transmitted}
+    \\
+    E_{incident}
+    +
+    E_{reflective}
+    =
+    E_{transmitted}
+    \frac{n_2}{n_1}
+}
+
+So we put our equations together to get 
+\equations{
+    E_{//} BC \hp 1 - \frac{E_R}{E_I} = \frac{E_T}{E_I}
+    \hp
+    H_{//} BC \hp 
+    1 + \frac{E_R}{E_I} = \frac{n_2}{n_1} \frac{E_T}{E_I}
+    \\
+    \frac{E_T}{E_I}
+    =
+    \frac{2}{1 + \frac{n_2}{n_1}}
+    \hp 
+    \frac{E_R}{E_I}
+    = 
+    \frac{n_2 - n_1}{n_2 + n_1}
+}
+
+Let's consider 
+\equations{
+    R = \frac{|S_R|}{|S_I|}
+    \hp
+    T = \frac{|S_T|}{|S_I|}
+}
+
+The incident $\vec S$ is given by 
+\equations{
+    \vec S_{inc}
+    =
+    \frac{1}{\mu_0}
+    E_I 
+    \cdot 
+    E_I \cdot \frac{n_1}{c}
+    \hp 
+    \vec S_{ref}
+    =
+    \frac{1}{\mu_0}
+    E_R 
+    \cdot 
+    E_R \cdot \frac{n_1}{c}
+    \\
+    \vec S_{tra}
+    =
+    \frac{1}{\mu_0}
+    E_T 
+    \cdot 
+    E_T 
+    \cdot 
+    \frac{n_1}{c}
+}
+
+So we put all our stuff together to get the coefficients
+\equations{
+    R 
+    =
+    \left(
+        \frac{n_2 - n_1}{n_2 + n_1}
+    \right)^2
+    \hp 
+    T 
+    =
+    \left(
+        \frac{E_T}{E_I}
+    \right)^2
+    *
+    \frac{n_2}{n_1}
+    =
+    \frac{4 n_1 n_2}{(n_2 + n_1)^2}
+}
+
+\section{Discussion}
+Pointing's vector stuff 
+
+There's a bunch of math behind an EM wave in a vacuum 
+
+We're trying to find the time average of the Pointing Vector 
+\equations{
+    \langle \vec S \rangle 
+    =
+    \textrm{ intensity }
+    =
+    \frac{1}{T}
+    \int^T_0 \, dt \, 
+    \vec S 
+}
+
+However, an interesting phenomena is an EM wave in a medium. 
+
+\section{Fresnel's Equations}
+Basically there's some fun math behind with light interacts with a 
+dielectric. Some of the light with reflect and some of the light will go through.
+
+The way that you figure it out is doing boundary matching with the $E$ and $B$ 
+fields. 
+
+You have to consider the parallel component of the $E$ field,
+and both the parallel and perpendicular components of the $B$ field.
+
+You do a bunch of math and get 
+\equations{
+    \frac{n_2}{n_1} = \tan(\theta_B)
+}
+That is Brewster's Angle 
+
+\section{LOOK AT LECTURES 36,37,38}
+
+\subsection{Lecture 32}
+This essentially looks at all the math to show that a electric field wave 
+has a speed of $c = 1 / \sqrt{\epsilon_0 \mu_0}$
+
+We know that magnetic fields are created from changing electric fields, so 
+we do some wave math to see that the corresponding magnetic field is 
+perpendicular. 
+
+\subsection{Pointing's Vector}
+Poynting's vector is the total field energy density times $c$ in the $\hat n$ 
+direction. 
+
+\subsection{Lecture 33: polarization}
+\equations{
+    B_y' = \frac{E_x'}{c}
+    \rightarrow 
+    \hat n \times \vec E 
+    =
+    c \vec B 
+}
+Something something mutual induction causes both the electric and magnetic fields 
+to increase and decrease. 
+
+The energy of an EM wave is equally split between the electric and 
+magnetic field. 
+
+Because the E and B fields have specific directions, we can place filters 
+to make sure that only lights of a certain polarization go through. 
+
+The polarization direction is the E field direction by convention. 
+
+I think you just do some vector component stuff to figure out how much light 
+goes through a filter depending on the angle. 
+
+\subsection{Lecture 34}
+There's some stuff with $\Omega$ I couldn't really tell you. 
+
+Radiation emitted from a single frequency source is given by 
+
+\equations{
+    \vec E_{\omega}(\vec r, t)
+    =
+    Re 
+    \left(
+        E_0
+        \exp(i (\vec k \cdot \vec r - \omega t + \phi ))
+    \right)
+}
+
+\subsection{Circularly Polarized Light}
+Instead of an even polarization, it is time dependent 
+\equations{
+    \vec E 
+    =
+    \frac{E_0}{\sqrt{2}}
+    \left(
+        \hat x 
+        \cos(kz - \omega t)
+        +
+        \hat y
+        \sin(kz - \omega t)
+    \right)
+}
+
+Circularly polarizaed light exists because the mutual induction between 
+the electric and magnetic fields allow it to exist. 
+
+You can have imaginary unit vectors 
+
+\subsection{Lecture 34-35: Propogation of Light Through Dielectrics}
+
+IMPORTANT QUANTITY
+\equations{
+    n = \sqrt{k}
+}
+Is the index of refraction.
+
+Poynting's Vector changes a bit because of $k$
+
+\equations{
+    \vec P = \epsilon_0 X \vec E 
+}
+
+The wave travels with a new speed 
+\equations{
+    v = \frac{c}{\sqrt{1 + X}} = \frac{c}{\sqrt{k}} 
+}
+
+You do some boundary conditions to see that some light goes through 
+and some light reflects 
 
 
+\subsection{Angular Momentum of Circularly Polarized Light}
+the energy is $\hbar \omega$ and the angular momentum is $\hbar$. 
+
+\subsection{Lecture 36: Changing Mediums}
+
+\subsection{Lecture 37: Fresnel's Equations}
 
 
+\section{NEW LECTURE}
+
+We have a normalized propogation speed $v = c / \sqrt{k}$ 
+
+We have Snell's Law of Refraction $n_1 \sin(\theta_1) = n_2 \sin(\theta_2)$
+
+We have Fresnel's Equation that gives Brewster's Angle 
+\equations{
+    \theta_B = \tan^{-1}(\frac{n_2}{n_1})
+}
+
+Now
+consider EM radiation in a conductor. 
+
+$\vec E$ leads to $\vec J$ 
+
+\equations{
+    \frac{\del}{\del t} \rho(\vec r, t)
+    =
+    - \vec \nabla \vec J(\vec r, t)
+    \hp 
+    \div \vec E = \frac{\rho_{f}}{\epsilon_0 k}
+    \hp
+    \div \vec E 
+    =
+    - \frac{\del}{\del t} \vec B 
+    \\ 
+    \div \vec B = 0
+    \hp 
+    \curl \vec B = \mu_0 \vec J + \mu_0 \epsilon_0 \frac{\del}{\del t} \vec E 
+    \hp 
+    \vec F = q(\vec E + \vec v \times \vec B)
+    \\
+    \vec J = \sigma \vec E 
+    \hp 
+    \frac{d}{dt} \rho(\vec r, t) 
+    = 
+    - \sigma \div \vec E = -\frac{\sigma}{\epsilon_0 k}
+}
+
+Solve the differential equation $\rho$ to get 
+\equations{
+    \rho(\vec r, t)
+    =
+    \rho_0 e^{-t/\tau}
+    \hp 
+    \tau = \frac{\epsilon_0 k}{\sigma}
+}
+
+This basically shows you that charges move to a stable state stupid crazy fast. 
+
+We then do some more shenanigans to get the wave itself 
+\equations{
+    \vec \nabla 
+    \left(
+        \div \vec E 
+    \right)
+    -
+    \nabla^2 \vec E 
+    =
+    -
+    \frac{\del}{\del t}
+    \curl \vec B 
+    \\
+    \frac{\del}{\del t}
+    \curl \vec B 
+    =
+    \mu_0 \sigma \frac{\del}{\del t}
+    \vec E 
+    +
+    \mu_0 \epsilon_0 k \frac{\del^2}{\del t^2} \vec E 
+}
+Getting our homogeneous wave equation 
+
+\equations{
+    \nabla^2 \vec E(\vec r, t)
+    =
+    \mu_0 \epsilon_0 \sigma \frac{\del}{\del t} \vec E
+    +
+    \mu_0 \epsilon_0 k \frac{\del^2}{\del t^2} \vec E 
+}
+
+We can do a fourier analysis on the wave equation in order to get only 
+the important parts of the wave propogation while ignoring the stuff that's 
+basically 0. 
+
+Let 
+\equations{
+    \vec E \propto e^{-i \omega t}
+    \\
+    \nabla^2 \vec E 
+    =
+    - i \omega \mu_0 \sigma \vec E 
+    -
+    \mu_0 \epsilon_0 \omega^2 k \vec E 
+}
+
+Consider the homogeneous wave equation in an ohmic conductor 
+\equations{
+    \nabla^2 E(z) = - i \omega \mu_0 \sigma \vec E(\vec r)
+    \hp 
+    E(z) = E_0 e^{i k z}
+    \\
+    - k^2 E_0 e^{i k z} = - i \omega \mu_0 \sigma E_0 e^{ikz}
+    \rightarrow 
+    k^2 = i \omega \mu_0 \sigma
+}
+
+you do some math shenanigans to get 
+
+\equations{
+    k = (1 + i) \sqrt{\frac{\omega \mu_0 \sigma}{2}}
+    \hp 
+    k = \frac{1 + i}{\delta}
+    \hp 
+    \delta = \sqrt{\frac{2}{\omega \mu_0 \sigma}}
+}
+
+$\delta$ is called the skin depth and copper has a skin depth of 3 nm
+
+\section{Light in Conductors}
+\equations{
+    \tau 
+    =
+    \frac{\epsilon_0 k}{\sigma }
+    \approx 
+    10^{-18}
+    \\
+    J_{free}
+    =
+    \sigma \vec E 
+    \\
+    \nabla^2 \vec E 
+    =
+    \mu_0 \sigma \frac{\del}{\del t}\vec E 
+    +
+    \mu_0 \epsilon_0 
+    (1 + X)
+    \frac{\del^2}{\del t^2} \vec E 
+}
+
+That equation leads to sinusoidal fields 
+\equations{
+    \vec E 
+    =
+    \vec E(z) e^{i (kz - \omega t)}
+}
+
+But we have a second wave equation 
+\equations{
+    \frac{\del^2}{\del z^2}
+    \vec E(z, t)
+    =
+    \left(
+        -i \omega \mu_0 \sigma 
+        -
+        \omega^2 \mu_0 \epsilon_0 (1 + X)
+    \right)
+    \vec E 
+}
+
+Let's try the ansatz 
+\equations{
+    \vec E 
+    =
+    \hat \varepsilon 
+    E_0 
+    e^{i(kz - \omega t)}
+    \\
+    k^2 = i \omega \mu_0 \sigma 
+    \rightarrow 
+    k 
+    =
+    \frac{1 + i}{\sqrt{2}}
+    \sqrt{\mu_0 \omega \sigma}
+    \hp 
+    \delta 
+    =
+    \sqrt{\frac{2}{\mu_0 \omega \sigma}}
+    \\
+    \hat \varepsilon 
+    E_0 
+    e^{i(z/\delta - \omega t) - z / \delta}
+}
+
+The units of $\delta$ are Volt second / Tesla
+
+\equations{
+    \curl \vec E 
+    =
+    - \frac{\del}{\del t}
+    \vec B 
+    \\
+    \curl \hat x E_0 e^{i(z / \delta - \omega t) - z / \delta}
+    =
+    i \omega \vec B 
+    \\
+    \hat y (i - 1) \frac{1}{\delta} E_0 e^{i(z / \delta - \omega t) - z / \delta}
+    =
+    i \omega \vec B e^{-i \omega t}
+    \\
+    \vec B(z)
+    =
+    \hat y \frac{1 + i}{\sqrt{2}}
+    \sqrt{2}
+    \frac{E_0}{\omega \delta}
+    e^{i(z / \delta - \omega t) - z / \delta}
+}
 
 
+How big is $\vec B$ in a conductor? 
 
+\equations{
+    B_{vac} = \frac{E}{c}
+    \hp 
+    \frac{\sqrt{2} E_0}{\omega \delta}
+    \\ 
+    \textrm{pseudo-speed }
+    =
+    \sqrt{\frac{2 \omega}{\mu_0 \sigma }}
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\section{Waves through a medium}
+\equations{
+    E_{inc} - E_{ref} = E_{trans}
+    \hp 
+    B_{inc} + B_{refl} = B_{trans} 
+    \\
+    \frac{k}{\omega}
+    \left(
+        E_{inc}
+        +
+        E_{ref}
+    \right)
+    =
+    \frac{c}{\omega \delta}
+    (1 + i)
+    E_{trans}
+    \\
+    \frac{E_{ref}}{E_{inc}}
+    =
+    \frac{1 - \frac{\omega \delta}{\sqrt{2} c} e^{-i \pi / 4}}
+    {1 + \frac{\omega \delta}{\sqrt{2} c} e^{-i \pi / 4}}
+    \\
+    \frac{E_{ref}}{E_{inc}}
+    =
+    1 - \sqrt{2} \frac{\omega \delta}{c} e^{-i \pi / 4}
+    \\
+    R = 1 - 2 \frac{\omega \delta}{c}
+}
 
 
 \end{document}

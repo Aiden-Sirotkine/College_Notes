@@ -411,6 +411,173 @@ You can optimize it in a couple ways but like that's the gist.
 \section{Poisson($\lambda$) Random Variable}
 The number of IID Exponentials under some value 
 
+\equations{
+    P(X = k)
+    =
+    e^{-\lambda}
+    \frac{\lambda^{k}}{k!}
+}
+
+And the expected value/mean of the variable is given by 
+
+\equations{
+    E(X) = \lambda 
+}
+
+You can do some math to get a pretty good algorithm for a Poisson 
+using just U(0, 1) variables
+
+Basically just counted U(0, 1) variables until you get one that is 
+less than $e^{- \lambda}$
+
+\subsection{Poisson Processes}
+It's kind of the same as Bernoulli trials except instead of 
+a U(0, 1) is exponential 
+
+Times at which events occur, where the interarrival times of
+the events are distributed exponential.
+
+\equations{
+    t_i 
+    =
+    t_{i - 1}
+    -
+    \frac{1}{\lambda}
+    \ln(U_{i - 1})
+}
+
+\subsection{Inhomogeneous Poisson Process}
+The only difference in $\lambda$ changes over time 
+
+\chapter{Random Discrete Variables}
+Consider a random permutation?
+
+There's an efficient way to do it or you can just randomly select 
+each location of each item 1 by 1 
+
+\section{Alias Method}
+This one is actually pretty smart 
+
+put mini binary probabilities in each of your already existing uniform 
+probabilities so that you only need 1 IID variables 
+to get a non-uniform discrete variable :
+
+\subsection{Algorithm}
+for all of your probabilities, multiply each of them by 
+the total number of numbers you're working with. 
+
+let $H$ be the probabilities that are smaller than the uniform distribution 
+
+let $G$ be the probabilities that are larger than the uniform distribution 
+
+for any non-empty bucket $H$, just dump a probability from $G$ into there. 
+\equations{
+    Q_{G} 
+    =
+    Q_{G} + Q_{H} - 1 
+}
+
+if $Q_{G} < 1$, remove it from $G$ and add it to $H$ 
+
+You should only have 1 alias per bucket.
+
+\section{Marsaglia's Method}
+Only works for discrete random variables with probabilities that 
+have denominators as powers of 2 
+
+Only use when you want to generate a bunch of values and you have 
+only 1 U(0, 1) variable
+
+\subsection{Urns}
+YOU USE BINARY TO FIGURE OUT HOW MANY TIMES TO MULTIPLY URN 
+
+that's basically it 
+
+But what you do with you 1 U(0, 1) 
+is it puts you in the urn and then it tells you what 
+part of the urn you land in by dividing it by the number of things 
+in the urn
+
+You find the urn and then generate a uniform discrete random variable
+
+\section{Normal(0, 1) Random Variable}
+The easiest way to do it is just 
+\equations{
+    N = \sigma X + \mu 
+}
+
+and that works like well enough
+
+\section{Verification}
+LAW OF TOTAL PROBABILITY 
+
+Basically check if the sum of all the probabilities is 1 
+
+
+
+\subsection{Crude CLT Method}
+Its a sneaky math trick 
+
+\equations{
+    Y = \sum_{n} U_i 
+    \hp 
+    \frac{Y - \frac{n}{2}}{(n / 12)^{1/2}}
+    \rightarrow 
+    N(0, 1):
+    n \to \infty 
+}
+like sure man go for it 
+
+\subsection{Bivariate}
+You do like a cosine thing with 2 U(0, 1) variables 
+
+Just make sure they arent back to back from the same LCG 
+
+\subsection{Polar Method}
+It's some log shenanigans also with 2 U(0, 1) variables 
+
+\chapter{Output Stuff}
+i DO know 
+
+\section{Variance and Covariance}
+\equations{
+    Cov(X, Y)
+    =
+    E(XY)
+    -
+    E(X) E(Y)
+    =
+    \frac{(X - \bar X)(Y - \bar Y)}{n}
+}
+
+\equations{
+    Var(X + Y)
+    =
+    Var(X)
+    +
+    Var(Y)
+    +
+    2 Cov(X, Y)
+    \\
+    Var(X - Y)
+    =
+    Var(X)
+    +
+    Var(Y)
+    -
+    2 Cov(X, Y)
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

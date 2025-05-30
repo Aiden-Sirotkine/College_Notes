@@ -1,0 +1,285 @@
+\documentclass[fleqn]{article}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{gensymb}
+\usepackage{graphicx}
+
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\geometry{margin = 2cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2024}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\begin{document}
+\pagestyle{empty}
+
+\section{Final Stuff}
+
+\section{Lagrangian Stuff}
+If youre trying to minimize a certain parameter, you can write it as 
+\equations{
+    S = \int \mathcal L(q, q'; t) dt 
+}
+And then you plug that into the Euler-Lagrange equation 
+\equations{
+    \frac{\del \mathcal L}{\del q} - 
+    \frac{d}{dt} \frac{\del \mathcal L}{\del \dot q} = 0
+}
+
+You can also 100\% just use the equation $\mathcal L = T - U$ to get the 
+equation of motion.
+
+\subsection{$\ddot q$}
+if your lagrangian depends on even more derivatives of $q$, then you get 
+\[
+\frac{\del \mathcal L}{\del q}
+-
+\frac{d}{dt}
+\frac{\del \mathcal L}{\del \dot q}
++
+\frac{d^2}{dt^2}
+\frac{\del \mathcal L}{\del \ddot q}
+=
+0
+\]
+You can get this from the same method as the normal E-L equation 
+plus integrating by parts twice 
+
+\section{Rocket Equation}
+\equations{
+    F = ma 
+    \rightarrow 
+    ma = - u \frac{dm}{dt} - F_{ext}
+}
+
+\section{N2L}
+F = ma 
+
+\section{Fourier Everything}
+Realistically this is the main thing that I need to know 
+
+\section{Integral bs}
+oh shit I need to write down the fuck ass trig integrals 
+
+\section{Rotation and Orbit bs}
+idk this'll probably be important to me 
+
+\section{Harmonic Oscillators}
+\subsection{Damped}
+
+\subsection{Undamped}
+
+\subsection{Resonance}
+
+\section{DERIVATIONS DERIVATIONS DERIVATIONS}
+\subsection{Euler-Lagrange Equation}
+I know the vibes of how to do but I've never actually done it from scratch 
+
+A function is minimized when the change is 0 if you nudge it in either direction 
+(critical point). 
+
+\equations{
+    \delta S = 
+    \int \mathcal L(q + \delta q, \dot q + \delta \dot q; t) - 
+    \int \mathcal L(q, \dot q; t)
+}
+implement a first order taylor series 
+\equations{
+     \mathcal L(q + \delta q, \dot q + \delta \dot q; t)
+    =
+    \mathcal L(q, \dot q; t) + \delta q \frac{\del}{\del q} L(q, \dot q; t)
+    + \delta \dot q \frac{\del}{\del \dot q} L(q, \dot q; t) + \ldots 
+    \\
+    \int \mathcal L(q + \delta q, \dot q + \delta \dot q; t) - 
+    \int \mathcal L(q, \dot q; t)
+    =
+    \int dt (
+    \delta q \frac{\del}{\del q} L(q, \dot q; t)
+    + \delta \dot q \frac{\del}{\del \dot q} L(q, \dot q; t))
+}
+get rid of $\delta \dot q$ using integration by parts 
+\equations{
+    \int dt \delta \dot q \frac{\del}{\del \dot q} L(q, \dot q; t)
+    \hp 
+    u = \frac{\del}{\del \dot q} L(q, \dot q; t)
+    \hp 
+    v' = \delta \dot q \rightarrow v = \delta q 
+    \\
+    \delta q \frac{\del}{\del \dot q} L(q, \dot q; t)
+    \Big|^{t1}_{t2}
+    -
+    \int dt 
+    \delta q \frac{d}{dt} \frac{\del}{\del \dot q} L(q, \dot q; t)
+    \rightarrow 
+    -
+    \int dt 
+    \delta q \frac{d}{dt} \frac{\del}{\del \dot q} L(q, \dot q; t)
+    \\
+    \int dt (
+    \delta q \frac{\del}{\del q} L(q, \dot q; t)
+    + \delta \dot q \frac{\del}{\del \dot q} L(q, \dot q; t))
+    =
+    \\
+    \int dt (
+    \delta q \frac{\del}{\del q} L(q, \dot q; t)
+    -
+    \delta q \frac{d}{dt} \frac{\del}{\del \dot q} L(q, \dot q; t)
+    )
+    \rightarrow 
+    \\
+    \int dt (
+    \frac{\del}{\del q} L(q, \dot q; t)
+    -
+    \frac{d}{dt} \frac{\del}{\del \dot q} L(q, \dot q; t)
+    )
+    \delta q
+}
+because $\delta q \to 0$ we get our EL equation 
+\[
+    \frac{\del}{\del q} L(q, \dot q; t)
+    -
+    \frac{d}{dt} \frac{\del}{\del \dot q} L(q, \dot q; t)
+    =
+    0
+\]
+
+
+
+\subsection{Fourier Shenanigans}
+We're given the fourier series and transform formulae, its just a matter of 
+implementing it in a way that doesn't suck.
+
+I'm just going to do the same midterm problem that I missed earlier.
+
+Given the harmonic oscillator equation (damped)
+\equations{
+    m \ddot x + c \dot x + k x = 0
+}
+Find that same function, except in terms of frequency instead 
+\equations{
+    f(\omega) = \int^{\infty}_{\infty} f(t) e^{i \omega t} dt 
+    \\
+    m \int^{\infty}_{\infty} \ddot x e^{i \omega t} dt + 
+    c \int^{\infty}_{\infty} \dot x e^{i \omega t} dt + 
+    k \int^{\infty}_{\infty} x e^{i \omega t} dt = 0
+}
+do some integration by parts 
+\equations{
+    c \int^{\infty}_{\infty} \dot x e^{i \omega t} dt
+    \hp 
+    v' = \dot x \rightarrow v = x
+    \hp 
+    u = e^{i \omega t}
+    \rightarrow 
+    du = i \omega e^{i \omega t}
+    \\
+    c 
+    (
+    x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    -
+    i \omega \int^{\infty}_{\infty} x e^{i \omega t} dt
+    )
+    \\
+    m \int^{\infty}_{\infty} \ddot x e^{i \omega t} dt 
+    \hp
+    v' = \ddot x \rightarrow v = \dot x
+    \hp 
+    u = e^{i \omega t}
+    \rightarrow 
+    du = i \omega e^{i \omega t}
+    \\
+    \dot x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    -
+    i \omega \int^{\infty}_{\infty} \dot x e^{i \omega t} dt
+    \rightarrow 
+    \\
+    \dot x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    -
+    i \omega x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    +
+    \omega^2 \int^{\infty}_{\infty} x e^{i \omega t} dt
+    \\
+    m \int^{\infty}_{\infty} \ddot x e^{i \omega t} dt + 
+    c \int^{\infty}_{\infty} \dot x e^{i \omega t} dt + 
+    k \int^{\infty}_{\infty} x e^{i \omega t} dt = 0
+    =
+    \\
+    \dot x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    -
+    i \omega x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    +
+    \omega^2 \int^{\infty}_{\infty} x e^{i \omega t} dt
+    +
+    x e^{i \omega t} \Big|^{\infty}_{-\infty}
+    -
+    i \omega \int^{\infty}_{\infty} x e^{i \omega t} dt
+    \\
+    +
+    k \int^{\infty}_{\infty} x e^{i \omega t} dt = 0
+}
+
+\subsection{Angular momentum/Orbit Stuff}
+angular momentum is defined at $l = r \times v$ 
+
+if angular momentum is conserved in a central force, then its derivative is 0
+\equations{
+    \frac{d}{dt} (r \times mv) 
+    =
+    \frac{dr}{dt} \times v + r \times m\frac{dv}{dt}
+    =
+    v \times v + r \times F = 0 + 0
+}
+because $F$ is in the direction of $r$ because that's the definition of a central
+force. 
+
+\section{WHAT TO WRITE DOWN}
+WRITE DOWN THE HARMONIC OSCILLATOR EQUATIONS 
+
+WRITE DOWN SOME TRIG INTEGRALS 
+
+WRITE DOWN SOME VECTOR STUFF 
+
+realistically there's no way I don't understand physics
+
+\end{document}

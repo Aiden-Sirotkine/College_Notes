@@ -1967,11 +1967,34 @@ observed by humans, so they're pretty neat.
 
 However, most of the time, anomalies are just bugs in the AI. 
 
+\section{Physics Informed AI}
+Neural Netwroks are good at interpolation but not extrapolation, so 
+NN based physics models have to be clever.
+ 
+You cant just plug in datapoints and assume it to understand physics. 
 
+THe way you do it is you put the differential equation in the loss function 
 
+That way, your trained neural network follows the differential equation 
+instaed of just like a line regression. 
 
+\subsection{PDE's}
+PINN's can solve a couple but not all systems with PDE's 
 
+\begin{itemize}
+    \item 
+    The PDE's are uniquely solvable 
+    \item 
+    the boundary conditions are known 
+\end{itemize}
 
+PINN's use 3 different sets of data 
+
+The legit training data 
+
+The diff eq boundary conditions 
+
+The "Collocation points", which is just a sample of solutions for the diff eq
 
 
 

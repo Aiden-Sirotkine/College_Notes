@@ -4147,6 +4147,169 @@ ig that's actually wrong so im just gonna follow lecture
     \frac{1}{2gc^2} \arctan(\sqrt{\frac{1}{2gyc^2} - 1})
 }
 
+\section{Lagrange Multipliers}
+What is there is a constraint on your functional?
+
+given a functional $S_1[q_i(t)]$ subject to a global (integral) restraint 
+$S_2[q_i(t)]$
+
+functional $S_1$ depending on $x(t), y(t)$ that have a local relationship. 
+
+Goal: minimize $S_1$ while holding $S_2$ fixed 
+
+\equations{
+    S_1[q_i(t)] = 
+    \int^{t2}_{t1} \mathcal L_1(q_i(t), \dot q_i(t), t) dt 
+    \hp \textrm{ is minimized}
+    \\
+    S_2[q_i(t)] = 
+    \int^{t2}_{t1} \mathcal L_2(q_i(t), \dot q_i(t), t) dt 
+    =
+    \gamma = \const 
+}
+Use these along with a constant to construct a compound functional 
+\equations{
+    C[q_i(t)] = S_1[q_i(t)] - \lambda S_2[q_i(t)]
+    =
+    \\
+    \int^{t2}_{t1} (\mathcal L_1(q_i(t), \dot q_i(t), t) - 
+    \lambda \mathcal L_2(q_i(t), \dot q_i(t), t)) dt 
+    \\
+    \delta C = \delta S_1 - \lambda \delta S_2 = 0
+    \hp 
+    \textrm{ make an E-L equation}
+    \\
+    \frac{\del}{\del q} (\mathcal L_1 - \lambda \mathcal L_2)
+    -
+    \frac{d}{dt} \frac{\del}{\del \dot q_i} 
+    (\mathcal L_1 - \lambda \mathcal L_2)
+    = 0
+}
+Solve the equation with $2$ integration constants $c$ and $\lambda$.
+
+\subsection{Chain Example}
+Consider a chain hanging between 2 points. How does the chain lie to 
+minimize potential energy?
+
+consider a linear mass density $\rho = \frac{dm}{dl}$
+
+The chain has start and endpoints $(0, 0)$ and $(a, b)$
+
+\equations{
+    dl = \sqrt{dx^2 + dy^2} = \sqrt{(\frac{dx}{dy})^2 + 1} dy
+    = \sqrt{x'^2 + 1} dy
+    \\
+    m = \int \rho dl 
+    \rightarrow 
+    \\
+    U = -mgl = - \int g y \rho dl = - \int g \rho y \sqrt{x'^2 + 1} dy 
+}
+now make the compount function considering the length of the thingy 
+\equations{
+    \mathcal L[x(y)] = \int dl = \int^b_0 \sqrt{x'^2 + 1} dy 
+    \\
+    C[x(y)] = U - \tilde \lambda L = 
+    U + g \rho \lambda \sqrt{x'^2 + 1} = 
+    - g \rho (y - \lambda) \sqrt{x'^2 + 1}
+}
+plug it into the Euler-Lagrange equation and hope for the best 
+\equations{
+    \frac{\del \mathcal L}{\del x} - 
+    \frac{d}{dy} \frac{\del \mathcal L}{\del \dot x}
+    = 0
+    \rightarrow 
+    \\
+    0 - 
+    \frac{d}{dy} \frac{\del}{\del \dot x}
+    - g \rho (y - \lambda) \sqrt{x'^2 + 1}
+    \\
+    - g \rho (y - \lambda) \frac{x'}{\sqrt{x'^2 + 1}}
+    =
+    \const = k
+    \rightarrow 
+    x' = \pm \frac{k}{\sqrt{(y - \lambda^2)} - k^2}
+    \\
+    x = \pm k \ln(\lambda - y + \sqrt{(y - \lambda)^2 - k^2})
+    \rightarrow 
+    y = k \cosh(\frac{x - k_2}{k}) + \lambda 
+    \hp 
+    k_2 = k \ln(\frac{1}{k})
+}
+solve and you'll get hyperbolic cosine 
+
+\section{Local Constraints}
+consider functionals of $2$ or more functions that are related to each other 
+
+\equations{
+    F[x(z), y(z); z] = \int f(x(z), x'(z) y(z), y'(z), z) dz 
+    \\
+    g(x(z), y(z); z) = 0
+    \\
+    \mathcal L = f - \lambda g 
+    \\
+    C = \int (f - \lambda g) dz
+}
+that's your new lagrangian, so plug that into the E-L equation and you're good 
+
+\section{Lagrangian Mechanics}
+consider a particle in a gravitational field 
+\equations{
+    \vec g = g \vec e_y 
+    \hp 
+    m \ddot y = -mg 
+    \\
+    \frac{\del \mathcal L}{\del q_i}
+    - 
+    \frac{d}{dt}
+    \frac{\del \mathcal L}{\del \dot q_i}
+    = 0
+    \\
+    \mathcal L = \frac{1}{2} m \dot y^2 - mgy 
+    \rightarrow 
+    \\
+    \mathcal L = T - U
+}
+The Lagrangian for mechanical systems with conservative forces that determine the potential 
+
+\subsection{Caution}
+\[T - U \neq T + U\]
+
+THE SIGN MATTERS ALOT 
+
+\[T + U = E = \const\]
+
+\[
+T - U = \mathcal L
+\]
+
+\subsection{Spring}
+Consider a mass $m$ on a spring with $k$ sliding along the $x$ axis 
+
+Goal: Find the equation of motion using the Lagrangian 
+\equations{
+    F = m \ddot x = - kx 
+    \\
+    L = T - U
+    \hp 
+    T = \frac{1}{2} m \dot x^2 
+    \hp 
+    U = \frac{1}{2} kx^2
+    \\
+    \mathcal L =  \frac{1}{2} m \dot x^2 
+    - \frac{1}{2} kx^2
+}
+Now just get the Euler-Lagrange equation 
+\equations{
+    \frac{\del L}{\del x} - \frac{d}{dt} \frac{\del L}{\del \dot x}
+    =
+    -kx - \frac{d}{dt} m \dot x = 0
+    \rightarrow 
+    m \ddot x + kx = 0
+}
+Look at that we got N2L from the Lagrangian 
+
+You get the equation of motion from the Euler-Lagrange equation 
+
 
 
 
