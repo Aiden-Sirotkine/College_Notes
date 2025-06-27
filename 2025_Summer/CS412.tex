@@ -1,0 +1,949 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Spring 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{CS 412}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\graphicspath{ {../Images/} }
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{CS 412}
+Silly data mining summer class on Coursera lmao. 
+
+Extract patterns from vast swaths of data. 
+
+Data mining happens after data analysis where you classify and cluster 
+and find patterns. 
+
+\section{Types of Data}
+There's a whole bunch of types 
+
+\subsection{Important Characteristics of Structured Data }
+\begin{itemize}
+    \item 
+    Dimensionality 
+    \item 
+    Sparsity 
+    \item 
+    Resolution 
+    \item 
+    Distribution
+\end{itemize}
+
+\subsection{Nominal}
+Qualitative names of things. 
+Categorical 
+
+\subsection{Binary}
+2 possible values 
+
+There are symmetric and asymmetric binary attribute. Symmetic binary 
+attributes are attributes where both classes are equally important, like 
+biological sex. Asymmetric attributes are those where one of the attributes 
+is more important than the other, like having a certain disease. 
+
+\subsection{Ordinal}
+Ordered, ranked 
+
+\subsection{Others}
+Just know there are more and they are self explanatory
+
+\subsection{Numeric}
+These are numbers 
+
+They can be either interval scaled where you have a range and they 
+can be in that range, so there is no true zero point, 
+or they can be ratio-scaled, where there is a true 
+zero-point at 0.
+
+There is also disrete numeric data which is discrete. They can 
+also be continuous. 
+
+
+\section{Central Tendency}
+Mean, median, mode, midrange. 
+
+There are weighted means. Means are also very sensitive to outliers unlike 
+the median or mode. 
+
+The median splits the two halves of the data. 
+
+The mode is whatever datapoint has the most repeated values.
+
+\subsection{Median}
+If the median falls in the $m$th bin, meaning between $m$ and $m+1$, 
+then a prediction for the median is 
+\equations{
+    median 
+    \approx 
+    L_m 
+    +
+    \frac{n/2 - F_{m-1}}{f_m} \times (L_{m + 1} - L_m)
+}
+
+That's a predictor for the median. 
+
+\subsection{Mode}
+\equations{
+    mean - mode 
+    =
+    3 \times (mean - median)
+}
+
+The difference between the mean and the mode is 3 times the difference between 
+the mean and the median. 
+This formula holds for slightly skewed distributions. 
+
+Data can be skewed which means the mode is to the left or ride of the mean by a lot.
+
+negatively skewed means a tail to the left (decreasing value)
+
+Distributions can be multi-modal. 
+
+Symmetric data means 
+
+\equations{
+    mean = median = mode
+}
+
+\section{Dispersion Measures}
+Variance, Standard Deviation, Covariance, Correlation Coefficient. 
+
+You know the equations for the first 3 
+
+\equations{
+    r 
+    =
+    \frac{ Cov(a, b) } {\sigma_a \sigma_b} 
+}
+
+\subsection{Normal Distribution}
+They're pretty cool 
+
+65-95-99.7 rule or whatever it is 
+
+\equations{
+    f(x)
+    =
+    \frac{1}{\sigma \sqrt{2 \pi}}
+    e^{
+        -\frac{1}{2} (\frac{x - \mu}{\sigma})^2
+    }
+}
+
+It also mimics binary random variables taken to infinity.
+
+\section{Statistical Tests}
+Chi-Squared Test tells you if a dataset follows a certain distribution. 
+
+You need a test statistic and a significance level. 
+
+You check if the p-value is above or below the significance level.
+
+\equations{
+    \chi^2 
+    =
+    \sum 
+    \frac{(Observed - Expected)^2}{Expected}
+}
+
+\subsection{Null Hypothesis}
+There is no relationship between 2 variables
+
+\subsection{Degrees of Freedom}
+(num of row - 1) * (number of columns - 1)
+
+or 
+
+number of categories - 1
+
+so flipping a coin has 1 degree of freedom beccause 2-1 = 1
+
+\section{Contingency Tables}
+For a table where you're finding the expected value of males and fiction,
+You take the total number of males and the total number of fiction 
+and you multiply them together and then divide by the total number of 
+people in the entire table.
+
+\section{Data Visualization}
+It just makes it easier to read and easier to see correlations. 
+
+\subsection{Quantile}
+Points taken at regularly separated intervals. 
+
+Percentile is a Quantile split 100 ways 
+
+Quartile is 25th, 50th, 75th percentile for 1st, 2nd, 3rd
+
+You know box and whiskers plots 
+
+an outlier is 1.5 * IQR 
+
+Histograms plot data frequency in bins of certain ranges.
+
+Bar charts look like histograms but they plot categorical data. 
+
+\subsection{Quantile Plots}
+You sort the data and then plot it so the x-axis is 
+the index or percentile and the y-axis is whatever you're measure 
+
+\subsection{QQ Plot}
+Scatterplot where you sort two things and put 1 variable on 1 axis 
+and the other variable on the other axis. 
+
+Very similar to scatter plots, but scatter plots have 2 different variables 
+on each axis, while QQ plots have the same variable, but different samples 
+for each datapoint. 
+
+\subsection{Pixel Visualization}
+It just lets you see higher dimensional data. 
+
+\subsection{Geometric Projections}
+You can have 3d scatterplots or matrices or landscapes and stuff 
+
+not as important as like QQ plots. 
+
+\chapter{Week 2}
+\subsection{Similarity Measure}
+0 if different, 1 if the same 
+
+\subsection{Dissimilarity/Proximity Measure}
+0 distance means the same. 
+
+Distance measure 
+
+You can compute the distances between different data matrices. 
+
+\section{Categorical Data }
+Names, not numbers 
+
+\subsection{Similarity}
+see how many match and use that percentage.
+
+\subsection{Contingency table}
+Make a 2 by 2 matrix and increment each box depending on the match 
+when counting out the data.
+
+The distance measure for symmetric binary data is. 
+
+\equations{
+    \begin{bmatrix}
+        q && r \\
+        s && t
+    \end{bmatrix}
+    \hp 
+    \frac{r + t}{q + r + s + t}
+}
+
+The diagonals are important 
+
+For asymmetric data, you just ignore the unimportant variable (buying nothing)
+
+Given a data matrix, you can make a dissimilarity matrix.
+
+\subsection{Minkowski Distance}
+\equations{
+    d 
+    =
+    \sqrt[p]{|x_{i1} - x_{j1}|^p + \ldots}
+}
+
+A special case is the manhattan distance (take just the component vectors 
+and sum them. Taxicab distance)
+
+The supremum distance is the largest distance between any 2 individual dimensions.
+
+\subsection{Standardization}
+Make all data have a mean of 0 and a standard deviation $\sigma$
+
+\equations{
+    z 
+    =
+    \frac{x - \mu}{\sigma}
+}
+
+\subsection{Mean Absolute Deviation}
+\equations{
+    S_f 
+    =
+    \frac{1}{n}
+    (|x_{1f} - m_{f}| + \ldots)
+}
+
+\section{Ordinal Data}
+Standardize with 
+\equations{
+    z 
+    =
+    \frac{r_i - 1}{r_{last} - 1}
+}
+The -1 makes sure the thing starts at 0 
+
+You can also use a weighted average 
+
+\subsection{Cosine Similarity}
+Angle between 2 vectors 
+
+\equations{
+    sim(d_1, d_2) = \cos(\theta)
+    =
+    \frac{d_1 \cdot d_2}{|d_1|*|d_2|}
+}
+
+\section{Probability Data}
+\subsection{KL Divergence}
+The difference between 2 probability distributions over the same variable X 
+
+Measures the information lost when using $q$ to approximate $p$ 
+
+\equations{
+    D_{KL}(p(x) || q(x))
+    =
+    \sum_{x \in X}
+    p(x) \ln(\frac{p(x)}{q(x)})
+}
+
+If q has a probability 0 for anything, just replace it with a very small $\epsilon$
+and subtract $\epsilon / c$ from the $c$ other probabilities.
+
+\subsection{Information Gain}
+Another way to think about it is the expected number of bits needed 
+to sample from $p$ starting at $q$ 
+
+The amount of information gained from when one goes from prior probability $q$ 
+to posterior probability $p$ 
+
+\section{Data Cleaning}
+There are many tools to get rid of data discrepancies
+
+
+\subsection{Noisy Data}
+\subsection{Binning}
+Sort data and put it into equal frequency bins and then turn each datapoint 
+into the mean/median whatever of the bin. 
+
+\subsection{Regression}
+Fit the datapoints along a curve 
+
+\subsection{Clustering }
+Remove outliers 
+
+\subsection{Semi-supervised}
+Use AI and a human to get rid of weird values.
+
+\subsection{Data Integration}
+Get the same data from multiple sources to try and get the most 
+complete picture of the datapoints.
+
+Clean the data with the mean/median/mode or the most recent data or something.
+
+\subsection{Redundancy}
+Don't count the same data multiple times. 
+
+\section{Data Reduction}
+\subsection{Linear Regression}
+Assume the data fits a model, find the parameters, get rid of the data. 
+\subsection{Histograms, Clustering}
+You can also do a stratified sample which means you actively try to match 
+the global probability distribution.
+\subsection{Data cube aggregation}
+You put all the data into a cube of nominal data and remove all unnecessary 
+data. 
+\subsection{Data compression}
+
+\section{Data Transformation}
+Smoothing, Normalization, Discretization.
+
+\subsection{Min-Max Normalization}
+\equations{
+    v' 
+    =
+    \frac{v - min}{max - min}(newmax - newmin) + newmin
+}
+
+There's also z-score normalization
+
+\section{Dimensionality Reduction}
+When dimensions increase, the data becomes more and more sparse. 
+
+$2^d$ possible combinations of $d$ attributes 
+
+\subsection{Supervised and Nonlinear}
+Feature selection and feature generation (make new features out of the 
+existing data that might be useful)
+
+\subsection{Unsupervised and linear}
+PCA and feature extraction. 
+
+\subsection{PCA}
+Take the $k$ most important eigenvectors and eigenvalues and use 
+just the most important eigenvectors to reconstruct/analyze the entire 
+dataset. 
+
+Use the explained and cumulative variance to figure out how many 
+eigenvectors to keep. 
+
+\chapter{Week 3}
+
+\subsection{Supervised vs Unsupervised Learning}
+
+Supervised learning has labels already built in, while 
+unsupervised learning clusters data based on patterns only.
+
+\subsection{Classification vs Regression}
+Classification guesses discrete or nominal labels. 
+
+Regression models continuous valued functions.
+
+training set trains, validation set also trains, testing set is just for tests
+
+\section{Decision Trees}
+you can order data by just splitting points up based on their traits. 
+Can handle all types of variables. 
+
+You do it recursively, splitting the data into the most meaningful 
+groups.
+
+NON-PARAMETRIC - no assumption of the data distribution.
+
+unstable decision boundaries, and very sensitive to noise.
+Accuracy might not be perfect because of the simplicity. 
+Perfect trees are NP hard and overfitting is common. 
+\subsection{When to stop}
+all sorted, no attributes, or no datapoints
+
+\section{Splitting Measures}
+
+There's post pruning and pre-pruning and whatnot 
+
+there's information gain and entropy and stuff
+
+\subsection{Entropy}
+A measure of uncertaintly associated with a number 
+
+Entropy is always between 0 and 1
+
+\equations{
+    H(Y)
+    =
+    -
+    \sum_{y \in Y}
+    p_y \ln(p_y)
+}
+Higher entropy = higher uncertainty 
+
+You find the entropy for the whole system, and you 
+change the decision tree based on if the entropy goes up or down 
+for the whole system. 
+
+$Y$ is the groups at each of the leaf nodes of the tree. 
+
+Information is the difference in the entropies before and after the split. 
+
+\subsection{Conditional Entropy}
+You just look at the leaf nodes 
+
+\equations{
+    H(Y|Patron)
+    =
+    \sum_{\textrm{leaf nodes after split}}
+    p(x)
+    H(Y|X = x)
+}
+
+You can have negative information gain but that means 
+you do something stupid.
+
+Information gain is biased towards attributes with a large number of values.
+
+Use gain ratio instead 
+
+\equations{
+    Information Gain 
+    =
+    Entropy(pre) - Entropy(post)
+    \\
+    Gain Ratio 
+    =
+    \frac{Gain}{Split Info(A)}
+    \\
+    SplitInfo(A)
+    =
+    - \sum^v_{j =1}
+    \frac{|D_j|}{|D|}
+    \ln(\frac{|D_j|}{|D|})
+}
+
+Whatever has the biggest gain ratio can be used for our splitting 
+measure.
+
+\subsection{Gini Index (Impurity)}
+The Lower the Better 
+
+Used in binary trees. 
+
+For a dataset $D$ with $n$ classes 
+\equations{
+    gini(D)
+    =
+    1 - \sum^n_{j=1} p_j^2
+}
+Where $p_j$ is the relative frequency of class $j$ in $D$ 
+
+For a split 
+\equations{
+    gini_A(D)
+    =
+    \frac{|D_1|}{|D|}
+    gini(D_1)
+    +
+    \frac{|D_2|}{|D|}
+    gini(D_2)
+}
+
+And you just take the difference between the two.
+
+Do some math and the Gini index is the probability of an error by 
+random assignment.
+
+Can be done with a multi-way split, but that wasnt its first use.
+
+\section{Comparisons}
+Information Gain: 
+biased towards multivalued attributes 
+
+Gain Ratio: 
+Tends to prefer unbalanced splits where 1 partition is much 
+larger than the other 
+
+Gini Index: 
+Biased to multi-valued attributes. Has difficulty when 
+number of classes are large. 
+favors equal sized partitions.
+
+\section{Lecture 10: Back to Decision Trees}
+\subsection{Prepruning}
+Early stop. End when splits stop improving error 
+
+\subsection{Post-pruning}
+Make the full minimized tree, then prune until cross-validation 
+error is minimized.
+
+Generally better then pre-pruning.
+
+\subsection{Random Forest}
+Make a whole bunch of decision trees and aggregate the predictions.
+
+\section{Baye's Theorem}
+Bayesian stats are based on belief because it usually is for events that 
+cannot be repeated. 
+
+\equations{
+    p(H|X)
+    =
+    \frac{p(X|H) p(H)}{p(X)}
+    \propto
+    p(X|H) p(H)
+}
+
+$p(X|H)$ is what we just observed, or the likelihood 
+and $p(H)$ is the prior probability, and we are obtaining 
+the posterior probability.
+
+$p(X)$ is just the scaling factor. 
+
+\chapter{Week 4}
+
+\section{Baye's Theorem with Multiple Hypotheses and Sequential Evidence}
+\subsection{Sequential Evidence}
+\equations{ 
+    p(H|X_1, X_2) 
+    =
+    \frac{P(X_2 | H, X_1) p(H|X_1)}{p(X_1, X_2)}
+}
+You just do bayes theorem twice I think
+
+Assume $X_1, X_2$ are conditionally independent given $H$ 
+\equations{ 
+    p(H|X_1, X_2) 
+    =
+    \frac{P(X_2 | H) p(H|X_1)}{p(X_1, X_2)}
+}
+
+Then it becomes easier.
+
+
+\section{Naive Baye's Classifier}
+ASSUME FEATURES ARE CONDITIONALLY INDEPENDENT
+
+Compute categorical features with frequency counts.
+
+Continuous features likely use a Gaussian.
+
+\subsection{Sequential}
+You can use Baye's theorem to 
+calculate the probability of an outcome given new information. 
+
+\section{Linear Regression}
+Use math to map datapoints to a continuous formula. 
+
+Minimize the loss function to make a linear predictor 
+
+least-squares regression is the math used in lin alg. solves analytically. 
+
+\section{Perceptron}
+Linear Classifier where you classify the top and the bottom of the classifier. 
+
+The line is adjusted if it misclassifies something
+
+\section{Logistic Regression}
+Uses a sigmoid function to classify between 2 classes. 
+
+If its below the sigmoid, its one class. Above is the other. 
+
+Returns a certain probability function that relates to the sigmoid. 
+
+\equations{
+    \sigma     
+    =
+    \frac{1}{1 + e^{-z}}
+}
+
+Minimize the negative log-likelihood.
+
+\subsection{Pros}
+Can handle many features. Fast, good. Robust, Interpretable. 
+
+Only works well if the decision boundary is linear. 
+
+\section{Generative vs Discriminative Classifiers}
+Generative make a thing, Discriminative make a decision boundary and figure 
+out everything else from there. 
+
+\chapter{Week 5}
+\section{Model Evaluation}
+
+\subsection{Confusion Matrix}
+It's a matrix of the number of actual traits in a dataset vs the number 
+of predicted traits in a dataset, and it's used to examine how accurately a model 
+models data. 
+
+true positive, false negative 
+
+false positive, true negative 
+
+Sensitivity = True Positive / Positive 
+
+Specificity = True Negative / Negative 
+
+Precision = True Positive / Predicted Positive 
+
+Recall = True Positive / Positive 
+
+Accuracy = True Positive + True Negative / All
+
+\subsection{F Measure}
+Gives weights to recall 
+
+\equations{
+    F_s 
+    =
+    \frac{(B^2 + 1)P \times R}{B^2 P + R}
+}
+B = 1 means equal weight 
+
+In some cases precision might be more or less useful than recall.
+
+\subsection{ROC Curves}
+True positive rate TP/P on the y-axis and false positive rate FP/N on the bottom.
+
+Receiver Operating Characcteristic. 
+
+It shows the true positive rate over the false positive rates, and as most 
+models increase their true positive rate, their false positive rate also increases
+because they're just saying everything is true. 
+
+You can use the ROC curves of different classifiers to see what works 
+best. 
+
+The area under the curve represents the quality of the model. 
+
+\section{Classifier Evaluation}
+
+\subsection{Holdout Method}
+
+Holdout Method is just training set and a validation set. 
+
+\subsection{Cross-validation}
+Cross-Validation is the same as the holdout method but you do it multiple times 
+over so that every part of the set becomes a validation set at some point. 
+
+You split it into a bunch 
+
+\subsection{Leave-One-Out}
+self-explanatory.
+
+\subsection{Bootstrap Method}
+sample tuples with replacement.
+
+The most common is the 0.632 bootstrap, where that much ends up 
+in the training set and the rest is the validation set.
+
+\subsection{Parameters and Statistical Tests}
+Accuracy, Speed, Robustness, Scalability, Interpretability.
+
+You can do a t-test to compare models.
+
+\section{Lazy Learning}
+Stores training data and waits until given a test tuple. 
+
+less training time, more predicting time.
+
+example: Nearest Neighbor.
+
+You need proper indexing/decent algorithms because lazy learning can be 
+computationally expensive.
+
+Must commit to a single hypothesis for the whole dataset.
+
+\subsection{KNN}
+Look at the nearest points and do a majority vote and boom youve classified it. 
+
+\section{Ensemble Methods}
+
+\section{Bagging and Random Forest}
+EACH TREE HAS RANDOMLY SELECTED FEATURES.
+
+Bagging is training a bajillion different models with different training sets 
+and put em all together.
+
+boot + agg(regating models) = bagging
+
+Random forest is bagging + a decision tree. You have different features 
+for some models and they're selected randomly. 
+
+The different models have different features. 
+
+\section{Boosting}
+Sequentially put a datapoint through classifiers with each one 
+mending the mistakes of the last.
+
+\subsection{Adaboost}
+Adaptive boosting.
+
+Assign initial weights to a dataset, fix the incorrect classifications by 
+changing the weights. Repeat until classifier is good. 
+
+\subsection{Gradient Boosting}
+Incrementally add procedurally weaker classifiers to the model to decrease 
+the loss function.
+
+You need a differentiable loss function. 
+
+\subsection{Regression Tree}
+decision tree but for continuous variables.
+
+\chapter{Week 6}
+\section{Class Imbalance}
+Alot of methods assume both classes have equal error cost. This 
+however is not true for many real-life samples (rare disease diagnosis, credit 
+card fraud.)
+
+You can oversample from the minority and undersample from the majority.
+
+\subsection{Threshold Moving}
+Increase the chance of classification for the minority to decrease the 
+chance of the false negatives (Better to be safe than sorry).
+
+
+\subsection{Class Weight Adjusting}
+Make false negatives more penalizing. 
+
+\section{Bayesian Belief Network}
+Given a di-graph of dependent probabilities, find the total probability of an 
+outcome given the data. 
+
+\subsection{Training}
+If the structure is known, and the variables are observable, 
+compute the Conditional Probability Table entries, and estimate the probabilities 
+analytically. 
+
+If the structure is known, but the variables are hidden, use the training 
+data to predict the unknown probabilities/parameters. Use gradient 
+ascent to maximize probabilities.
+
+\subsection{Plate Notation}
+You index graphs that are all related and put them all into 1 square.
+
+\section{Support Vector Machines}
+You use a non-linear mapping to map your data into a higher dimension such 
+that you only need a linear hyperplane to separate your classes.
+
+You can also do the mapping using a kernel function.
+
+\subsection{IF-THEN Rules}
+Seeing what previous traits correlation to other classifications.
+
+\subsection{Size Ordering}
+Assign highest priority to triggering rules that have the "toughest"
+requirement (with the most attribute tests)
+
+\subsection{Class-Based Ordering}
+Decreasing order of prevalence or misclassification cost per class.
+
+\subsection{Rule-based Ordering}
+Rules are organized into one long priority list according to 
+some measure or expert opinion.
+
+
+\subsection{Rule Induction}
+Rules are mutually exclusive and exhaustive which means 
+no two rules are triggered by the same tuple, and all combinations 
+of attributes have a rule.
+
+Start with a list of 0 rules.
+
+Add a rule
+
+Remove the point classified by the rule. 
+
+repeat until terminating condition.
+
+\section{Pattern-Based Classification}
+Learn patterns 
+
+\section{Semi-Supervised Learning}
+Use labeled AND unlabeled data to train a classifier.
+
+\subsection{Self-Training}
+Train with the labeled data. Predict the unlabeled data. The most confident 
+predictions get added to the labeled data. Repeat.
+
+\subsection{Co-Training}
+Use two features with mutually independently features. Give the 
+most confident predictions to THE OTHER List to not reinforce errors.
+
+\subsection{Active Learning}
+The learner queries a human expert to have only the most informative data 
+for training. It specifically queries the least confident data in the set.
+
+You can also use a learning curve 
+
+\subsection{Transfer Learning}
+Use a separate classifier to help train with unlabeled data.
+
+\subsection{Weak Supervision}
+Use noisier less high quality data to train the data instead of our fancy 
+labeled training data.
+
+You just ask people or use wikipedia for your weak data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
