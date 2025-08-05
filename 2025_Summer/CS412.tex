@@ -893,12 +893,856 @@ labeled training data.
 
 You just ask people or use wikipedia for your weak data.
 
+\chapter{Week 7}
+Patterns are items or structures that occur frequently together. 
+
+\section{Pattern}
+A set of items, subsequences, or substructures that 
+occur frequently together in a dataset. 
+
+Pattern discovery is finding those patterns in a very large 
+dataset. 
+
+\subsection{Types of Pattern Discovery}
+\begin{itemize}
+    \item 
+    Sequential Patterns 
+    \item 
+    Classification 
+    \item 
+    Clustering
+\end{itemize}
+
+\subsection{Transactional Database}
+A data that has transactions, and each 
+transaction has a (sometimes ordered) set of items. 
+
+Example: grocery list. 
+
+a k-itemset is a set of $k$ items that 
+occur in a transaction and could be a pattern. 
 
 
 
 
+\section{Support and confidence}
+The support is the number of transactions that 
+contain the k-itemset.
 
 
+
+The confidence in a pattern existing is the conditional 
+probability that both $X$ and $Y$ are in a transaction 
+given $X$ is already in the transaction.
+
+\equations{
+    c = 
+    \frac{sup(X, Y)}{sup(X)}
+}
+
+Where the support is just the frequency of the pattern. 
+
+patterns can have minimum support labeled minsup.
+
+You can also use a minimum confidence.
+
+\section{Closed Pattern}
+A closed pattern X is a pattern that does not have a larger encompassing pattern 
+with the same support as X.
+
+Closed patterns are lossless compression (
+    This means if you know all the closed patterns, you can 
+    figure out all the possible other patterns in the 
+    dataset AND THEIR SUPPORT. 
+). 
+
+\subsection{Maximal Pattern}
+if X is frequent and there exist no super-patterns of X. 
+
+The differnce between maximal and closed is that 
+closed patterns have no super-pattern with THE SAME SUPPORT, 
+while maximal patterns have no frequent super-pattern at all.
+Closed patterns can have super-patterns AS LONG AS THE SUPPORT 
+IS SMALLER.
+
+Maximal patterns are LOSSY compression. We know it's frequent but we do 
+not know the support of it. 
+
+\section{Apriori Algorithm}
+Find sequences that are infrequent and get rid of them and then just 
+make bigger and bigger patterns from there. 
+
+Make candidate patterns that might or might not be frequent.
+
+Prune larger patterns if all their subsets are not also frequent.
+
+\begin{itemize}
+    \item 
+    Find all frequent-1 itemsets (scan)
+    \item 
+    Generate frequent 2-itemsets if 
+    all the subsets are also frequent 
+    \item 
+    scan for frequency 
+    \item 
+    find larger candidate itemsets from the subsets 
+    \item 
+    repeat 
+\end{itemize}
+
+\section{Improvements}
+
+\subsection{Partitioning}
+Any item that is frequent in the total database must be frequent in 
+at least 1 partition of the total database. 
+
+SPECIFICALLY, THE SUPPORT IS NOW A FRACTION BASED 
+ON THE PARTITION SIZE.
+
+\subsection{Hashing}
+Put patterns together and then if the sum of the supports 
+is below a certain threshold, then none of the items in that 
+set of patterns can be frequent.
+
+
+\subsection{Pruning}
+
+pruning is removing candidates that dont have ALL 
+subsets frequent.
+
+\section{Vertical Data Format}
+ECLAT = Equivalent CLass Transformation method.
+
+
+For every item $a$, you can see which indexes contain $a$. 
+
+Usually it's the other way around (index 1 contains $a, b, c$ or whatever).
+
+It allows you to discover patterns in a new way. 
+
+Only keep track of the differences in Tids (transaction ids)
+
+\section{FPGrowth}
+Apriori is a breadth-first search of pattern discovery 
+
+FPGrowth is a depth-first search. 
+
+\begin{itemize}
+    \item 
+    find 1-frequent items 
+    \item 
+    sort them in descending order 
+    \item 
+    perform another scan to find ordered frequency items in the dataset. 
+    \item 
+    that's your data structure 
+\end{itemize}
+
+There's a whole bunch of tree-traversal that I don't fully get. 
+
+You basically just recursively order the most frequent patterns in 
+exceedingly deeper and deeper trees. 
+
+There are like conditional databases which are essentially all the 
+things that exist assuming $m$ exists for some $m$ in the database. 
+
+\begin{itemize}
+    \item
+    Find all the frequent 1-itemsets 
+    \item 
+    remove all the non-frequent items from each transaction 
+    and order them by support.
+    \item 
+    Build the FP-tree by inserting transactions 1 by 1 
+    and incrementing counts/adding branches as necessary.
+\end{itemize}
+
+
+\section{Mining Closed Patterns (can probably ignore)}
+CLOSET+ 
+
+\subsection{Merging}
+If Y is in every transaction in X, then Y is 
+merged with X. 
+
+Probably not important
+
+\chapter{Week 8}
+\section{Pattern Evaluation}
+Pattern mining will give you many patterns, but many are useless. 
+
+\subsection{Interestingness Measures}
+Numbers that tell you how interesting a pattern is. 
+
+\subsection{Objective vs Subjective}
+Objective can be calculated with a formula every time, 
+while subjective measures are dependent on the database.
+
+Objective = support, confidence, correlation, lift, chi-squared 
+
+Subjective measures are silly
+
+\subsection{Support-Confidence Limitations}
+Support and confidence are interestingness measures.
+
+If your data is skewed, support and confidence might 
+be high without any correlation.
+
+\subsection{Lift}
+Measure of correlation in 2 events. 
+
+Less than 1 is negatively correlated 
+
+Greater than 1 is positively correlated.
+
+\equations{
+    lift(B, C)
+    =
+    \frac{s(B \cup C)}{s(B) \times s(C)}
+}
+Where $s$ is the support, which we know how to measure.
+
+
+
+\subsection{$\chi^2$}
+Tells you if datapoints follow a distribution.
+
+\equations{
+    \chi^2 
+    =
+    \sum
+    \frac{(Observed - Expected)^2}{Expected}
+}
+
+
+Both lift and $\chi^2$ are good if you do NOT have a bunch of null datapoints.
+
+\section{Pattern Evaluation Part 2}
+
+
+\section{Null-Invariant Measures}
+These measures are the same whether or not you count 
+null transactions.
+
+ALL RANK [0, 1]
+
+\subsection{AllConf(A, B)}
+\equations{
+    \frac{s(A \cup B)}{\max(s(A), s(B))}
+}
+
+\subsection{Jaccard(A, B)}
+\equations{
+    \frac{s(A \cup B)}{s(A) + s(B) - s(A \cup B)}
+}
+
+\subsection{Cosine(A, B)}
+\equations{
+    \frac{s(A \cup B)}{\sqrt{s(A) \times s(B)}}
+}
+
+\subsection{Kulcynski(A, B)}
+\equations{
+    \frac{1}{2} \left( \frac{s(A \cup B)}{s(A)} + \frac{s(A \cup B)}{s(B)} \right)
+}
+
+\subsection{MaxConf(A, B)}
+\equations{
+    \max{\frac{s(A \cup B)}{s(A)}, \frac{s(A \cup B)}{s(B)}}
+}
+
+\subsection{Differences}
+Kulc is the most steady, but it does not change as
+dynamically as the others, so it is best paired with a second 
+measure.
+
+
+
+
+Null invariant means that all transformations done with them are 
+also null-invariant.
+
+Null transactions do not affect the measure in the slightest.
+
+\subsection{Imbalance Ratio}
+
+\equations{
+    \frac{|s(A) - s(B)|}{s(A) + s(B) - s(A \cup B)}
+}
+
+measures the imbalance of two itemsets A and B in rule implications.
+
+This + Kulcynski works pretty well
+
+\section{Mining Diverse Patterns}
+There's a big ass lecture 
+
+You can partition your data before looking at patterns. 
+
+\section{Multilevel Association Rules}
+You can partition your data in a hierarchy.
+
+Lower level patterns naturally will have a lower support 
+because they're subpatterns of bigger patterns.
+
+How do we figure out the best minsup for all levels?
+
+\subsection{Multi-Dimensional Associations}
+You might be working with data from many different dimensions 
+like age, weight, products, etc. and you need to figure 
+out different support threshholds for each.
+
+\subsection{Static Discretization}
+Turn a range of data-points into 1 discretized value. 
+
+age = 18-20, 20-22, etc etc 
+
+\subsection{Clustering}
+Connect age clusters together based on other values.
+
+\subsection{Z-Test}
+How to figure out if Quantitative patterns are actually 
+interesting.
+
+\subsection{Shared Multilevel Mining}
+Use the lowest possible minsup of all the larger patterns.
+
+\subsection{Negative Patterns}
+There's a formula for both support and a null-invariant thing.
+
+\equations{
+    sup(A \cup B)
+    << 
+    sup(A) \times sup(B)
+}
+
+If that is true, then A and B are negatively correlated.
+
+This does NOT work well when there are many null transactions.
+
+You can use the null-invarient method with Kulc < some 
+epsilon to figure out of your items are negatively 
+correlated.
+
+\section{Mining Compressed Patterns}
+Closed patterns are not compressable, and max patterns 
+lose too much data. 
+
+\subsection{Pattern Distance Measuring}
+\equations{
+    Dist(A, B)
+    =
+    1
+    -
+    \frac{|T(A) \cap T(B)}{|T(A) \cup T(B)}
+}
+
+Where $T(A)$ is the set of transaction id's that contain $A$.
+
+\subsection{Delta Cover}
+There's also a distance metric for patterns 
+
+delta clusters are patterns that can be made from each other and have a 
+distance less than delta. 
+
+Cluster all patterns that are $\delta$ close to each other.
+
+\section{Constraint-Based Mining}
+\subsection{Meta Rules}
+if constraint and constraint then pattern 
+
+find predicate patterns with min-sup
+
+\subsection{Anti-Monotonic}
+if an itemset violates a constraint $C$, then so does 
+all of its supersets.
+
+sum of prices $< k$ is anti-monotonic because prices are always positive.
+
+\subsection{Monotonic}
+if an itemset satisfies a constraint $C$, then so does 
+all of its supersets.
+
+sum $> k$ is monotonic because prices are always positive.
+
+\subsection{Data anti-monotonic}
+If a data entry does not satisfy a constraint $C$, then no
+superset containing that entry satisfies $C$.
+
+min(X) $< k$ is data anti-monotonic because that datapoint 
+will be the new smallest minimum.
+
+\subsection{Succinct}
+can a constraint $c$ be made true by directly manipulating 
+the data with a function.
+
+
+\subsection{Convertible}
+Can a set be converted to monotonic or anti-monotonic based 
+on just ordering the dataset.
+
+average $< k$ is convertible because if the data is 
+in descending order, then the average will always be decreasing.
+
+\chapter{Week 9}
+\section{Sequence-Based Data Mining}
+Gapped vs non-gapped means the direction matters more vs like a stochastic 
+pattern. 
+
+(ab) are in-ordered while ab(cd)e are ordered (except for c and d)
+
+unordered items are listed alphabetically.
+
+\subsection{Generalized Sequential Patterns (GSP)}
+Apriori method of finding sequential patterns
+
+\begin{itemize}
+    \item 
+    Find all length 1 frequent patterns 
+    \item 
+    calculate candidates with their subsets
+    \item 
+    scan to find frequent 2-patterns
+    \item
+    repeat forever
+\end{itemize}
+
+\subsection{How to test Joining }
+Sequence joining and item joining (if the last item is 
+part of an unordered set)
+
+\subsection{SPADE}
+Sequential Pattern mining in Vertical Data Format
+
+for each element (a),  you get both a sequence ID and 
+and element ID. 
+
+The way you find the patterns is by putting together 
+incrementing element ID's 
+
+if (a) has EID 1 and (b) has EID 2, then you can
+put together the sequence (a, b) 
+
+You do the same thing starting from 1 and going upwards with the vertical 
+table. 
+
+\subsection{PreFix Span}
+Pattern Growth Approach 
+
+Prefixes are patterns at the beginning of a datapoint. 
+
+\begin{itemize}
+    \item 
+    Find all frequent 1-patterns
+    \item 
+    Find the prefix projection for each pattern 
+    \item 
+    find the frequent 1-patterns inside that projected database 
+    \item 
+    make the prefix projection database of the 2-pattern 
+    \item 
+    repeat forever 
+\end{itemize}
+
+\subsection{CloSpan}
+Closed Sequential Pattern:
+Just a regular closed pattern but in sequential data. 
+
+\subsection{Graph Pattern Data Mining}
+Graphs are the things you use in CS225 
+
+you have to look at the full graph patterns instead of just 
+the unions of different frequent edges. 
+
+\subsection{Support}
+If the whole graph is a subset of the datapoint, then 
+increment the support.
+
+\subsection{Apriori}
+Use anti-monotonicity.
+
+A graph is frequent only if all of its subgraphs are frequent.
+
+Start with small graphs and build up.
+
+\subsection{gSpan (Pattern Growth)}
+graph span. Pattern Growth approach. 
+
+Do a depth-first search.
+
+Start with a k-edge graph, then add a edge, check if it 
+is frequent, and immediately add another edge if it is 
+frequents.
+
+Order the graph so that it's a sequence.
+
+\subsection{CloseGraph}
+A n-sized graph may have $2^n$ subgraphs.
+
+only mine closed frequent graphs.
+
+Used your mining closed graph patterns. 
+
+An n-edge frequent graph may have $2^n$ subgraphs. 
+
+Finding only closed frequent graphs removes this explosion problem.
+
+Lossless compression. 
+
+Done by extending gspan. 
+
+If $G_1$ is always frequent when $G$ is frequent, you can 
+ignore $G$ and only consider the larger graphs of $G_1$.
+
+\chapter{Week 10}
+\section{Cluster Analysis}
+A cluster is a collection of data objects that 
+are similar to each other. 
+
+Objects can be classified based on just similarity.
+
+As similar as possible in the same groups. As far as possible to other 
+groups. 
+
+Cluster classification is a form of unsupervised learning. This 
+is because there is no training prior to cluster classification.
+
+What quantitative datapoints should you use to classify your dataset?
+
+\subsection{Considerations}
+\begin{itemize}
+    \item 
+    Partitioning Criteria 
+    \item 
+    Separation of Clusters 
+    \item 
+    Similarity Measure 
+    \item 
+    Clustering Space (high-dimensional vs low-dim) 
+    \item 
+    Quality (Qualititative, Numeric, Hierarchical, Ordered)
+    \item 
+    Scalability 
+    \item 
+    Constraints 
+    \item 
+    Interpretability
+\end{itemize}
+
+\section{Partitioning Algorithms}
+\subsection{K-Partitioning}
+There are $K$ clusters and you split the data into that many clusters, trying 
+to make them as even and correct as possible.
+
+Specifically, you are minimizing some loss function accross 
+all the of the clusters.
+
+\subsection{K-Means Clustering}
+goated unsupervised learning method.
+
+Each cluster is represented by the center of the points 
+and we minimize the mean distance between the cluster and all 
+of its points.
+
+sensitive to noisy data and outliers. 
+
+Best used for circular-ish shapes.
+
+Not suitable for non-convex shapes.
+
+\subsection{K-Medoids}
+Instead of using the mean, you use the most centrally 
+located point in the cluster (the point that's closest 
+to the mean).
+
+Not as affected by outliers. 
+
+Use random swapping in your medoid algorithm.
+Because of this, it does not scale well, but is 
+good for small datasets.
+
+\subsection{K-Medians}
+Less sensitive to outliers.
+
+\subsection{K-Modes}
+Useful for qualitative data. 
+
+dissimilarity measure is frequency-based.
+
+\subsection{Kernel K-Means}
+Use a kernel function to make more distinct clusters.
+
+Turn the space into a higher-dimensional one such that 
+your points are more easily separable.
+
+\section{Hierarchical Clustering}
+You make clusters within clusters. 
+
+\subsection{Single Link Clustering}
+Use the nearest possible objects within the cluster 
+to calculate distance. 
+
+This allows you to have non-circular shapes.
+
+\subsection{Complete Link Clusterings}
+Use the farthest possible objects to calculate distance.
+
+\subsection{Average Link}
+Use the mean.
+
+\subsection{Centroid Link}
+Use the medoid.
+
+\subsection{Agglomerative}
+Start with smaller clusters and put them together until you have the whole 
+dataset.
+
+\subsection{Divisive Clustering}
+Start with a giant cluster and split until you get to single clusters. 
+
+Inverse of agglomerative clustering model (AGNES).
+
+\section{Probabilistic Clustering Methods}
+Model the data from a generative process. 
+Turn the datapoints into stats. 
+
+Assume the data is generated by some underlying probability 
+distributions.
+
+Optimize the fit between the observed data and some 
+mathematical model.
+
+\subsection{Parametric Mixed Models}
+Assume that the data is made up of multiple 
+different distributions, but they're all of the 
+same type (Gaussian, for example). Each of the different 
+clusters are made up of models with different means 
+and variances and models. 
+
+It's called parametric mixture model because its a mix of the 
+same distributions, but with different parameters.
+
+\subsection{Gaussian Mixture Models}
+Assume each cluster matches a Gaussian distribution.
+
+You can have multivariate Gaussians. 
+
+\subsection{Expectation-Maximization Function}
+It's just a lost function for datapoints matching a probability distribution.
+
+Calculate the Maximum Likelihood Estimation with the 
+log-likelihood.
+
+Use Bayes' Theorem and weight changes to adapt and 
+create your cluster model.
+
+\chapter{Week 11}
+
+\section{Density-Based Clustering}
+Allows you to find clusters of arbitary shape. 
+
+\section{DBSCAN}
+A cluster a maximal set of density-connected points.
+
+It's an algorithm 
+
+sensitive to parameters. 
+
+\subsection{Directly Density Reachable}
+this is true if $p$ is within the 
+epsilon neighborhood of $q$.
+
+And there's enough core points in the neighborhood.
+
+\subsection{Density Reachable}
+If there is some sequence of direct density reachable points 
+that get your from $p$ to $q$.
+
+\subsection{Density Connected}
+If there exists $o$ such that its density reachable to 
+both $p$ and $q$. This allows $p$ and $q$ to both 
+be at the border of a cluster while still connected-ish.
+
+\section{Evaluation of Clusters}
+
+\subsection{Clustering Tendency}
+suitability of clustering on a dataset. 
+
+\begin{itemize}
+    \item 
+    Spatial Histogram 
+    \item 
+    Distance Distribution 
+    \item 
+    Hopkins Statistic (whatever that is)
+\end{itemize}
+
+\section{Number of Clusters}
+Find something in between 1 cluster and every point being its 
+own cluster.
+
+\subsection{Empirical Number}
+\equations{
+    k = \sqrt{\frac{n}{2}}
+}
+Personally I think this is dumb.
+
+\subsection{Elbow Method}
+I TALKED ABOUT THIS IN PHYS498
+
+Look at the whole bunch of cluster methods with different 
+$k$ values and look at cluster variance. At some point 
+you can diminishing returns in your information gain.
+
+\subsection{Cross Validation}
+Partition your data and validation your clustering method 
+against the other partitions.
+
+\section{Clustering Quality}
+There is not a consensus-perfect way to do this. 
+
+\subsection{Extrinsic} 
+human-derived goals (a.k.a. \textit{ground truth})
+
+The qualities that we want out of extrinsic cluster 
+evaluation are:
+\begin{itemize}
+    \item 
+    Homogeneity 
+    \item 
+    Completeness 
+    \item 
+    rag bag better than alien 
+    \item 
+    small cluster prevention
+\end{itemize}
+
+Some common methods are 
+\begin{itemize}
+    \item 
+    Matching Based 
+    \item 
+    Information Theory Based
+    \item 
+    Pairwise-Comparison Based 
+\end{itemize}
+
+\subsection{Matching Based: Purity}
+The extent that a cluster contains points only from the 
+ground truth.
+
+\equations{
+    Purity(C_i, G_j) 
+    =
+    \sum
+    \frac{|C_i \cap G_j|}{|C_i|}
+}
+
+\subsection{Information Theory Based: Conditional Entropy}
+\equations{
+    H(G | C)
+    =
+    - \sum_{i=1}^{k}
+    \sum_{j=1}^{l}
+    \frac{|C_i \cap G_j|}{n}
+    \log
+    \frac{|C_i \cap G_j|}{n}
+}
+
+\subsection{Normalized Mutual Information}
+\equations{
+    I(C, G)
+    =
+    - \sum_{i=1}^{k}
+    \sum_{j=1}^{l}
+    p_{ij}
+    \log{
+    \frac{p_{ij}}{p_{Ci} \cdot p_{Gj}}
+    }
+    \\ 
+    NMI(C, G)
+    =
+    \frac{I(C; G)}{\sqrt{H(C)} + H(G)}
+}
+
+Value close to 1 means good clustering. 
+It means the clusterings have very similar information.
+
+\subsection{Pairwise-Comparison Based: Jaccard Coefficient}
+Make a contingency table of calculated clusters 
+and ground truth clusters. 
+
+\equations{
+    J(C, G) 
+    =
+    \frac{|C \cap G|}{|C \cup G|}
+    =
+    \frac{TP}{TP + FP + FN}
+}
+
+\section{Intrinsic}
+quality based off of just the data 
+(silhouette coefficient). 
+
+If clusters are compact and separated, then that is good.
+
+\subsection{Dunn Index}
+Maximum distance between 2 points that belong in 
+the same cluster is $\Delta$.
+
+The minimum distance between 2 points in different 
+clusters is $\delta$.
+
+\equations{
+    DI = \frac{\delta}{\Delta}
+}
+
+The larger the better.
+
+\subsection{Silhouette Coefficient}
+Measures how well-separated clusters are by comparing 
+intra-cluster and inter-cluster distances.
+
+For each point $i$:
+\begin{itemize}
+    \item $a(i)$ = average distance to other points in same cluster
+    \item $b(i)$ = average distance to points in nearest neighboring cluster
+\end{itemize}
+
+\equations{
+    s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
+}
+
+Range: $[-1, 1]$. Values close to 1 indicate good clustering 
+(point is well-matched to its cluster). Values near 0 indicate 
+the point is on the border between clusters. Negative values 
+indicate the point may be in the wrong cluster.
+
+Overall silhouette score is the mean of all $s(i)$ values.
+
+When the value for an individual object $o$ is 1, that 
+is good. 
+
+If the value is negative, that is bad.
+
+\chapter{Week 12}
+
+\section{Neural Networks}
+They have many neurons and activation functions for their 
+regression stuff. 
+
+\section{Gradient Descent and Backpropagation}
+You take the gradient of the probability space and you change the weights 
+of the neurons in the opposite direction of the gradient to minimize the loss 
+function. 
+
+\section{Convolutional NN's}
+You make the data space lower-dimensional with a convolution function and then 
+run your NN on that before bringing it back to the regular dimensional space.
+
+\section{Recurrent NN's}
+You input sequential data and the previous datapoints are kept in the nodes 
+to affect the future datapoints. 
 
 
 

@@ -4,15 +4,16 @@
 % Packages
 \usepackage[utf8]{inputenc} % For input encoding
 \usepackage{geometry} % For page margins
-\geometry{a4paper, margin=0.75in} % Set paper size and margins
+\geometry{a4paper, margin=1cm} % Set paper size and margins
 \usepackage{titlesec} % For section title formatting
 \usepackage{enumitem} % For itemized list formatting
 \usepackage{hyperref} % For hyperlinks
 
 % Formatting
 \setlist{noitemsep} % Removes item separation
-\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}[\titlerule] % Section title format
-\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip} % Section title spacing
+\titleformat{\section}{\large\bfseries}{\thesection}{0em}{}[\titlerule] % Section title format
+\titlespacing*{\section}{0pt}{\baselineskip}{0.2cm} % Section title spacing
+
 
 \newcommand{\comment}[1]{}
 
@@ -24,104 +25,251 @@
 
 % Header
 \begin{center}
-\textbf{\Large Aiden Sirotkine}\\[2pt] % Name
-Fort Collins, Colorado / Champaign, Illinois | \href{mailto:aidensiro@gmail.com}{aidensiro@gmail.com} 
+\textbf{\Huge Aiden Sirotkine}\\[2pt] % Name
+% Fort Collins, Colorado / 
+Champaign, Illinois | 
+% \href{mailto:aidensiro@gmail.com}
+{aidensiro@gmail.com} | 
 %(720) 568-9582 
-\href{https://www.linkedin.com/in/aiden-sirotkine-535630242/}{linkedin.com/in/aiden-sirotkine}
+% \href{https://www.linkedin.com/in/aiden-sirotkine-535630242/}
+https://github.com/Aiden-Sirotkine 
 \comment{
 | Country Citizen % Contact info
 }
 \end{center}
 
+% \noindent
+% Motivated student with a strong background in Computational Physics Simulations, Data Analysis, and Artificial Intelligence, seeking an internship in engineering and software development to apply technical skills and contribute to innovative projects.
+
+% \noindent
+% Motivated engineering student with a strong background in Artificial Intelligence
+% \\
+% and Semiconductor Tech
+% looking to pursue a career in electrical and computer engineering.
+% Currently seeking external research to broaden my horizons.
+
 % Education Section
 \section*{EDUCATION}
 \noindent
-\textbf{University of Illinois at Urbana-Champaign}, BS\\
-Enrolled: August, 2023 | Expected Graduation: May 2026\\ % University name and location
-Physics Major, Computational Physics Track, Computer Science Minor \hspace{1cm} \\
-GPA: 3.88
-\comment{
- | Major GPA X.XX\\ % Degree and GPA
- }
-\comment{
-Threads: Example and Example \hfill Credit standing: Honors % Additional info
-}
+\textbf{University of Illinois at Urbana-Champaign
+| B.S. Physics}
+\hfill Expected May 2026 \\
+% \begin{itemize}
+% University name and location
+% \textbf{Major:} Physics, \hspace{0.5cm}
+\textbf{Concentration:} Semiconductor Tech \hspace{0.5cm}
+\textbf{Minors:} Computer Science, Music
+\hfill
+GPA: 3.95
+% \end{itemize}
+\\
 
-% Experience Section
-\section*{JOB EXPERIENCE}
 \noindent
-\textbf{ChessMates:} \hspace{0.05cm}
-\href{https://chessmatesfc.com/}{https://chessmatesfc.com/}
-\hfill Fort Collins, Colorado\\ % Company name and location
-\textit{Teacher} \hfill October 2021 - August 2023 % Position and duration
-\begin{itemize}
-    \item Taught elementary chess clubs and grew students' passion for the chess. 
-    \item Organized and managed chess tournaments for k-12 students
-    \item Guided students to win various awards throughout the Fort Collins area
- % Job responsibilities and achievements
-\end{itemize}
+\textbf{Relevant Coursework:} \\
+MEMS and NEMS Fabrication | Embedded DSP |
+Machine Learning | Simulations
+% Relevant coursework
 
-\comment{
-% Club or Organization Experience
-\textbf{Club or Organization Name} \hfill City, State\\ % Club or organization name and location
-\textit{Position Title} \hfill Month Year – Ongoing % Position and duration
-\begin{itemize}
-    \item Description of responsibilities and achievements at this position. % Responsibilities and achievements
-\end{itemize}
-}
-
-% Projects Section
-\section*{PROJECTS}
-\noindent
-\textbf{Prime Number Calculator}  \hfill January 2023 - Active % Project link and 
-% \hfill City, State\\ % Project name and location \\
-
-%\href{https://github.com/Aiden-Sirotkine/Prime-Number-Calculator}
-%{https://github.com/Aiden-Sirotkine/Prime-Number-Calculator}
-
-\begin{itemize}
-\item Implemented a variety of concepts in both computer science and number theory in order to find arbitrary amounts of prime numbers quickly.
-\item Written in Python, Java, C++, Julia
-\item Utilizes file reading/writing, file compression, multithreading, etc. 
-\item Sieves over 50,000,000 prime numbers per second on 4 threads
-% Project description and contributions
-
-\end{itemize}
-
-% Additional Project
-\noindent
-\textbf{Cloud Chamber} \hfill Fort Collins, CO % Project name and location
-%\textit{Project Link:} \url{https://www.projectwebsite.com/} \hfill Month Year % Project link and duration
-\begin{itemize}
-    \item Chamber of supercooled isopropyl alcohol
-    \item visualizes radiation and various elementary particles through streaks of condensation.
- % Project description and contributions
-\end{itemize}
-
-% Additional Experience or Volunteer Work
-\section*{VOLUNTEER WORK}
-\noindent
-\textbf{Math Club} \hfill Fort Collins, Colorado\\ % Project or organization name and location
-\textit{Founder, Organizer, Teacher} \hfill January 2022 – August 2023 % Position and duration
-\begin{itemize}
-    \item Started the Ridgeview Classical Schools Math Club from scratch
-    \item Organized events and meetings. Created posters to advertise.
-    \item Led team to top 10 finish in the Regional MathCounts Competition
-     % Responsibilities and achievements
-\end{itemize}
 
 % Skills Section
 \section*{SKILLS}
-\begin{itemize}
-    \item \textbf{Relevant Coursework:} Intro to Java, Intro to C++, Linear Algebra, Discrete Math, \\
-    \hspace{1cm} Differential Equations, Quantum Physics,
-    Thermal Physics, Relativity
-    % Relevant coursework
-    \item \textbf{Programming:} Python, Java, Javascript, C++, Julia % Programming skills
-    \item \textbf{Software:} LaTeX, Git, GitHub, Linux % Software 
-    \item \textbf{Soft Skills:} Technical Communication for Laymen, Organization and Team Planning % Software skills
+% \begin{itemize}
+    \textbf{General:} Clean Room Lithography, Embedded Systems, Data Analysis, 
+    Mathematical Modeling 
+    \\
+    \textbf{Programming:} Python, Arduino, Matlab, Java, Javascript, C++, C\#, C, HTML, CSS, Julia % Programming skills
+    \\
+    \textbf{Software:} CAD, SPICE, Git, GitHub, AWS, OxDNA, Unity % Software 
+    % \item \textbf{Miscellaneous:} Swing Dancing, Chess, Violin, Hiking % Software skills
 %    \item \textbf{Communication:} List of communication skills you possess. % Communication skills
+% \end{itemize}
+
+
+
+
+% Experience Section
+\section*{EXPERIENCE}
+% \noindent
+% \textbf{ChessMates:} \hspace{0.05cm}
+% % \href{https://chessmatesfc.com/}
+% {https://chessmatesfc.com/}
+% \hfill Fort Collins, Colorado\\ % Company name and location
+% \textit{Teacher} \hfill October 2021 - August 2023 % Position and duration
+% \begin{itemize}
+%     \item Taught elementary chess clubs and grew students' passion for the chess. 
+%     \item Organized and managed chess tournaments for k-12 students
+%     \item Guided students to win various awards throughout the Fort Collins area
+%  % Job responsibilities and achievements
+% \end{itemize}
+
+\noindent
+\textbf{Aksimentiev Group - 2d Materials Researcher}
+\hfill Champaign, Illinois \\
+Beckman Institute \hfill January 2025 - Present 
+
+\begin{itemize}[topsep=0pt]
+\itemindent=-13pt
+% \item Running course-grained molecular simulations of 
+% DNA origami with OxDNA 
+% \item Developing a computational model to determine the mechanical properties 
+% of planar DNA origami 
+% \item Numerically calculated and visualized the forces behind computational spintronics 
+% \item Utilize external computational power via remote access 
+% protocols
+% \item Ran and analyzed Molecular Dynamics simulations 
+% of nanoscale materials.
+% \item Developed a mathematical model to determine the elastic properties of 2d structures
+% \item Developed python code to run the mathematical 
+% model on coarse-grained MD simulations
+
+
+\item Simulated nanoscale mechanics of DNA lattices using oxDNA to compute positional fluctuations.
+
+\item Built mathematical models to extract 2D elastic moduli (bending, torsion) from time-sequenced data.
+
+\item Developed Python tools for high-throughput MD analysis and property extraction.
 \end{itemize}
+
+
+
+
+% \noindent
+% \textbf{University of Minnesota - Summer Program Scholar}
+% \hfill Minneapolis, Minnesota \\
+% Quantum + Chips Summer Program \hfill June 28th - August 10th
+
+% \begin{itemize}
+% \item Remotely utilized the UMinnesota supercomputer to calculate and visualize the physical structure of semi-conductors. 
+% \item Computed discrete Fourier transforms to numerically approximate the time-dependent Schr{\"o}dinger Equation 
+% % \item Numerically calculated and visualized the forces behind computational spintronics 
+% \item Simulated quantum algorithms in Qiskit
+% \end{itemize}
+
+
+% \noindent
+% \textbf{DISSCO - Software Developer} \hspace{0.05cm}
+% % \href{https://cmp.ischool.illinois.edu/cmp-projects.html}
+% % {https://cmp.ischool.illinois.edu/cmp-projects.html}
+% \hfill Champaign, Illinois\\ % Company name and location
+% Digital Instrument for Sound Synthesis and Composition 
+% \hfill August 2024 - Present  % Position and duration
+% \begin{itemize}
+%     \item Develop Linux-based C++ software to run computationally random 
+%     signal analysis
+%     \item Debug 10,000+ line code base to run on Ubuntu 22.04
+%     \item https://cmp.ischool.illinois.edu/software/dissco/index.php
+%  % Job responsibilities and achievements
+% \end{itemize}
+
+
+% % Club or Organization Experience
+% \textbf{Club or Organization Name} \hfill City, State\\ % Club or organization name and location
+% \textit{Position Title} \hfill Month Year – Ongoing % Position and duration
+% \begin{itemize}
+%     \item Description of responsibilities and achievements at this position. % Responsibilities and achievements
+% \end{itemize}
+
+% \noindent
+% \textbf{Prime Number Calculator}  \hfill January 2023 - Active % Project link and 
+% % \hfill City, State\\ % Project name and location \\
+
+% % \href{https://github.com/Aiden-Sirotkine/Prime-Number-Calculator}
+% {https://github.com/Aiden-Sirotkine/Prime-Number-Calculator}
+
+% \begin{itemize}
+% \item Created in Python, Java, C++, Julia
+% \item Sieves over 50,000,000 numbers per second on one thread
+% \item Designed an adaptable algorithm to support vertical scaling
+% Project description and contributions
+
+% \end{itemize}
+
+% Additional Project
+% \noindent
+% \textbf{Cloud Chamber} \hfill Fort Collins, CO % Project name and location
+% %\textit{Project Link:} \url{https://www.projectwebsite.com/} \hfill Month Year % Project link and duration
+% \begin{itemize}
+%     \item Chamber of supercooled isopropyl alcohol
+%     \item visualizes radiation and various elementary particles through streaks of condensation.
+%  % Project description and contributions
+% \end{itemize}
+
+% Projects Section
+\section*{PROJECTS}
+
+\textbf{MOSFET Structure Visualization}
+\hfill Minneapolis, Minnesota \\
+Quantum + Chips Summer Program \hfill June 28th - August 10th
+\begin{itemize}[topsep=0pt]
+\itemindent=-13pt
+\item Executed DFT simulations on UMN supercomputers to model and visualize 
+semiconductor crystal structures.
+\item Computed electronic eigenstates using density functional theory to study 
+energy band properties.
+\end{itemize}
+
+
+\vspace{\baselineskip}
+\noindent
+\textbf{IoT Climate Control System}
+\\
+Fort Collins, Colorado \hfill June 2024 – Active
+\begin{itemize}[topsep=0pt]
+\itemindent=-13pt
+\item Designed a closed-loop atmospheric controller to regulate 
+temperature and humidity (for my pet snake).
+\item Achieved sub-10ms latency and 99\% accuracy across sensor, controller, and AWS cloud backend.
+\item Established remote access protocols for full environmental control and monitoring from anywhere.
+\end{itemize}
+
+
+% Additional Experience or Volunteer Work
+\section*{OTHER EXPERIENCE}
+
+\noindent
+\textbf{POINT VR - Unity/Sound Designer} \hspace{0.05cm}
+% \href{https://cmp.ischool.illinois.edu/cmp-projects.html}
+% {https://cmp.ischool.illinois.edu/cmp-projects.html}
+\hfill Champaign, Illinois\\ % Company name and location
+https://icasu.illinois.edu/outreach/point-vr
+\hfill August 2024 - Present % Position and duration
+\begin{itemize}[topsep=0pt]
+\itemindent=-13pt
+\item Enhanced a VR general relativity simulation for science education using Unity.
+\item Composed and implemented original music and sound design for immersive learning.
+\item Integrated audio assets via Unity scripts in C\# for dynamic in-environment playback.
+\end{itemize}
+
+
+\vspace{\baselineskip}
+\noindent
+\textbf{Ridgeview Classical Schools - Elementary Chess Teacher} \hspace{0.05cm}
+% \href{https://chessmatesfc.com/}
+\hfill Fort Collins, Colorado\\ % Company name and location
+ChessMates \hfill October 2021 - Present % Position and duration
+\begin{itemize}[topsep=0pt]
+\itemindent=-13pt
+\item Instructed k-12 students in chess fundamentals, strategy, and competitive play.
+\item Organized local tournaments and managed event logistics for youth players.
+\item Coached students to tournament wins in the Fort Collins area.
+\end{itemize}
+
+% \vspace{\baselineskip}
+% \noindent
+% \textbf{Violin Tutor} \hspace{0.05cm}
+% % \href{https://chessmatesfc.com/}
+% % {https://chessmatesfc.com/}
+% \hfill Fort Collins, Colorado\\ % Company name and location
+% {Ridgeview Classical Schools} \hfill October 2021 - August 2023 %Position and duration
+% \begin{itemize}[topsep=0pt]
+% \itemindent=-13pt
+%     \item Taught beginner and intermediate students violin technique and musicality
+%     \item Students advanced greatly in 6-12 months and learned to love their instrument
+%     \item Students went on to receive Most Improved awards and play in advanced orchestras.
+% \end{itemize}
+
+
+
 
 % End document
 \end{document}
