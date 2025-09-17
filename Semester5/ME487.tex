@@ -1,0 +1,754 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{esint}
+
+\geometry{a4paper, margin=2cm} % Set paper size and margins
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{ME 487}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{ME 487}
+The lab safety training is already up and I have to do that before the first lab.
+
+You'll make a pressure sensor, and then a microfluidic mixer (because mixing small
+fluids is hard).
+
+\textbf{THERE WILL BE POP QUIZZES IN LECTURE}
+
+\section{LAB POLICY}
+\begin{itemize}
+    \item
+    \textbf{NO SHORTS, CONTACTS, OPEN TOED SHOES}
+    \item 
+    Don't touch anything unless told so 
+    \item 
+    If you do anything stupid you get kicked out.
+\end{itemize}
+
+\section{Importance}
+MEMS are important because they take advantage of forces that scale dramatically 
+at small scales 
+
+\begin{itemize}
+    \item 
+    Surface tension scales with $l$ 
+    \item 
+    Fluid/electrostatic forces scale with $l^2$
+    \item 
+    weight/inertia forces scale with $l^3$
+    \item
+    electromagnetic forces scale with $l^4$
+\end{itemize}
+
+So at very small scales, these forces act very differently than in 
+macro-scale systems. You can almost completely ignore gravity.
+
+\subsection{Cantilever}
+Deflection under self weight goes down dramatically with $l^2$.
+
+Resonant frequency \textbf{increases} with $l^{-1}$.
+
+\subsection{Fabrication Scaling}
+\begin{itemize}
+    \item 
+    Devices are on a single substrate, and you can make 
+    thousands of devices on a single substrate. 
+    \item 
+    We can take infrastructure/technology from the semiconductor industry. 
+\end{itemize}
+
+\subsection{Function Integration}
+Both electrical and mechanical functions can be obtained 
+with the same materials and processes. 
+
+Projectors use a MEM that has a mirror, tilting mechanism, 
+and electronic controller all on 1 substrate. 
+
+\subsection{Material Saving}
+Because MEMS are on the atomic scale, you use close to 
+nothing on material saving. There is functionally 
+0 material cost. 
+
+\section{Difficulties}
+\begin{itemize}
+    \item 
+    Really small $(10^6)$
+    \item 
+    Only very very specific materials actually work in lithography
+    \item 
+    All tools are only planar- we can only edit from the 
+    top/bottom of the wafer. 
+    \item 
+    You need very specific/expensive facilities and materials.
+\end{itemize}
+
+\section{Typical Process}
+\begin{enumerate}
+    \item 
+    Deposition
+    
+    You put a target material onto a substrate
+    \item 
+    Lithography
+
+    You put a photoresisting material onto that target, and you 
+    use lasers to get rid of material to leave a pattern. 
+    \item 
+    Etching 
+
+    You get rid of the target material with lasers, and all the target 
+    material under the photoresist is untouched. 
+
+    You then remove the photoresist material and then you're left with 
+    just the target material in just the pattern you wish. 
+\end{enumerate}
+
+
+\subsection{MUMPs (Multi-User MEMS Processes) Sequence}
+This is a 7 layer process of depositing, adding a photoresist, and etching. 
+
+This esseentially allows a company to make multiple different MEMS blueprints 
+on a single wafer. 
+
+Often used by fab-less companies. They buy a small bit of a wafer from a 
+fab company and have that company etch a specific blueprint onto that 
+small portion of wafer. 
+
+\subsection{Finish Fabrication}
+\begin{itemize}
+    \item 
+Singulation: Cut the large wafer 
+into little dies such that each individual die has 1 MEM.
+    \item 
+    Packaging: 
+
+    Bond the functional pieces of the MEM with a wire so that it can 
+    work in a larger system. 
+    \item 
+    Encapsulation
+
+    seal the MEM so it becomes a functional black box with wires for 
+    input/output.
+\end{itemize}
+
+\chapter{Cleanroom Procedure}
+Something something something review.
+
+We're usually going to be working in the $\sim 5 \mu m$ range for our 
+MEMS building. 
+
+\section{Wafer Contamination}
+If you leave your wafer in the cleanroom uncovered, it will eventually 
+get contaminated with dust particles. The amount of time it takes for 
+your device to get contaminated is probabilistic. A more clean cleanroom
+will mean the chances your device gets contaminated in a certain amount of 
+time decreases.
+
+As we consider smaller and smaller dust particles, they move more and 
+more randomly due to the random motion of air particles (Cunningham 
+Correction Factor). Particles move at a speed dependent on some large 
+convoluted equation. 
+
+Possible contaminants include dust particles, organic films, and atoms/ions. 
+
+\subsection{Humidity}
+Fluid condensation is bad. 
+
+Water can contaminate your device, and as the water evaporates, the surface 
+tension will warp your device (cantilever). 
+
+You can calculate the forces caused by the surface tension of water stuck 
+in your cantilever.
+
+\section{Cleanroom Itself}
+You have to wear a whole bunch of silly clothes 
+
+The yellow room is for photolithography. 
+
+The white room is for deposition and etching. 
+
+\subsection{Chase}
+A part of the cleanroom only available to staff. 
+
+New device will be brought in through the chase.
+
+\chapter{Chemicals}
+All sorts of chemicals and they're all flammable and carcinogenic so 
+don't touch anything or you'll die.
+
+\begin{itemize}
+    \item 
+    Solvents
+    \item 
+    Photoresists (Carcinogen)
+    \item 
+    Developers (Weak base)
+    \item 
+    Strippers (acetone)
+    \item 
+    Etching (Acids)
+\end{itemize}
+
+\section{Materials Safety Data Sheet (MSDS)}
+It gives you a bunch of information about certain chemicals 
+
+\begin{itemize}
+    \item 
+    Chemical breakdown
+    \item 
+    Methods of exposure
+    \item 
+    Effects/risks of exposure
+    \item 
+    other 
+    \item 
+    other 
+\end{itemize}
+
+16 different important bits of information on every MSDS. 
+
+There is a physical binder and a search engine that gives you the MSDS 
+to every chemical in the cleanroom.
+
+\section{NFPA Diamond}
+It's the square with 4 parts that tells you everything about a certain chemical 
+in a container.
+
+Yellow is for reactivity, red is for flammability, blue is for health hazards, 
+white is for miscellaneous. 
+
+White: OXY, ACID, ALK, COR, W-, RAD 
+
+\section{PPE}
+You need certain equipment BEYOND THE CLEANROOM GOWN to work with certain 
+chemicals. 
+
+HF spills have to be treated with special care.
+
+\subsection{Do's and Dont's}
+Do 
+\begin{itemize}
+    \item 
+    change gloves whenever dirty/broken
+    \item 
+    Use fresh gloves
+    \item 
+    use cleanroom paper
+    \item 
+    remove rings and bracelets
+\end{itemize}
+
+\chapter{Lithography}
+Writing stuff on stone by using an insoluble material on top. 
+
+You can then put an acid on top and the resist on top will not be dissolved, 
+but the rock will be dissolved.
+
+\subsection{Process (Etch)}
+\begin{enumerate}
+    \item 
+    Prepare surface and apply photoresist 
+    \item 
+    Pre-bake oven 
+    \item 
+    aligner exposure (with mask)
+    \item 
+    develop, rinse, and dry 
+    \item 
+    Post-bake oven
+    \item 
+    Inspect and measure
+    \item 
+    Etch and Deposit
+    \item 
+    Strip the photoresist and clean 
+    \item 
+    Deposit or grow new layer 
+    \item 
+    repeat 
+\end{enumerate}
+
+Etching is putting down deposition material and then putting the photoresist 
+on top and in a certain pattern and then removing all material \textbf{not}
+under the photoresist.
+
+\subsection{Lift-off}
+You put the photoresist on and get rid of the unwanted resist, 
+\textbf{then} you put on the deposition material, and then the material that 
+is on top of the photoresist gets removed.
+
+\subsection{Issues}
+Photoresists etch at various rates, so you need a tall photoresist layer 
+to make sure that the photoresist doesn't completely etch away before your 
+unwanted material is fully gone. 
+
+\section{Wafer Cleaning}
+Degrease the wafer with acetone, alcohol (IPA), de-ionized (DI) water, 
+dry with $N_2$ gas. 
+
+\subsection{Standard Clean 1 (SC1, RCA1)}
+DI water, ammonium hydroxide, hydrogen peroxide 
+
+Removes light organic material. 
+
+
+\subsection{Standard Clean 2 (SC2, RCA2)}
+DI water, HCl, hydrogen peroxide. 
+
+Good for removing metal ions. 
+
+Pirhana solution = sulfuric acid + hydrogen peroxide. 
+very very harsh etch. 
+Must be done in a fume hood!!!!!
+Reactive mixture must be allowed to deactivate.
+Only really used if you're trying to salvage a wafer.
+
+Surface tension determines how far into a crevass a solvent 
+will go.
+
+\subsection{Other Cleaning}
+Ultrasonic Cleaning - 
+use sound in the 20-400 kHz range to dislodge large particles $(> 2 \mu m)$ 
+
+Megasonic cleaners use even faster waves (800-2000 kHz) to dislodge 
+smaller particles $(< 0.5 \mu m)$.
+
+Cryogenic Cleaning - immerse your substrate into liquid nitrogen to make 
+your wafer (and debris) very brittle, which should break apart debris.
+
+Supercritical cleaning/drying - 
+Immerse in ethanol or methanol. 
+Supercritical CO2 dissolves the solvent. When pressure is lowered 
+the gas changes.
+
+\section{Wafer Priming}
+You want a very hydrophobic surface for best adhesion. You also 
+want to minimize humidity. 
+
+You can use a number of methods for priming 
+\begin{itemize}
+    \item 
+    Oxygen plasma descum 
+    \item 
+    Adhesion Promoter AP8000 (chemical)
+    \item 
+    Increase soft bake 
+    \item 
+    Sputter the surface to induce micro-roughness. 
+\end{itemize}
+
+\section{Details Of Photolithography}
+\begin{enumerate}
+    \item 
+    Surface preparation 
+    \item 
+    Spin coating 
+    \item 
+    Alignment and Exposure 
+    \item 
+    Post-exposure bake 
+    \item 
+    Develop, clean, and dry 
+    \item 
+    Inspection 
+    \item 
+    Descum and Hard Bake 
+    \item 
+    Resist Stripping (Removing the PR)
+\end{enumerate}
+
+\subsection{Photoresist}
+PR's consist of 3 main materials 
+
+\begin{itemize}
+    \item 
+    Polymer (resin)
+    \item 
+    sensitizer 
+    \item 
+    Solvent 
+\end{itemize}
+
+You want your PR to be as flat as possible so that you are 
+at minimal risk of under-exposure or over-exposure.
+
+\subsection{Spin Coating}
+You just use centrifugal forces. 
+
+edge beading is what happens at the edge of your wafer that comes from 
+excess PR at the edge of the wafer coming back into the wafer once it is done 
+spinning.
+
+The equation for spin coating is given by 
+\equations{
+    T 
+    =
+    \frac{K C^{\beta} \eta^{\gamma}}{\omega^{\alpha}}
+}
+\begin{itemize}
+    \item 
+    T = thickness 
+    \item 
+    K = calibration constant 
+    \item 
+    C = polymer concentration 
+    \item 
+    $\eta$ = intrinsic viscosity 
+    \item 
+    $\omega$ = angular speed (rpm)
+    \item 
+    $\alpha, \beta, \gamma$ = empirically determined parameters
+\end{itemize}
+
+Features on the wafer should be no more than 20\% of the 
+resist thickness, otherwise the resist may not have good coverage. 
+
+To estimate the dispense volume, you just do basic geometry 
+\equations{
+    V 
+    =
+    \pi r^2 T 
+}
+
+
+\subsection{Other Methods of PR Deposition}
+\begin{itemize}
+    \item 
+    Spray coating 
+    \item 
+    Electrostatic Spraying 
+    \item 
+    Meniscus Coating 
+    \item 
+    Electrodeposition 
+    \item 
+    Roller Coating 
+    \item 
+    Silkscreen Pirnting 
+    \item 
+    Dip Coating
+    \item 
+    Curtain Coating 
+    \item 
+    Extrusion Coating
+\end{itemize}
+
+\section{Soft Baking}
+Depends on the type and the thickness of the PR. 
+It is also called pre-bake or pre-exposure bake. 
+Hotplates are used in the 60C to 110C range. 
+
+Pre-baking is important because it 
+\begin{itemize}
+    \item 
+    Relieves stresses in the film
+    \item 
+    Removes solvents
+    \item 
+    Promotes adhesion
+\end{itemize}
+
+Too much heat can degrade photosensitivity!! 
+
+PR must be soft-baked so that it does not stick to your mask during alignment.
+
+\section{Exposure}
+Optical transfer of the pattern on the mask to the PR. 
+
+The light wavelength of our exposure is mainly in the UV range because we 
+need visible light to see. 
+
+Lasers are monochromatic and coherent. 
+
+PR's have a required "dose" of light to successfully be removed from the wafer. 
+
+\section{Mask}
+It's the device that blocks light at certain locations so that the PR 
+is untouched underneath it. There are multiple types of masks 
+
+Masks are made of optically flat glass coated with a patterned 
+absorber layer which blocks the light.
+
+\begin{itemize}
+    \item
+    lightfield mask
+
+    exposed almost everywhere
+    \item
+    darkfield mask
+
+    exposed only in features.
+    \item 
+    Binary Mask 
+
+    either completely exposed or completely blocked 
+    \item 
+    Greyscale mask
+    
+    transparency varies so you can deposit material of varying 
+    heights with only a single layer of PR. 
+    \item 
+    Phase Shift Mask 
+
+    Work like holograms and odulate the phase-shift of the 
+    light beam to create interference patterns in the 
+    PR. Requires a coherent light-source for exposure. 
+\end{itemize}
+
+\subsection{Mask Materials}
+\begin{itemize}
+    \item
+Chrome is opaque to both visible and UV light
+    \item
+iron oxide is clear to visible light but opaque to UV 
+    \item
+    emulsion based materials are transparent 
+
+    Soda Lime glass, BK-7, Quartz, CaF$_2$
+\end{itemize}
+
+The emulsion based materials have various cutoff wavelengths, and you would 
+use different mask materials depending on both your PR and your exposure 
+wavelength. 
+
+Mask production is another lithography step. 
+
+\subsection{Exposure Tools}
+\begin{itemize}
+    \item 
+Contact mask: put the mask on the wafer directly
+
+Fast, cheap, and simple, but the wafer has to be specifically made to withstand 
+contact, there's no magnification, and the mask is the same size as the wafer.
+    \item 
+    Proximity: put the mask as close as you can without touching 
+
+    Fast, and no-contact, but slightly more complex, the separation 
+    leads to diffraction blur, and the mask needs to be the same size as 
+    the wafer (expensive).
+    \item 
+    Projection: use lenses to be able to accurately place the 
+    light without proximity. 
+
+    Masks are easier, laser is more expensive.
+\end{itemize}
+
+Projection is useful because the mask does not have to be the same size 
+as the pattern because the lens will de-magnify the light.
+
+The modulation transfer function is the function that determines 
+the type of feature sizes that can be put into a system.
+
+\subsection{Projection Lithography}
+You have to worry about both resolution and depth of focus.
+
+
+\chapter{SKIPPED OPTICS LECTURE}
+
+
+\chapter{Polymers}
+
+\section{Crosslinking}
+This is what happens when a polymer changes into an insoluble 
+product due to light exposure.
+
+This is for negative photoresists
+
+\section{Scission}
+Polymers separate under light exposure and actually become soluble.
+
+This is for positive photoresists
+
+\subsection{Examples of Positive PR}
+\begin{itemize}
+    \item 
+    PMMA
+
+    sensitive at 220nm and useful with DUV but not mercury 
+    \item 
+    DNQ resists
+
+    Have a DNQ ester and a resin 
+
+    useful with mercury lamp lines 
+\end{itemize}
+
+\section{Pros and Cons}
+Positive PR's are better for resolving isolated holes and trenches 
+
+Negative PR's are better for resolving isolated lines.
+
+Positive PR leaves PR everywhere except the illuminated parts 
+
+Negative PR leaves PR only on the illuminated parts and not anywhere else.
+
+In order to use PR, you put you material \textbf{where there is no 
+photoresist} and then the PR removes all the deposited material on top 
+of it.
+
+
+\subsection{Permanent Resists}
+These are PR's that become permanent components of the device. 
+Thicker layers are achievable.
+They use strong adhesion, which makes removal difficult.
+
+\subsection{Dry Resists}
+A film is directly laminated onto a surface. No liquids are used. 
+Available thickness from $25\mu m$ to $100 \mu m$. It conforms 
+to surfaces of different topologies, and is developed in sodium 
+carbonate solutions.
+
+\subsection{Image Reversal Resists}
+You can use both heat and UV to make the PR act as both a 
+positive PR and a negative PR. 
+
+\section{Overexposure}
+You use too much light and part of the PR that was meant to be 
+not touched is touched. 
+
+\subsection{Positive}
+Too much PR has been removed 
+
+\subsection{Negative}
+Too much PR is solidified on the wafer.
+
+\subsection{Liftoff}
+Positive photoresists are better for liftoff when overexposed because 
+the PR forms a concave structure that makes sure the deposition material 
+is definitely disconnected. 
+
+\section{Underexposure}
+The opposite of overexposure. 
+
+Negative PR is better when you underexpose.
+
+\section{PR Resolution and Contrast}
+Certain resists only change a certain amount depending 
+on the dosage of light. 
+
+The sensitivity = resist contrast = the slope of resist removed over dosage 
+
+\equations{
+    \gamma_p 
+    =
+    \frac{1}{
+        \log(D_p)
+        -
+        \log(D_p^0)
+    }
+    =
+    \left(\log(\frac{D_p}{D_p^0})\right)^{-1}
+}
+
+Having a PR with less contrast is useful if you have 2 masks. 
+
+
+\section{Developers}
+\begin{itemize}
+    \item 
+    MIF (Metal Ion Free) Developesr
+    \item 
+    Inorganic (metal ion based) Developer
+\end{itemize}
+
+\textbf{Do not mix these two developers}
+
+\section{Choosing a PR}
+Dependent on wavelength, feature size, thickness, positive/negative, 
+lift-off, chemical/plasma resistance, removal, developer, stripper.
+
+\subsection{Multi-layer Resists}
+These are used when you have resolution issues but still need a very 
+thick layer. 
+
+A multi-layer resist could also be used if there are features already in the 
+wafer. You use 1 layer to cover all your features and then use a 
+second layer for your actual pattern.
+
+The resist thickness should be $5 \times$ as big as the largest feature.
+
+\subsection{LIGA}
+It's some German word.
+
+Essentially you use a very thick PR to make a mold, and then you 
+plate the PR mold with metal electroplating.
+
+
+\subsection{Lift-Off Resist}
+Basically you put a resist on top of an overexposed resist so 
+you can get the nice concavity while still having a straight line for the 
+deposition process.It's some German word.
+
+\subsection{Post-Exposure Treatment}
+\textbf{Heavily Dependent on Resist}.
+baking, radiation, reactive gas, vacuum, time.
+
+\subsection{Stripping}
+There's all sorts of ways to get PR's off of your wafer.
+
+
+
+
+
+
+
+
+
+\end{document}

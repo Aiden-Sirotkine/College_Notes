@@ -1,0 +1,2333 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{esint}
+
+\geometry{a4paper, margin=1cm} % Set paper size and margins
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 486}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\setlength{\headsep}{10pt}
+\setlength{\topmargin}{-2cm}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS486}
+Quantum Mechanics lol. This is apparently a math language more 
+than actual physics.
+
+\section{What is QM}
+\begin{itemize}
+    \item 
+Classical Mechanics - $F = ma$, solve for $x$ and $p$, position and momentum.
+    \item
+Classical E \& M - $\ddot \vec E(\vec r, t) - \nabla^2 \vec E(\vec r , t) = 0$
+\end{itemize}
+
+You have observable entities and you work with just the observable entities to 
+figure out the exact numbers. 
+
+\subsection{The Quantum State $\ket \psi$ }
+This is a state vector.
+
+The quantum state by definition is \textbf{not} observable.
+
+An observable operator is something like position that describes the system that 
+we can actually see. 
+
+\equations{
+    \hat A \ket{\psi} 
+    =
+    a \ket \psi 
+}
+where $\hat A$ is an observable and $a$ is the measurement out.
+
+This is just an eigenvalue equation.
+
+\subsection{Schrodinger Equation}
+\equations{
+    i \hbar \frac{\del}{\del t} \ket{\psi(t)} = \hat H \ket{\psi(t)}
+}
+
+$\hat H$ is a matrix and $\ket{\psi(t)}$ is a vector.
+
+\section{Summary of "Central Phenomena"}
+Imagine an electron orbiting around a proton. 
+
+The electron \textbf{cannot} take arbitrary orbits.
+
+The electron can only have \textbf{certain discrete} orbits.
+
+\subsection{Superpositions}
+Consider two discrete states in which an electron can orbit around a proton. 
+
+Because $0$ and $1$ are solutions for the electron, a superposition of $0$ and $1$ is 
+also a solution for the electron.
+
+\equations{
+    \alpha \ket 0 + \beta \ket 1
+}
+
+This is the electron being in both discrete states at the same time.
+
+\equations{
+    \sim
+    \left[ 
+        \ket 0 \sim {1 \choose 0}, 
+        \ket 1 \sim {0 \choose 1}, 
+        SP {\alpha \choose \beta}
+    \right]
+}
+
+\section{Probabilistic Interpretation}
+Consider a system with the solution 
+\equations{
+    \alpha \ket 0 + \beta \ket 1
+}
+
+If we have a thing that measures the energy, we can get 
+\textbf{either} $0$ \textbf{or} $1$ with probabilities depending on the 
+values $\alpha$ and $\beta$.
+
+\section{Entanglement}
+Consider atom $A$ with state $\{ \ket{0}_A, \ket{1}_A \}$
+and atom $B$ with state $\{ \ket{0}_B, \ket{1}_B \}$.
+
+It is completely legal to have an entangled state with the form 
+
+\equations{
+    \alpha \ket{0}_A \ket{0}_B 
+    +
+    \beta \ket{1}_A \ket{1}_B 
+}
+
+
+\section{Course Outline}
+\begin{enumerate}
+    \item 
+    Basic Rules 
+    \item 
+    Wave Mechanics ("toy models")
+    \item 
+    Formalism (Midterm 1)
+    \item 
+    Simplest Real System (Hydrogen Atom) (Midterm 2)
+    \item 
+    Intro to Multiparticle Descriptions
+\end{enumerate}
+
+\chapter{Actual Physics Now}
+
+\section{Black Body Radiation}
+Consider an object that perfectly absorbs radiation and turns it into heat. 
+
+Place it in thermal equilibrium 
+(finite $T$, constant $E$, absorption $\rightarrow$ emission).
+
+\subsection{Classical Description}
+Consider the system as a harmonic oscillator. 
+
+\equations{
+    \langle E \rangle = k_B T
+    \Rightarrow 
+    I(\omega)
+    \sim 
+    \frac{\omega^2 k_B T}{\pi^2 c^3}
+    \hp
+    \textrm{Rayleigh-Jeans Law}
+}
+
+This \textbf{does not} match experimental data. 
+
+While the classical description says that temperature will go up forever, the 
+experiments show that the temperature stops increasing for large frequencies.
+
+\subsection{Plack, 1900}
+Complete guess that maybe energy is discretized. Maybe the harmonic oscillator 
+comes in chunks of size $\hbar \omega$.
+
+Now, energy can be written in the form 
+\equations{
+    P(E)
+    =
+    \alpha e^{- \frac{-E}{k_B T}}
+    \longrightarrow 
+    \langle E \rangle 
+    =
+    \frac{\hbar \omega}{\exp((\hbar \omega / k_B T) - 1)}
+    \\
+    I(\omega)
+    =
+    \frac{\hbar \omega^3}{\pi^2 c^3 \exp((\hbar \omega / k_B T) - 1)}
+}
+This perfectly matches experimental data.
+
+\section{Photoelectric Effect}
+Consider a circuit that absorbs light with frequency $\omega$ and intensity $J$
+to create a potential.
+
+As light intensity $J$ increases, current $I$ increases, but $V_0$ stays the same. 
+
+$V_0$ is dependent on $\omega$ and the properties of the material. 
+
+Einstein figured out that there is an energy threshold such that light will 
+not be absorbed if it does not have a high enough energy. 
+
+The kinetic energy of the electron can be given in the form:
+\equations{
+    kE 
+    =
+    \hbar \omega 
+    -
+    W 
+    > 
+    - eV_0
+}
+
+\section{Wave Particle Duality}
+Consider a photon with energy and momentum
+\equations{
+    E = \hbar \omega
+    \hp 
+    p = \hbar k 
+    \left(
+        = \frac{h}{2 \pi} \cdot \frac{2 \pi}{\lambda}
+    \right)
+}
+
+The photon has no mass $(m = 0)$, so consider the relativistic mass of the photon 
+\equations{
+    E^2 = m^2 c^4 + p^2 c^2 
+    \rightarrow 
+    p^2 c^2
+    \rightarrow 
+    \\
+    E = pc 
+    \hp 
+    \omega = kc 
+    \hp 
+    f \lambda = c
+}
+
+\subsection{De Broglie, 1924}
+Everything has a wavelength and frequency
+
+\equations{
+    \lambda 
+    =
+    \frac{h}{p}
+}
+
+The wavelength for even electrons is extremely small, so this feature 
+is very hard to observe even if its true for everything.
+
+\subsection{Davisson and Germer, 1927}
+Electrons act in the same wave-like nature as light when shot through 
+a small slit (double slit experiment but for electrons).
+
+This proved the De Broglie wavelength theory for particles.
+
+\chapter{Beginning of QM}
+The issue with quantum mechanics is that the math is derived only 
+from experimental data. There is no classical physics basis or derivation 
+behind quantum mechanics. 
+
+Multiple textbooks will bring up quantum mechanics in different ways. 
+The professor recommends the Townsend QM textbook 
+
+\chapter{Ruleset}
+Motivated from experimental observations. These are base postulates 
+with no derivations. 
+
+\section{System State}
+The state of the physical system is a vector $\ket \Psi$ 
+in Hilbert Space. 
+
+A Hilbert space $(\equiv H^2)$ is a complex vector space with a well-behaved 
+inner product.
+
+(bra + ket = braket). You have to take the complex conjugate
+\equations{
+    \bra \Psi \ket{\Psi}
+    \hp 
+    \textrm{"bra"}
+    =
+    (\ket{\Psi}^*)^T
+    \hp 
+    \bra \alpha \ket{\beta}
+    =
+    \bra \beta \ket{\alpha}^*
+}
+
+\section{Observables}
+Observables are operators in Hilbert Space, and they have to 
+have real eigenvalues. 
+
+The measurement outcomes of the observable are the eigenvalues.
+
+\equations{
+    \hat A \ket{\alpha_n}
+    =
+    a_n \ket \alpha_n
+}
+
+I think $\hat A$ is the observable of the state $\ket{\alpha_n}$ 
+and $a_n$ is the $n$-th eigenvalue of the observable.
+
+\subsection{Born's Rule}
+
+The probability for an outcome $a_n$ is given by 
+\equations{
+    P(a_n)
+    =
+    |\bra{\alpha_n} \ket{\Psi}|^2
+}
+Where $\alpha_n$ is an eigenvector of the operator. 
+
+\subsection{Expected Value}
+Given an observable operator $\hat A$, the expected value is given by 
+
+\equations{
+    \langle \hat A \rangle 
+    =
+    \bra{\Psi} \hat A \ket{\Psi}
+}
+
+\subsection{Waveform "Collapse"}
+Given a quantum state $\ket{\Psi}$, when you measure 
+an observable $\hat A$, you return only a single result $a_n$
+
+\equations{
+    \ket{\Psi}
+    \longrightarrow 
+    \ket{\alpha_n}
+}
+The system state collapses to just the individual eigenvector state. 
+
+\section{Time Evolution (Schrodinger Equation)}
+\equations{
+    i \hbar \frac{\del}{\del t} \ket{\Psi}
+    =
+    \hat H \ket{\Psi}
+    \hp 
+    \hat H = 
+    \textrm{Hamiltonian (Energy Operator)}
+}
+
+The Eigenvectors of $\hat H$ are stationary states (do not change with 
+time). 
+
+This is the time-independent Schrodinger Equation 
+\equations{
+    \hat H \ket{\Psi}
+    =
+    E_h \ket{\Psi}
+}
+
+Now you know the entirety of quantum mechanics. Everything else 
+can be derived. 
+
+\chapter{Experiments}
+\section{Double Slit}
+If you shine light through a small slit, you will see a diffraction 
+pattern. 
+
+Imagine shining light at 2 slits and an attennuator at the other 
+side that \textbf{measures} the location of each photon at the screen. 
+
+If you just shoot a single photon, the location will be random, but if you
+shoot multiple photons, there is a very distinct diffraction pattern that 
+demonstrate the probability distribution of the list. 
+
+\section{Stern-Gerlach}
+Consider a beam of atoms with varying spins. This beam of atoms is 
+put into a magnetic field gradient. 
+
+If the magnetic moment is up, the atom will go up. If the magnetic 
+moment is down, the atom will go down. 
+
+If we put the beam through this field, then half the atoms will go up, 
+and half the atoms will go down (probabilistically).
+
+This makes sense. 
+
+The quantum state of each atom is given by 
+\equations{
+    \ket{\Psi}
+    =
+    \frac{1}{\sqrt{2}}
+    \left(
+        \ket{\uparrow}
+        +
+        \ket{\downarrow}
+    \right)
+    \hat z
+}
+
+Consider a basis 
+\equations{
+    \ket{\uparrow}
+    =
+    \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+    \hp
+    \ket{\downarrow}
+    =
+    \begin{pmatrix} 0 \\ 1 \end{pmatrix}
+}
+
+Let's call spin up $+1$ and spin down $-1$. 
+
+Because of those numbers, our observable operator is 
+\equations{
+    \hat A 
+    =
+    \begin{bmatrix}
+        1 && 0 \\
+        0 && -1
+    \end{bmatrix}
+    \hp 
+    \hat A \ket{\uparrow}
+    =
+    + 1 \ket{\uparrow}
+    \hp 
+    \hat A \ket{\downarrow}
+    =
+    - 1 \ket{\downarrow}
+}
+
+Now we have our quantum state and our observable operator matrix. 
+
+Because we have two possible eigenvectors, the superposition 
+of our quantum state can be written as 
+
+\equations{
+    \ket{\Psi}
+    =
+    \left(
+        \sum_k \ket{k} \bra{k}
+    \right)
+    \ket{\Psi}
+    \equiv 
+    \mathbb{\lambda}_i
+    , 
+    \ket{k}
+    \hp 
+    \textrm{kth basis vector}
+    \\
+    =
+    \sum_k 
+    c_k \ket{k}
+    \hp 
+    c_k = \bra{k}\ket{\Psi}
+}
+
+\subsection{Born's Rule}
+\equations{
+    P(+1)
+    =
+    |\bra{\uparrow}\ket{\Psi}|^2
+    =
+    \frac{1}{2}
+    |\bra{\uparrow}\ket{\uparrow}
+    +
+    \bra{\uparrow}\ket{\downarrow}|^2
+}
+
+Because we're using Dirac notation, we know exactly what inner products
+are parallel and what inner products are orthonormal.
+
+
+\equations{
+    P(+1)
+    =
+    |\bra{\uparrow}\ket{\Psi}|^2
+    =
+    \frac{1}{2}
+    |1
+    +
+    0|^2
+    =
+    \frac{1}{2}
+}
+
+\subsection{Expected Values}
+\equations{
+    \langle \hat A \rangle 
+    =
+    \bra{\Psi} \hat A \ket{\Psi}
+    \hp 
+    \hat A 
+    =
+    \sum_k 
+    \lambda_k 
+    \ket{k} \bra{k}
+    \hp 
+    \lambda_k 
+    =
+    \textrm{kth eigenvalue}
+}
+
+You can use the Spectral Theorem to get 
+\equations{
+    \hat A 
+    =
+    \ket{\uparrow}
+    \bra{\uparrow}
+    -
+    \ket{\downarrow}
+    \bra{\downarrow}
+}
+
+So to find the expected value, we use 
+
+\equations{
+    \langle \hat A \rangle 
+    =
+    \bra{\Psi} \left(
+        \ket{\uparrow}
+        \bra{\uparrow}
+        -
+        \ket{\downarrow}
+        \bra{\downarrow}
+    \right) \ket{\Psi}
+    =
+    \ldots 
+    = 0
+}
+
+\section{Double Slit and the Wave Function}
+we need $\ket{\Psi}$ in the position basis. 
+
+Imagine if the space was discrete. 
+\equations{
+    \ket{\Psi}
+    =
+    \sum_k 
+    c_k \ket{x}
+}
+
+But our space is continuous, so instead of taking a discrete sum, 
+we take an integral. 
+
+\equations{
+    \bra{x_k} \ket{x_j}
+    =
+    \delta (k - j)
+    \hp 
+    \int dx 
+    \bra{x_k} \ket{x_j}
+    =
+    1
+    \\
+    \ket{\Psi}
+    =
+    \int \, dx \,
+    \ket{x} \bra{x} \ket{\Psi}
+    =
+    \int \, dx \, 
+    \Psi(x) \ket{x}
+}
+
+That's the wave function 
+
+implement Born's Rule to get 
+
+\equations{
+    P(x)
+    =
+    |\bra{x}\ket{\Psi}|^2
+    =
+    |\Psi(x)|^2
+}
+
+\subsection{Bra-Ket Notation}
+\equations{
+    \bra{x} \ket{y}
+}
+Is an inner product that yields just 1 number.
+
+\equations{
+    \ket{y} \bra{x} 
+}
+is an outer product that yields a matrix.
+
+\subsection{Stationary State}
+A stationary state is an eigenstate of the Hamiltonian.
+It has a perfectly well-defined energy. 
+
+\section{Interpreting the Double Slit}
+You have a quantum state dependent probability density 
+
+\equations{
+    P(x)
+    =
+    |\Psi(x)|^2
+}
+
+That's a probability density function that needs to be normalized 
+
+\equations{
+    \int^\infty_{-\infty}
+    dx |\Psi(x)|^2 
+    =
+    1
+}
+
+So to find the expected value, we get 
+
+\equations{
+    \langle x \rangle 
+    =
+    \int^\infty_{-\infty}
+    dx \, 
+    x 
+    |\Psi(x)|^2 
+    \hp
+    \langle f(x) \rangle 
+    =
+    \int^\infty_{-\infty}
+    dx \, 
+    f(x) 
+    |\Psi(x)|^2 
+}
+
+And the variance of that probability distribution is given by 
+\equations{
+    \sigma_x^2 
+    =
+    \langle x^2 \rangle 
+    -
+    \langle x \rangle^2
+}
+
+Given a quantum state, if we can measure the position, we 
+can \textbf{only} estimate $|\Psi(x)|^2$ with finite accuracy. 
+Each position sampled is just a single point of a probability distribution 
+that cannot be directly measured. 
+
+\chapter{Wave Mechanics}
+Let's start with 
+
+\equations{
+    \ket{\Psi(x)} 
+    =
+    \Psi(x, t)
+    \hp
+    H 
+    =
+    - \frac{\hbar^2}{2 m}
+    \left( \frac{\del}{\del x} \right)
+    +
+    V(x)
+}
+
+Where $V(x)$ is the potential. This is our wave function 
+and our Hamiltonian. 
+
+The Schrodinger Wave equation is 
+\equations{
+    i \hbar \frac{\del}{\del t} \Psi(x, t)
+    =
+    - \frac{\hbar^2 }{2m} \frac{\del^2}{\del x^2} \Psi(x, t) 
+    +
+    V(x) \Psi(x, t)
+}
+
+\section{Important Properties of the S.W.E.}
+\subsection{ Unitary }
+Conservation of probability.
+Found is Griffiths Textbook chapter 1.4
+
+\equations{
+    0
+    =
+    \frac{d}{dt}
+    \int^\infty_{-\infty}
+    dx \, 
+    |\Psi(x, t)|^2 
+    =
+    \int dx \, 
+    \frac{\del}{\del t}
+    |\Psi(x, t)|^2
+    =
+    \\
+    \int dx \, 
+    \left(
+        \Psi^* \frac{\del}{\del t} \Psi 
+        +
+        \Psi \frac{\del}{\del t}
+        \Psi^*
+    \right)
+    \rightarrow 
+    \int dx \, 
+    \left(
+        \Psi^* \frac{\del^2}{\del x^2} \Psi 
+        -
+        \Psi \frac{\del}{\del x^2}
+        \Psi^*
+    \right)
+    \frac{i \hbar}{2 m}
+    \\
+    =
+    \int dx \, 
+    \frac{d}{dx}
+    \left(
+        \Psi^* \frac{\del}{\del x} \Psi 
+        -
+        \Psi \frac{\del}{\del x}
+        \Psi^*
+    \right)
+    \frac{i \hbar}{2 m}
+}
+
+So now we have to 
+
+\equations{
+    \left(
+        \Psi^* \frac{\del}{\del x} \Psi 
+        -
+        \Psi \frac{\del}{\del x}
+        \Psi^*
+    \right)^\infty_{-\infty}
+    \frac{i \hbar}{2 m}
+    =
+    0
+    \hp 
+    \Psi, \Psi' \to 0 
+    \hp 
+    |x| \to \infty
+}
+
+To first try and figure out the wave function, we start with a bunch of 
+plane waves. 
+
+A single plane wave will have equation 
+\equations{
+    \Psi_k 
+    =
+    A e^{i (kx - \omega t)}
+}
+
+Plug that into the S.W.E. to get 
+
+\equations{
+    \frac{\del}{\del t}
+    \Psi_k 
+    =
+    -i \omega \Psi_k 
+    \hp 
+    \frac{\del}{\del x}
+    \Psi_k 
+    =
+    i k \Psi_k 
+    \hp 
+    \frac{\del^2}{\del x^2}
+    \Psi_k 
+    =
+    -k^2 \Psi_k 
+    \\
+    \hbar \omega \Psi_k 
+    =
+    \frac{\hbar^2 k^2}{2 m}
+    \Psi_k
+    \Rightarrow 
+    E 
+    =
+    \frac{p^2}{2m}
+}
+
+I can express all wave functions as plane waves 
+
+\equations{
+    f(x)
+    =
+    \int \frac{dk}{2 \pi}
+    e^{ikx}
+    \tilde f(x)
+}
+
+Add time and 
+\equations{
+\omega = \frac{\hbar k^2}{2m}
+}
+
+And get equation
+
+\equations{
+    \Psi(x, t)
+    =
+    \int 
+    \frac{dk}{2 \pi}
+    e^{ikx - i \omega t}
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+}
+
+Unbounded plane waves are not normalizable. 
+
+\equations{
+    \int^\infty_{-\infty}
+    dx \, 
+    |A e^{i(kx - \omega t)}
+    |^2
+    =
+    |A|^2
+    \int^\infty_{-\infty}
+    dx 
+    =
+    \infty
+}
+
+The way to fix this is by putting the plane wave in a finite box 
+that is much larger than the bounds of the problem 
+
+\equations{
+    1
+    =
+    \int^L_{-L}
+    dx 
+    |A|^2
+    \rightarrow
+    A 
+    =
+    \frac{1}{\sqrt{2} L}
+}
+
+So the SWE can be given as 
+
+\equations{
+    i \hbar \frac{\del}{\del t}
+    \Psi 
+    =
+    - \frac{\hbar}{2 m}
+    \frac{\del^2}{\del x^2}
+    \Psi 
+    \hp
+    (+ V(x) \Psi)
+}
+
+In classical mechanics, we would have 
+\equations{
+    E 
+    =
+    \frac{p^2}{2m}
+    +
+    V(x)
+    \rightarrow 
+    p 
+    \iff 
+    \frac{\del}{\del x}
+    \Psi
+}
+
+So what is $\hat p$? 
+
+For plane waves 
+\equations{
+    p \Psi_k 
+    =
+    \hbar k \Psi_k
+}
+From De Broglie. We put that into our wave equation
+
+\equations{
+    p \Psi_k 
+    =
+    \hbar k \Psi_k 
+    =
+    -i \hbar 
+    \frac{\del}{\del x}
+    \Psi_k
+}
+
+Classically, we know that 
+\equations{
+    V = \dot x 
+    \hp 
+    p = mV 
+}
+
+The expected value is the value over many many quantum mechanical states 
+\equations{
+    \frac{d \langle x \rangle}{dt}
+    =
+    \frac{d}{dt}
+    \int dx \, 
+    x |\Psi(x, t)|^2
+    =
+    \int dx \, 
+    x 
+    \left(
+        \left(
+            \frac{\del}{\del t} \Psi^*
+        \right)
+        +
+        \Psi^*
+        \left(
+            \frac{\del}{\del t} \Psi
+        \right)
+    \right)
+}
+
+This derivation is in Griffiths 1.5 
+
+\equations{
+    \frac{i \hbar }{2m}
+    \int dx \,
+    x \frac{\del}{\del x}
+    \left(
+        - \Psi 
+        \frac{\del}{\del x}
+        \Psi^*
+        +
+        \Psi^*
+        \frac{\del}{\del x}
+        \Psi
+    \right)
+}
+
+We do integration by parts 
+
+\equations{
+    \frac{\del}{\del x}
+    \left(
+        - \Psi 
+        \frac{\del}{\del x}
+        \Psi^*
+        +
+        \Psi^*
+        \frac{\del}{\del x}
+        \Psi
+    \right)
+    =
+    g'
+    \hp 
+    x = f 
+}
+
+\equations{
+    - \frac{i \hbar }{2m}
+    \int dx \,
+    \left(
+        \Psi^*
+        \frac{\del}{\del x}\Psi 
+        -
+        \Psi 
+        \frac{\del}{\del x}
+        \Psi^*
+    \right)
+    =
+    \frac{i \hbar}{m}
+    \int dx \,
+    \Psi^* \frac{\del}{\del x}
+    \Psi
+    \\
+    =
+    \frac{1}{m}
+    \int dx \,
+    \Psi^*
+    \left(
+        -i \hbar 
+        \frac{\del}{\del x}
+    \right)
+    \Psi 
+    =
+    \frac{\del \langle x \rangle} {\del t}
+}
+
+Momentum should be 
+\equations{
+    p 
+    \sim 
+    m \frac{d}{dt}
+    \langle x(t) \rangle
+    \\
+    \langle p \rangle 
+    =
+    \int dx \, 
+    \Psi^*
+    \left(
+        -i \hbar \frac{\del}{\del x}
+    \right)
+    \Psi
+}
+
+The momentum operator (expressed in position), known as $\hat p$, is 
+\equations{
+    \hat p 
+    =
+    -i \hbar \frac{\del}{\del x}
+}
+
+\section{Recap}
+
+Given a state vector $\ket{\Psi}$, you can make a probability distribution 
+to describe the position of the particle at time $t$ 
+\equations{
+    P(x, t)
+    =
+    |\Psi(x, t)|^2
+}
+
+Plane waves cannot be normalized, so they are bad wave functions. 
+
+Solve for $\Psi \rightarrow $ Plane waves (only for math)
+
+The momentum of the particle can be written as 
+\equations{
+    \hat p 
+    =
+    - i \hbar 
+    \frac{\del}{\del x}
+}
+That is specifically in the position basis. 
+
+The ep
+\equations{
+    \langle \hat p \rangle 
+    =
+    \int dx \, 
+    \Psi^* \hat p \Psi
+}
+
+That is true for any 
+\equations{
+    \hat A 
+    \equiv
+    \hat A(\hat x, \hat p)
+    \hp
+    \langle \hat A \rangle 
+    =
+    \Psi^* \hat A \Psi
+}
+
+\section{Uncertainty Relation}
+Given a plane wave wavefunction. 
+Because I have a single wave with a well defined wavelength, the momentum 
+is well-defined. 
+
+\equations{
+    \sigma_p \to 0
+}
+
+However, because it's a plane wave, we cannot say anything about the 
+position of the particle. 
+
+\equations{
+    \sigma_x \to \infty
+}
+
+If given a wave function that looks like a dirac delta with a single 
+spike, then the position is well-defined but the momentum is not. 
+
+If you perfectly measure position, the momentum is then a superposition of 
+all possible momenta, so the particle will spread out over time because 
+the particle has to be moving due the momentum uncertainty.
+
+Generally, the bound for momentum and position variance is 
+\equations{
+    \sigma_x 
+    \sigma_p
+    \geq 
+    \frac{\hbar}{2}
+}
+
+There are wave functions that miimize the uncertainty relation 
+(Gaussian Wave Packets).
+
+\section{Solving the SWE}
+Given $V(x)$, how do we get $\Psi(x, t)$
+
+The Schrodinger wave equation is given as 
+\equations{
+    i \hbar \frac{\del \Psi}{\del t}
+    =
+    - \frac{\hbar^2}{2m} 
+    \frac{\del^2 \Psi}{\del x^2}
+    +
+    V \Psi
+}
+
+Here we assume that the state is \textbf{not} time-dependent 
+\equations{
+    \frac{\del V}{\del t}
+    =
+    0
+}
+
+Because of our time-independence, we can just separate the variables. 
+\equations{
+    \Psi(x, t)
+    =
+    \Psi(x) \varphi(t) 
+}
+
+Initial Condition: know what $\Psi(x, 0)$ is
+
+\equations{
+    i \hbar \frac{1}{\varphi}
+    \frac{d \varphi}{d t}
+    =
+    -\frac{\hbar^2}{2m}
+    \frac{1}{\Psi}
+    \frac{d^2 \Psi}{d x^2} 
+    + V
+}
+
+The separation constant is the energy $E$ 
+
+\equations{
+    i \hbar \frac{1}{\varphi}
+    \frac{d \phi}{d t}
+    =
+    E 
+    \rightarrow 
+    \frac{d \varphi}{d t}
+    =
+    \frac{-i E}{\hbar} \varphi
+    \rightarrow 
+    \\
+    \phi 
+    =
+    e^{\frac{-iE}{h}}
+}
+
+Now we consider the position from the state space 
+\equations{
+    - \frac{\hbar^2}{2m}
+    \frac{d^2 \Psi}{d x^2}
+    +
+    V \Psi
+    =
+    E \Psi
+}
+
+The left side is the Hamiltonian operator on $\Psi$ 
+and the right side is the energy.
+
+The stationary solution is of the form 
+\equations{
+    \Psi(x, t)
+    =
+    \psi(x)
+    \exp(\frac{-i E t}{\hbar})
+}
+
+The time independent and time dependent states are equal 
+
+For any $\hat A$ 
+\equations{
+    \langle \hat A \rangle 
+    =
+    \int 
+    \psi^* \hat A \psi \, dx
+    =
+    \textrm{const}
+}
+
+We can define the energy as 
+
+\equations{
+    H 
+    =
+    \frac{p}{2m}
+    +
+    V(x)
+}
+This is the total energy in classical mechanics (kinetic + potential energy)
+
+Our quantum Hamiltonian operator is 
+\equations{
+    \hat H 
+    =
+    - \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    +
+    V(x)
+    \hp 
+    \hat H \psi = E \psi 
+    \hp 
+    \langle \hat H \rangle 
+    =
+    E
+    \\
+    H^2 \psi 
+    =
+    E^2 \psi 
+    \rightarrow 
+    \langle H^2 \rangle 
+    =
+    E^2
+    \rightarrow 
+    \sigma_H^2
+    = 0
+}
+
+So the general solution is a linear combination of the separated 
+solutions. 
+
+\equations{
+    V(x)
+    \rightarrow 
+    \{ \psi_n \}
+    \Rightarrow 
+    \{ E_n \}
+}
+
+With an Initial Condition: 
+
+\equations{
+    \Psi(x, 0)
+    =
+    \sum_n c_n \psi_n(x)
+}
+
+And then we evolve that system 
+\equations{
+    \Psi(x, t)
+    =
+    \sum_n 
+    c_n \psi_n(x) \exp(\frac{-i E_n t}{\hbar})
+}
+
+make sure that everything is normalized 
+\equations{
+    \sum_n |c_n|^2 = 1
+    \hp 
+    \langle H \rangle 
+    =
+    \sum_n
+    |c_n|^2 E_n
+}
+
+\subsection{Question}
+Given a stationary state $\{ \psi_n(x) \}$ for some $\hat H$, how 
+can we explain motion?
+
+To explain motion, we need a superposition of $\psi_n(x)$.
+
+\equations{
+    \Psi(x, 0)
+    =
+    c_1 \psi_1(x)
+    +
+    c_2 
+    \psi_2(x)
+    \rightarrow 
+    \Psi(x, t)
+    \\
+    =
+    c_1 \psi_1(x) \exp(\frac{-i E_1 t}{\hbar})
+    +
+    c_2 \psi_2(x) \exp(\frac{-i E_2 t}{\hbar})
+    \\
+    |\Psi(x, t)|^2
+    =
+    \psi^* \psi
+}
+Use Euler's equation
+
+\equations{
+    c_1^2 \psi_1^2 
+    +
+    c_2^2 \psi_2^2 
+    +
+    2 c_1 c_2 \psi_1 \psi_2 
+    \cos(\frac{(E_2 - E_1) t}{\hbar})
+}
+
+You have two stationary states in position. They interfere and something 
+happens in time. 
+
+\section{Infinite Square Well}
+Horrendously artificial, but one of the few problems we can actually solve. 
+
+Consider a particle with mass $m$ and velocity $v$ in a valley of height 
+$h$.
+
+The particle is trapped in the well because $mv^2/2 < mgh$.
+
+We can consider the valley as $h \to \infty$, because the particle can 
+quantum tunnel out of it.
+
+The width of the well goes from $0 \to a$. The potential of the 
+particle can be stated as 
+
+\equations{
+    V(x)
+    =
+    \begin{cases}
+        0: 0 \leq x \leq a 
+        \\
+        \infty : \textrm{elsewhere}
+    \end{cases}
+}
+
+At $V = \infty$, we can say that the wave function $\psi = 0$
+
+\subsection{Boundary Conditions}
+\begin{itemize}
+    \item
+    $\psi(x)$ is always continuous.
+    \item
+    $\psi'(x)$ is always continuous but not if $|V(x)| = \infty$.
+\end{itemize}
+
+So now all we have to do is solve the SWE inside the well 
+\equations{
+    - \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    \psi 
+    =
+    E \psi 
+    \iff 
+    \psi''(x)
+    =
+    -k^2 \psi 
+    \hp 
+    k
+    =
+    \frac{\sqrt{2mE}}{\hbar}
+}
+
+Everything is a simple harmonic oscillator 
+
+\equations{
+    \psi=
+    A e^{ikx}
+    +
+    B e^{-ikx}
+}
+
+Now we have to consider the boundary conditions. 
+
+\equations{
+    \psi(x=0)
+    =
+    \psi(x=k)
+    =
+    0
+    \\
+    A 
+    + 
+    B 
+    = 
+    0
+    \rightarrow 
+    A 
+    =
+    -B
+    \\
+    \psi(x)
+    =
+    A(e^{ikx} - e^{-ikx})
+    =
+    A \sin(kx)
+    \\
+    psi(x=0) = 0 
+    \rightarrow 
+    \sin(kx) = 0
+    \\
+    \textrm{shit}
+}
+
+\subsection{Energies}
+
+\equations{
+    k^2 
+    =
+    \frac{2mE}{\hbar^2}
+    \rightarrow 
+    E_n 
+    =
+    \frac{\hbar^2 k_n^2}{2ma^2}
+}
+
+\subsection{Normalization}
+\equations{
+    \int_0^{a}
+    A^2 \sin^2(kx)
+    \, dx 
+    =
+    1
+    \rightarrow 
+    A 
+    =
+    \sqrt{\frac{2}{a}}
+    \\
+    \psi_n(x)
+    =
+    \sqrt{\frac{2}{a}}
+    \sin(\frac{n \pi x}{a})
+    \hp
+    E_h 
+    =
+    \frac{k^2 \pi^2 \hbar^2}{2ma^2}
+}
+
+\section{Discussion 1}
+\subsection{The Classical Recipe}
+\equations{
+    F = ma 
+    \hp 
+    \frac{\del L}{\del \dot x}
+    =
+    \frac{\del}{\del x}
+    \frac{\del L}{\del x}
+}
+
+\subsection{Quantum Reality}
+
+Input is ket. Output is bra.
+
+Ket to bra is input to output based off of the inner product. 
+
+The wavefunction gives the probability density of finding a particle 
+in a volume element $dx$
+
+\equations{
+    \rho(x)
+    =
+    \Psi^*(x, t) 
+    \Psi(x, t) 
+    \\
+    P(a < x < b)
+    =
+    \int^b_a
+    \Psi^*(x, t) 
+    \Psi(x, t) 
+    \, dx
+}
+
+The wave function is also normalized
+
+\equations{
+    \int^\infty_{-\infty}
+    \Psi^*(x, t) 
+    \Psi(x, t) 
+    \, dx
+    =
+    1
+}
+
+Given an input state $\ket{\Psi_1}$ and an output state 
+$\bra{\Psi_2}$. The probability amplitude is given in the form 
+
+\equations{
+    \bra{\Psi_2} \ket{\Psi_1}
+    =
+    \Psi_2^*(x, t) 
+    \Psi_1(x, t) 
+}
+
+The output state comes first, and it is the one that's the conjugate.
+
+Given a superposition 
+\equations{
+    \Psi_{in}
+    =
+    \frac{1}{\sqrt{3}}
+    \Psi_1
+    +
+    \frac{\sqrt{2}}{\sqrt{3}}
+    \Psi_2
+}
+
+So to find the probability of the output being 2
+
+\equations{
+    P(2)
+    =
+    |\bra{\Psi_{out}} \ket{Psi_{in}}|^2
+    =
+    \Psi_2
+    \frac{1}{\sqrt{3}}
+    \Psi_1
+    +
+    \Psi_2
+    \frac{\sqrt{2}}{\sqrt{3}}
+    \Psi_2
+}
+something something I'll look at the lecture notes later 
+
+\subsection{Questions}
+
+Consider a wave function 
+\equations{
+    \psi(x)
+    =
+    A(a^2 - x^2)
+}
+
+inside interval $\{-a, a\}$
+
+Determine the normalization constant $A$ 
+
+\equations{
+    \int \psi(x)^2 \, dx \, = 1
+    \\
+    A^2
+    \int^a_{-a} 
+    (a^2 - x^2)^2
+    \, dx 
+    \hp 
+    A^2 
+    \left(
+        a^4 x - (2 a^2 x^3)/3 + x^5/5
+    \right) \Big|^a_{-a}
+    =
+    \\
+    A^2 
+    \left(
+        a^4 a - (2 a^2 a^3)/3 + a^5/5
+    \right)
+    -
+    \left(
+        -a^4 a + (2 a^2 a^3)/3 - a^5/5
+    \right)
+    \\
+    =
+    2A^2 
+    \left(
+        a^5 - \frac{2}{3}a^5 + a^5/5
+    \right)
+    =
+    \frac{16}{15} A^2 a^5 = 1
+    \rightarrow 
+    A 
+    =
+    \sqrt{\frac{15}{16 a^5}} 
+    \\
+    \frac{15}{15} - \frac{10}{15} + \frac{3}{15}
+    =
+    \frac{8}{15}
+}
+
+What is the probability of finding the particle at $x = a/2$. It is 0 
+because that's a miniscule-ly small point. The range $-a/2 \to a/2$ is different. 
+
+\equations{
+    P(-a/2 < x < a/2)
+    =
+    \int^{a/2}_{-a/2}
+    \Psi^*(x) \Psi(x)
+    \\
+    =
+    2 \frac{15}{16 a^5}
+    \left(
+        a^4 x - (2 a^2 x^3)/3 + x^5/5
+    \right)
+    \Big|^{a/2}_{-a/2}
+    \\
+    =
+    \frac{15}{4 a^5}
+    a^4 (\frac{a}{2}) - (2 a^2 (\frac{a}{2})^3)/3 + (\frac{a}{2})^5/5
+    =
+    \frac{15}{4 }
+    \left(
+    (\frac{1}{2}) - (2  (\frac{1}{8}))/3 + (\frac{1}{32})/5
+    \right)
+    \\
+    \frac{15}{4 }
+    \left(
+        \frac{1}{2}
+        -
+        \frac{1}{12}
+        +
+        \frac{1}{160}
+    \right)
+}
+
+For what potential is the state an eigenfunction?
+
+The energy eigenfunctions are determined from the Hamiltonian
+\equations{
+    \hat H 
+    =
+    - \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    \psi
+    +
+    V(x)
+    =
+    E \psi
+}
+
+So I need to take the double derivative 
+
+\equations{
+    \frac{\del^2}{\del x^2}
+    Aa^2 - Ax^2
+    =
+    -2A
+    \\
+    \frac{\hbar^2}{2m}
+    2A
+    +
+    V(x) ( Aa^2 - Ax^2)
+    =
+    E A (a^2 - x^2)
+}
+
+Set energy to 0 
+
+\equations{
+    -\frac{\hbar^2}{2m}
+    2 \sqrt{\frac{15}{16 a^5}}
+}
+
+\subsection{bra-ket}
+Consider a three dimension vector space spanned by an orthonormal basis 
+\equations{
+    \ket{1}
+    \hp
+    \ket{2}
+    \hp
+    \ket{3}
+}
+
+$\ket{\alpha}$ and $\ket{\beta}$ are defined as 
+
+\equations{
+    \ket{\alpha}
+    =
+    i \ket{1} - 2\ket{2} - i \ket{3}
+    \hp
+    \ket{\beta}
+    =
+    i \ket{1} + 2 \ket{3}
+}
+
+Construct $\ket{\alpha}$ and $\ket{\beta}$ in terms of the dual basis 
+$\bra{1}$, $\bra{2}$, $\bra{3}$
+
+Something that might be useful 
+\equations{
+    A_{ij} 
+    =
+    \bra{i} \hat A \ket{j}
+    =
+    \bra{i} (\ket{\alpha} \bra{\beta}) \ket{j}
+    =
+    \bra{i}\ket{\alpha}
+    \cdot
+    \bra{\beta}\ket{j}
+}
+
+\chapter{Solving the SWE}
+\section{Recap}
+Our starting point is 
+\equations{
+    \hat H 
+    =
+    - \frac{\hbar}{2 m}
+    \frac{\del^2}{\del x^2}
+    +
+    V(x)
+}
+with initial conditions. 
+
+The time-indepedent SWE can be written as 
+\equations{
+    \hat H \psi(x)
+    =
+    E_n \psi(x)
+    \hp 
+    \psi(x, 0) 
+    =
+    \sum_n c_n \psi_n(x) 
+    \hp 
+    \psi(x, t) 
+    =
+    \sum_n c_n \psi_n(x) 
+    e^{\frac{-i}{\hbar} E_n t}
+}
+
+And infinite square well can be written as 
+\equations{
+    \psi(x \leq 0) = \psi(x \geq a) = 0 
+}
+
+\subsection{Stationary State}
+If we consider a probability distribution 
+\equations{
+    |\psi(x, t)|
+    =
+    \psi^*(x, t) \psi(x, t)
+}
+So for an infinite square well. 
+
+Consider the general statement 
+\equations{
+    \frac{d^2 \psi}{dx^2}
+    =
+    \frac{2m}{\hbar^2}
+    (V(x) - E) \psi
+}
+if $E < V(x)$, then $\psi''$ and $\psi$ always have the same 
+sign. The issue with this is the wave will not be normalizable
+(because for positive x, the concavity has to be positive, so it has to increase).
+
+The eigenstates are given by 
+\equations{
+    E_1
+    =
+    \frac{\pi^2 \hbar^2}{2 m a^2}
+    \hp 
+    E_2 = 4 E_1
+    \hp
+    E_3 = 9 E_2
+}
+
+In a stationary state, $\{ \psi_n\}$ forms a complete orthonormal eigenbasis. 
+\equations{
+    \int \, dx \, 
+    \psi^*_m(x)
+    \psi_n(x)
+    =
+    \delta_{mn}(m = n)
+    \\
+    f(x)
+    =
+    \sum_n c_n \psi_n(x)
+    =
+    \sqrt{\frac{2}{a}} 
+    \sum_n c_n \sin(\frac{n \pi x}{a})
+    \hp 
+    c_n = \bra{\psi_n} \ket{f(x)}
+}
+\subsection*{Question} Given a wave function $\psi(x, t=0)$ 
+and a stationary state, how can we find $c_n$ such that 
+$\psi = \sum_n c_n \psi_n(x)$?
+\equations{
+    \int \, dx \, 
+    \psi^*_m(x) f(x)
+    =
+    \int \, dx \, 
+    \psi^*_m(x) f(x)
+    \sum_n c_n \psi_n(x)
+    \\
+    =
+    \sum_n c_n 
+    \int 
+    \psi^*_m(x)
+    \psi_n(x)
+    =
+    \sum_n 
+    c_n f_{mn}
+    =
+    c_m
+}
+
+\section{Time-Dependence}
+\equations{
+    \psi(x, t=0)
+    =
+    \sum_n c_n \psi_n(x)
+    \rightarrow 
+    \psi(x, t)
+    =
+    \sum_n c_n \psi_n e^{\frac{-i}{\hbar} E_n t}
+}
+
+This is just summing over all of the possible standing waves within 
+an infinite square well. 
+
+\subsection{THIS WILL BE ON THE MIDTERN1}
+The thing above 
+
+\subsection{Quantum Number}
+It's a fake number that is just an index to show the different eigenvectors 
+\equations{
+    E_n
+    \hp 
+    n = 
+    \textrm{quantum number}
+}
+
+\subsection*{Question}
+How can we describe a "ball" bouncing between the walls 
+of the infinite square well? 
+
+\equations{
+    \psi(x, t=0)
+    =
+    \sum_{odd}
+    c_n \psi_n(x)
+}
+sum odd means that the function that we're summing over has to be an odd function. 
+
+An even function will just have an expected value of 0.
+
+\subsection{Free Particle}
+\equations{
+    V= 0 
+    \rightarrow 
+    \hat H 
+    =
+    -
+    \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+}
+and the time-indepedent SWE is 
+\equations{
+    -
+    \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    \psi
+    =
+    E \psi
+    \rightarrow 
+    \psi 
+    =
+    A e^{ikx} + B e^{-ikx}
+    \hp 
+    E = \frac{\hbar^2 k^2}{2m}
+    \hp 
+    kc=
+    \sqrt{\frac{2mE}{\hbar^2}}
+}
+
+and the time-\textbf{dependent} SWE is 
+
+
+\equations{
+    \psi(x, t)
+    A e^{ikx - \frac{i}{\hbar} E t}
+    +
+    B e^{-ikx - \frac{i}{\hbar} E t}
+    =
+    A e^{i(kx - \omega t)}
+    +
+    B e^{-i(kx + \omega t)}
+}
+
+The wave function is a superposition of a left-propagating and a 
+right-propagating wave both with constant kintetic energy.
+
+allow $k$ to be
+\equations{
+    k 
+    =
+    \pm 
+    \sqrt{\frac{2mE}{\hbar^2}}
+    \rightarrow 
+    A e^{i(kx - \omega t)}
+}
+
+The velocity can be written as 
+\equations{
+    e^{-i(kx - \omega t)}
+    =
+    e^{-ik(x - \frac{\omega}{k} t)}
+    \rightarrow 
+    v 
+    =
+    \frac{\hbar |k|}{2m}
+    =
+    \sqrt{\frac{E}{2m}}
+}
+
+This is different from the classical definition of velocity by a factor of 2
+\equations{
+    \frac{1}{2} mv^2 = E 
+    \rightarrow 
+    v 
+    =
+    \sqrt{\frac{2E}{m}}
+}
+The reason this is so is because the quantum definition of velocity 
+is \textbf{not} for a particle.
+
+Consider a Guassian wave packet 
+\equations{
+    \psi(x, t)
+    =
+    \frac{1}{\sqrt{2 \pi}}
+    \int 
+    \Phi(k)
+    e^{i(kx - \omega t)}
+    \, dk
+}
+For some initial conditions $\psi(x, t=0)$, we find the weight function with 
+
+\equations{
+    \Phi(k)
+    =
+    \frac{1}{\sqrt{2 \pi}}
+    \int 
+    \psi(x, t=0)
+    e^{-ikx}
+    \, dx 
+}
+
+\section{MISSED LECTURE}
+
+\section{Discussion}
+Time-Evolving superpositions. We use a Hamiltonian basis 
+\equations{
+    \hat H \psi_n 
+    =
+    E_n \psi_n 
+    \hp 
+    \textrm{Basis }
+    =
+    \{
+        \psi_1, \psi_2, \ldots
+    \}
+}
+
+This basis is orthonormal 
+\equations{
+    \bra{\psi_m} \ket{\psi_n} = \delta_{mn}
+}
+
+And the basis is complete 
+\equations{
+    \Psi(x, 0)
+    =
+    c_1 \psi_1(x)
+    +
+    c_2 \psi_2(x)
+    +
+    c_3 \psi_3(x)
+    +
+    \ldots
+}
+
+And we have a time-evolution operator 
+
+\equations{
+    \Psi(x, 0)
+    =
+    c_1 \psi_1(x)
+    +
+    c_2 \psi_2(x)
+    +
+    c_3 \psi_3(x)
+    +
+    \ldots
+    \\
+    \Psi(x, t)
+    =
+    e^{\frac{-i \hat H t}{\hbar}}
+    \left(
+    c_1 \psi_1(x)
+    +
+    c_2 \psi_2(x)
+    +
+    c_3 \psi_3(x)
+    +
+    \ldots
+    \right)
+}
+
+And this effects each individual state differently 
+\equations{
+    e^{\frac{-i \hat H t}{\hbar}}
+    c_3 \psi_3(x)
+    =
+    e^{\frac{-i E_3 t}{\hbar}}
+    c_3 \psi_3(x)
+}
+
+\subsection{Questions}
+Find the normalized wave function at time $t$ for a particle in an 
+infinite square with a wave function given by 
+\equations{
+    \psi(x, 0)
+    =
+    A 
+    \left(
+        \psi_1(x)
+        +
+        e^{i \theta}
+        \psi_2(x)
+    \right)
+    \\
+    P(x)
+    =
+    |\psi(x)|^2 
+    =
+    A^2 
+    |\left(
+        \psi_1(x)
+        +
+        e^{i \theta}
+        \psi_2(x)
+    \right)|^2
+}
+
+The time dependent portion of the wave function is 
+\equations{
+    e^{-i \frac{E}{\hbar}}
+}
+
+So our equation will be 
+
+\equations{
+    P(x)
+    =
+    e^{-i \frac{E}{\hbar}}
+    |\psi(x)|^2 
+    =
+    A^2 
+    |\left(
+        \psi_1(x)
+        +
+        e^{i \theta}
+        \psi_2(x)
+    \right)|^2
+}
+
+For an infinite square well, the solution can be written as 
+\equations{
+    \psi(x, 0)
+    =
+    \sin(\frac{n \pi x}{L})
+    \\
+    \ket{\psi(x, 0)}
+    =
+    A 
+    \left(
+        \ket{\psi_1}
+        +
+        e^{i \theta}
+        \ket{\psi_2}
+    \right)
+    \\
+    |\psi(x)|^2
+    =
+    A^2 
+    \left(
+        \bra{\psi_1}
+        +
+        e^{-i \theta}
+        \bra{\psi_2}
+    \right)
+    \left(
+        \ket{\psi_1}
+        +
+        e^{i \theta}
+        \ket{\psi_2}
+    \right)
+    =
+    \\
+    A^2 
+    \left(
+        \bra{\psi_1}\ket{\psi_1}
+        +
+        \ket{\psi_1}
+        e^{i \theta}
+        \ket{\psi_2}
+        +
+        \bra{\psi_2}\ket{\psi_2}
+    \right)
+    =
+    2A^2
+    =1
+}
+
+The probability density is just something 
+
+\subsection{Infinite Square Well}
+Given a unique wave function that's put in the paper and on the website, 
+expand the wave function in terms of its eigenvectors using 
+a Fourier series.
+
+Go to chapter 11 of townsend for braket notation or chapter 4 for 
+time-evolution.
+
+\section{Finite Square Well}
+Consider a well with potential 
+\equations{
+    V(x)
+    =
+    \begin{cases}
+        -V_0 
+        : -a < x < a
+        \\
+        % V(x) 
+        0
+        : x < -a, x > a
+    \end{cases}
+}
+
+The wave function can extend out of the well now, and the 
+wave function \textbf{must be continuous}.
+Exact solutions are typically numerical bound states $(\geq 1)$
+
+\subsection{Scattering Stationary States $(E > 0)$}
+
+Consider that we're starting with a plane wave (coming from the left)
+\equations{
+    \psi_{I}(x, t=0)
+    =
+    A e^{ikx}
+    +
+    B e^{-ikx}
+}
+
+In the middle, we have 2 boundary conditions, and both the wavefunction 
+itself and its derivative have to be continuous. 
+
+\equations{
+    \psi_{II}(x, t=0)
+    =
+    C \sin(lx )
+    +
+    D \cos(lx )
+}
+
+On the right side, there is still 1 boundary condition, but the 
+other side is unbounded
+
+\equations{
+    \psi_{III}(x, t=0)
+    =
+    F e^{ikx}
+}
+
+You do some math (Griffith's 2.6). Solve for Boundary Conditions 
+and make sure $x$ is continuous at the important parts
+\equations{
+    \frac{|F|^2}{|A|^2}
+    =
+    T 
+    \hp 
+    R 
+    =
+    1-T 
+    \hp 
+    k = \frac{\sqrt{2m E}{\hbar}}
+    \hp 
+    l 
+    =
+    \frac{\sqrt{2m (E + V_0)}}{\hbar}
+    \\
+    A e^{-ika}
+    +
+    B e^{ika}
+    =
+    -C \sin(la)
+    + 
+    D \cos(la)
+    \\
+    \Rightarrow
+    \Rightarrow
+    \Rightarrow
+    \Rightarrow
+    \Rightarrow
+    \Rightarrow
+    \\
+    B = i \frac{\sin(2la)}{2kl}
+    (l^2 - k^2)
+    F
+    \hp 
+    F 
+    =
+    A e^{-2ika} 
+    \left(
+        \cos(2la)
+        -
+        i \frac{(k^2 + l^2)}{2kl}
+        \sin(2la)
+    \right)^{-1}
+}
+
+Those are the answer given 
+\equations{
+    \psi(x, 0)
+    \propto 
+    \int \, dk \, 
+    \psi(k) e^{-ikx}
+}
+
+An interesting case is $T=1$. This can be fulfilled for 
+
+\equations{
+    \frac{2a}{\hbar}
+    \sqrt{2m (E_n + V_0)}
+    =
+    n \pi
+    \hp 
+    (E_n + V_0)
+    =
+    \frac{n^2 \pi^2 \hbar^2}{2m (2a)^2}
+}
+
+We are matching $k$ to the "infinite well". 
+
+\equations{
+    B 
+    =
+    i \frac{\sin(2la)}{2kl}
+    (l^2 - k^2) F 
+    \\
+    F 
+    =
+    (e^{-2ika} A)
+    * 
+    \left(
+        \cos(2la)
+        -
+        i \frac{k^2 + l^2}{2kl}
+        \sin(2la)
+    \right)^{-1}
+}
+
+\section{Quantum Tunneling}
+Consider the opposite of a finite square well 
+\equations{
+    V =
+    \begin{cases}
+        V_0 : 0 < x < a 
+        \\
+        0 : x < 0, x > a
+    \end{cases}
+}
+
+The stationary state consists of a plane wave on the left side.
+\equations{
+    \psi_{I}
+    =
+    A^{ikx}
+    +
+    B^{-ikx}
+}
+
+We have exponential decay inside the "well".
+The particle can also be reflected, so the wave function is 
+given by 
+\equations{
+    \psi_{II}
+    =
+    Ce^{-kx}
+    +
+    De^{kx}
+}
+
+And then we have another plane wave on the 2nd side 
+\equations{
+    \psi_{III}(x, 0)
+    =
+    F e^{ikx}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

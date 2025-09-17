@@ -1,0 +1,689 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{esint}
+
+\geometry{a4paper, margin=2cm} % Set paper size and margins
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{ECE 420}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{ECE 310 Overview}
+\section{Sampling}
+\subsection{Shannon-Nyquist Theorem: }
+
+Proves that discrete samples can perfectly reconstruct a continuous signal. 
+
+Reconstruction 
+
+Up-Down Sampling
+
+z-transform 
+
+CTFT 
+
+DTFT 
+
+DFT (FFT)
+
+Yea its literally all fourier transforms lmao
+
+\subsection{Discrete LTI System}
+Convolution 
+
+Impulse Response 
+
+Frequency Response 
+
+\subsection{Filters}
+Digital Filters 
+
+FIR vs IIR 
+
+Linear Phase 
+
+\section{310 vs 420}
+\begin{itemize}
+    \item 
+    How do we get the data? 
+
+    ECE 310 = offline (batched)
+
+    ECE 420 = online (stream)
+
+    We use buffering techniques 
+
+    overlapped added 
+
+    windowing
+
+    \item 
+    Who Computes?
+
+    ECE 310 = Computer code 
+
+    ECE 420 = Mobile app/phone
+
+    RUN-TIME IS IMPORTANT 
+
+    time-domain processes and FFT'S
+
+\end{itemize}
+
+\section{Skillsets}
+Android app dev 
+
+C++ and Java. 
+
+Do not need to know crazy circuit shenanigans
+
+You do not need a fancy UI for the DSP final project. 
+
+The DSP algorithm is more important.
+
+\section{Signals}
+IMU signals = 1d signals that are acceleration + Gyro
+
+Audio signal is also 1d in the 20 - 20,000 Hz range 
+
+Image signals are 2d signals with visible light and video.
+
+\section{Android Device}
+You can loan a tablet 
+
+Need a specific OS
+
+Needs gradle compiler.
+
+\section{Code}
+Need Python and need Android Studio
+
+\section{Basic Practice}
+\begin{enumerate}
+    \item
+Develop and Test DSP algorithms in hihg-level languages (Python)
+    \item
+Port tested algorithms into Android platform (C++, Java)
+\end{enumerate}
+
+\subsection{Attendance Quiz}
+There will be a quiz and you answer the question in the quiz and that gives you 
+the attendance credit.
+
+\section{Labs}
+\begin{enumerate}
+    \item 
+    Lab Quiz (PrairieTest)
+    \item 
+    Demo Lab
+    \item 
+    Office Hours
+\end{enumerate}
+
+Prelab (Individual)
+
+Quiz (Individual)
+Need laptop and ID 
+
+Lab Demo (Group).
+Groups are randomized every week. 
+
+This class should be very chill I'll be so fr I'm very glad I picked this 
+class. 
+
+\chapter{Sampling}
+Take amplitude at various points in time.
+
+You then reconstruct the continuous signal using just the sampled points. 
+
+\section{CTFT}
+\equations{
+    X_a(\Omega)
+    =
+    \int^{\infty}_{\infty}
+    x_a(t) e^{j \Omega t} dt
+}
+
+Scale by Ts and make periodic every $2 \pi$ to get 
+
+\subsection{DTFT}
+\equations{
+    X(\omega)
+    =
+    \sum^{\infty}_{\infty}
+    x[n] e^{j \omega n}
+}
+
+To avoid overlap,
+\equations{
+    B 
+    <
+    \frac{\pi}{T_s}
+    \hp 
+    f < \frac{1}{2 T_s}
+}
+
+Where $T_s$ is the sampling period so $1/T_s$ is the sampling rate,
+ and $B$ is the angular speed 
+
+\subsection{Nyquist rate}
+\equations{
+    F_s 
+    =
+    \frac{1}{T_s}
+    > 2f
+}
+
+\subsection{Audio Nyquist Rate}
+The band max is 20kHz, so the Nyquist rate is 
+
+\equations{
+    \frac{1}{T_s}
+    =
+    2f = 40 Khz
+}
+
+So the sampling rate is 40kHz
+
+\section{Digital Filtering}
+In Lab 2, we're going to want to take out certain frequencies from 
+our entire noise space.
+
+We can try to use a continuous-time bandstop filter.
+We could use an RLC circuit, but that has all sorts of consequences.
+
+Instead, we can use a digital filter.
+
+Digital Filters are equivalent to analog filters IF we have 
+Nyquist rate sampling.
+
+\subsection{Digital Filter}
+Big silly equation that's in the lecture slides
+
+\equations{
+    y[n]
+    =
+    (b_0 x[n] + b_1 x[n-1] + \ldots + b_K x[n-K])
+    -
+    \\
+    (a_0 y[n] + a_1 y[n-1] + \ldots + a_L y[n-L])
+}
+
+FIR, if no feedback (L=0)
+
+IIR, if feedback (L $\neq$ 0)
+
+\subsection{Large N}
+\begin{itemize}
+    \item 
+    CLose to desired response 
+    \item 
+    Sharper transition 
+    \item 
+    Less ripples 
+
+    BUT 
+    \item 
+    More computation/memory 
+    \item 
+    Longer Delay 
+    \item 
+    (for IIR) possible worse performance
+
+\end{itemize}
+
+\subsection{FIR and Convolution}
+\equations{
+    y[n]
+    =
+    (b_0 x[n] + b_1 x[n-1] + \ldots + b_K x[n-K])
+    \\
+    y[n]
+    =
+    \sum^K_{k = 0}
+    b_k x[n-k]
+}
+
+\subsection{Batch vs Block Process}
+h = filter 
+\hp 
+x = batch samples 
+\hp 
+h*x = ideal output
+
+makes an N-size output 
+
+We can have multiple convolution functions, and they can cause discontinuities 
+if we just add them together.
+
+\subsection{Convolution by Circular Buffer}
+Challege 1: Block Processing
+
+Audio samples come as a buffer, 
+
+which means discontinuities between buffers 
+
+Solution: Use a buffer (as a global variable) to store the samples 
+from the previous buffer. 
+
+something something more words from the lecture slides.
+
+\equations{
+    y[n]
+    =
+    \sum^K_{k=0} h[k]x[n-k] 
+}
+
+Assume $K=2$ and $h[n], y[n] = 0$
+
+Consider a Circular Buffer 0, 1, 2
+
+% \begin{tabular}
+%     0 && 1 && 2 \\
+%     x[0] && 0 && 0
+% \end{tabular}
+idk fix later 
+
+\section{OpenSL ES}
+Open Sound Library for Embedded Systems
+
+Use default sampling rate (48kHz)
+
+The library gives you weird 8 bit sampling 
+
+Use a bitwise operature to turn the 8 bit sampled data into 
+the original 16 bit data.
+
+\chapter{Spectral Analysis}
+Lab2 and Quiz 2 on digital filtering and Audio notch filtering.
+
+Spectral analysis give you signal in the time domain. 
+
+You can also see signal in the frequency domain. 
+
+It shows the relative distribution of signal "energy" in a different basis 
+
+The most common choice is the Fourier basis (frequency)
+
+The magnitude/log, phase and other post-processing are possible. 
+
+\section{Fourier Transforms}
+Turns time domain into frequency domain or vice versa. 
+
+\subsection{Continuous Time, Continuous Frequency}
+You use a CTFT, $X_A(\Omega)$
+
+\equations{
+    X_a(\Omega)
+    =
+    \int^{\infty}_{-\infty}
+    x_a(t)
+    e^{-j \Omega t}
+    dt
+    \hp 
+    \Omega 
+    =
+    2 \pi f 
+}
+
+\subsection{Discrete Time, Continuous Frequency}
+You use a DTFT $X(\omega)$
+
+\equations{
+    X(\omega)
+    =
+    \sum^{\infty}_{-\infty}
+    x[n]
+    e^{-j \omega n}
+    dt
+    \hp 
+    \Omega 
+    =
+    2 \pi f 
+}
+\subsection{Discrete Time and Discrete Frequency}
+DFT X[k]
+
+\equations{
+    X[k]
+    =
+    \sum_{n=0}^{N-1}
+    x[n]
+    e^{-j2 \pi k n / N}
+}
+
+\subsection{Continuous Time and Discrete Frequency}
+Fourier Series $\{ a_k \}$
+
+\section{CTFT vs DTFT vs DFT}
+\begin{itemize}
+    \item 
+    CTFT use an integral and everything is continuous 
+    \item 
+    DTFT takes in a discrete input and you use a discrete sum, but 
+    you get a continuous output 
+    \item 
+    DFT's exist because you cant integrate or sum to infinity on a computer.
+\end{itemize}
+
+The relation between all of them is 
+\equations{
+    \frac{f}{F_s}
+    =
+    \frac{\omega}{2 \pi}
+    =
+    \frac{k}{N}
+}
+
+\subsection{Consequences to DFT Truncation}
+In order to use DFT, the length of the input samples must be \textbf{finite}
+
+\section{Time-Windowing}
+Duration and bandwidth are inverse. 
+
+\subsection{Rectangular Window}
+\equations{
+    W_R =
+    \begin{cases}
+        1: 
+        0 < t < T 
+        \\
+        0:
+        \textrm{ otherwise} 
+    \end{cases}
+}
+It's just a step function.
+
+If we have a function of just 
+\equations{
+    x_a(t)
+    =
+    A \cos(\omega_1 t)
+}
+
+Then when we take our DFT, we get 
+\equations{
+    X_a(j \Omega)
+    =
+    A \pi \delta(\Omega - \omega_1)
+    +
+    A \pi \delta(\Omega + \omega_1)
+}
+
+So we take our Discrete Fourier Transform to get 
+\equations{
+    \tilde{x_a}(t) 
+    =
+    w_R (t) x_a(t) 
+    =
+    \frac{1}{2}
+    A w_R(t) e^{j \omega_1 t}
+    +
+    \frac{1}{2}
+    A w_R(t) e^{-j \omega_1 t}
+    \\
+    \tilde{X_a}(\Omega) 
+    =
+    w_R (t) x_a(t) 
+    =
+    \frac{1}{2}
+    A w_R(t) (\Omega - \omega_1)
+    +
+    \frac{1}{2}
+    A w_R(t) (\Omega + \omega_1)
+}
+
+
+\subsection{Hamming Window}
+Instead of a step function, it's more of a bump. 
+
+There are not artifacts on the side, but the main lobe is more wide. 
+
+\section{Zero-Padding}
+When the window length $L$ is less than the DFT length $N$, you 
+add $N - L$ zeros to the end of the sequence. However, it \textbf{only}
+increases the resolution of the DFT, \textbf{not the DTFT}.
+
+If you want an actually sharper frequency-domain image, you have to 
+increase the length of the DTFT.
+
+\section{STFT}
+So far, we've assumed that signals are periodic and stationary. If this is 
+not true, we have to change our Fourier transform parameters. 
+
+A STFT can cut out a segment from a signal and move the window 
+with a shift $m$ 
+
+\equations{
+    X(\Omega, t)
+    =
+    \int^{\infty}_{-\infty}
+    w(t - \tau) x(t) e^{-j \Omega t} \, dt 
+    \\
+    X(k, m]
+    =
+    \sum_{n=0}^{N-1}
+    w[n - m] x[n] e^{-j 2 \pi k n / N}
+}
+
+\section{Uncertainty Principle}
+Time resolution and frequency resolution
+cannot be improved simultaneously
+in the spectrum
+
+\section{Spectrogram}
+Magnitude of STFT. 
+
+Every timestamp, you perform an STFT to get a 2d plot 
+of frequency over time. 
+
+\subsection{Resolution vs Window Size}
+Larger windows mean finer frequency resolution. Smaller windows 
+mean. 
+
+A Hamming window is a very good option for a spectrogram. 
+
+Rectangular windows are very noisy with prominent side-lobes. They are not 
+good for spectrograms. 
+
+\chapter{Source-Filter Model}
+Excitation Generator $\rightarrow$ LTI System h(t) (Linear and Time 
+Invariant).
+
+The excitation parameters are 
+
+\begin{itemize}
+    \item 
+    amplitude (loudness)
+    \item 
+    frequency (pitch)
+    \item 
+    phase/delay 
+    \item 
+    Type (voiced, unvoiced, silenced)
+\end{itemize}
+
+The parameters of an LTI system are
+\begin{itemize}
+    \item 
+    IMPULSE RESPONSE 
+    \item 
+    resonance frequency 
+\end{itemize}
+
+In the frequency space, you can just multiply the generated signal 
+and the LTI system's frequency response. 
+
+An LTI system \textbf{cannot} create new frequencies in the output.
+
+\subsection{Speech}
+Given speech, you can see multiple different syllables, but it 
+has very dynamically changing frequencies and amplitude.
+
+Speech contains an envelope of frequencies, and human speech 
+is contained in a very narrow bandwidth $(< 2000Hz)$
+
+The sampling rate for speech is usually only 4kHz or 8kHz because 
+humans are not very high pitched.
+
+\section{Characterization of Frames}
+\begin{itemize}
+    \item
+    Voiced Sounds
+    \item
+    Unvoiced Sounds (P)
+    \item
+    Silence/noise (no active speech)
+\end{itemize}
+
+\section{Pitch Detection Algorithm}
+Figure out if sound is voiced or unvoiced. 
+
+If voiced, find the frequency. Voiced signals are touder and more sustained.
+Unvoiced signals are more abrupt. 
+
+Pitch calculation is found with autocorrelation 
+\equations{
+    R_{xx}[l]
+    =
+    \frac{
+        \sum_{n=0}^{N-1}
+        x[n] x^*[n-l]
+    }
+    {
+        \sum_{n=0}^{N-1}
+        |x[n]|^2
+    }
+}
+
+Auto-correlation is an $N$ length vector that spans the possible
+available lags.
+
+$l$ is defined by a circular shift 
+\equations{
+    x^*[<n-l>_N]
+}
+So the lag wraps around if you're using a negative number 
+(this is already done in python).
+
+The way you figure out the frequency is with good old unit 
+analysis because lag is in samples and sampling rate is samples per second.
+\equations{
+    fs * \frac{1}{l}
+    =
+    \frac{samples}{s}
+    *
+    \frac{1}{samples}
+    =
+    \frac{1}{s}
+    =
+    Hz
+}
+
+\section{Complexity}
+big O notation. 
+
+the autocorrelation function is $O(n^2)$ 
+Because finding the autocorrelation for a single lag is $O(n)$, 
+and then 
+
+It is very similar to a circular convolution 
+\equations{
+    y[l]
+    =
+    \sum_{n=0}^{N-1}
+    x[n] h[l-n]
+}
+
+Convolution involves flipping the out-of-phase portion 
+
+The reason we use circular convolution is because of now DFT's work 
+
+The autocorrelation can be written as 
+\equations{
+    X[k] X^*[k]
+}
+
+\section{Uncertainty Principle}
+Time resolution and frequency resolution
+cannot be improved simultaneously
+in the spectrum.
+
+\section{Time-Windowing}
+Effect of time-windowing: Blurring and spreading the original spectrum.
+To improve the frequency resolution, use a longer time window.
+
+Rectangular window means higher sidelobes. Increase T and decrease 
+$\Delta \Omega$.
+
+\section{Challenges of Pitch Detection}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

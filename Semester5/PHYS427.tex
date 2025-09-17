@@ -1,0 +1,3033 @@
+\documentclass[fleqn]{report}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{color}
+\usepackage[fontsize=16pt]{fontsize}
+\usepackage{lipsum}
+\usepackage{pgfplots}
+\usepackage{physics}
+\usepackage{mathtools}
+\usepackage[makeroom]{cancel}
+\usepackage{ulem}
+\usepackage{esint}
+\usepackage{enumitem}
+
+\geometry{a4paper, margin=1cm} % Set paper size and margins
+\graphicspath{ {../Images/} }
+\setlength{\columnsep}{1cm}
+\addtolength{\jot}{0.1cm}
+\def\columnseprulecolor{\color{blue}}
+\date{Fall 2025}
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+
+\newcommand{\hp}{\hspace{1cm}}
+
+\newcommand{\const}{\textrm{const}}
+
+\newcommand{\del}{\partial}
+
+\newcommand{\pdif}[2]{ \frac{\partial #1}{ \partial #2} }
+
+\newcommand{\pderiv}[1]{ \frac{\partial}{ \partial #1} }
+
+\newcommand{\comment}[1]{}
+
+\newcommand{\equations} [1] {
+\begin{gather*}
+#1
+\end{gather*}
+}
+
+\newcommand{\numequations} [1] {
+\begin{gather}
+#1
+\end{gather}
+}
+
+\newcommand{\twovec}[2]{ 
+\begin{pmatrix}
+#1 \\ 
+#2
+\end{pmatrix}
+}
+
+\title{PHYS 427}
+\author{Aiden Sirotkine}
+
+\begin{document}
+
+\setlength{\headsep}{10pt}
+\setlength{\topmargin}{-2cm}
+
+
+\pagestyle{fancy}
+\maketitle
+\tableofcontents
+\clearpage
+
+\chapter{PHYS427}
+I did a bunch of stat mech in my silly research group I'm assuming this won't 
+be the end of the world. \
+
+Much of this course builds on PHYS213
+
+Homework has to be physically printed and put in a bin so I have to steal 
+a ton of paper. 
+
+Just do textbook problems if you don't understand any part of the material.
+
+She seems like she enjoys this course. 
+
+\chapter{Probability and Multiplicity}
+
+\section{Microstates}
+Complete description of the system. 
+
+Knowing the position/momentum of every molecule in a box (unrealistic).
+
+\section{Macrostates}
+Gas pressure, volume, temperature, etc.
+
+\subsection{Ex: Polymer}
+Imagine a polymer 
+
+The microstate would be the state of every single portion of the polymer. 
+
+A macrostate could be the end-to-end extension of the polymer. 
+
+\subsection{Ex: Magnet}
+Microstate: 
+the configuration of every single electron spin in the entire magnet. 
+
+Macrostate:
+magnetization of the magnet (average spin value)
+
+\section{Particles In a Box}
+Imagine a box with $N$ particles distributed in both the left half and the right half. 
+
+Microstate: 
+Configuration of all $N$ particles in either the right or left half.
+
+Macrostate:
+Total number of particles in the left box. 
+
+\subsection{Number of Possible Microstates}
+consider $n_L$ as the macrostate which is the number of particles in the left 
+box.
+
+\subsection{$\Omega(n_L, N)$}
+$\Omega(n_L, N)$ is the number of microstates given 1 possible macrostate.
+
+\begin{itemize}
+\item 
+Consider $N = 1$ and $n_L = 0$.
+This means that only 1 particle has to be in the right box, 
+so $\Omega(0, 1) = 1$.
+
+if $n_L = 1$, then the 1 particle has to be in the left side, so 
+$\Omega(1, 1) = 1$.
+
+\item
+What about N = 2?
+
+if $n_L = 0$, then all particles have to be in the right side,
+so $\Omega(0, 2) = 1$.
+
+if $n_L = 1$, then either particle $A$ can be on the left side, or particle $B$ 
+can be on the left side, 
+so $\Omega(1, 2) = 2$.
+
+if $n_L = 2$, then all particles have to be in the left side,
+so $\Omega(2, 2) = 1$.
+
+\item N = 3
+$n_L = 0
+\rightarrow \Omega(0, 3) = 1$.
+
+$n_L = 1
+\rightarrow \Omega(1, 3) = 3$.
+
+$n_L = 2
+\rightarrow \Omega(2, 3) = 3$.
+
+$n_L = 3
+\rightarrow \Omega(3, 3) = 1$.
+
+\end{itemize}
+
+For this example, the number of possible microstates grows 
+exponentially. 
+
+the total number of microstates is known as the ensemble of microstates.
+
+The total number of microstates grows like $2^n$.
+
+The total number of macrostates grows like $n$
+
+For large $n$ the number of microstates becomes unreasonably big.
+
+\subsection{General Formula for $\Omega$?}
+I think you just use combinatorics.
+
+For $n_L$ particles on the left side, there are $N - n_L$ particles on the 
+right side. 
+
+for the first particle going to $L$, you have $N$ choices.
+
+for the second particle going to $L$, you have $N - 1$ choices.
+
+for the third particle going to $L$, you have $N - 2$ choices.
+
+go all the way until you have $n_L$ particles in the left bin. 
+
+Then you remove all permutations that are the same as each other by 
+dividing by $n_L!$
+
+\equations{
+    \frac{N(N-1)(N-2) \ldots (N - n_L + 1)}{n_L!}
+    \Rightarrow 
+    \\
+    \frac{N!}{(N - n_L)! n_L!}
+    =
+    {N \choose n_L}
+}
+
+That's just the binomial coefficient.
+
+If we consider $p$ and $q$ as the right and left sides 
+of the box, then we can derive another formula.
+
+For this box, $p = 1$ and $q = 1$ because there is 1 left side and 1 right side.
+\equations{
+    (p + q)^N 
+    =
+    \sum^N_{n = 0}
+    {N \choose n}
+    p^n q^{N - n}
+    \\
+    2^n 
+    =
+    \sum^N_{n = 0}
+    {N \choose n}
+    =
+    \sum^N_{n = 0}
+    \Omega(n, N)
+}
+
+\section{Probability of a Macrostate}
+
+An assumption we make is that each microstate is equally likely. 
+This is true for microstates, but \textbf{not true} for macrostates.
+
+If a macrostate has many many many possible microstates, then it is more likely 
+than a macrostate with fewer possible microstates. 
+
+Let $p(n_L, N)$ be the probability of getting a certain macrostate
+\equations{
+    p(n_L, N)
+    =
+    \frac{\Omega(n_L, N)}{\sum^N_{n = 0} \Omega(n, N)}
+    =
+    \frac{\Omega(n_L, N)}{2^N}
+    =
+    \frac{{N \choose n_L}}{2^n}
+    =
+    \frac{N!}{n_L! (N - n_L!)} \cdot \frac{1}{2^N}
+}
+Graph this and you will see a spike for large $N$'s 
+
+This means that there is a better and better defined macrostate that becomes 
+overwhelmingly likely given the probabilities and microstates. 
+
+This very likely macrostate is the equilibrium state.
+
+For $N \to 6.022 * 10^{23} \approx \infty$, you get very well defined equilibrium 
+states.
+
+\section{Averages}
+To work with the probabilities of macrostates, we have to normalize the function. 
+
+\equations{
+    \sum^N_{n = 0} p(n, N) = 1
+}
+This is easy to check (see lecture note 1)
+
+\subsection{Expectation Value}
+\equations{
+    \langle n_L \rangle 
+    =
+    \frac{N}{2}
+}
+
+So to find the average of a function that takes $n_L$, 
+\equations{
+    f(n_L)
+    \rightarrow 
+    \langle f(n_L) \rangle 
+    =
+    \sum^N_{n = 0} 
+    f(n_L) \cdot p(n_L, N)
+    \rightarrow 
+    \langle n_L^2 \rangle 
+    =
+    \sum^N_{n = 0} 
+    n_L^2 \cdot p(n_L, N)
+    \\
+    \langle n_L \rangle 
+    =
+    \sum^N_{n = 0} 
+    n_L \cdot p(n_L, N)
+    =
+    \sum^N_{n = 0} 
+    n_L
+    \frac{N!}{n_L! (N - n_L)!} (\frac{1}{2})^N
+    = \ldots =
+    \frac{N}{2}
+}
+
+Everything is dependent on the probability distribution of your macrostates.
+
+\subsection{Math Trick}
+\equations{
+    (p + q)^N = 
+    \sum^N_{n = 0}
+    {N \choose n_L} p^{n_L} q^{N - n_L}
+    \\
+    (p \frac{\del}{\del p}) p^{n_L}
+    =
+    n_L p^{n_L}
+    \\
+    \langle n_L \rangle
+    =
+    \sum^N_{n = 0}
+    {N \choose n_L}
+    n_L p^{n_L} q^{N - n_L}
+    =
+    \\
+    \left(
+        p \frac{\del}{\del p}
+        \sum^N_{n = 0}
+        {N \choose n_L}
+        p^{n_L} q^{N - n_L}
+    \right)
+    =
+    p \frac{\del }{\del p}
+    (p + q)^N
+    =
+    N p (p + q)^{N - 1}
+    \\
+    p = q = \frac{1}{2}
+    \\
+    \Rightarrow 
+    \langle n_L \rangle 
+    =
+    \frac{N}{2}
+}
+
+\section{Variance}
+\equations{
+    \sigma_{n_L}^2
+    =
+    \langle 
+        n_L - \langle n_L \rangle 
+    \rangle^2
+    =
+    \langle 
+        n_L^2 - 2 n_L \langle n_L \rangle 
+        +
+        \langle n_L \rangle^2 
+    \rangle
+    =
+    \\
+    \langle n_L^2 \rangle 
+    -
+    2 \langle n_L \rangle^2 + \langle n_L \rangle^2 = 
+    \langle n_L^2 \rangle - \langle n_L \rangle^2
+}
+
+\section{Discussion 1}
+All microstates are equally likely. 
+
+$\Omega$ is the number of microstates in a given macrostate. 
+
+\equations{
+    S 
+    =
+    k_b \ln(\Omega) 
+}
+
+The general entropy equation can be written as 
+\equations{
+    S
+    =
+    -k_B 
+    \sum_i 
+    p_i \ln(p_i)
+}
+
+\subsection{}
+Compute the average number of successful experiments given 
+a binomial distribution of probability $p$. 
+
+\equations{
+    \langle n \rangle 
+    =
+    \sum^N_{n=0}
+    P_p(n, N) n
+    \hp 
+    P_p(n, N)
+    =
+    {N \choose n}
+    p^n (1 - p)^{N - n}
+    \\
+    {N \choose n}
+    =
+    \frac{N!}{n! (N - n)!}
+    \\
+    \sum^N_{n=0}
+    P_p(n, N) n
+    =
+    \sum^N_{n=0}
+    {N \choose n}
+    p^n (1 - p)^{N - n}
+    n
+    =
+    \sum^N_{n=0}
+    \frac{N! * n}{n! (N - n)!}
+    p^n (1 - p)^{N - n}
+    \\
+    \sum^N_{n=0}
+    n 
+    =
+    \frac{N(N+1)}{2}
+    \hp 
+    \sum^N_{n=0}
+    p^n 
+    =
+    p^0 + p^1 + p^2 + p^3
+}
+I give up I'm stupid 
+
+Supposedly the answer is $Np$ and that makes sense but I have no idea 
+how to get to it.
+
+The given answer is 
+\equations{
+    \langle n \rangle 
+    =
+    p \frac{\del }{\del p}
+    \left(
+        (p + q)^N
+    \right)
+    =
+    Np(p + q)^{N-1}
+    \hp
+    p + q = 1
+    \\
+    \langle n \rangle 
+    =
+    Np
+}
+
+Stirling's approximation is 
+\equations{
+    \ln(N!)
+    =
+    N \ln(N) - N
+    \hp 
+    N \to \infty
+}
+
+\subsection{Paramagnet}
+Consider a lattice of $N$ particles with energy 
+
+\equations{
+    U 
+    =
+    - \mu B (N_{\uparrow} - N_{\downarrow})
+}
+
+\begin{enumerate}[label=\alph*)]
+    \item 
+    Calculate the entropy for very large $N$ 
+    specifically with just $U$, $N$, and $B$
+
+    Supposedly the answer is given by 
+    \equations{
+        \Omega 
+        = 
+        \frac{(N_{\uparrow} 
+        - 
+        N_{\downarrow})}{N_{\uparrow}! N_{\downarrow}!}
+        \hp 
+        U 
+        =
+        - \mu B (N_{\uparrow} - N_{\downarrow})
+        \hp 
+        N_{\uparrow} + N_{\downarrow} = N
+        \\
+        \Omega 
+        =
+        \frac{N!}{(\frac{N}{2} - \frac{U}{2 \mu B})!
+        (\frac{N}{2} + \frac{U}{2 \mu B})!}
+        \hp 
+        S 
+        =
+        k_B \ln(\Omega)
+    }
+
+    Do some log stuff and \textbf{use Stirling's Approximation}
+    and then you get a decent number.
+    \item 
+    Compute the energy of the system at temperature $T$
+
+    Okay so we can solve for temperature, and then we 
+    can replace parts of the equation for $T$ to get the energy 
+    as a function of $T$.
+
+    \equations{
+        \frac{1}{T}
+        \equiv
+        \frac{\del S}{\del U}
+        \hp 
+        S 
+        =
+        k_b \ln(
+        \frac{N!}{(\frac{N}{2} - \frac{U}{2 \mu B})!
+        (\frac{N}{2} + \frac{U}{2 \mu B})!}
+        )
+    }
+\end{enumerate}
+
+\section{Probability Width}
+We talked about for $n_L$ when $\langle n_L \rangle = N/2$, as 
+$N$ gets large, there is a significant peak in probability at $N/2$. However, 
+we do not know the width of the peak. 
+
+\equations{
+    \sigma_{n_L}^2 
+    =
+    \langle n_L^2 \rangle - \langle n_L \rangle^2
+    \hp 
+    \langle n_L^2 \rangle
+    =
+    \frac{N (N+1)}{4}
+}
+
+With derivation 
+\equations{
+    \left( p \frac{\del}{\del p}\right)^2 
+    p^{n_L}
+    =
+    n_L^2 p^{n_L}
+    \\
+    p \frac{\del}{\del p}
+    \left( p \frac{\del}{\del p}\right) p^{n_L}
+    \rightarrow 
+    p \frac{\del}{\del p}
+    \left( p \cdot n_L p^{n_L - 1} \right)
+    \rightarrow 
+    p \frac{\del}{\del p}
+    \left( n_L p^{n_L} \right)
+    =
+    n_L^2 p^{n_L}
+}
+
+Now we can determine the average of the square
+
+Remember that $p = q = 1/2$
+\equations{
+    \langle n_L^2 \rangle
+    =
+    \sum^N_{n=0}
+    n_L^2 {N \choose n_L}
+    p^{n_L} q^{N - n_L}
+    \rightarrow 
+    \\
+    \left( p \frac{\del}{\del p}\right)^2
+    \sum^N_{n=0}
+    {N \choose n_L}
+    p^{n_L} q^{N - n_L}
+    =
+    \left( p \frac{\del}{\del p}\right)^2
+    (p + q)^{N}
+    \\
+    \langle n_L^2 \rangle 
+    =
+    \sum_{n_L}
+    n_L^2 P(n_L, N)
+    \\
+    p \frac{\del}{\del p}
+    \left( 
+        N p (p + q)^{N - 1} 
+    \right)
+    =
+    N p (p + q)^{N - 1}
+    +
+    N(N -1)
+    p^2 (p + q)^{N - 2}
+    \\
+    \langle n_L^2 \rangle 
+    =
+    \sum^N_{n_L = 0}
+    {N \choose n_L} n_L^2 
+    \left(\frac{1}{2}\right)^N
+    \equiv 
+    \frac{N}{2}
+    +
+    \frac{N(N-1)}{4}
+    =
+    \frac{N(N+1)}{4}
+    \\
+    \sigma_{n_L}^2 
+    =
+    \langle n_L^2 \rangle
+    -
+    \langle n_L \rangle^2
+    =
+    \frac{N(N+1)}{4}
+    -
+    \left(\frac{N}{2}\right)^2
+    =
+    \frac{N}{4}
+    \\
+    \sigma_{n_L}
+    =
+    \frac{\sqrt{N}}{2}
+}
+
+The standard deviation increases, but it increases less quickly
+than $N$ and $\langle n_L \rangle$, so the ratio of width to number 
+of particles decreases 
+
+\equations{
+    \frac{\sigma_{n_L}}{\langle n_L \rangle}
+    =
+    \frac{1}{\sqrt{N}}
+    \underset{N \to \infty}{\longrightarrow}
+    0
+}
+
+\section{Physical Systems}
+We know that 
+\equations{
+    \Omega 
+    =
+    \textrm{ Multiplicity}
+}
+But how does this look for real systems?
+
+\subsection{Closed System}
+Energy is conserved. Also known as an isolated system.
+
+No change in $E, U, N$
+
+So we're trying to find 
+$\Omega(U, N)$
+
+\subsection{Einstein Solid}
+Imagine a lattice of particles connected via strings. 
+
+N identical independent quantum harmonic oscillators. 
+
+The quantum harmonic oscillators have energy levels of the form 
+\equations{
+    E 
+    =
+    \hbar \omega 
+    (s_i + \frac{1}{2})
+    , 
+    s_i
+    =
+    \mathbb{N}
+}
+
+This is derived from the Schrodinger Equation 
+\equations{
+    H \Psi(x, t)
+    =
+    - \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    \Psi(x, t)
+    +
+    m \omega^2 x^2 \Psi(x, t)
+    =
+    \epsilon_i \Psi(x, t)
+}
+
+But this is not actually important for the material.
+
+Given $N$ oscillators 
+\equations{
+    U 
+    =
+    \sum^N_{i=0}
+    \epsilon_i
+    =
+    \hbar \omega (n + \frac{N}{2})
+    \hp 
+    n 
+    =
+    \sum^N_i
+    s_i
+}
+$n$ is the number of energy quanta that you have. 
+
+The $+ \frac{1}{2}$ in energy does not affect the statistics whatsoever, 
+so we can ignore it. 
+
+To get the multiplicity, we have to know the number of microstates for 
+the same amount of energy in $N$ oscillators. 
+
+How many ways are there to have different $\sum s_i$ such that they all 
+yield the same quantum number $n$.
+
+Oh my good we're doing stars and bars. 
+
+$\cdot$ is a quanta and $|$ is the positions between the oscillators.
+
+\equations{
+    \cdot 
+    |
+    \cdot 
+    \cdot 
+    \cdot 
+    |
+    |
+    \cdot 
+    \cdot 
+    \cdot 
+    \cdot 
+    |
+    \cdot 
+    |
+    ...
+}
+represents $s_1 = 1, s_2 = 3, s_3 = 0, s_4 = 4$
+
+There are always $n$ dots and $N-1$ bars going 
+into $n + (N - 1)$ slots.
+
+Therefore, the total number of ways to distribute it is. 
+
+\equations{
+    \Omega(U, N)
+    =
+    {n + N - 1 \choose n}
+    =
+    \frac{(n + N - 1)!}{n! (N - 1)!}
+}
+
+\subsection{Stirling's Approximation}
+This is literally the more important thing in the 
+entirety of statistical mechanics.
+
+\equations{
+    \ln(N!)
+    \underset{N \to \infty}{\approx} 
+    N \ln(N) - N
+}
+The approximation works from 
+a sum from 1 to large $N$ being similar to a continuous integral.
+
+\section{Entropy}
+The entropy involves the log of the multiplicity, so we can calculate that 
+for our Einstein solid. 
+
+\equations{
+    \ln(\Omega(U, N))
+    \approx 
+    \ln((n + N)!)
+    -
+    \ln(N!)
+    -
+    \ln(n!)
+    \hp 
+    \textrm{Use Stirling's Approx.}
+    \\
+    \approx 
+    (n + N) \ln(n + N) - (n + N)
+    -
+    N \ln(N) + N - n \ln(n) + n
+    \\
+    =
+    (n + N)\ln(n + N)
+    -
+    N \ln(N) - n \ln(n)
+}
+
+\subsection{High Temperature Limit}
+This is known as the high temperature limit 
+because we're assuming that $n >> N$, meaning there are many 
+possible energy states for each particle.
+
+\equations{
+    \ln(n + N)
+    =
+    \ln(n \left( 1 + \frac{N}{n} \right))
+    =
+    \ln(n)
+    +
+    \ln(1 + \frac{N}{n} )
+    \\
+    \ln(1+x) \approx x: x << 1
+    \\
+    \ln(n + N)
+    \approx 
+    \ln(n)
+    +
+    \frac{N}{n}
+}
+
+We than plug this result back into our original expressions 
+
+\equations{
+    (n + N)\ln(n + N)
+    -
+    N \ln(N) - n \ln(n)
+    \approx 
+    \\
+    (n + N) (\ln(n) + \frac{N}{n})
+    -
+    N \ln(N) - n \ln(n)
+    =
+    \\
+    (n + N)\ln(n) + (n + N)\frac{N}{n}
+    -
+    N \ln(N) - n \ln(n)
+    =
+    \\
+    n \ln(n) + N \ln(n) + (n + N)\frac{N}{n}
+    -
+    N \ln(N) - n \ln(n)
+    =
+    \\
+    N (\ln(n) - \ln(N)) + (N + \frac{N^2}{n})
+    =
+    \\
+    N \ln(\frac{n}{N})
+    +
+    N(1 + \frac{N}{n})
+    \approx 
+    N \ln(\frac{n}{N})
+    + N
+}
+
+You can then re-exponentiate that expression. 
+
+\equations{
+    \Omega(U, N)
+    =
+    e^{\ln(\Omega(U, N))}
+    =
+    (e \frac{n}{N})^N
+    =
+    \left(
+        \frac{eU}{N \hbar \omega}
+    \right)^N
+    \\
+    \Omega 
+    \sim 
+    U^N
+}
+
+For an ideal gas, $\Omega \sim U^f, f \sim N$ 
+
+\subsection{Entropy Property}
+For two independent systems: 
+
+\equations{
+    \Omega_{A + B}
+    =
+    \Omega_A
+    \Omega_B
+    \Rightarrow 
+    \sigma_{A+B}
+    =
+    \sigma_A
+    +
+    \sigma_B
+}
+
+For changing system size
+
+\equations{
+    \sigma 
+    =
+    N 
+    \ln(\frac{e U}{N \hbar \omega})
+}
+
+If both $N$ and $U$ double in size 
+
+\equations{
+    N \to 2N
+    \hp 
+    U \to 2U
+    \\
+    \sigma 
+    =
+    N 
+    \ln(\frac{e U}{N \hbar \omega})
+}
+
+The variance is independent of system size. 
+
+Intensive quantities are independent of system size $T, p$
+
+$\sigma$ goes up logaritmically with $U$
+
+\subsection{Not High Temperatures}
+All of this \textbf{only works because of the high temperature 
+approximation}
+
+\equations{
+    U >> N \hbar \omega
+}
+
+So the limit 
+\equations{
+    \sigma(U \to 0)
+    =
+    - \infty
+}
+is wrong because it ignore the approximation we made. 
+
+\equations{
+    \sigma(U \to 0)
+    \rightarrow 
+    \ln(1)
+    =
+    0
+}
+That is what actually happens at low temperatures.
+
+\section{Paramagnet}
+Imagine a paramagetic with $N$ independent spins of both $\uparrow$ 
+and $\downarrow$. 
+
+\equations{
+    N = n_{\uparrow}
+    +
+    n_{\downarrow}
+}
+
+The paramagnet has a magnetic moment given by 
+\equations{
+    \vec \mu 
+    =
+    g \frac{q}{2m} \vec s 
+    \\
+    \epsilon 
+    =
+    - \vec \mu \cdot \vec B 
+    =
+    - \mu_z B
+}
+
+The general solution for magnetic moment in this case is 
+\equations{
+    \mu_z 
+    =
+    g \frac{q \hbar}{2 m} m_s
+    \hp 
+    m_s 
+    =
+    -s, -s + 1, \ldots , s-1, s
+    \\
+    m_s = \frac{1}{2} \textrm{ or } \frac{-1}{2}
+    \hp 
+    g \approx z 
+    \\
+    \mu_B
+    =
+    \frac{e \hbar }{2 m_e}
+    \hp 
+    \textrm{Bohr Magneton}
+    \\
+    \epsilon 
+    =
+    - \mu B
+    , 
+    \epsilon 
+    =
+    + \mu B
+    \\
+    U 
+    =
+    n_{\uparrow}
+    (- \mu B)
+    +
+    n_{\downarrow}
+    (\mu B)
+    =
+    - \mu B 
+    (n_{\uparrow} - n_{\downarrow})
+    =
+    - \mu B 
+    (2 n_{\uparrow} - N)
+}
+
+For a binary system, we get 
+\equations{
+    \Omega(n_{\uparrow}, N)
+    =
+    {N \choose n_{\uparrow}}
+    =
+    \frac{N!}{n_{\uparrow}! (N - n_{\uparrow})!}
+    \\
+    \Omega(U, N)
+    =
+    \frac{N!}
+    {
+        \left(
+            \frac{N}{2}
+            -
+            \frac{U}{2 \mu B}
+        \right)
+        !
+        \left(
+            \frac{N}{2}
+            +
+            \frac{U}{2 \mu B}
+        \right)
+        !
+    }
+}
+Use Stirling Approximation and put the terms together. 
+
+After everything is said, we should get 
+\equations{
+    \ln(\Omega(U, N))
+    =
+    N \ln(N) 
+    -
+    (N - n_{\uparrow})
+    \ln( (N - n_{\uparrow}))
+    -
+    n_{\uparrow }
+    \ln( n_{\uparrow })
+    \\
+    \sigma 
+    =
+    \ln(\Omega(U, N))
+    =
+    \\
+    N \ln(N) 
+    -
+    \left(
+        \frac{N}{2}
+        -
+        \frac{U}{2 \mu B}
+    \right)
+    \ln(
+        \frac{N}{2}
+        -
+        \frac{U}{2 \mu B}
+    )
+    -
+    \left(
+        \frac{N}{2}
+        +
+        \frac{U}{2 \mu B}
+    \right)
+    \ln(
+        \frac{N}{2}
+        +
+        \frac{U}{2 \mu B}
+    )
+}
+
+The variance to energy graph looks like a circle because 
+the lowest variances are at 2 edges where all is up 
+or all is down.
+
+You can calculate $\sigma(U = 0, N)$ by just plugging in the 
+numbers, and you get $N \ln(2)$.
+
+\section{Discussion 2}
+In thermal equilibrium, a closed system 
+is equally likely to be in any of the microstates available 
+to it. 
+
+\equations{
+    \Omega 
+    =
+    \textrm{total \# of microstates available}
+    \\
+    S = k_b \ln{\Omega}
+}
+
+\subsection{Mini Equation Sheet}
+\equations{
+    \frac{1}{T}
+    \equiv 
+    \left(
+        \frac{\del}{\del U}
+    \right)_{N, V}
+    \\
+    \textrm{chemical potential}
+    =
+    \mu
+    \equiv
+    -T \left(
+        \frac{\del S}{\del N}
+    \right)_{U, V}
+    \\
+    P 
+    \equiv
+    T \left(
+        \frac{\del S}{\del V}
+    \right)_{U, N}
+}
+These are Lagrange Multipliers which I don't remember 
+
+\equations{
+    \Omega(U, N)
+    =
+    \sum_i
+    \delta_k(U - U_i)
+    \delta_k(N - N_i)
+    \\
+    \delta_{i, k}(x)
+    =
+    \begin{cases}
+        1 \textrm{ if } x = 0
+        \\
+        0 \textrm{ otherwise}
+    \end{cases}
+}
+The kronecker delta enforces boundary conditions. 
+
+\equations{
+    \delta(ax)
+    =
+    \delta(x)
+    :
+    a \neq 0
+}
+
+\equations{
+    \sum_m \sum_n
+    g(m, n)
+    \delta(P(m, n))
+    =
+    \sum_m
+    g(m, n = n^*(m))
+    \\
+    n*(m)
+    \Rightarrow 
+    P(m, n^*) 
+    =
+    0
+}
+
+\subsection{Stars and Bars}
+\equations{
+    \Omega(n, N)
+    =
+    {N + n - 1 \choose n}
+}
+
+Imagine a bunch of stars and bars 
+\equations{
+    \cdot 
+    \cdot 
+    ||
+    \cdot 
+    |
+    \cdot 
+    \cdot 
+    |
+    \cdot 
+    ||
+    \cdot 
+}
+
+each section between 2 bars is a certain classification, and each star 
+in between the bars is an item that is a part of that classification. 
+
+\subsection{Questions}
+Find the entropy for multiplicity 
+
+\equations{
+    \Omega(U, N, V)
+    =
+    \frac{V^N (CU)^{3N/2}}
+    {N! (3N / 2)!}
+}
+
+So you do the thing 
+
+\equations{
+    S 
+    =
+    k 
+    \ln(
+    \frac{V^N (CU)^{3N/2}}
+    {N! (3N / 2)!}
+    )
+    =
+    \ln(
+    V^N (CU)^{3N/2}
+    )
+    -
+    \ln(
+    N! (3N / 2)!
+    )
+    \\
+    \ln(
+    V^N
+    )
+    + \ln(
+    (CU)^{3N/2}
+    )
+    -
+    \ln(
+    N!
+    )
+    - \ln(
+    (3N / 2)!
+    )
+    \\
+    N \ln(
+    V
+    )
+    + 3N/2\ln(
+    CU
+    )
+    -
+    N\ln(
+    N
+    )
+    +N
+    -3N / 2 \ln(
+    (3N / 2)
+    )
+    +3N / 2
+    \\
+    N \ln(
+    V
+    )
+    + 3N/2\ln(
+    CU
+    )
+    -
+    N\ln(
+    N
+    )
+    +N
+    -3N / 2 \left(
+    \ln(
+    (N)
+    )
+    + \ln(3/2)
+    \right)
+    \\
+    +3N / 2
+}
+
+You just do a bunch of math and it works. 
+
+It's not hard everything is fine 
+
+\subsection{Determining Multiplicity Functions}
+Consider 
+\equations{
+    U = \hbar \omega n 
+    \hp 
+    \epsilon 
+    =
+    \hbar \omega 
+    (n_x + n_y + n_z)
+}
+Where $n_i = 0, 1, 2, \ldots, \infty$ 
+
+I think we're just gonna do stars and bars but with 3. 
+
+there is a total energy $N$ that needs to be split $3$ different ways 
+for the energy to be in $n_x, n_y$, or $n_z$. 
+
+\chapter{Temperature}
+
+\section{Thermal Contact}
+Imagine a box $A$ and a box $B$ that are able to interact with each other. 
+Each box has multiplicity $\Omega_A$ and $\Omega_B$
+
+The multiplity and energy of the combined boxes is 
+\equations{
+    \Omega_{AB}
+    =
+    \Omega_{A}
+    \cdot
+    \Omega_{B}
+    \hp 
+    U_{AB}
+    =
+    U_{A}
+    +
+    U_{B}
+}
+
+$U_A$ and $U_B$ can change, but the combined energy is fixed. 
+
+To write everything in terms of just a single box, we can say that 
+
+\equations{
+    \Omega_{tot}
+    =
+    \sum_{U_A}
+    \Omega_A(U_A)
+    \cdot
+    \Omega_B(U - U_A)
+}
+
+We know that approximately 
+
+\equations{
+    \Omega_A(U_A)
+    \sim
+    U_A^N
+}
+
+We find that the total multiplicity has a peak centered at
+the average $1/U_A$ and with a relative width of $1/\sqrt{N}$.
+
+Consider the natural log $\ln(\Omega)$.
+We also know that at the peak
+
+\equations{
+    \frac{d \Omega}{d U}
+    =
+    0
+    \hp 
+    \frac{d \ln(\Omega)}{d U}
+    =
+    \frac{1}{\Omega}
+    \frac{d \Omega}{d U}
+    = 
+    0
+}
+
+
+We look for $U_A$ where 
+\equations{
+    \frac{\del \ln(\Omega_A(U_A) \Omega_B(U - U_A))}{\del U_A}
+    =
+    0
+}
+So we do some calculations 
+
+\equations{
+    \ln(\Omega_A(U_A) 
+    \Omega_B(U - U_A)) 
+    =
+    \ln(\Omega_A(U_A))
+    +
+    \ln(\Omega_B(U - U_A)) 
+}
+
+So our equation is 
+
+\equations{
+    \frac{\del}{\del U_A}
+    \left(
+        \ln(\Omega_A(U_A))
+    \right)
+    +
+    \frac{\del}{\del U_A}
+    \left(
+        \ln(\Omega_B(U - U_A))
+    \right)
+    =
+    0
+}
+
+Know the derivative 
+\equations{
+    \frac{\del \ln(U^N)}{\del U}
+    =
+    \frac{1}{U^N}
+    \cdot 
+    N (U^{N-1})
+    =
+    \frac{N}{U}
+}
+
+This solves to 
+
+\equations{
+    \frac{N_A}{\bar{U_A}}
+    -
+    \frac{N_B}{\bar{U - U_A}}
+    =
+    0
+    \rightarrow 
+    \frac{U}{\bar{U_A}}
+    -
+    1
+    =
+    \frac{N_B}{N_A}
+    \\
+    \overline U_A
+    =
+    \frac{U}{1 + \frac{N_B}{N_A}}
+    \hp 
+    \overline{U}_B
+    =
+    \frac{U}{1 + \frac{N_A}{N_B}}
+    =
+    U - \overline U_A
+}
+
+Notice that from our equations we get 
+\equations{
+    \frac{\overline U_A}{N_A}
+    =
+    \frac{\overline U_B}{N_B}
+    =
+    \frac{U}{N_A + N_B}
+}
+
+So our peak multiplicity is found where 
+
+\equations{
+    \overline U_A 
+    =
+    \frac{U}{1 + \frac{N_B}{N_A}}
+}
+
+The energy per particle is the same in both $A$ and $B$ and it is equal 
+to 
+\equations{
+    \frac{U}{N}
+    =
+    \frac{U}{N_A + N_B}
+}
+
+\subsection{Peak Sharpness}
+We are trying to find how sharp the multiplicity peak is 
+
+\equations{
+    N_A 
+    =
+    N_B 
+    \Rightarrow 
+    \overline U_A
+    =
+    \frac{U}{2}
+    \hp
+    \overline U_B
+    =
+    \frac{U}{2}
+}
+
+For an Einstein solid, we can do a small perturbation and then take a taylor 
+expansion around that point to find the equation 
+
+\equations{
+    U_A 
+    =
+    \overline U_A
+    +
+    \delta U
+}
+
+Our energy function is given as 
+\equations{
+    \Omega(U)
+    =
+    \left(
+        \frac{eU}{N \hbar \omega}
+    \right)^N
+    =
+    \Omega_A(U_A)
+    +
+    \Omega_B(U - U_A)
+}
+
+We can do a taylor expansion around this to get 
+\equations{
+    \Omega_A(U_A)
+    +
+    \Omega_B(U - U_A)
+    \\
+    =
+    2N + N \ln(\frac{U_A + \delta U}{N \hbar \omega})
+    +
+    N \ln(\frac{U_A - \delta U}{N \hbar \omega})
+    \\
+    =
+    2N 
+    - 
+    2N \ln(N \hbar \omega)
+    +
+    N \ln(\overline U_A^2 - (\delta U)^2) 
+    \\
+    =
+    2 N \ln(\frac{e U_A}{N \hbar \Omega})
+    +
+    N \ln(1 - \frac{\delta U^2}{\overline U_A^2})
+}
+
+Use a $\ln(1+x) \approx x$ approximation to get 
+
+\equations{
+    2 N \ln(\frac{e U_A}{N \hbar \Omega})
+    -
+    N \frac{\delta U^2}{\overline U_A^2}
+}
+
+So now we have 
+\equations{
+    \Omega 
+    =
+    \Omega_A(U_A)
+    \Omega_B(U - U_A)
+    \approx 
+    \left(
+    \frac{e U_A}{N \hbar \Omega}
+    \right)^{2N}
+    \exp({- \frac{N \delta U^2}{U_A^2}})
+    \\
+    \approx 
+    \left(
+    \frac{e U_A}{N \hbar \Omega}
+    \right)^{2N}
+    \exp({- \frac{ \delta U^2}{2 \sigma^2}})
+}
+
+So our variance and standard deviation are given by 
+\equations{
+    \sigma_{U_A}
+    =
+    \frac{\overline U_A}{\sqrt{2N}}
+}
+
+And the fractional width is given by 
+\equations{
+    \frac{\sigma_{U_A}}{\overline U_A}
+    =
+    \frac{1}{\sqrt{2N}}
+}
+
+The multiplicity can again be written as 
+\equations{
+    \Omega_{tot}
+    =
+    \sum_{U_{A}}
+    \Omega_A(U_A)
+    \Omega_B(U - U_A)
+    \approx 
+    \Omega_A(\overline U_A)
+    \Omega_B(U - \overline U_A)
+}
+
+This works almost perfectly for large N $(N \approx 10^{20})$
+
+\section{Thermal Equilibrium}
+The entropy equation is 
+\equations{
+    \sigma 
+    \equiv 
+    \ln(\Omega)
+}
+
+When systems $A$ and $B$ are in thermal contact at $t=0$, then 
+\equations{
+    \sigma_{tot}
+    =
+    \sigma_A(U_A)
+    +
+    \sigma_B(U - U_A)
+}
+
+initially, let's say that $U_A > U_B$.
+Then, over time, $U_A$ will decrease and $U_B$ will increase until both 
+reach $\overline U_A$ and $\overline U_B$.
+
+The entropy of $\sigma_A$ might decrease, but the total entropy 
+of the two systems will always increase when going towards equilibrium. 
+
+Thermal equilibrium is reached when total entropy is maximized. 
+
+To maximize total entropy, we find a critical point 
+\equations{
+    \frac{\del \sigma_{tot}}{\del U_A}
+    =
+    0
+    =
+    \frac{\del \sigma_{A}}{\del U_A}
+    +
+    \frac{\del \sigma_{B}}{\del U_B}
+    =
+    \frac{\del \sigma_{A}}{\del U_A}
+    +
+    \frac{\del \sigma_{B}}{\del U_B}
+    \cdot
+    \frac{\del U_B}{\del U_A}
+}
+
+So at equilibrium 
+\equations{
+    \frac{\del \sigma_A}{\del U_A}
+    =
+    \frac{\del \sigma_{B}}{\del U_B}
+}
+
+At thermal equilibrium there is a fundamental temperature $\tau$ 
+\equations{
+    \frac{1}{\tau}
+    =
+    \left(
+        \frac{\del \sigma}{\del U}
+    \right)_N
+    \Rightarrow 
+    \tau_A 
+    =
+    \tau_B
+}
+
+\subsection{0th Law of Thermodynamics}
+If system $A$ is in thermal equilibrium with systems $B$ and $C$, then 
+$B$ is in thermal equilibrium with $C$.
+
+This is just the transitive property but with equilibrium.
+
+\subsection{Conversions}
+
+$\tau$ is a form of energy. 
+The absolute temperature is $T$ in regular temperature units (Kelvin)
+
+\equations{
+    \tau 
+    \equiv 
+    k_B T 
+    \hp 
+    k_B
+    =
+    1.371 * 10^{-23}
+    \frac{J}{K}
+}
+
+The regular entropy you are used to is 
+\equations{
+    S 
+    \equiv 
+    k_B \ln(\Omega)
+    \hp 
+    \frac{1}{T}
+    \equiv
+    \left(
+        \frac{\del S}{\del U}
+    \right)_N
+}
+
+So for the einstein solid example we were talking about, the initial 
+parameters lead to 
+
+\equations{
+    \frac{\del S}{\del U_A}
+    \Big|_{U_A(t=0)}
+    <
+    \frac{\del S}{\del U_B}
+    \Big|_{U_B(t=0) = U - U_A(t=0)}
+}
+
+So 
+\equations{
+    T_A > T_B
+}
+
+$S_{tot}$ increases when $U_A$ goes down and $U_B$ goes up.
+Entropy flows from the hotter system to the cooler system.
+
+\subsection{How Much Energy is Transferred?}
+\equations{
+    S_{tot}
+    =
+    \Delta S_A
+    +
+    \Delta S_B 
+    =
+    \frac{\del S}{\del U_A}
+    \cdot 
+    \Delta U_A
+    +
+    \frac{\del S}{\del U_B}
+    \cdot 
+    \Delta U_B
+    \\
+    =
+    \frac{1}{T_A}
+    \Delta U_A
+    +
+    \frac{1}{T_B}
+    \Delta U_B
+    \hp 
+    \Delta U_B
+    =
+    -\Delta U_A
+    \\
+    \Delta S_{tot}
+    =
+    \left(
+        \frac{1}{T_A}
+        -
+        \frac{1}{T_B}
+    \right)
+    \Delta U_A 
+}
+
+So if $T_A > T_B$, then 
+
+\equations{
+    \left(
+        \frac{1}{T_A}
+        -
+        \frac{1}{T_B}
+    \right)
+    <
+    0
+}
+
+So for entropy to increase, $\Delta U_A < 0$. 
+Energy flows from hot to cold. This energy transfer is heat $Q$.
+
+\equations{
+    \Delta U_A
+    =
+    T_A \Delta S_A 
+    =
+    - \Delta U_B 
+    =
+    - T_B \delta S_B
+}
+
+\subsection{Einstein Solid}
+\equations{
+    \Omega 
+    \simeq 
+    U^N 
+    \\ 
+    S 
+    =
+    k_B \ln(\Omega)
+    =
+    k_b N \ln(U)
+    +
+    \textrm{terms independent of $U$}
+}
+
+Let's take the derivative with respect to $U$ 
+
+\equations{
+    \frac{1}{T}
+    =
+    \frac{\del S}{\del U}
+    =
+    N k_B \frac{\del}{\del U} \ln(U)
+    =
+    \frac{N k_B}{U}
+    \rightarrow 
+    U 
+    =
+    N k_B T 
+}
+
+Many systems have multiplicities of the form 
+\equations{
+    \Omega 
+    =
+    U^f 
+    \hp 
+    f 
+    \propto 
+    N
+    \Rightarrow 
+    k_B T 
+    \sim 
+    \frac{U}{f}
+}
+
+\section{Heat Bath/Reservoir}
+Consider a very large room $A$ with temperature $T_A$ connected to your 
+experimental system $B$ with temperature $T_B$. $U_A >> U_B$ and $N_A >> N_B$.
+ 
+Because of those, any change in $B$ should not affect the reservoir, so 
+$T_A$ does not change.
+
+Temperature is defined as 
+\equations{
+    \frac{1}{T}
+    =
+    \left(
+        \frac{\del S}{\del U}
+    \right)_N
+}
+
+All the information about heat baths is given in lecture 3. 
+
+For an einstein solid of the form 
+\equations{
+    \Omega 
+    \sim 
+    U^f
+}
+
+For a paramagnet, the entropy-energy curve has 2 separate zero-points. 
+It looks like a semicircle, and the two zero-points are all spin-up and 
+all spin-down. 
+
+If you take the derivative of that graph to get temperature, you see 
+that temperature is positive on the spin-up side of the graph, but 
+negative for the spin-down part of the graph. 
+
+At the apex, temperature goes to infinity because $1/T \to 0$ 
+
+Let's let an unstable $(T_A \to 0)$ paramagnet be in contact with a system. 
+
+We know that entropy increases on average, so which direction does 
+energy move from entropy to increase?
+\equations{
+    \Delta S_{tot}
+    =
+    \Delta S_A
+    +
+    \Delta S_B 
+    =
+    \frac{\del S_A}{\del U_A}
+    \Delta U_A
+    +
+    \frac{\del S_B}{\del U_B}
+    \Delta U_B
+    \hp 
+    \Delta U_B = - \Delta U_A 
+    \\
+    =
+    \left(
+        \frac{1}{T_A}
+        -
+        \frac{1}{T_B}
+    \right)
+    \Delta U_A
+}
+
+We can do something to get rid of $1/T_A$ so that we get 
+
+\equations{
+    \Delta S_{tot}
+    =
+    -
+    \frac{1}{T_B}
+    \Delta U_A
+    \geq 
+    0
+    \\
+    T_A \to \infty 
+    \hp 
+    T_B > 0 
+    \hp 
+    \Delta U_A \leq 0
+}
+
+Now let's consider $T_A < 0$ and $T_B > 0$ 
+
+\equations{
+    \Delta S_{tot}
+    =
+    \left(
+        \frac{1}{T_A}
+        -
+        \frac{1}{T_B}
+    \right)
+    \Delta U_A 
+    =
+    \left(
+        -
+        \frac{1}{|T_A|}
+        -
+        \frac{1}{|T_B|}
+    \right)
+    \Delta U_A 
+    \geq 0
+    \\
+    U_A < 0
+}
+
+\section{Entropy of an Ideal Gas}
+Consider a particle in a box of volume 
+\equations{
+    V 
+    =
+    L_x
+    L_y
+    L_z
+}
+
+An you have a multiplicity function with inputs 
+\equations{
+    \Omega(U, N)
+}
+
+The hamiltonian operator of an ideal gas is given as 
+\equations{
+    H(\Psi(\vec r, t))
+    =
+    -
+    \frac{\hbar}{2m}
+    \nabla^2 
+    \Psi(\vec r, t)
+    =
+    \epsilon 
+    \Psi(\vec r, t)
+    \\
+    \Psi(\vec r, t)
+    =
+    \frac{1}{\sqrt{v}}
+    e^{i \vec k \vec r - i \omega t}
+    \hp 
+    \epsilon 
+    =
+    \frac{p^2}{2m}
+    =
+    \frac{\hbar^2}{2m}
+    |\vec k|^2
+    =
+    \frac{\hbar^2}{2m}
+    (k_x^2 + k_y^2 + k_z^2)
+    \\
+    k_x 
+    =
+    \frac{\pi}{L_x} n_x 
+    \hp 
+    n 
+    =
+    1, 2, 3, \ldots
+}
+
+This looks like a quantum harmonic oscillator. 
+The discrete set of energy eigenstates are given in the form 
+
+\equations{
+    \epsilon 
+    =
+    \frac{\hbar^2 \pi^2}{2m}
+    -
+    \left(
+        \frac{n_x^2}{L_x^2}
+        +
+        \frac{n_y^2}{L_y^2}
+        +
+        \frac{n_z^2}{L_z^2}
+    \right)
+}
+
+$\vec k$ can be written in the form 
+\equations{
+    \vec k 
+    =
+    \sqrt{
+        \frac{2 m \epsilon}{\hbar^2}
+    }
+}
+
+So now our multiplicity function can be written as 
+\equations{
+    \Omega(\epsilon, N)
+}
+
+So if we consider a large lattice of potential states, each quantum 
+state is represented by a point on the lattice. 
+
+The axes are $k_x, k_y, k_z$, and each interval is $\pi/L$
+
+The number of possible quantum states for a certain energy is given 
+by all points that intersect a \textbf{shell} of radius $|\vec k|$. 
+The energy is given in the form $\epsilon = \hbar^2 |\vec k|^2 / 2m$.
+
+This cannot be solved trivially, but to start, we can find all the points 
+that are inside a \textbf{sphere} of radius $|\vec k|$.
+
+We only consider the shell in a \textbf{single octant}, so we 
+divide our volume by $8$.
+
+each state space occupies a point in a box with volume
+\equations{
+    \frac{\pi}{L_x}
+    \frac{\pi}{L_y}
+    \frac{\pi}{L_z}
+    =
+    \frac{\pi^3}{V}
+}
+
+So we can just divide that volume by our sphere 
+
+\equations{
+    \frac{
+        \textrm{\# state with energy $\leq \epsilon$}
+    }
+    {
+        \textrm{volume of box each state occupies }
+    }
+    =
+    \Psi(\epsilon)
+}
+
+And the number of microstates with energy $\leq \epsilon$ can be written as 
+\equations{
+    \frac{
+        \textrm{
+            volume of sphere with radius $r = |\vec k|
+            = \sqrt{\frac{2m\epsilon}{\hbar^2}}$
+        }
+    }
+    {
+        \textrm{volume per state}
+    }
+}
+
+This can be written in the form 
+\equations{
+    \Phi(\epsilon)
+    =
+    \frac{
+        \frac{4}{3} \frac{\pi |\vec k|^3 }{8}
+    }
+    {
+        \frac{\pi^3}{V}
+    }
+    =
+    \frac{V}{6 \pi^2}
+    |\vec k|^3
+    =
+    \frac{V}{6 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \epsilon^{3/2}
+}
+
+This approximation is good for 
+\equations{
+    |\vec k| 
+    >> 
+    \Delta k 
+    =
+    \frac{\pi}{L}
+    \hp
+    \textrm{ or } 
+    \hp
+    \epsilon >> \Delta \epsilon 
+    =
+    \frac{\pi^2 \hbar^2}{2m V^{2/3}}
+}
+
+If the energy of the particle is much larger than the 
+spacing between each energy level. 
+
+Now, to find the amount of microstate for a \textbf{specific} energy, 
+we give our sphere are small change in radius, and we see the resulting change 
+in number of microstates from that 
+
+\equations{
+    \Omega(\epsilon, \epsilon + \delta \epsilon)
+    =
+    \Phi(\epsilon + \delta \epsilon)
+    -
+    \Phi(\epsilon)
+    \approx 
+    \frac{\del \Phi}{\del \epsilon}
+    \delta \epsilon 
+    =
+    \frac{V}{4 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \sqrt{\epsilon}
+    \delta \epsilon
+}
+
+This is the same answer as getting the volume of the shell and 
+dividing it by the volume of each state 
+
+\equations{
+    \frac{V_{shell}}{V_{state}}
+    =
+    \frac{
+        \frac{4 \pi |\vec k|^2}{8} \delta k
+    }
+    {
+        \frac{\pi^3}{V}
+    }
+    =====
+    \frac{V}{4 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \sqrt{\epsilon}
+    \delta \epsilon
+}
+
+\subsection{2D Ideal Gas in an Area $A$}
+We have a state area 
+\equations{
+    \frac{\pi}{L_x}
+    \frac{\pi}{L_y}
+    =
+    \frac{\pi^2}{A}
+}
+
+Now you see how many state volumes fit in the quarter circle 
+of a certain energy level. 
+
+\equations{
+    \Phi_{2d}(\epsilon)
+    =
+    \frac{
+        \frac{1}{4}
+        \pi |\vec k|^2
+    }
+    {
+        \left(
+            \frac{\pi^2}{A}
+        \right)
+    }
+    \hp 
+    k 
+    =
+    \sqrt{\frac{2m \epsilon}{\hbar^2}}
+}
+
+You now perform the same perturbation math to get 
+\equations{
+    \Omega(\epsilon, \epsilon + \delta \epsilon)
+    =
+    \frac{\del \Phi}{\del \epsilon}
+    \delta \epsilon 
+    =
+    \frac{A}{4 \pi}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)
+    \delta \epsilon
+}
+
+\section{Density of States}
+The number of states per energy interval 
+
+\equations{
+    D(\epsilon)
+    =
+    \frac{\del \Phi}{\del \epsilon}
+    \hp
+    \textrm{ or }
+    \hp
+    \int^\epsilon_0
+    \, d \epsilon' \, 
+    D(\epsilon')
+    =
+    \Phi(\epsilon)
+    \\
+    \Omega(\epsilon, \epsilon + \delta \epsilon)
+    =
+    D(\epsilon)
+    \delta \epsilon
+}
+
+\section{2 Particles in a Box}
+Consider 2 particles in a box. Energy is given by 
+\equations{
+    U 
+    =
+    \epsilon_1 
+    +
+    \epsilon_2
+    =
+    \frac{p_1}{2m}
+    +
+    \frac{p_2}{2m}
+    =
+    \frac{\hbar^2 k^2}{2m^2}
+}
+
+And our energy space is now given by 
+
+\equations{
+    k 
+    =
+    \sqrt{
+        k_{x1}^2
+        +
+        k_{y1}^2
+        +
+        k_{z1}^2
+        +
+        k_{x2}^2
+        +
+        k_{y2}^2
+        +
+        k_{z2}^2
+    }
+}
+
+The states are particles in a lattice in a 6-dimensional $k$-space
+
+Now, each quantum state is in a box of volume 
+\equations{
+    V_{state}
+    =
+    \left(
+        \frac{\pi^3}{V}
+    \right)^2
+}
+
+So all states with energy $\epsilon < U$ occupies a volume of 
+$\left( 1/8 \right)^2$ of the 6D hypersphere.
+
+So our multiplicity 
+$
+    \Omega(\epsilon, \epsilon + \delta \epsilon)
+$
+
+Are all the states in between $\epsilon$ and $\epsilon + \delta \epsilon$ 
+that occupy $1/2^6$ of the hypersphere.
+
+\subsection{$N$ Particles}
+All states with energy $\epsilon \leq U$ occupy a volume that's 
+$1/2^{3N}$ of a $3N$ dimension hypersphere. So to find all the states, 
+in a shell, it's the same volume partition, but with a shell. 
+
+Ignore geometric factors and constants.
+\equations{
+    k \sim \sqrt{U} 
+    \hp 
+    (k \sim \sqrt{\epsilon} )
+    \\
+    N = 1 
+    \hp 
+    \Phi_1(U)
+    \sim 
+    V k^3 
+    \sim 
+    V U^{3/2}
+    \\
+    \Omega_1(U_1, U + \delta U)
+    \sim 
+    V k^2 dk 
+    \sim 
+    V \sqrt{U} dU 
+    \\
+    N = 2
+    \hp 
+    \Phi_2(U)
+    \sim 
+    V^2 k^6
+    \sim 
+    V^2 U^{3}
+    \\
+    \Omega_2(U_2, U + \delta U)
+    \sim 
+    V^N k^5 dk 
+    \sim 
+    V^2 U^2 dU 
+    \\
+    N = N
+    \hp 
+    \Phi_2(U)
+    \sim 
+    V^N k^{3N}
+    \sim 
+    V^N U^{3N / 2}
+    \\
+    \Omega_N(U_N, U + \delta U)
+    \sim 
+    V^N k^{3N - 1} dk 
+    \sim 
+    V^2 U^{(3N/2)-1} dU 
+}
+
+Because all the particles are identical, we 
+divide $\Omega_N$ by $N!$ to make up for the different possible 
+permutations.
+
+\equations{
+    \Omega_N(U, U + \delta U)
+    =
+    \frac{g_{3N}}{2^{3N} N!}
+    \left(
+        \frac{V}{\pi^3}
+    \right)^N 
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3N/2} 
+    \frac{U^{(3N/2) - 1}}{2} 
+    \delta U
+}
+
+$g_D$ is the solid angle of the hypershell in $N$ dimensions 
+
+\equations{
+    g_3 
+    =
+    4 \pi
+}
+
+Our multiplicity function can also be written as 
+
+\equations{
+    \Omega_N(U, U + \delta U)
+    =
+    \frac{g_{3N}}{2^{3N + 1} N!}
+    \left(
+        \frac{U}{\Delta \epsilon}
+    \right)^{(3N/2) - 1}
+    \frac{\delta U}{\Delta \epsilon}
+    \hp 
+    \Delta \epsilon 
+    =
+    \frac{\hbar^2 \pi^2}{2m V^{2/3}}
+}
+
+The entropy of this system can be written as 
+\equations{
+    S(U, U + \delta U, V)
+    =
+    k_B \ln(\Omega_N)
+    \\
+    =
+    Nk_B \ln(V)
+    +
+    \left(
+        \frac{3N}{2}
+        -
+        1
+    \right) k_B \ln(U)
+    +
+    k_B \ln(f(N)) 
+    +
+    \ldots
+    \\
+    \approx
+    Nk_B \ln(V)
+    +
+    \left(
+        \frac{3}{2}
+    \right) N k_B \ln(U)
+    +
+    k_B \ln(f(N)) 
+}
+
+\section{MISSED LECTURE}
+\section{Discussion}
+I microcanonical ensemble is when $U$ and $N$ are fixed, and it 
+is ideal but not realistic.  
+
+\equations{
+    \Omega(U, N)
+    =
+    \sum_i 
+    \delta(U - U_L)
+    \delta(N - N_L)
+}
+
+A canonical ensemble is an ensemble connected to a thermostat. $N_S$ 
+is fixed
+\equations{
+    U_0 = U_R + E 
+}
+
+The probability of a state having a certain energy can be written as 
+\equations{
+    P(E_i)
+    =
+    \frac{\Omega_{R + S}(E_i)}{\sum_j \Omega_{R+S}(E_j)}
+}
+
+The main way to do things is find $z$ such that 
+\equations{
+    z 
+    =
+    \sum_i e^{- \beta E_i}
+}
+
+And then take the derivatives of $z$ 
+\equations{
+    U 
+    =
+    -\frac{\del z}{\del \beta}
+}
+
+\section{Equipartition Theorem}
+Imagine a gas coupled to a reservoir. 
+
+\equations{
+    \epsilon_1
+    =
+    \frac{\hbar^2}{2m}
+    (k_x^2 - k_y^2 + k_z^2)
+    =
+    \frac{\hbar^2 \pi^2}{2m}
+    (\frac{n_x^2}{L_x^2} - \frac{n_y^2}{L_y^2} + \frac{n_z^2}{L_z^2})
+    \\
+    z_1 
+    =
+    \sum e^{-\frac{\epsilon_1}{k_B T}}
+    =
+    \sum e^{-\frac{
+        \left(
+            \frac{\hbar^2 \pi^2}{2m}
+            (\frac{n_x^2}{L_x^2} - \frac{n_y^2}{L_y^2} + \frac{n_z^2}{L_z^2})
+        \right)
+    }{k_B T}}
+    \\
+    z_1(t)
+    = 
+    \left(
+        \sum_{nx=1}^{\infty}
+        e^{
+            - \frac{\hbar^2 \pi^2}{2m}
+            \frac{n_x^2}{L_x^2 k_B T}
+        }
+    \right)
+    \left(
+        \sum_{ny=1}^{\infty}
+        e^{
+            - \frac{\hbar^2 \pi^2}{2m}
+            \frac{n_y^2}{L_y^2 k_B T}
+        }
+    \right)
+    \left(
+        \sum_{nz=1}^{\infty}
+        e^{
+            - \frac{\hbar^2 \pi^2}{2m}
+            \frac{n_z^2}{L_z^2 k_B T}
+        }
+    \right)
+}
+
+Let's consider just one of these parts 
+\equations{
+    \sum_{nx=1}^{\infty}
+    e^{
+        - \frac{\hbar^2 \pi^2}{2m}
+        \frac{n_x^2}{L_x^2 k_B T}
+    }
+    =
+    \sum_{nx=1}^{\infty}
+    e^{
+        -\alpha_x n_x^2
+    }
+}
+
+This works for low temperatures. For high temperatures (many $n \in N$), 
+we get a different answer. Large $T$ means $k_B T >> \hbar^2 \pi^2 / (2m L_x^2)$
+for $x, y, z$. It can also be written as 
+$k_B T >> \Delta \epsilon = \hbar^2 \pi^2 / (2m V^{2/3})$
+
+\equations{
+    \sum_{nx=1}^{\infty}
+    e^{
+        -\alpha_x n_x^2
+    }
+    \approx 
+    \int^\infty_{0}
+    \, dn_x \, 
+    e^{- \alpha_x n_x^2}
+    =
+    \frac{1}{2}
+    \sqrt{\frac{\pi}{\alpha_x}}
+    \\
+    z(\textrm{high $T$})
+    \approx 
+    \frac{\pi^{3/2}}{2^3 (\alpha_x \alpha_y \alpha_z)^{1/2}}
+    L_x L_y L_z 
+    =
+    \left(
+        \frac{m k_B T}{2 \pi \hbar^2}
+    \right)^{3/2}
+    * V
+}
+
+This looks similar to a density times a volume.
+
+Let $k_B T = 1/\beta$. For $N$ particles in a box at the high temperature limit, we can describe 
+it with
+
+\equations{
+    z_{tot}
+    =
+    \frac{z_1^N}{N!}
+    \hp
+    U 
+    =
+    -
+    \frac{\del}{\del \beta} \ln(z_{tot})
+    =
+    -\frac{\del}{\del \beta} \ln(z_{1}^N)
+    =
+    -N\frac{\del}{\del \beta} \ln(z_{1})
+    \\
+    =
+    - N \frac{\del}{\del \beta}
+    \left(
+        \ln(\beta^{-3/2})
+        +
+        f(\textrm{not } \beta)
+    \right)
+    \\
+    U 
+    =
+    \frac{3}{2}
+    N \frac{1}{\beta}
+    =
+    \frac{3}{2}
+    N k_B T 
+    \hp 
+    k_B T 
+    >> 
+    \Delta \epsilon
+}
+
+Now we can go back to our density 
+
+\equations{
+    z_1 
+    =
+    \left(
+        \frac{m k_B T}{2 \pi \hbar^2}
+    \right)^{3/2}
+    * V
+    \hp 
+    n_{\varnothing}
+    \left(
+        \frac{m k_B T}{2 \pi \hbar^2}
+    \right)^{3/2}
+    \hp
+    z_1(T)
+    =
+    n_{\varnothing}(T)
+    * V
+}
+
+$n_{\varnothing}$ is known as the quantum density. $\lambda = h/p$ is the 
+De Broglie Wavelength and $p = \hbar / k$. For an ideal gas, our energy 
+is described as
+\equations{
+    \langle \epsilon \rangle
+    \frac{3}{2} k_B T 
+    =
+    \frac{\hbar^2 k^2}{2m}
+    =
+    \frac{p^2}{2m}
+    \hp \hp 
+    h 
+    =
+    2 \pi \hbar
+}
+
+And the expected value of $\lambda$ is 
+\equations{
+    \langle \lambda \rangle 
+    =
+    \frac{h}{\sqrt{2 m \langle \epsilon \rangle}}
+    =
+    \sqrt{
+        \frac{4 \pi^2 \hbar^2}{3 m k_B T}
+    }
+}
+
+So with this, we can describe $n_\varnothing$ 
+\equations{
+    n_{\varnothing}
+    =
+    \frac{const O(1)}{\langle \lambda \rangle^3}
+}
+
+If you have a density of particles on the order of the quantum density, then 
+you cannot ignore quantum effects.
+
+\subsection{Example}
+Consider Helium at $300K$. 
+
+\equations{
+    n_{\varnothing}
+    \approx 
+    0.8 * 10^25 \frac{1}{cm^3}
+    =
+    \frac{1}{0.5 \r{A}^3}
+    \\
+    n_{He}
+    =
+    2.5 * 10^{19}
+}
+So we are in the classical limit.
+
+\chapter{Equipartition Theorem}
+A diatomic ideal gas can not only be translated around, but also rotated to 
+change is potential state. The energy of this atom can be written as 
+\equations{
+    \epsilon_{mol}
+    =
+    \epsilon_{trans}
+    +
+    \epsilon_{vib}
+    +
+    \epsilon_{rot}
+    \\
+    z_{mol}
+    =
+    \sum_{all states}
+    e^{- \beta \epsilon_{mol}}
+    =
+    \left(
+        \sum_{\epsilon_{trans}}
+        e^{- \beta \epsilon_{trans}}
+    \right)
+    \left(
+        \sum_{\epsilon_{vib}}
+        e^{- \beta \epsilon_{vib}}
+    \right)
+    \left(
+        \sum_{\epsilon_{rot}}
+        e^{- \beta \epsilon_{rot}}
+    \right)
+    \\
+    \epsilon_{transl}
+    =
+    \frac{\hbar^2 k^2}{2m}
+    \hp 
+    z_{transl}
+    =
+    n_{\varnothing}(T) \cdot V 
+    \hp 
+    U_{transl}
+    =
+    \frac{3}{2} N k_B T
+}
+
+We can figure out rotational energy in quantum mechanics in the 
+form of angular momentum 
+\equations{
+    J 
+    =
+    |\vec J| 
+    =
+    \sqrt{j(j+1) \hbar} \hp j \in \mathbb{N} 
+    \\
+    J_z 
+    =
+    m_z \hbar 
+    \hp 
+    m_z = -j, -j+1, \ldots j-1, j
+    \\
+    \epsilon_{rot}
+    =
+    \frac{|\vec J|^2}{2 I}
+    =
+    \frac{j(j+1) \hbar^2}{2 I}
+    = 
+    \epsilon * j(j+1)
+    \hp 
+    j \in \mathbb{N}
+    \\
+    z_{rot}
+    =
+    \sum_{J, J_z}
+    e^{- \beta \epsilon_{rot}}
+    =
+    \sum^{\infty}_{j-0}
+    (2j + 1) e^{\frac{\epsilon j(j+1)}{k_B T}}
+}
+
+For low temperature $T$, then 
+\equations{
+    z_{rot}
+    =
+    1 
+    +
+    3 e^{-2 \beta \epsilon}
+    +
+    5 e^{-6 \beta \epsilon}
+    +
+    7 e^{-12 \beta \epsilon}
+    +
+    \ldots
+}
+
+The $\ldots$ corresponds to excited states that are "frozen out", 
+or they don't contribute to the physics.
+
+For the high temperature limit, we can make some approximations 
+\equations{
+    z_{rot}
+    \approx
+    \int^{\infty}_{0} \, dj \, 
+    (2j + 1) e^{\frac{\epsilon j(j+1)}{k_B T}}
+    \hp 
+    x = \beta \epsilon(j(j+1))
+    dx = \beta \epsilon(2j + 1) dj
+    \\
+    z_{rot}
+    =
+    \frac{1}{\beta \epsilon}
+    \int^{\infty}_{0} \, dj \, 
+    e^{-x}
+    =
+    \frac{1}{\beta \epsilon}
+    \\
+    U_{rot}
+    =
+    -\frac{\del}{\del \beta}
+    \ln(z_{rot})
+    =
+    \frac{1}{\beta}
+    =
+    k_B T
+}
+
+
+Now we can calculate the vibrational degrees of freedom 
+\equations{
+    \epsilon_{vib}
+    =
+    \hbar \omega (n + \frac{1}{2})
+    \hp 
+    n \in \mathbb{N}
+    \\
+    z_{vib}
+    \sum_n 
+    e^{- \beta \epsilon_{vib}}
+    =
+    e^{- \frac{1}{2} \beta \hbar \omega}
+    \sum_{n = 0}^{\infty}
+    e^{- \beta \hbar \omega * n}
+}
+
+We can use a geometric series 
+\equations{
+    \sum x^n = \frac{1}{1-x}
+    \hp 
+    e^{-\beta \hbar \omega}
+    =
+    x
+    \\
+    z_{vib}
+    =
+    \frac{e^{- \frac{1}{2} \beta \hbar \omega}}{{1 - e^{- \beta \hbar \omega}}}
+    \\
+    U_{vib}
+    =
+    \langle \epsilon_{vib} \rangle 
+    =
+    - \frac{\del}{\del \beta}
+    \ln(z_{vib})
+    \\
+    =
+    + \frac{\del}{\del \beta}
+    \left(
+        \frac{1}{2} \hbar \omega \beta 
+        +
+        \ln(1 - e^{- \beta \hbar \omega})
+    \right)
+    \\
+    =
+    \hbar \omega 
+    \left(
+        \frac{1}{e^{\beta \hbar \omega} - 1} 
+        +
+        \frac{1}{2}
+    \right)
+    =
+    \hbar \omega 
+    \left(
+        \langle n \rangle 
+        +
+        \frac{1}{2}
+    \right)
+}
+
+We can also find the average 
+\equations{
+    \langle n \rangle 
+    =
+    \frac{1}{e^{\beta \hbar \omega} - 1}
+}
+
+In the low temperature limit $k_B T << \hbar \omega$, we get 
+\equations{
+    \frac{1}{e^{\beta \hbar \omega} + 1}
+    \approx 
+    e^{- \beta \hbar \omega}
+    \rightarrow 
+    U_{vib}
+    \approx 
+    \hbar
+    \left(
+        e^{-\beta \hbar \omega}
+        +
+        \frac{1}{2}
+    \right)
+}
+
+In the high temperature limit, we can take a taylor expansion to get 
+\equations{
+    \langle n \rangle 
+    =
+    \frac{1}{e^{\beta \hbar \omega} - 1}
+    \approx 
+    \frac{1}{1 + \beta \hbar \omega - 1}
+    =
+    \frac{1}{\beta \hbar \omega}
+    \\
+    U_{vib}
+    =
+    \hbar \omega(\langle n \rangle + \frac{1}{2})
+    \approx
+    \hbar \omega
+    \left(
+        \frac{k_B T}{\hbar \omega} + \frac{1}{2}
+    \right)
+    =
+    k_B T + \frac{\hbar \omega}{2}
+    \approx 
+    k_B T
+}
+
+\section{Heat Capacity}
+Heat capacity is defined as 
+\equations{
+    C_V 
+    =
+    \left(
+        \frac{\del U}{\del T}
+    \right)_V
+    \hp 
+    U_{tot}
+    =
+    U_{transl}
+    +
+    U_{rot}
+    +
+    U_{vib}
+    \\
+    C_{V}
+    =
+    C_V^{transl}
+    +
+    C_V^{rot}
+    +
+    C_V^{vib}
+}
+
+For Helium the heat capacity over temperature is a step function. 
+
+Each of the different degrees of freedom become relevant at different times, 
+so the specific heat capacity changes depending on the temperature. 
+
+\section{Equipartition Theorem}
+This theorem helps us figure out the high temperature limit of systems 
+very easily. 
+
+\equations{
+    U 
+    \propto 
+    \alpha 
+    \cdot 
+    N k_B T
+    \hp 
+    k_B T >> \Delta \epsilon
+}
+
+This can be found with 
+\equations{
+    z 
+    =
+    \sum_i 
+    e^{\epsilon_i / k_B T}
+    \\
+    A 
+    \int \, dq_1 
+    \int \, dq_2
+    \int \, dq_3 
+    \ldots
+    e^{-\beta \epsilon(q_1, q_2, q_3, \ldots, q_N)}
+    \\
+    p(\epsilon_i)
+    =
+    \frac{e^{- \beta \epsilon_i}}{z}
+    \\
+    \langle \epsilon_{qi} \rangle 
+    =
+    \langle a_i q_i \rangle 
+    \\
+    \langle \epsilon_{qi} \rangle 
+    =
+    \frac{1}{2} k_B T
+}
+
+\section{Discussion}
+Consider a system with a bath $R$ connected to a system $D$ with parameters 
+\equations{
+    U_R 
+    =
+    U_0 - \epsilon 
+    \hp 
+    T_R = T_D = fixed 
+}
+
+We can try to find the extrema in the systme $S$ 
+\equations{
+    dS_{R + D}
+    =
+    0 
+    =
+    dS_R + dS_D 
+    \\
+    \frac{dU_R}{T_R}
+    +
+    dS_D 
+    =
+    0
+    \rightarrow 
+    dU_R 
+    =
+    d(U_0 - U_D)
+    =
+    -dU_D
+    \\
+    0
+    =
+    \frac{-dU_D}{T}
+    + dS_D 
+    \rightarrow 
+    \frac{-1}{T} 
+    d (U_D - TS_D)
+    =
+    0
+    \\
+    F 
+    \equiv 
+    U - TS
+}
+That is an extremum of $S$ in the canonical ensemble. It is also 
+known as the Helmholz Free energy. 
+
+\equations{
+    \left(
+        \frac{\del F}{\del T}
+    \right)_V 
+    =
+    -S 
+    =
+    \frac{F - U}{T} 
+    \\
+    \tilde F = 
+    - k_B T \ln(z)
+    \Rightarrow 
+    |\frac{\del \tilde F }{\del T}| 
+    =
+    -k_B \ln(z) 
+    -
+    k_B T \frac{\del}{\del T}
+    \ln(z) 
+    \\
+    =
+    -k_B \ln(z)
+    +
+    \frac{1}{T}
+    \frac{\del}{\del B } \ln(z)
+}
+
+We are also theoretically able to derive 
+\equations{
+    \frac{\del \tilde F}{\del T}
+    =
+    \frac{\tilde F - U}{T }
+    \\
+    \tilde F(T=0)
+    =
+    - \lim_{T \to 0}
+    k_B T \ln(z) 
+    =
+    - \lim_{T \to 0}
+    k_B T 
+    \ln(\sum_i e^{\epsilon_i / k_B T})
+    \\
+    z(T = 0)
+    =
+    e^{-\epsilon_0 / k_B T}
+    +
+    e^{-\epsilon_1 / k_B T}
+    \approx 
+    e^{-\epsilon_0 / k_B T}
+    \\
+    \tilde F(T=0)
+    =
+    - \lim_{T \to 0}
+    k_B T 
+    \ln(e^{\epsilon_0 / k_B T})
+    =
+    \epsilon_0
+    \\
+    F(T=0)
+    =
+    U(T=0)
+    \\
+    - \frac{\del}{\del B}
+    \ln(z(T \to 0))
+    =
+    - \frac{\del}{\del B}
+    \ln(e^{-B \epsilon_0})
+    =
+    \epsilon_0 
+    \\
+    F 
+    =
+    -k_B \ln(z)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
