@@ -2991,35 +2991,3429 @@ We are also theoretically able to derive
     -k_B \ln(z)
 }
 
+\section{Equipartition Theorem}
+\equations{
+    \langle \epsilon_{q1} \rangle 
+    =
+    \langle 
+        a_1 q_1^2 
+    \rangle
+    =
+    \frac{1}{2} 
+    k_B T 
+}
+
+This is true for each degree of freedom at the high temperature limit.
+This means that for a particle with 3 degrees of freedom, then 
+the expected value of the energy is 
+\equations{
+    \langle U \rangle 
+    =
+    \frac{3}{2} k_B T
+}
+
+We have a function $z(T)$ that can be written as 
+\equations{
+    z(T) 
+    =
+    A 
+    \int^{\infty}_{-\infty}
+    dq_1
+    * 
+    \ldots 
+    *
+    \int^{\infty}_{-\infty}
+    dq_N
+    e^{- \beta \epsilon (q_1, \ldots, q_N)}
+    \\
+    \epsilon = 
+    a_1 q_1^2 
+    +
+    a_2 q_2^2 
+    +
+    \ldots 
+    +
+    a_N q_N^2 
+}
+
+And the probability of getting a certain energy is 
+\equations{
+    p(\epsilon_1)
+    =
+    \frac{A dq_1 \ldots dq_N e^{-\beta \epsilon(q_1, \ldots , q_N)}}
+    {
+    A \int^{\infty}_{-\infty} 
+    dq_1 \ldots 
+    \int^{\infty}_{-\infty} 
+    dq_N e^{-\beta \epsilon(q_1, \ldots , q_N)}
+    }
+    \\
+    \langle \epsilon \rangle
+    =
+    \frac{\int^{\infty}_{-\infty} dq_1 
+    \ldots 
+    \int^{\infty}_{-\infty} dq_N a_1 q_1^2 
+    e^{-\beta \epsilon(q_1, \ldots , q_N)}}
+    {
+    \int^{\infty}_{-\infty} 
+    dq_1 \ldots 
+    \int^{\infty}_{-\infty} 
+    dq_N e^{-\beta \epsilon(q_1, \ldots , q_N)}
+    }
+    =
+    \frac{\int^{\infty}_{-\infty} dq_1 a_1 q_1^2 e^{- \beta \epsilon_{q1}}}
+    {
+        \int^{\infty}_{-\infty} dq_1  e^{- \beta \epsilon_{q1}}
+    }
+    \\
+    \langle \epsilon_1 \rangle 
+    =
+    \frac{
+        \int^{\infty}_{-\infty} dq_1 \epsilon_{q1} e^{- \beta \epsilon_{q1}}
+    }
+    {
+        \int^{\infty}_{-\infty} dq_1  e^{- \beta \epsilon_{q1}}
+    }
+    =
+    - \frac{\del}{\del \beta}
+    \ln(
+        \int^{\infty}_{-\infty} dq_1  e^{- \beta a_1 q_1^2}
+    )
+    =
+    - \frac{\del}{\del \beta}
+    \ln(
+        \sqrt{\frac{\pi}{\beta a_1}}
+    )
+    \\
+    \langle \epsilon_1 \rangle 
+    =
+    - \frac{\del}{\del \beta}
+    \left(
+    \ln(
+        \frac{1}{\sqrt{\beta}}
+    )
+    \right)
+    +
+    \textrm{f(not $\beta$)}
+    \\
+    \langle \epsilon_1 \rangle 
+    =
+    \frac{1}{2 \beta}
+    =
+    \frac{1}{2} k_B T
+}
+
+This works in the high temperature limit for systems of quadratic 
+energy $\epsilon = q_1^2 + \ldots$.
+
+An ideal gas in 3 dimensions has an expected total system energy of 
+\equations{
+    \langle \epsilon \rangle
+    =
+    N \frac{3}{2} k_B T
+}
+
+A 1d harmonic oscillator has energy 
+\equations{
+    \epsilon 
+    =
+    \frac{p_1^2}{2m}
+    +
+    \frac{1}{2}
+    \omega x^2 
+    \Rightarrow 
+    \langle \epsilon \rangle 
+    =
+    2 
+    \frac{1}{2} k_B T
+    =
+    k_B T
+}
+
+For $N$ oscillators, the expected energy is just $N k_B T$.
+
+\subsection{Counterexample}
+A paramagnet has energy of the form 
+\equations{
+    U 
+    =
+    -N \mu B 
+    \tanh(\frac{\mu B}{k_B T})
+}
+So for the high temperature limit 
+\equations{
+    U 
+    =
+    -\frac{N \mu^2 B^2 }{k_B T}
+    \neq 
+    N k_B T
+}
+
+Because the energy is not in the form $k_B T$, we 
+\textbf{cannot} use the equipartition theorem.
+
+\subsection{Maxwell Velocity Distribution}
+The kinetic energy can be written as 
+\equations{
+    \epsilon 
+    =
+    \frac{1}{2} mv^2 
+    =
+    \frac{1}{2} m 
+    \left(
+        v_x^2 
+        + 
+        v_y^2 
+        + 
+        v_z^2 
+    \right)
+}
+
+This is equivalent to the energy having mutliple quadratic 
+degrees of freedom. The probability of having a specific velocity 
+(certain components), we its 
+\equations{
+    P(\vec v)
+    =
+    \frac{dv_x dv_y dv_z e^{-\beta \epsilon}}
+    {
+        \int^{\infty}_{-\infty}
+        dv_x 
+        \int^{\infty}_{-\infty}
+        dv_y
+        \int^{\infty}_{-\infty}
+        dv_y
+        e^{-\beta \epsilon}
+    }
+}
+
+If we switch from cartesian coordinates to spherical coordinates, 
+we get
+\equations{
+    P(\vec v)
+    =
+    \frac{
+        v^2 dv \sin(\theta) \, d \theta \,  d \varphi \, e^{-\beta \epsilon}
+    }
+    {
+        \int^{\infty}_{0}
+        v^2 dv 
+        \int^{2 \pi}_{0}
+        d \varphi
+        \int^{\pi}_{0}
+        \sin(\theta) \, d \theta
+        e^{-\beta \epsilon}
+    }
+    =
+    \frac{
+        v^2 dv e^{-\beta \frac{mv^2}{2}}
+    }
+    {
+        \int^{\infty}_{0}
+        v^2 dv 
+        e^{-\beta \frac{mv^2}{2}}
+    }
+    \frac{4 \pi}{4 \pi}
+    \\
+    \int^{\infty}_{0}
+    v^2 e^{-\alpha v^2} \, dv 
+    =
+    - \frac{\del}{\del \alpha}
+    \int^{\infty}_{0}
+    e^{-\alpha v^2} \, dv 
+    =
+    - \frac{\del}{\del \alpha}
+    \frac{1}{2}
+    \sqrt{\frac{\pi}{\alpha}}
+    =
+    \frac{1}{4 \pi}
+    \left(
+        \frac{2 \pi k_B T}{m}
+    \right)^{3/2}
+    \\
+    f(v) dv
+    =
+    4 \pi 
+    \left(
+        \frac{m}{2 \pi k_B T}
+    \right)^{3/2}
+    v^2 
+    e^{- \frac{mv^2}{2 k_B T}}
+    dv 
+}
+So we get some properties 
+
+\equations{
+    v_{peak}
+    =
+    \sqrt{\frac{2 k_B T}{m}}
+    \hp
+    \left(
+        \frac{\del f}{\del v}
+    \right)
+    =0
+    \\
+    \langle v \rangle 
+    =
+    \int^{\infty}_{0} \, dv \, 
+    f(v) v 
+    =
+    \sqrt{\frac{8 k_B T}{\pi m}}
+    \hp
+    \langle v^2 \rangle 
+    =
+    \int^{\infty}_{0} \, dv \, 
+    f(v) v^2
+    =
+    \frac{3 k_B T}{m}
+    \\
+    \langle \frac{1}{2} m v^2 \rangle 
+    =
+    \frac{3}{2} k_B T 
+}
+Equipartition theorem does hold.
+
+\section{Helmholz Free Energy}
+Consider a system $\phi$ with fixed $U, N$. 
+It is a microcanonical ensemble, so $U_S$ is at a maximum in 
+equilibrium $(dS_\phi = 0)$. 
+
+In a canonical ensemble of fixed $N$, our system is connected to a 
+larger bath, 
+so $U_0$ is constant, and $T = T_0 = T_\phi$ is fixed. 
+$S_{R+F}$ is at an extremum $(d S_{R + F} = 0)$
+
+What qualities of $\phi$ are at an extremeum?
+\equations{
+    dS(U, V)
+    =
+    \left(
+        \frac{\del S}{\del U}
+    \right)_V 
+    dU 
+    +
+    \left(
+        \frac{\del S}{\del V}
+    \right)_U
+    dV
+    =
+    \frac{1}{T}
+    dU 
+    +
+    \frac{p}{T}
+    dV
+    \\
+    dS_{R + \phi}
+    =
+    0
+    =
+    dS_R + dS_\phi 
+    =
+    \frac{dU_R}{T}
+    +
+    dS_{\phi}
+    \\
+    U_0 = U_R + U_{\phi}
+    \hp 
+    dU_R = -dU_{\phi}
+    \\
+    dS_{R + \phi}
+    =
+    -
+    \frac{dU_{\phi}}{T}
+    +
+    dS_{\phi}
+    =
+    -
+    \frac{1}{T}
+    \,
+    d 
+    \left(
+        U_{\phi}
+        -
+        T S_\phi
+    \right)
+    =
+    0
+}
+
+So the Helmholz Free energy is given by 
+\equations{
+    F 
+    U_{\phi}
+    -
+    T S_\phi
+    \\
+    0
+    =
+    dS_{R + \phi}
+    =
+    - \frac{1}{T}
+    d F
+}
+When the entropy is maximized (system is at equilibrium), then $F$ 
+is minimized.
+
+With the Helmholz Free Energy, we get 
+\equations{
+    F = U_\phi - TS_{\phi}
+    \hp 
+    dF =
+    dU - T \, dS - S \, dT
+    \hp
+    dU 
+    =
+    T \, dS - p \, d V
+    \\
+    d F
+    =
+    - p \, dV - S \, dT 
+    \Longrightarrow
+    dF 
+    =
+    - \left(
+        \frac{\del F}{\del V}
+    \right) dV - 
+    \left(
+        \frac{\del F}{\del T} 
+    \right)
+    dT 
+    \\
+    \hp 
+    p
+    =
+    - 
+    \left(
+        \frac{\del F}{\del V}
+    \right)_T
+    \hp 
+    S 
+    =
+    -
+    \left(
+        \frac{\del F}{\del T}
+    \right)_V
+}
+So now we have both momentum and entropy in terms of the 
+Helmholz Free Energy. 
+
+In a microcanonical ensemble, our equations are 
+\equations{
+    S_{\phi}
+    =
+    k_b \ln(\Omega_{\phi})
+}
+
+But in a canonical ensemble, we should be able to predict the free energy 
+\equations{
+    F 
+    =
+    - k_B T 
+    \ln(z)
+    \hp 
+    z 
+    =
+    \sum_{i=0}^{\infty}
+    e^{- \beta \epsilon_i}
+}
+
+We can find this with 
+\equations{
+    \left(
+        \frac{\del F}{\del T}
+    \right)_V 
+    =
+    -S 
+    =
+    \frac{F - U}{T}
+}
+Use an ansatz 
+\equations{
+    \tilde F 
+    =
+    -k_B T \ln(z)
+}
+And you see that $\tilde F$ fulfills the differential equation.
+
+To make sure that there is no constant offset, you can check 
+the term at $T=0$ 
+\equations{
+    \tilde F(T =0)
+    =
+    F(T=0)
+}
+
+\section{2 Energy Levels}
+$\epsilon$ is either $\Delta$ or $0$. What is the entropy $S(T)$? 
+What is $S$ for both $T \to 0$ and $T \to \infty$? 
+
+First, start with a partition function $z$ 
+\equations{
+    z 
+    =
+    \sum e^{- \beta \epsilon}
+    =
+    e^{- \beta \Delta}
+    +
+    e^{- \beta 0}
+    =
+    1 +
+    e^{- \beta \Delta}
+}
+Then find the free energy 
+\equations{
+    F 
+    =
+    -k_B T 
+    \ln(z)
+    =
+    -k_B T 
+    \ln( 1 + e^{- \beta \Delta})
+}
+And then find the entropy 
+\equations{
+    S =
+    - \left(
+        \frac{\del F}{\del T}
+    \right)_V 
+    =
+    k_B
+    \ln( 1 + e^{- \Delta / k_B T})
+    +
+    \frac{\Delta}{T}
+    \frac{
+    e^{- \Delta / k_B T}
+    }
+    {
+    1+
+    e^{- \Delta / k_B T}
+    }
+}
+Then you can check $S$ for small and large $T$ 
+\equations{
+    S(T \to 0)
+    =
+    k_B \ln(1)
+    =
+    0
+    \hp 
+    S(T \to \infty)
+    =
+    k_B \ln(2)
+}
+Those both look good.
+
+\section{Summary}
+\subsection{Microcanonical Ensemble}
+In a microcanonical ensemble, the system is closed, so the 
+fixed variables are $N, V, U$. 
+
+The extremum is when $S(U, V)$ is at a maximum
+
+The system is measured with the multiplicity 
+\equations{
+    \Omega 
+    =
+    \sum_{\textrm{all states with energy $U$}}
+    1
+}
+
+And entropy is defined as 
+\equations{
+    S 
+    =
+    k_B \ln(\Omega)
+    \\
+    dS 
+    =
+    \left(
+        \frac{\del S}{\del U}
+    \right)_V 
+    dU 
+    +
+    \left(
+        \frac{\del S}{\del V}
+    \right)_U
+    dV
+    \\
+    dS 
+    =
+    \frac{1}{T}
+    dU 
+    +
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+    \ldots
+}
+
+\subsection{Canonical Ensemble}
+In a canonical ensemble, the system is connected to a bath.
+The fixed variables are $N, V, T$
+
+The extremum is when $F(T, V)$ is at a minimum
+
+The system is defined with a partition function 
+\equations{
+    z 
+    =
+    \sum_{\textrm{all states with temperature $T$}} e^{-\epsilon / k_B T}
+}
+
+And free energy is defined as 
+\equations{
+    F 
+    =
+    - k_B T \ln(z)
+    \\
+    dF 
+    =
+    \left(
+        \frac{\del F}{\del U}
+    \right)_V 
+    dU 
+    +
+    \left(
+        \frac{\del F}{\del V}
+    \right)_U
+    dV
+}
+
+\chapter{Heat and Work}
+Recall the thermodynamic identities 
+\equations{
+    dU 
+    =
+    T \, dS - 
+    p \, dV
+    \hp 
+    dQ 
+    =
+    T \, dS 
+    \hp 
+    dW_{on}
+    =
+    - p \, dV 
+    \\
+    dU 
+    =
+    dQ 
+    +
+    dW_{on}
+}
+All types of work can be \textbf{completely} interconverted. 
+Heat can be \textbf{partially} interconverted, but not completely.
+This is because of the 2nd law of thermodynamics.
+
+\section{Heat Engine}
+Consider a device that can completely convert heat into work 
+\equations{
+    T_h \longrightarrow Q_H
+}
+Could you then use that heat to lift up a mass?
+Consider the 1st law of thermodynamics (conservation of energy). 
+This requires that, for our engine, 
+\equations{
+    Q_H = W 
+}
+What about entropy? We are working in a closed system with a reservoir 
+and an engine and a mass 
+\equations{
+    \Delta S_{tot}
+    =
+    \Delta S_{res}
+    +
+    \Delta S_{eng}
+    +
+    \Delta S_{mass}
+    \\
+    \Delta S_{res}
+    =
+    - \frac{Q_H}{T_H}
+    < 0
+    \hp 
+    \Delta S_{eng}
+    =
+    0 
+    \hp 
+    \Delta S_{mass}
+    =
+    0
+    \hp
+    \Delta S_{tot}
+    =
+    - \frac{Q_H}{T_H}
+}
+This violates the 2nd law of thermodynamics, which means our engine 
+absolutely cannot be perfectly efficient. However, if we imagine the 
+opposite (work to heat), then we see that does not violate the 2nd law 
+of thermodynamics. 
+
+Because of the first law, we get that 
+\equations{
+    Q_H 
+    =
+    Q_C + W
+}
+Because of the 2nd law, we get 
+\equations{
+    \Delta S_{tot} \geq 
+    \hp 
+    \Delta S_{tot}
+    =
+    \Delta S_{H, res}
+    \Delta S_{C, res}
+    =
+    - \frac{Q_H}{T_H}
+    +
+    \frac{Q_C}{T_C}
+    \geq 0
+}
+
+\section{Efficiency}
+The efficiency will be denoted as $\eta$. 
+\equations{
+    \eta 
+    =
+    \frac{W}{Q_H}
+    =
+    \frac{Q_H - Q_C}{Q_H}
+    =
+    1
+    -
+    \frac{Q_C}{Q_H}
+}
+
+What is the maximum possible efficiency? 
+\equations{
+    \Delta S_{tot} = 0 
+    \Rightarrow 
+    \Delta S_{tot}
+    =
+    - \frac{Q_H}{T_H}
+    +
+    \frac{Q_C}{T_C}
+    = 0
+    \hp 
+    \frac{Q_C}{Q_H}
+    =
+    \frac{T_C}{T_H}
+}
+
+The carnot effiency is known as the maximum possible attainable efficiency, 
+and that is done with 
+\equations{
+    \eta_{max}
+    =
+    1
+    -
+    \frac{Q_C}{Q_H}
+    =
+    1 - \frac{T_C}{T_H}
+}
+
+In practice, this does not happen. 
+\equations{
+    \Delta S_{tot}
+    > 0 
+    \hp 
+    \Delta S_{H, res}
+    =
+    - \frac{Q_H}{T_H}
+    \hp 
+    \Delta S_{C, res}
+    =
+    \frac{Q_C}{T_C}
+    +
+    \Delta S_{i, res}
+    \\
+    \Delta S_{tot}
+    =
+    -
+    \frac{Q_H}{T_H}
+    +
+    \frac{Q_C}{T_C}
+    > 0
+    \Rightarrow
+    \frac{Q_C}{Q_H}
+    >
+    \frac{T_C}{T_H}
+    \\
+    \eta 
+    =
+    1
+    -
+    \frac{Q_C}{Q_H}
+    <
+    1
+    -
+    \frac{T_C}{T_H}
+    =
+    \eta_{C}
+}
+
+\subsection{Types of Efficiency Losses}
+\begin{itemize}
+    \item
+    Heat bypass: 
+    Heat moves from one system to another without being used for work 
+    \item
+    Thermal Resistance: 
+    There's a gradient in temperature in your system
+    \item
+    Friction Loss: 
+    Work is turned to heat 
+    \item
+    Irreversible gas expansion:
+    This type of expansion requires more work to be undone so it 
+    is thermodynamically unfavorable.
+\end{itemize}
+
+All of these efficiency losses are irreversible, which means that 
+one $\Delta S_{loss} > 0$, you cannot remove it.
+
+\section{Carnot Cycle}
+Consider a cycle with efficiency 
+\equations{
+    \eta_C 
+    =
+    1 - \frac{T_C}{T_H}
+}
+A working substance (gas) can absorb/expel heat and turn it into work 
+(move a piston). 
+An isotropic/adiabatic process is a process such that entropy is fixed.
+
+\begin{center}
+    heat 
+    $\to$
+    expand
+    $\to$
+    contract
+    $\to$
+    cool down
+\end{center}
+Because the piston returns to its original state and the gas cools 
+down again, the total energy for 1 cycle is 
+\equations{
+    \oint dU 
+    =
+    0
+    =
+    \oint 
+    dQ 
+    +
+    \oint 
+    dW 
+}
+We can solve for each individual step of the Carnot cycle 
+\equations{
+    \oint dQ 
+    =
+    \oint dQ_1
+    +
+    \oint dQ_2 
+    \oint dQ_3
+    \oint dQ_4 
+    =
+    Q_H 
+    +
+    0 
+    +
+    -Q_H 
+    +
+    0
+    =
+    0
+    \\
+    \oint T \, dS 
+    =
+    T_H(S_2 - S_1)
+    + 0 +
+    T_C(S_4 - S_3)
+    + 0
+    \Rightarrow 
+    \\
+    \oint dU 
+    =
+    0
+    =
+    (T_H - T_C) (S_2 - S_1)
+    -
+    \oint p \, dV
+    \\
+    W_{engine}
+    =
+    \oint p \, dV
+    =
+    (T_H - T_C) (S_2 - S_1)
+}
+
+All these number returns the maximum possible efficiency, but that is not 
+practical or realistic. This is because reversible heating and cooling 
+processes are too slow for real-world applications.
+
+\subsection{Realizing Carnot Cycle}
+for a gas, we assume ideal behavior 
+\equations{
+    pV 
+    =
+    n k_B T 
+}
+There's something on the board called Sackur-Tetrode 
+\equations{
+    S 
+    =
+    N k_B 
+    \left(
+        \ln(\frac{n_Q V}{N})
+        +
+        \frac{3}{2}
+    \right)
+}
+
+\subsection{Isothermal Segments}
+\equations{
+    pV 
+    =
+    const 
+}
+
+\subsection{Isotropic Segments}
+Knowing isotropic behavior will be useful for the homework 
+
+\equations{
+    S 
+    =
+    \const 
+    =
+    N k_B 
+    \left(
+    \ln(T^{3/2})
+    +
+    \ln(V)
+    \right)
+    +
+    \const
+    \\
+    T^{3/2} * V 
+    =
+    \const
+    \hp 
+    T 
+    =
+    \frac{pV}{N k_B}
+    \rightarrow 
+    (pV)^{3/2}
+    * V 
+    =
+    p^{3/2} V^{5/2}
+    =
+    \const
+    \\
+    p V^{\gamma}
+    =
+    \const 
+    \hp 
+    \gamma 
+    =
+    \frac{5}{3}
+}
+$\gamma = 5/3$ for a monatomic gas, $7/5$ for a diatomic gas, etc etc. 
+\equations{
+    \gamma 
+    =
+    1 +
+    \frac{2}{f}
+}
+So the entire process that be written in terms of changes in pressure 
+and volume 
+\begin{center}
+    $\underset{1}
+    \rightarrow$
+    isothermal
+    $\underset{2}
+    \rightarrow$
+    adiabatic
+    $\underset{3}
+    \rightarrow$
+    isothermal
+    $\underset{4}
+    \rightarrow$
+    adiabatic
+\end{center}
+
+\subsection{Work Done}
+\equations{
+    \oint p \, dV 
+    \Rightarrow 
+    W 
+    =
+    (T_H - T_C)
+    (S_2 - S_1)
+}
+
+\section{Irreversible Processes}
+Consider a system with gases one just one side. Energy is constant 
+and heat transferred is 0 and the work done is 0. Temperature is also constant. 
+\equations{
+    \Delta S 
+    =
+    N k_B 
+    \ln(\frac{V_f}{V_i})
+    > 0
+}
+Because the entropy change is positive, this process is irreversible in a 
+closed system.
+She said sackur tetrodi again and I have no idea what the fuck that means. 
+
+\subsection{1st Law of Thermodynamics}
+\equations{
+    dU 
+    =
+    dQ 
+    +
+    dW_{on}
+}
+
+For an reversible process, $dQ = T dS$ 
+\equations{
+    dU 
+    =
+    T dS
+    +
+    dW_{on}
+}
+
+For an \textbf{irreversible} process, $T dS > dQ_{irrev}$ 
+\equations{
+    dW_{on}
+    >
+    dU 
+    -
+    T dS
+}
+
+For the irreversible case, the total work done on the gas is $W_{on} = 0$, 
+but in the 
+reversible case, the gas would have to push a piston to expand, so 
+$W_{on} = \int p dV < 0$.
+
+\section{Discussion}
+Consider a system of conserved $U, N, B$ where $B$ is the magnetic field. 
+\equations{
+    dU 
+    =
+    \left(
+        \frac{dU}{dS}
+    \right)_{NB} dS 
+    +
+    \left(
+        \frac{dU}{dN}
+    \right)_{SB} dN 
+    +
+    \left(
+        \frac{dU}{dB}
+    \right)_{SN} dB
+    =
+    T dS 
+    +
+    \mu dN 
+    - 
+    M dB
+}
+The Helmholz free energy is 
+\equations{
+    F 
+    =
+    U_S 
+    -
+    T S_S
+    =
+    -k_B T \ln(Z)
+}
+The maxwell relations are as following 
+\equations{
+    \frac{\del}{\del x}
+    \left(
+        \frac{\del}{\del y}
+        f(x, y)
+    \right)
+    =
+    \frac{\del}{\del y}
+    \left(
+        \frac{\del}{\del x}
+        f(x, y)
+    \right)
+}
+
+\chapter{Thermodynamic Potentials}
+Consider the Helmholz Free Energy 
+\equations{
+    F 
+    =
+    U 
+    -
+    T S
+}
+
+In equilibrium, $F$ is minimized for fixed $V, T$. 
+Consider starting with a reservoir and building a system out of energy 
+just from that reservoir. Your system has an energy $U$, and you can transfer 
+heat from the reservoir to the system. Let the system be $S$ and the 
+reservoir be $R$.
+\equations{
+    S_{R + S}
+    \geq 0
+    \hp
+    F_{S}
+    =
+    U_S 
+    -
+    T_S S_S
+}
+
+$F$ can be intuitively described as the work provided to $S$ at fixed $T$. 
+It can also be the work extracted from $R$ to $S$.
+
+\equations{
+    \Delta F 
+    =
+    \Delta U 
+    -
+    T \Delta S
+    \hp 
+    \Delta U 
+    =
+    0 + W_{on}
+    \rightarrow 
+    \Delta F 
+    =
+    W_{on}
+}
+This is in ideal conditions, but in reality there are irreversible 
+processes that happen. 
+\equations{
+    T \Delta S 
+    > 
+    \Delta Q 
+    \Rightarrow 
+    \Delta F 
+    < 
+    W_{on}
+}
+
+\section{Enthalpy and Gibbs Free Energy}
+consider a system $s$ at fixed $p, T$. 
+\equations{
+    U_{S} + pV 
+    =
+    H 
+    \hp 
+    \textrm{(Enthalpy)}
+    \\
+    U_{S}
+    +
+    pV 
+    -
+    TS 
+    =
+    G 
+    \hp 
+    \textrm{(Gibbs Free Energy)}
+}
+$G$ is the work required from the system $s$ at fixed pressure. It is 
+also the amount of work you can extract from the system $s$.
+
+\equations{
+    \Delta G 
+    =
+    \Delta U 
+    + 
+    p \Delta V 
+    -
+    T \Delta S 
+    =
+    0 + W_{on}
+    + 
+    p \Delta V 
+    -
+    T \Delta S 
+    \Rightarrow 
+    \\
+    \Delta G 
+    =
+    W_{on}
+    + 
+    p \Delta V 
+    \hp 
+    \textrm{(ideal conditions)}
+    \hp 
+    \Delta G 
+    \leq
+    W_{on}
+    + 
+    p \Delta V 
+}
+
+In equilibrium, $G$ is at a minimum for fixed $p, T$. 
+
+In equilibrium, $F$ is at a minimum for fixed $V, T$. 
+
+\section{4 Thermodynamic Potentials}
+\equations{
+    U = U(S, V)
+    \hp 
+    dU 
+    =
+    T dS - p dV 
+    =
+    d Q + d W_{on}
+    \\
+    F 
+    =
+    F(T, V)
+    =
+    U - TS 
+    \\ 
+    dF 
+    =
+    dU - T dS - S dT 
+    =
+    T dS - p dV - T dS - S dT 
+    =
+    - p dV - S dT 
+    \\
+    H 
+    =
+    H(p, S)
+    =
+    U + pV
+    \\
+    dH 
+    =
+    dU + p dV + V dp
+    =
+    T dS - p dV + p dV + V dp
+    =
+    T dS + V dp
+    \\
+    G 
+    =
+    G(p, T)
+    =
+    U + pV - TS 
+    =
+    H - TS
+    \\
+    dG 
+    =
+    dU + p dV + V dp - T dS - S dT 
+    \\ 
+    = 
+    T dS - p dV + p dV + V dp - T dS - S dT 
+    = 
+    V dp - S dT 
+}
+The energy, Helmholz Free Energy, Enthalpy, and Gibbs Free Energy 
+are the most important potentials in statistical mechanics. 
+
+\section{Maxwell Relations}
+All 4 potentials depend on 2 sets of 2 variables. They all contain 
+one of $\{ S, T \}$ and one of $\{ p, V \}$.
+
+\equations{
+    dU 
+    =
+    T dS 
+    -
+    p dV
+    =
+    \left(\frac{\del U}{\del S}\right)_{V}
+    dS 
+    +
+    \left(\frac{dU}{dV}\right)_{S} 
+    dV
+    \\ 
+    \left(\frac{\del U}{\del S}\right)_V
+    =
+    T 
+    \hp
+    -\left(\frac{dU}{dV}\right)_{S} 
+    =
+    p
+    \\
+    \left( \frac{\del T}{\del V}\right)_S 
+    =
+    \frac{\del^2 U}{\del S \del V}
+    =
+    -\left(\frac{dp}{dS}\right)_{V} 
+    \hp 
+    \textrm{First Maxwell Relation}
+}
+
+Now I can do the same thing with the other potentials 
+\equations{
+    dF 
+    =
+    - p dV - S dT 
+    =
+    \left(
+        \frac{\del F}{\del V}
+    \right)_T 
+    dV 
+    +
+    \left(
+        \frac{\del F}{\del T}
+    \right)_V 
+    dT 
+    \Rightarrow 
+    \\
+    p 
+    =
+    -
+    \left(
+        \frac{\del F}{\del V}
+    \right)_T 
+    \hp 
+    S 
+    =
+    -
+    \left(
+        \frac{\del F}{\del T}
+    \right)_V 
+    \\
+    \left(
+        \frac{\del S}{\del V}
+    \right)_T 
+    =
+    -
+    \frac{\del^2 F}{\del T \del V}
+    =
+    \left(
+        \frac{\del p}{\del T}
+    \right)_V 
+}
+
+Now Enthalpy 
+\equations{
+    dH
+    =
+    T dS + V dp
+    = 
+    \left( \frac{\del H}{\del S}\right)_T dS 
+    +
+    \left( \frac{\del H}{\del p}\right)_T dp 
+    \Rightarrow 
+    \\
+    T 
+    =
+    \left( \frac{\del H}{\del S}\right)_T dS 
+    \hp
+    V 
+    =
+    \left( \frac{\del H}{\del p}\right)_T dp 
+    \\
+    \left( \frac{\del T}{\del p}\right)_T dp 
+    =
+    \frac{\del^2 H}{\del S \del T}
+    =
+    \left( \frac{\del V}{\del S}\right)_T dS 
+}
+
+And last but not least 
+\equations{
+    dG 
+    =
+    V dp - S dT 
+    = 
+    \left( \frac{\del G}{\del p}\right)_T dp 
+    +
+    \left( \frac{\del G}{\del T}\right)_p dT 
+    \Rightarrow 
+    \\
+    V 
+    =
+    \left( \frac{\del G}{\del p}\right)_T
+    \hp 
+    S 
+    =
+    -
+    \left( \frac{\del G}{\del T}\right)_p
+    \\
+    -\left( \frac{\del V}{\del T}\right)_p
+    =
+    \frac{\del^2 G}{\del T \del p}
+    =
+    \left( \frac{\del S}{\del p}\right)_T
+}
+
+All of these relations come from the fact that $S = S(U, V)$ and 
+\equations{
+    dS = \frac{1}{T} dU + \frac{p}{T} dV
+    =
+    \frac{\del S}{\del U}
+    dU 
+    +
+    \frac{\del S}{\del V }
+    dV 
+    \\
+    \frac{1}{T}
+    =
+    \left( \frac{\del S}{\del U}\right)_V 
+    \hp 
+    \frac{p}{T}
+    =
+    \left( \frac{\del S}{\del V}\right)_U
+}
+
+\subsection{Applications}
+Let's say you measure a gas, and you have the temperature and volume of the gas. 
+Let's say you want the entropy. $S(U, V) \to S(T, V)$.
+\equations{
+    dS 
+    =
+    \left( \frac{\del S}{\del T} \right)_V 
+    dT 
+    +
+    \left( \frac{\del S}{\del V} \right)_T 
+    dV 
+    \\
+    C_v 
+    =
+    \left( \frac{\del Q}{\del T} \right)_V
+    = 
+    T \left( \frac{\del S}{\del T} \right)_V
+    \hp 
+    \left( \frac{\del S}{\del V} \right)_T
+    =
+    \left( \frac{\del p}{\del T} \right)_V 
+    \\
+    dS 
+    =
+    \frac{C_v}{T}
+    dT 
+    +
+    \left( \frac{\del p}{\del T} \right)_V 
+    dV
+}
+Because we measured pressure, we can now get the entropy. 
+The way we get the heat capacity is with the experimental 
+data and a bunch of integrals that I don't really want to write down. 
+\equations{
+    S_{tot}
+    =
+    S(T_i, p_i)
+    +
+    \Delta S_1 
+    + 
+    \Delta S_2
+    \\
+    =
+    S(T_i, p_i)
+    +
+    \int^{Tf}_{Ts} \, dT \, 
+    \frac{C_v(T_0, V_i)}{T} 
+    + 
+    \int^{Vf}_{Vs} \, dV \, 
+    \left( \frac{\del p}{\del T}\right)_V
+}
+
+\subsection{Monatomic Ideal Gas}
+\equations{
+    U = \frac{3}{2} N k_B T 
+    \Rightarrow 
+    C_v 
+    =
+    \frac{3}{2} N k_b
+    =
+    T
+    \left( \frac{\del S}{\del T}\right)_V
+    \hp 
+    T dS 
+    =
+    dU 
+    + 
+    p dV 
+    =
+    dU 
+    +
+    0
+    \\
+    C_v 
+    =
+    \frac{3}{2} N k_b
+    =
+    \left(
+    \frac{dU}{dT}
+    \right)_V
+    \\
+    \Delta S_1
+    =
+    \int^{Tf}_{Ts} \, dT \, 
+    \frac{C_v(T_0, V_i)}{T} 
+    =
+    \int^{Tf}_{Ts} \, dT \, 
+    \frac{\frac{3}{2} N k_B}{T} 
+    =
+    \frac{3}{2} N k_B
+    \ln(\frac{T_f}{T_i})
+    \\
+    \Delta S_2 
+    =
+    \int^{Vf}_{Vs} \, dV \, 
+    \left( \frac{\del p}{\del T}\right)_V
+    =
+    \int^{Vf}_{Vs} \, dV \, 
+    \left( \frac{\del }{\del T}\right)_V
+    \frac{N k_B T }{V}
+    =
+    \int^{Vf}_{Vs} \, dV \, 
+    \frac{N k_B }{V}
+    \\
+    =
+    N k_B
+    \ln(\frac{V_f}{V_i})
+    \\
+    \Delta S_{tot}
+    =
+    \frac{3}{2} N k_B
+    \ln(\frac{T_f}{T_i})
+    +
+    N k_B
+    \ln(\frac{V_f}{V_i})
+}
+This is consistent with the Sackur-Tetrode Equation for a monatomic ideal gas.
+\equations{
+    S(T, V)
+    =
+    N k_B \ln(T^{3/2} \cdot V ) + \const
+    \rightarrow 
+    \frac{3}{2} N k_B
+    \ln(T)
+    +
+    N k_B
+    \ln(V)
+    + \const
+}
+
+\chapter{Chemical Potential}
+Consider 2 systems that can exchanges particles with each other. 
+$(U_1 + U_2)$, $(V_1 + V_2)$, $(N_1 + N_2)$ are all fixed.
+At equilibrium, $S = (S_1 + S_2)$ is maximized, so $dS_1 + dS_2 = 0$.
+\equations{
+    dS_1
+    =
+    \left(
+        \frac{\del S_1}{\del U_1}
+    \right)_{V_1, N_1}
+    \del U_1
+    +
+    \left(
+        \frac{\del S_1}{\del V_1}
+    \right)_{U_1, N_1}
+    \del V_1
+    +
+    \left(
+        \frac{\del S_1}{\del N_1}
+    \right)_{U_1, V_1}
+    \del N_1
+}
+
+Because everything is fixed, we can say that 
+\equations{
+    dU_1 = -dU_2 
+    \hp
+    dV_1 = -dV_2 
+    \hp
+    dN_1 = -dN_2 
+    \\
+    \left(
+        \frac{\del S_1}{\del U_1}
+        -
+        \frac{\del S_2}{\del U_2}
+    \right)_{V_1, N_1}
+    \del U_1
+    +
+    \left(
+        \frac{\del S_1}{\del V_1}
+        -
+        \frac{\del S_2}{\del V_2}
+    \right)_{U_1, N_1}
+    \del V_1
+    +
+    \left(
+        \frac{\del S_1}{\del N_1}
+        -
+        \frac{\del S_2}{\del N_2}
+    \right)_{U_1, V_1}
+    \del N_1
+    \\
+    =
+    \left(
+        \frac{1}{T_1}
+        - 
+        \frac{1}{T_2}
+    \right)_{V_1, N_1}
+    \del U_1
+    +
+    \left(
+        \frac{p_1}{T_1}
+        - 
+        \frac{p_2}{T_2}
+    \right)_{U_1, N_1}
+    \del V_1
+    +
+    \left(
+        -
+        \frac{\mu_1}{T_1}
+        + 
+        \frac{\mu_2}{T_2}
+    \right)_{U_1, V_1}
+    \del N_1
+    \\
+    = 0
+    \Longrightarrow
+    T_1 = T_2
+    \hp 
+    p_1 = p_2
+    \hp 
+    \mu_1 = \mu_2
+}
+
+This is the equilibrium condition for the 2 systems that can exchange particles. 
+Because $N_1$ and $N_2$ are now non-constant, our equations change 
+\equations{
+    dS 
+    =
+    \frac{1}{T} dU 
+    +
+    \frac{p}{T} dV 
+    - 
+    \frac{\mu}{T} dN
+    \hp 
+    dU 
+    =
+    T dS 
+    - 
+    p dV 
+    +
+    \mu dN
+    \\
+    \mu  
+    =
+    \left(
+        \frac{\del U}{\del N}
+    \right)_{S, V}
+}
+
+\section{Chemical Potential}
+A temperature difference derived heat flow. A pressure difference derives 
+volume change. A chemical potential difference derives particle change.
+\equations{
+    \mu_1 > \mu_2 
+    \Rightarrow
+    \mu_{1}
+    \to 
+    \mu_{2}
+    \\
+    \mu 
+    =
+    -T \frac{\del S}{\del N}
+    \rightarrow 
+    \frac{\del S_1}{\del N_1}
+    <
+    \frac{\del S_2}{\del N_2}
+    \\
+    dS = dS_1 + dS_2 > 0
+    \Rightarrow 
+    \left(
+        \frac{\del S_1}{\del N_1}
+        -
+        \frac{\del S_2}{\del N_2}
+    \right)
+    dN_1 
+    > 0
+    \Rightarrow
+    dN_1 < 0
+}
+
+Chemical potentials moves from high to low. 
+
+\subsection{With a Reservoir}
+We have two systems $A_1$ and $A_2$ connected to a reservoir $R$ at fixed $T$.
+The equilibrium state is when the Helmholz Free Energy is minimized. 
+Let's assume that $dV = 0$ and $dT = 0$.
+\equations{
+    F = F_1(T, V_1, N_1) + F_2(T, V_2, N - N_1)
+    \hp 
+    dF 
+    =
+    dF_1
+    +
+    dF_2
+    =
+    0
+    \\
+    dF 
+    =
+    \left( 
+        \frac{\del F_1}{\del N_1}
+    \right)_{T, V_2}
+    dN_1
+    +
+    \left( 
+        \frac{\del F_2}{\del N_2}
+    \right)_{T, V_2}
+    dN_2
+    =
+    \left( 
+        \frac{\del F_1}{\del N_1}
+        -
+        \frac{\del F_2}{\del N_2}
+    \right)_{T, V_2}
+    =
+    0
+    \\
+    \frac{\del F_1}{\del N_1}
+    =
+    \frac{\del F_2}{\del N_2}
+}
 
 
 
+Let's propose that $\mu = \del F / \del N$
+\equations{
+    dU 
+    =
+    T dS 
+    - 
+    p dV 
+    + 
+    \mu dN 
+    \\
+    F = U - TS 
+    \Rightarrow
+    dF 
+    =
+    dU - S dT + T dS 
+    =
+    -S dT 
+    - 
+    p dV 
+    +
+    \mu dN 
+    \\
+    dF 
+    =
+    \frac{\del F}{\del T} dT 
+    + 
+    \frac{\del F}{\del V} dV 
+    +
+    \frac{\del F}{\del N} dN
+}
+
+That is the proof, so we now know chemical potential for a canonical 
+ensemble. 
+
+\section{Ideal Gas}
+\equations{
+    F 
+    =
+    -k_B T \ln(Z)
+    \hp 
+    Z_{I.D.} 
+    =
+    \frac{ (n_Q * V)^{N} }{N!}
+    \\
+    F 
+    =
+    -k_B T N
+    \ln(n_Q * V)
+    +
+    k_B T
+    \ln(N!)
+    \\
+    =
+    -k_B T N
+    \ln(n_Q * V)
+    +
+    k_B T N
+    \ln(N)
+    - 
+    k_B T N
+    \\
+    \mu 
+    =
+    \frac{\del F}{\del N}
+    =
+    -k_B T
+    \ln(n_Q * V)
+    +
+    k_B T
+    \ln(N)
+    +
+    k_B T
+    - 
+    k_B T
+    \\
+    =
+    -k_B T
+    \ln(\frac{n_Q * V}{N})
+    \hp 
+    \frac{N}{V} = n
+    \\
+    \mu 
+    =
+    k_B T
+    \ln(\frac{n}{n_Q})
+}
+
+For a classical ideal gas, $n << n_Q$, so the chemical potential 
+is always negative. We also now know that the chemical potential is proportional 
+to the log of the density. 
+
+\section{Internal and External Chemical Potential}
+This is the Nernst Equation. Consider an ideal gas with charge. You can 
+counteract $\mu$ with a difference in potential energy $U$.
+The energy is given by 
+\equations{
+    \epsilon_i
+    =
+    \frac{p_i^2}{2m}
+    q U_{1 or 2}
+    \hp 
+    Z_{tot}
+    =
+    \frac{1}{N_1!}
+    \left(
+        \sum_i
+        e^{-\beta \epsilon_i}
+    \right)^{N_1}
+    =
+    \frac{1}{N_1!}
+    \left(
+        e^{- \beta q U_1}
+        \sum_i
+        e^{-\beta \frac{p_i^2}{2m}}
+    \right)^{N_1}
+    \\
+    =
+    \frac{1}{N_1!}
+    \left(
+        e^{- \beta q U_1}
+        n_Q * V
+    \right)^{N_1}
+    \hp 
+    F 
+    =
+    - k_B T \ln(Z)
+    \\
+    F 
+    ====
+    -N_1 k_B T \ln(e^{\beta q U_1} n_Q V_1)
+    +
+    N_1 k_B T \ln(N_1) - N_1 k_B T
+    \\
+    \mu 
+    =
+    \frac{\del F}{\del N}   
+    ===
+    k_B T \ln(\frac{n_1}{n_Q}) 
+    + 
+    q U_1
+    =
+    \mu_{int}
+    +
+    \mu_{ext}
+}
+
+At equilibrium, the chemical potential can be written as 
+\equations{
+    \mu_1 = \mu_2 
+    \hp 
+    \Delta \mu_{ext}
+    =
+    q U_1
+    -
+    q U_2
+    =
+    - \Delta \mu_{int}
+    =
+    k_B T \ln(\frac{n_2}{n_1})
+    \hp 
+    \\
+    q U_1
+    -
+    q U_2
+    =
+    k_B T \ln(\frac{n_2}{n_1})
+}
+
+This is known as the Nernst Equation. This equation also works for the 
+chemical potential in a charge dilute solution.
+\equations{
+    \mu_{sol}
+    = 
+    \mu_{sol0}
+    +
+    k_B T \ln(\frac{n_{sol}}{n_0})
+}
+
+\subsection{Atmospheric Density}
+\equations{
+    \mu(h)
+    =
+    k_B T \ln(\frac{n(h)}{n_Q})
+    + 
+    mgh 
+    =
+    \mu_{int}
+    +
+    \mu_{ext}
+    \\
+    n(h) 
+    = 
+    n(0) e^{-\frac{mgh}{k_B T}}
+    \hp 
+    p(h) 
+    =
+    p(0)
+    e^{-\frac{mgh}{k_B T}}
+}
 
 
+\section{Discussion}
+\equations{
+    I(\alpha)
+    =
+    \int^{\infty}_{-\infty} \, dx \, 
+    e^{- \alpha x^2}
+    \\
+    I(1)^2
+    =
+    \int^{\infty}_{-\infty} \, dx \, 
+    \int^{\infty}_{-\infty} \, dx \, 
+    e^{- (x^2 + y^2)}
+    = 
+    \int^{2 \pi}_{0} \, d \theta \, 
+    \int^{\infty}_{0} \, d r \, 
+    \gamma e^{- \gamma^2}
+    \\
+    =
+    2 \pi 
+    \left(
+        -
+        \frac{1}{2}
+        e^{-\gamma^2}
+    \right)
+    \Big|^{\infty}_{0}
+    =
+    \sqrt{\pi}
+}
+
+\section{Gibbs Free Energy}
+\equations{
+    G 
+    =
+    U + pV 
+    - TS 
+    =
+    H - TS 
+}
+Where $H$ is the heat (i think).
+Remember that 
+\equations{
+    dS 
+    =
+    \left(
+        \frac{\del S}{\del U}
+    \right)_{V}
+    dU 
+    +
+    \left(
+        \frac{\del S}{\del V}
+    \right)_{U}
+    dV 
+    =
+    \frac{1}{T} dU 
+    +
+    \frac{p}{T} dV 
+}
+
+For the total system $R + s$, we know that 
+\equations{
+    dS_{R + s} 
+    =
+    0
+    =
+    dS_{R}
+    +
+    dS_{s}
+    =
+    \frac{dI_{R}}{T_{R}}
+    +
+    \frac{p_{R}}{T_{R}} dV_R 
+    +
+    dS_{s}
+    \\
+    U_{tot}
+    =
+    \const 
+    =
+    U_R + U_s 
+    \rightarrow 
+    dU_R = - dU_s
+    \\
+    V_{tot}
+    =
+    \const 
+    =
+    V_R + V_s 
+    \rightarrow 
+    dV_R 
+    =
+    - dV_s
+}
+
+Plug those things into our total entropy equation and get 
+\equations{
+    dS_{tot}
+    =
+    -
+    \frac{dI_{s}}{T_{R}}
+    -
+    \frac{p}{T} dV_s
+    +
+    dS_{s}
+    =
+    - \frac{1}{T} 
+    d 
+    \left(
+        U_s 
+        +
+        p V_s 
+        -
+        T S_s
+    \right)
+}
+
+We now have the equilibrium condition of entropy in terms of the 
+system $s$ alone.
+
+\equations{
+    G 
+    =
+    U_s 
+    +
+    p V_s 
+    -
+    T S_s
+    \hp
+    dS_{tot}
+    =
+    0 
+    \Rightarrow 
+    0
+    =
+    - dG
+}
+
+To maximize entropy, you minimize $G$.
+
+\section{Summary}
+\subsection{Microcanonical Ensemble}
+Closed system with fixed $U, V$. 
+
+At equilibrium, we maximize entropy $\Delta S \geq 0$.
+
+\subsection{Canonical Ensemble}
+System $s$ coupled to reservoir $S$ of set temperature. 
+$V_s$ and $T$ are constant. For this, we use the Helmolz Free Energy $F$.
+At equilibrium, we minimize Helmholz Free Energy $\Delta F_s \leq 0$. 
+
+\subsection{Fixed Pressure Reservoir}
+Consider a system with fixed $p, T$ instead of fixed $V_s, T$.
+
+At equilibrium, Gibbs Free Energy is minimized $\Delta G \leq 0$.
+
+\subsection{Math}
+We showed that 
+\equations{
+    U 
+    =
+    U(S, V)
+    \hp 
+    F = F(T, V) = U - TS 
+    \hp 
+    G 
+    =
+    G(T, p)
+    =
+    H - TS 
+    \\
+    dU 
+    =
+    T dS 
+    -
+    pdV 
+    +
+    \mu dN 
+    \\
+    dF 
+    =
+    - p dV 
+    -
+    S dT 
+    +
+    \mu dN 
+    \\
+    dG 
+    =
+    -S dT 
+    +
+    V dp 
+    +
+    \mu dN
+}
+
+\section{Relating G to $\mu$}
+Consider a monatomic ideal gas. 
+\equations{
+    G 
+    =
+    U + pdV - TS
+    \\ 
+    U 
+    =
+    \frac{3}{2}
+    k_B T 
+    \hp 
+    pV 
+    =
+    N k_B T 
+    \hp
+    S 
+    =
+    N k_B 
+    \left(
+        \ln(\frac{n_Q}{n}) + \frac{5}{2}
+    \right)
+    \\
+    G_{ideal gas}
+    =
+    \frac{3}{2} N k_B T 
+    +
+    N k_B T 
+    -
+    N k_B T 
+    \left(
+        \ln(\frac{n_Q}{n}) + \frac{5}{2}
+    \right)
+    =
+    N k_B T 
+    \left(
+        \ln(\frac{n}{n_Q})
+    \right)
+    \\
+    =
+    N * \mu_{ideal}
+    =
+    G_{ideal}
+    \hp 
+    \mu 
+    =
+    k_B T 
+    \ln(\frac{n}{n_Q})
+}
+While we proved this for the ideal gas, this is actually true in all cases.
+The proof is also supposedly very short. 
+
+An extensive quantity doubles if every feature doubles 
+$N \to 2N, V \to 2V, U \to 2U$. 
+
+Examples are $U, V, S, F$.
+
+Intensive quantities stay the same if the entire system doubles proportionally.
+Examples are $T, p, n = \frac{N}{V}, \mu $
+
+\equations{
+    G 
+    =
+    U + pV 
+    -
+    TS
+}
+Because $U, V, S$ are all extensive, then $G$ is just a sum of extensive 
+properties, and thus is also extensive. However $G$ is only a condition 
+based off of $G(T, p, N)$, and $T$ and $p$ are both intensive, so 
+\equations{
+    G(T, p, 2N) = 2G
+}
+
+Because of this, we know that $G$ must be proportional to $N$ since it's the 
+only extensive variable and $G$ itself is extensive. 
+\equations{
+    G 
+    \sim
+    N * \varphi(T, p)
+}
+
+Now we have to figure out $\varphi$ 
+\equations{
+    dG 
+    =
+    - S dT  
+    +
+    V dp 
+    +
+    \mu dN
+    \Rightarrow 
+    \left(
+        \frac{dG}{dN}
+    \right)_{T, p}
+    =
+    \mu
+    \\ 
+    dG 
+    =
+    \left(
+        \frac{d}{dN} (N * \varphi(T, p))
+    \right)_{T, p}
+    =
+    \varphi(T, p)
+    =
+    \mu
+}
+
+This does not work for the Helmholz Free Energy $F$ because it is depedent 
+on 2 extensive variables $V$ and $N$.
+
+\subsection{Generalizing $G_n$}
+This is specifically if you have $n$ species
+\equations{
+    G(T, p, N_1, N_2, \ldots, N_n)
+    =
+    \sum_{i = 1}^{n}
+    N_i \mu_i(T, p)
+}
+
+\subsection{Chemical Equilibrium}
+Chemical reactions for fixed $p, T$ can use $G$ instead. 
+Consider the nitrogen fixation reaction 
+\equations{
+    N_2 + 3H_2 
+    \leftrightarrow
+    2 NH_3
+    \hp 
+    -N_2 - 3H_2 
+    +
+    2 NH_3
+    =
+    0
+}
+
+The chemical reaction can be written as 
+\equations{
+    \nu_1 A_1 
+    +
+    \nu_2 A_2 
+    +
+    \ldots 
+    +
+    \nu_n A_n 
+    =
+    \sum_{i=1}^{n}
+    \nu_i A_i
+    =
+    0
+}
+Where $A_i$ denotes the $i$th chemical species. 
+For constants $p, T$, equilibrium is minimizing $G$. 
+
+\equations{
+    dG 
+    =
+    0
+    =
+    -S dT 
+    +
+    V dP 
+    +
+    \mu dN 
+    \rightarrow 
+    dG 
+    =
+    \sum_{i = 1}^{n}
+    \mu_i dN_i
+}
+
+Where $dN_i$ is the change in the number of molecules of species $i$ 
+in the reaction. 
+Let $d \hat N$ denote the number of reaction cycles 
+
+\equations{
+    dN_{N2} 
+    =
+    -1 * d \hat N
+    \hp
+    dN_{H2} 
+    =
+    -3 * d \hat N
+    \hp
+    dN_{NH3} 
+    =
+    +2 * d \hat N
+    \\
+    dG 
+    =
+    0
+    =
+    -1 \mu_{N2}
+    -
+    3 \mu_{H2}
+    +
+    2 \mu_{NH3}
+}
+This is the condition of diffusive equilibrium.
+
+In general, this can be written as 
+\equations{
+    dN_i 
+    =
+    \nu_i d \hat N_i
+    \hp 
+    dG = 0
+    \Rightarrow 
+    \sum_{i = 1}^{n}
+    \mu_i \nu_i 
+    =
+    0
+}
+
+If we consider $N_2, H_2, NH_3$ each as ideal gases, we can get 
+\equations{
+    p_i 
+    =
+    n_i k_B T 
+    \hp 
+    n_i = \frac{N_i}{V}
+    \\
+    \mu_i 
+    =
+    k_B T 
+    \ln(\frac{n_i}{n_Q(T)})
+    =
+    k_B T 
+    \ln(\frac{p}{n_Q k_B T})
+    =
+    \mu_{i0}
+    +
+    k_B T \ln(\frac{p_i}{p_0})
+}
+
+$p_i$ is specifically the partial pressure of gas $i$ in the system.
+\equations{
+p_0 = 1atm 
+\hp 
+\mu_0 = k_B T \ln(\frac{p_0}{n_Q k_B T})
+}
+
+Now we plug $\mu_{N2}, \mu_{H2}, \mu_{NH3}$ into our equilibrium equation 
+\equations{
+    dG 
+    =
+    \\
+    - \mu_{N2}^{ \varnothing}
+    -
+    k_B T 
+    \ln(\frac{p_{N2}}{p_0})
+    -
+    3
+    \left(
+    \mu_{H2}^{ \varnothing}
+    +
+    \ln(\frac{p_{H2}}{p_0})
+    \right)
+    +
+    2
+    \left(
+    \mu_{NH3 \varnothing}
+    +
+    \ln(\frac{p_{NH3}}{p_0})
+    \right)
+    \\
+    =
+    k_B T 
+    \ln(
+        \frac{p_{N2} * (p_{H2})^{3}}{(p_{NH3})^{2} * (p_{0})^{2}}
+    )
+    =
+    - \mu_{N2}^{ \varnothing}
+    -
+    3\mu_{H2}^{ \varnothing}
+    +
+    2\mu_{NH3 \varnothing}
+}
+
+The left side is $\Delta G_0$ which is the standard Gibbs Free Energy of 
+a reaction. 
+
+\equations{
+    \frac{(p_{NH3})^{2} * (p_{0})^{2}}{(p_{N2}) * (p_{H2})^{3}}
+    =
+    e^{- \frac{\Delta G_0}{k_B T}}
+    =
+    K(T)
+    =
+    \textrm{ equil. constant}
+    \hp 
+    \Delta G_0 < 0 
+    \hp 
+    K(T) > 1
+}
+
+This is known as the law of mass action. 
+Because $K(T)$ is constant, you can figure out the change in resulting 
+partial pressure if the partial pressure of the reactants changes.
+
+If you do all the math for the water reaction 2H2 + O2 = 2H2O, you get 
+\equations{
+    \frac{(p_{H2O})^{2} p_0}{(P_{H2})^{2} * (p_O2)^{2}}
+    =
+    e^{- \frac{\Delta G_0}{k_B T}}
+    \equiv 
+    K(T)
+}
+
+dilute solutions have a different equations that's on the last page of lecture 
+11.
 
 
+\chapter{Grand Canonical Ensemble (Not on Midterm 1)}
+Consider a reservoir $R$ and a system $\rho$ of $N=N$ and $\epsilon = \epsilon$. 
+The reservoir has parameters $N_0 - N$ and $U_0 - \epsilon$. 
+\equations{
+    U_0 
+    =
+    U_R 
+    + 
+    \epsilon 
+    =
+    \const 
+    \hp
+    N_0 
+    =
+    N_R 
+    +
+    N 
+    =
+    \const
+}
 
+For a gibbs ensemble or a grand sum ensemble. We consider the system in a 
+single microstate and the multiplicity of the system. 
+\equations{
+    p(N_i, \epsilon_i)
+    =
+    \frac{
+        \Omega_{R + \epsilon}(N_i, \epsilon_i)
+    }
+    {
+        \sum_{N_i, \epsilon_i} \Omega_{R + \rho}(N_i, \epsilon_i)
+    }
+    \\
+    \frac{p(N_1, \epsilon_1)}{p(N_2, \epsilon_2)}
+    =
+    \frac{
+        \Omega_{R}(N_0 - N_1, U_0 - \epsilon_1) \cdot \perp
+    }
+    {
+        \Omega_{R}(N_0 - N_2, U_0 - \epsilon_2) \cdot \perp
+    }
+    =
+    \frac{
+        e^{S_R(N_0 - N_1, U_0 \epsilon_1) / k_B}
+    }
+    {
+        e^{S_R(N_0 - N_2, U_0 \epsilon_2) / k_B}
+    }
+}
 
+For a reservoir $R$, we can do a taylor expansion around $U_0$ for 
+$U_0 >> \epsilon_1$ or $\epsilon_2$ and $N_0 >> N_1$ and $N_2$ 
 
+\equations{
+    S_R(N_0 - N_i, U_0 - \epsilon_i)
+    \approx 
+    S_R(N_0, U_0)
+    -
+    \frac{\del S_R}{\del N} \Big|_{N_0}
+    N_i 
+    -
+    \frac{\del S_R}{\del U} \Big|_{U_0}
+    \epsilon_i 
+    +
+    \ldots 
+    \\
+    =
+    S_R(N_0, U_0)
+    +
+    \frac{\mu}{T} N_i 
+    -
+    \frac{\epsilon_i}{T}
+    \\
+    \frac{p(N_1, \epsilon_1)}
+    {
+    p(N_2, \epsilon_2)
+    }
+    =
+    \frac{e^{(\mu N_1 - \epsilon_1) / k_B T}}
+    {
+    e^{(\mu N_2 - \epsilon_2) / k_B T}
+    }
+    \hp 
+    \sum_N \sum_\epsilon p(N, \epsilon) = 1
+    \\
+    p(N_1, \epsilon_1)
+    =
+    \frac{
+        e^{- (\epsilon_i - \mu N_i) / k_B T}
+    }
+    {
+        \sum_{N_j} \sum_{\epsilon_j}
+        e^{- (\epsilon_j - \mu N_j) / k_B T}
+    }
+}
 
+$ e^{- (\epsilon_i - \mu N_i) / k_B T} $
+Is known as the Gibbs Factor. The Gibbs Sum or Grand Sum is 
+\equations{
+    \zeta(\mu, T)
+    =
+    \sum_{N_j} \sum_{\epsilon_j}
+    e^{- (\epsilon_j - \mu N_j) / k_B T}
+}
 
+I don't know what's happening anymore I don't really care I'm tired 
+\equations{
+    \zeta(\mu, T)
+    =
+    \sum_{N}
+    e^{-\mu N / k_B T}
+    *
+    \sum_{\epsilon}
+    e^{-\epsilon / k_B T}
+    =
+    \sum_N \lambda^N Z(N, T)
+    \hp
+    \lambda 
+    =
+    e^{\mu / k_B T}
+    \\
+    \langle N \rangle 
+    =
+    \frac{
+    \sum_N 
+    \sum_{\epsilon(N)} 
+    N
+    \lambda^N
+    e^{-\epsilon / k_B T}
+    }
+    {
+    \zeta(\mu, T)
+    }
+    =
+    k_B T 
+    \frac{\del}{\del \mu}
+    \ln(\zeta(\mu, T))
+    =
+    \lambda 
+    \frac{\del}{\del \lambda}
+    \ln(\zeta(\lambda, T))
+    \\
+    U 
+    =
+    \langle \epsilon \rangle 
+    =
+    \frac{
+        \sum_N \sum_{\epsilon(N)}
+        \epsilon e^{-(\epsilon - \mu N) / k_B T}
+    }
+    {
+        \zeta(\mu T)
+    }
+}
 
+\subsection{Example: Myoglobin}
+I didn't want to pay attention so I did not.
 
+\section{Multiple Species}
+Consider a system $\rho$ with $N_A, N_B, \epsilon_A, \epsilon_B$ attached 
+to a reservoir $R$. 
 
+\equations{
+    \frac{p_1}{p_2}
+    =
+    \frac{
+    \Omega_R(N^{\varnothing}_{A} - N_{A1}, N^{\varnothing}_{B} - N_{B1},
+    U_0 - \epsilon_{A1} - \epsilon_{B1})
+    }
+    {
+    \Omega_R(N^{\varnothing}_{A} - N_{A2}, N^{\varnothing}_{B} - N_{B2},
+    U_0 - \epsilon_{A2} - \epsilon_{B2})
+    }
+    =
+    e^{\Delta S_R / k_B T}
+}
 
+\subsection{Example: Carbon Dioxide}
+I don't care
 
+\chapter{Photon Gas}
 
+Given a box of length $L$ at temperature $T$. Inside the box is EM radiation. 
+\equations{
+    |\vec k|^2 
+    =
+    k^2 
+    =
+    \frac{\omega^2}{c^2}
+}
 
+And an EM wave of frequency $\omega$ has energy 
+\equations{
+    \epsilon_n = \hbar \omega (n + \frac{1}{2})
+    \approx 
+    \hbar \omega n
+}
 
+What is the partition function for a single mode? 
+\equations{
+    Z 
+    =
+    \sum^{\infty}_{s=0}
+    e^{-\beta \epsilon_s}
+    =
+    \sum^{\infty}_{s=0}
+    e^{- \beta \hbar \omega s}
+    =
+    \frac{1}{1 - e^{- \beta \hbar \omega } }
+}
 
+And the average energy can be calculated with 
+\equations{
+    U 
+    =
+    \langle \epsilon \rangle 
+    =
+    - \frac{\del}{\del \beta} \ln(Z)
+    =
+    + \frac{\del}{\del \beta}
+    \ln(1 - e^{- \beta \hbar \omega})
+    =
+    \frac{\hbar \omega}{ e^{\beta \hbar \omega} - 1 }
+    =
+    \hbar \omega \langle s \rangle 
+}
 
+And $\langle s \rangle$ is the average number of photons in the mode 
+at temp $T$. 
+For high temperatures, it starts functioning as the classical case 
+\equations{
+    \langle s \rangle 
+    \approx 
+    \frac{k_B T}{\hbar \omega}
+    \Rightarrow 
+    U 
+    =
+    \langle \epsilon \rangle 
+    =
+    k_B T
+}
 
+It follows the equipartition theorem.
 
+\subsection{Standing Waves}
+Standing waves are described by a discrete set of integers $n_x, n_y, n_z$. 
+such that 
+\equations{
+    \omega = c |\vec k| 
+    \hp
+    \omega_n = c \sqrt{k_x^2 + k_y^2 + k_z^2}
+    \hp 
+    k_x 
+    =
+    \frac{n_x \pi}{L_x}
+    \\
+    Z_{tot}
+    =
+    \prod_{modes}
+    \frac{1}{1 - e^{- \beta \hbar \omega_n}}
+    \hp 
+    U_{tot}
+    =
+    \sum_{modes=n}
+    \frac{\hbar \omega_n}{e^{\beta \hbar \omega_n} - 1}
+    =
+    \sum_{modes=n}
+    \hbar \omega_n \langle s_n \rangle
+}
 
+\subsection{Continuum Basis}
+Let's assume that each particle is in an empty space of $\pi/L_x$ by $\pi/L_y$
+by $\pi/L_z$. So, it occupies a volume $\pi^3 / V$. If we consider only 
+the quarter circle shell of points such that $a < |\vec k|^2 < a + \delta$.
 
+What we're trying to solve is 
+\equations{
+    \# modes: f \in [\omega, \omega + d \omega] 
+    =
+    \frac{V(shell)}{V(\textrm{per k space})}
+    =
+    D(\omega) d\omega
+    \\
+    =
+    2 * 
+    \frac{\frac{4 \pi k^2}{8} dk}{ \frac{\pi^3}{V}}
+    =
+    \frac{V}{\pi^2} k^2 dk 
+    =
+    \frac{V}{\pi^2} \frac{\omega^2 d \omega}{c^3}
+}
 
+Remember that there are 2 polarizations per mode (hence the beginning 2 
+coefficient). 
+To find energy, we calculate 
+\equations{
+    U_{tot}
+    =
+    \sum_n \langle \epsilon_n \rangle 
+    =
+    \sum_n 
+    \frac{\hbar \omega}{e^{\beta \hbar \omega_n} - 1}
+    \approx 
+    \int^{\infty}_{0} \, d \omega \, 
+    D(\omega) 
+    \frac{\hbar \omega}{e^{\beta \hbar \omega_n} - 1}
+    \\
+    =
+    \int^{\infty}_{0} \, d \omega \, 
+    \frac{V}{\pi^2} \frac{\omega^2 }{c^3}
+    \frac{\hbar \omega}{e^{\beta \hbar \omega_n} - 1}
+    \hp
+    \frac{U_{tot}}{V}
+    =
+    \mu_{tot}
+    =
+    \int^{\infty}_{0} \, d \omega \, 
+    \frac{\hbar \omega^3 }{\pi^2 c^3}
+    \frac{1}{e^{\beta \hbar \omega_n} - 1}
+    \\
+    \mu(\omega)
+    =
+    \frac{\hbar \omega^3 }{\pi^2 c^3}
+    \frac{1}{e^{\beta \hbar \omega_n} - 1}
+}
+$\mu(\omega)$ is the energy density in the frequency band 
+$[\omega, \omega + d \omega]$.
 
+This is known as the \textbf{Planck Radiation Law}
 
+You can graph it to get a black body radiation something 
+\equations{
+    x = \beta \hbar \omega = \frac{\hbar \omega}{k_B T}
+    \hp 
+    \frac{d}{dx}
+    \frac{x^3}{e^x -1} \overset{!}{=} 0
+    \\
+    \frac{d}{dx}
+    \frac{x^3}{e^x -1} 
+    = 
+    \frac{3x^2}{e^{x} - 1}
+    - 
+    \frac{x^3 e^{x}}{(e^x - 1)^2}
+    =
+    \left(
+        \frac{x^2}{e^x - 1}
+    \right)
+    \left(
+        3 
+        -
+        \frac{x e^{x}}{e^x - 1}
+    \right)
+}
+
+This equation has trivial solution $x=0$ and nontrivial solution: 
+\equations{
+    3 
+    =
+    \frac{x e^{x}}{e^x - 1}
+    \Rightarrow 
+    3 (1 - e^{-x}) = x
+}
+
+This can be solved numerically, and the numerical solution is known as 
+\textbf{Wien's Law}.
+
+\subsection{Wien's Law}
+\equations{
+    2.82 
+    =
+    x_{max}
+    = 
+    \beta \hbar \omega_{max}
+    =
+    \frac{\hbar \omega_{max}}{k_B T}
+    \Rightarrow 
+    \hbar \omega_{max}
+    =
+    2.82 k_B T
+}
+
+\subsection{Def: Black Body}
+Idealized object that absorbs all EM radiation. In thermal equilibrium 
+at temp $T$, a black body emits radiation with spectrum $\mu(\omega)$.
+
+\subsection{Example: Cosmic Microwave Background}
+
+$mu(\omega)$ at $T = 273 K \rightarrow \lambda_{peak} =$ microwave.
+
+\section{Low Temperature Limit (Ultraviolet Catastrophe)}
+Let $\hbar \omega << k_B T$
+\equations{
+    \mu(\omega)
+    =
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \frac{1}{e^{\beta \hbar \omega} - 1}
+    \approx 
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \frac{k_B T}{\hbar \omega}
+    \hp 
+    e^x 
+    \approx 
+    1 + x + \ldots 
+    \\
+    \mu(\omega)
+    =
+    \omega^2 \frac{k_B T}{\pi^2 c^3}
+    \propto
+    \omega^2 k_B T
+}
+This is the Raleigh-Jeans Law.
+This is the classical limit without quantum mechanics. However, this breaks 
+everything because the total energy diverges 
+$\int^{\infty}_{0} d \omega \, \mu(\omega) = \infty$ (which is bad).
+This catastrophe is what caused us to think of photons and discover quantum 
+mechanics.
+
+\section{Stefan-Boltzmann Law}
+\equations{
+    \mu_{tot}
+    =
+    \int^{\infty}_{0} \, d \omega \, 
+    \mu(\omega)
+    =
+    \int^{\infty}_{0} \, d \omega \, 
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \frac{1}{e^{\beta \hbar \omega} - 1}
+    \hp 
+    x = \beta \hbar \omega 
+    =
+    \frac{\hbar \omega}{k_B T}
+    \\
+    \mu_{tot}
+    =
+    -
+    \frac{(k_B T)^4}{pi^2 (\hbar c)^3}
+    \int^{\infty}_{0} \, d x \, 
+    \frac{x^3}{e^x - 1}
+    \propto 
+    T^4
+}
+
+This is dramatically different from an ideal gas where $U \propto T$.
+We can solve the integral and plug it in to get 
+
+\subsection{Stefan-Boltzmann Law}
+\equations{
+    \mu_{tot}
+    =
+    \frac{\pi^2}{15}
+    \frac{(k_B T)^4}{(\hbar c)^3}
+}
+
+We can do shenanigans with entropy now. 
+\equations{
+    dU 
+    =
+    T dS - pdV 
+    =
+    T dS 
+    \Rightarrow 
+    dS 
+    =
+    \frac{1}{T} dU 
+    =
+    \alpha V \frac{4T^3 dT}{T}
+    \\
+    dS 
+    =
+    4 \alpha V T^2 dT 
+    \hp 
+    S 
+    =
+    \int dS 
+    =
+    \int
+    4 \alpha V T^2 dT 
+    =
+    \frac{4 \alpha}{3} V T^3 + C
+    \hp
+    (C = 0)
+    \\
+    S(V, T)
+    =
+    \frac{4 \alpha}{3} V T^3 + C
+    \hp 
+    S(U, V)
+    =
+    \frac{4}{3}
+    (\alpha V)^{1/4} U^{3/4}
+    \hp 
+    S 
+    \propto 
+    U^{3/4}
+}
+
+Very different from an ideal gas.
+
+\section{Discussion (october 14th)}
+It looks like we're just reviewing the different ensembles
+
+Micro-canonical ensembles mean no reservoir, constant $N, V, U$, and they
+are governed by 
+\equations{
+    S = k_B \ln(\Omega)
+}
+
+Canonical ensembles have a reservoir and thus constant $N, V, T$ with 
+the small system having energy $\epsilon$. 
+It is governed by 
+\equations{
+    Z = \sum_{i} e^{- \beta \epsilon_i}
+    \hp 
+    F 
+    =
+    k_B T \ln(Z)
+    =
+    U - TS
+}
+
+The Grand Canonical or Gibbs ensemble allows particles to move 
+so what's constant is $\mu, U, T$ with small system energy $\epsilon$ 
+and the equations are 
+\equations{
+    \zeta(\mu, T)
+    =
+    \sum_N \sum_{\epsilon(N)}
+    e^{- (\epsilon - \mu N) / k_B T}
+    =
+    \sum_N 
+    \lambda^N Z(N, T)
+    \hp 
+    \lambda 
+    \equiv 
+    e^{\mu / k_B T}
+    \\
+    \Phi 
+    =
+    G 
+    =
+    U - TS 
+    -
+    \mu \langle N \rangle
+    \hp 
+    \langle N \rangle 
+    =
+    \sum_N \sum_{\epsilon(N)}
+    N
+    e^{- (\epsilon - \mu N) / k_B T}
+    =
+    \lambda \frac{\del}{\del \lambda} \zeta(\lambda, T)
+    \\
+    \Phi = G 
+    =
+    -k_B T \ln(\zeta)
+    \\
+    \langle \epsilon \rangle 
+    =
+    \frac{\mu}{\beta} \frac{\del}{\del \mu} \zeta 
+    -
+    \frac{\del}{\del \beta}
+    \ln(\zeta)
+}
+
+\chapter{Debye Model}
+Instead of looking at a photon gas, we look at lattice vibrations 
+within a solid (\textbf{phonons}). I remember talking about these in the quantum 
++ chips summer school and that's about it. 
+
+Consider a 3D lattice of atoms that are elastically coupled (Let's call 
+them springs), and the lattices takes up a volume $V$. 
+
+At high temperature
+\equations{
+    \epsilon_i 
+    =
+    \frac{p_i^2}{2m} + \frac{1}{2} kx_{i}^{2}
+    \hp 
+    U_{tot}
+    N * 3 * 2 * \frac{1}{2} k_B T 
+    =
+    3 N k_B T
+    \\
+    C_{v}
+    =
+    \left(
+        \frac{\del U}{\del T}
+    \right)_{V}
+    =
+    3 N k_B T
+}
+(3 * 2 comes from 3 translational degrees of freedom + kinetic 
+energy + potential energy)
+
+At low temperature, we have to consider quantum shenanigans 
+\equations{
+    \epsilon_s 
+    =
+    \hbar \omega 
+    \left(
+        s 
+        +
+        \frac{1}{2}
+    \right)
+}
+
+This looks very similar to an Einstein Solid, which has a calculated 
+energy of 
+\equations{
+    U_1
+    =
+    \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1}
+    \hp 
+    U_N 
+    =
+    3 N
+    \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1}
+    \\
+    C_{v}
+    =
+    \left(
+        \frac{\del U_{tot}}{\del T}
+    \right)_{V}
+    =
+    \left(
+        \frac{\hbar \omega}{k_B T}
+    \right)^2 
+    k_B
+    \frac{e^{\beta \hbar \omega} }{(e^{\beta \hbar \omega} - 1)^2}
+}
+
+for high temperature $k_B T >> \hbar \omega$, we use the taylor 
+series $e^x \approx 1 + x + \ldots$ to get 
+\equations{
+    U_{tot}
+    =
+    3N 
+    \frac{\hbar \omega}{1 + \beta \hbar \omega - 1} 
+    =
+    3 N \frac{1}{\beta} = 3 N k_B T 
+    \hp 
+    C_{v}
+    =
+    \left(
+        \frac{\del U_{tot}}{\del T}
+    \right)_{V}
+    =
+    3 N k_B
+}
+
+At low temperature $k_B T << \hbar \omega$, we get 
+\equations{
+    U_{tot}
+    \approx 
+    3 N \hbar \omega e^{-\beta \hbar \omega}
+    \hp
+    C_{v}
+    =
+    3 N k_B
+    \left(
+        \frac{\hbar \omega}{k_B T}
+    \right)^2 
+    e^{-\hbar \omega / k_B T}
+}
+
+Experimentally, we see that the specific heat capacity starts at 
+0 for $T = 0K$, and it goes up to an asymptote $3 N k_B$ as $T$ 
+gets higher. $C_{V}$ goes up linearly with $T^2$ in experiments at low $T$. 
+
+For an insulator we calculate $C_V = A T^3$, and for a metal, 
+$C_V = \gamma T + A T^3$. These are both wrong, so we have to figure 
+out what's up with the Einstein model to get the experimental result of $T^2$
+The biggest issue with the Einstein model is that it assumes that 
+every atom has the same frequency $\omega$.
+
+\section{Debye Model}
+Atoms are \textbf{not} independent oscillators. Consider atoms of a 
+lattice spacing $a$.
+
+The force on a single atom is given by 
+\equations{
+    F_i 
+    = 
+    \kappa
+    \left(
+        r_{i + 1}
+        -
+        r_{i}
+        - 
+        a
+    \right)
+    - 
+    \kappa
+    \left(
+        r_{i}
+        -
+        r_{i - 1}
+        - 
+        a
+    \right)
+    =
+    m \frac{d^2 r_{i}}{d t^2}
+    =
+    \kappa
+    \left(
+        r_{i + 1} - 2r_i + r_{i-1}
+    \right)
+    \\
+    \frac{df}{dx}
+    \lim_{a \to 0}
+    \frac{f(x + a) - f(x)}{a}
+    \Rightarrow
+    \frac{d^2f}{dx^2}
+    =
+    \lim_{a \to 0}
+    \frac{f(x + a) - 2f(x) + f(x-a)}{a^2}
+    \\
+    \frac{r_{i + 1} - 2r_i + r_{i-1} }{a^2}
+    \approx 
+    \frac{d^2 r}{dx^2}
+    \approx 
+    \frac{m}{\kappa a^2}
+    \frac{d^2 r}{dt^2}
+    \hp 
+    \frac{m}{\kappa a^2}
+    =
+    \frac{1}{C_S^2}
+}
+$C_s$ is the speed of sound in the lattice. We can just treat the set 
+of lattices as a wave equation. 
+
+\equations{
+    \tau(x, t)
+    \approx
+    e^{ikx - i \omega t}
+    \hp 
+    \omega 
+    =
+    c_s k
+}
+
+This approximation is valid for $\lambda = \frac{2 \pi}{k} >> a$ 
+so there's a long wavelength. 
+The Debye model assumes that $\omega = c_s k$ is always valid.
+Atoms move either parallel or perpendicular to the wave 
+propagation direction, and there's 1 parallel and 2 perpendicular directions. 
+The speed of sound in the lattice $c_s$ could depend on the polarization 
+of the wave. All we know is that we should get 
+\equations{
+    U_{tot}
+    =
+    ?
+    \hp 
+    C_{v}
+    =
+    \left(
+        \frac{\del U_{tot}}{\del T}
+    \right)_{V}
+    \simeq 
+    T^3
+}
+
+\section{1D Chain}
+Let's consider a 1d chain bounded at distance $L_x$ from each other. 
+The standing waves will have the following forms 
+\equations{
+    \lambda = 2 L_x 
+    \hp 
+    k_x 
+    =
+    \frac{2 \pi}{\lambda}
+    =
+    \frac{\pi}{L_x}
+    \hp
+    \lambda = L_x 
+    \hp 
+    k_x 
+    =
+    \frac{2 \pi}{L_x}
+    \hp
+    \lambda = \frac{2}{3} L_x 
+    \hp 
+    k_x 
+    =
+    \frac{3 \pi}{L_x}
+}
+
+etc etc, and the maximum standing wave will be of the form 
+\equations{
+    k_{max}
+    =
+    \frac{\pi}{a}
+    =
+    \frac{N_x \pi}{L_x}
+    \hp 
+    k_{x}
+    =
+    \frac{n_x \pi}{L_x}
+    \hp
+    n_x
+    =
+    1, 2, 3, \ldots, N_x
+}
+
+And it's the same for $y$ and $z$.
+
+With this, the total number of modes as be written as 
+\equations{
+    \#(modes)_{tot}
+    =
+    3 N_x N_y N_z 
+    =
+    3N
+}
+And there 3 is because of the polarization states of the waves.
+
+\subsection{Photon Gas}
+For a photon gas, we have 
+\equations{
+    \omega = ck
+}
+You are always 2 transverse polarizations
+
+\equations{
+    k_{x, y, z}
+    =
+    n_{x, y, z}
+    \frac{\pi}{L_{x, y, z}}
+    \hp 
+    n_{x, y, z}
+    =
+    1, 2, 3, \ldots, \infty
+    \hp
+    2 \sum_{n_x, n_y, n_z} 
+    \to 
+    \infty
+}
+
+\subsection{Phonon Gas}
+and phonon gas, we have 
+\equations{
+    \omega 
+    =
+    c_s k : \lambda >> a 
+}
+You are always 2 transverse and 1 longitudinal polarization. 
+
+\equations{
+    k_{x, y, z}
+    =
+    n_{x, y, z}
+    \frac{\pi}{L_{x, y, z}}
+    \hp 
+    n_{x, y, z}
+    =
+    1, 2, 3, \ldots, N_{x, y, z}
+    \hp
+    3 \sum_{n_x, n_y, n_z} 
+    =
+    3N
+}
+
+\section{Phonon Energy}
+\equations{
+    U_{tot}
+    =
+    \sum_{n=1}^{3N}
+    \frac{\hbar \omega_n}{e^{\beta \hbar \omega_N} - 1}
+}
+Where $n$ is shorthand for $n_x, n_y, n_z$. The way to do this is 
+by transforming it into an integral with large $N$.
+\equations{
+    \# modes(\omega \in [\omega, \omega + d \omega])
+    =
+    \# polarizations
+}
+
+The easiest way to do this is the spherical shell method that we 
+used in lecture 13 or for the derivation of the ideal gas.
+\equations{
+    D(\omega) d \omega 
+    =
+    3 
+    \frac{\frac{4 \pi k^2 dk}{8}}
+    { \frac{\pi^3}{V} }
+    =
+    \frac{3V}{2 \pi^2 } k^2 dk
+    =
+    \frac{3}{2}
+    \frac{V}{\pi^2}
+    \frac{\omega^2 d \omega}{c_s^3}
+    \\
+    U_{tot}
+    =
+    \sum_{n=1}^{3N}
+    \frac{\hbar \omega_n}{e^{\beta \hbar \omega_N} - 1}
+    =
+    \int_{0}^{?} \, d \omega \, 
+    D(\omega)
+    =
+    \int_{0}^{?} \, d \omega \, 
+    D(\omega)
+    \frac{\hbar \omega_n}{e^{\beta \hbar \omega_N} - 1}
+}
+
+Let's assume that instead of a square of $L_x, L_y, L_z$, we instead 
+have a sphere of radius $r$ such that there is an equal amount of modes 
+as the cube which is $\# modes = 3N$.
+
+\equations{
+    3N 
+    =
+    3 
+    \frac{\frac{4}{3} \pi \frac{k_D^3}{8}}{\frac{\pi^3}{V}}
+    =
+    \frac{V}{2 \pi^2} 
+    k_D^3
+    =
+    \frac{V}{2 \pi^2} 
+    \left(
+        \frac{\omega_D}{c_s}
+    \right)^3
+    \Rightarrow 
+    \omega_D 
+    =
+    6 \pi^2 
+    \left(
+    \frac{N}{V}
+    \right)^{1/3}
+    c_s
+}
+
+That is known as the Debye frequency, which is the upper limit 
+of our integral.
+
+\equations{
+    U_{tot}
+    =
+    \int^{\omega_D}_{0} \, d \omega \, 
+    D(\omega)
+    \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1}
+    =
+    \frac{3 V \hbar}{2 \pi^2 c_s^3}
+    \int^{\omega_D}_{0} \, d \omega \, 
+    \frac{\omega^3}{e^{\beta \hbar \omega} - 1}
+    \\
+    \frac{3 V \hbar}{2 \pi^2 c_s^3}
+    \left(
+    \frac{k_B T}{\hbar}
+    \right)^4
+    \int^{x_D(T)}_{0} \, d x \, 
+    \frac{x^3}{e^{x} - 1}
+}
+
+that is dependent on the Debye Temperature 
+\equations{
+    \theta_D 
+    =
+    \frac{\hbar \omega_D}{k_B}
+    \Rightarrow 
+    x_D 
+    =
+    \frac{\theta_D}{T}
+    \\
+    \Theta_D 
+    =
+    \frac{\hbar \omega_D}{k_B}
+    =
+    \left(
+        6 \pi^2
+        \frac{N}{V}
+    \right)^{1/3}
+    \frac{\hbar c_s}{k_B}
+    =
+    T * x_D 
+    \\
+    U_{tot}
+    \simeq
+    \frac{3 V \hbar}{2 \pi^2 c_s^3}
+    \left(
+    \frac{k_B T}{\hbar}
+    \right)^4
+    \int^{\infty}_{0} \, d x \, 
+    \frac{x^3}{e^{x} - 1}
+    \approx
+    \frac{3 V \hbar}{2 \pi^2 c_s^3}
+    \left(
+    \frac{k_B T}{\hbar}
+    \right)^4
+    \frac{\pi^4}{15}
+    \\
+    U_{tot}
+    ==
+    \frac{3 \pi^4}{5}
+    N k_B T 
+    \left(
+        \frac{T}{\theta_D}
+    \right)^3
+    \\
+    C_V 
+    =
+    \left(
+        \frac{\del U}{\del t}
+    \right)_V
+    =
+    \frac{12 \pi^4}{5}
+    N k_B 
+    \left(
+        \frac{T}{\theta_D}
+    \right)^3
+}
+This is for the low temperature limit 
+
+For the high temp limit we get 
+\equations{
+    C_v = 3 N k_B
+}
+
+The Debye model gets the low and high temperature limits correct, but 
+does not do as well in the middle.
 
 
 

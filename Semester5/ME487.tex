@@ -743,6 +743,1655 @@ baking, radiation, reactive gas, vacuum, time.
 \subsection{Stripping}
 There's all sorts of ways to get PR's off of your wafer.
 
+\section{MONDAY LITHOGRAPHY QUIZ (it should only take 5 minutes)}
+Resist's have 3 components 
+Sensitizer, resin, solvent.
+
+Ferrera likes darkfield masks more than lightfield masks because he 
+has more control. 
+
+\subsection{Step and Repeat Process}
+Used for high-volume fabrication. I wasnt paying attention 
+
+\chapter{Alignment}
+You need both in-plane and out-of-plane alignment. 
+
+\subsection{Out of Plane}
+Wedge error compensation. Necessary for good image transfer 
+
+\subsection{In-Plane}
+Overlay Registration. This is important for when we need to add new 
+features to features already on the plane. 
+
+\subsection{Top-Down}
+Aligning features on the two faces of the wafer. 
+
+There are multiple ways to do this of varying quality 
+\begin{itemize}
+    \item 
+    Hole through the wafer 
+    \item 
+    IR Microscopy 
+    \item 
+    visible light with 2 masks 
+    \item 
+    back-side mask and top-side mask 
+    \item 
+    Wafer flats can also be used at reference points.
+\end{itemize}
+
+\section{Errors}
+There are all sorts of errors that can occur due to misalignment in 
+projection lithography.
+
+\subsection{Misalignment Examples}
+Thermal run-in and run-out is when your features move due to a change 
+in temperature during lithography 
+
+\equations{
+    R 
+    =
+    r 
+    \left(
+        \Delta T_{mask}
+        \alpha_{mask}
+        -
+        \Delta T_{Si}
+        \alpha_{Si}
+    \right)
+}
+
+
+\section{Alignment Markers}
+\subsection{Fiducial Marks}
+Little marks on the wafer that you can align your mask towards.
+They are usually on the sides of the wafer where you are not 
+putting devices.
+
+\subsection{Contact Aligner}
+It's just a mark with depth such that you can align the wafer with a 
+physical process instead of just visual.
+
+\subsection{Special Marks}
+Vernier scales and Moire-style marks are used for very quick 
+alignment.
+
+\subsection{Vernier Scale}
+Vernier scales use slightly misaligned steps such that you can 
+see very small measurements more easily. Each misalignment is 1 step, 
+and you can see the total misalignment by seeing which step is 
+aligned with the wafer itself.
+
+LC = least count, MSP = main scale pitch. 
+\equations{
+    O 
+    =
+    ZL * MSP + (LC \times MB)
+}
+
+If the vernier scale aligns with the number $10$, and the spacing 
+difference is $0.2$ microns, then the alignment is $10 * 0.2 = 2$ micron 
+misalignment.
+
+\subsection{Moire Scale}
+Uses constructive and destructive interferencec to essentially show 
+a large wave pattern with a very small misalignment.
+
+\section{Projection Lithography}
+If your wafer is at an angle to the mask, the diffraction will cause 
+blurry portions, and the dimensions will also be off because you are 
+no longer in the focal plane.
+
+\section{Resolution Enhancement Technology}
+How do you improve resolution? 
+
+You can use shadow printing 
+\equations{
+    R 
+    =
+    B_{min}
+    =
+    k \sqrt{\lambda \left( s + \frac{z}{2} \right)}
+}
+
+\begin{itemize}
+    \item Resists
+
+You can use better resists or multi-layer resists. You can use an 
+anti-reflection coating. 
+\item New Masks 
+
+Phase shifting, optical proximity correction 
+
+\item 
+Exposure system
+ 
+buy a new system
+\end{itemize}
+
+resists are the cheapest option of any of these. 
+Masks are pretty expensive. Aligners are crazy expensive.
+
+\section{Chemically Amplified Resists}
+Quantum Efficiency 
+=
+$\frac{\textrm{Number of photons induced}}
+{\textrm{number of photon absorbed}}$
+
+They have improved efficiency compared to regular resists. 
+
+They do have some issues 
+\begin{itemize}
+    \item 
+    Poor stability 
+    \item 
+    dependent on process parameters 
+    \item 
+    Oxygen causes surface inhibition 
+\end{itemize}
+
+Single layer photoresists also cause issues
+
+\subsection{Anti-Reflective Coatings}
+A coating is applied to the wafer before the PR is put on. 
+
+\begin{itemize}
+    \item 
+    reduce reflected light 
+    \item 
+    reduces standing waves 
+    \item 
+    planarized surface 
+\end{itemize}
+
+We don't worry about non-standing waves in our cleanroom because 
+we use a mercury lamp that release non-coherent light. 
+
+\subsection{Thin Film Imaging}
+You use multiple layers of resists. Use a very thin top resist 
+and only etch the top resist. Then the bottom resist acts to get 
+rid of standing waves and interference, increasing resolution. 
+
+\subsection{Wavelength}
+Decreased wavelength means less diffraction and greater resolution.
+
+\section{Mask/Wavefront Engineering}
+
+
+\subsection{Phase Shifting Mask}
+A phase shifting mask improves both resolution and DOF. 
+To use a phase shifting masks, you need \textbf{coherent light} (lasers), 
+so that the phase is consistent.
+
+Controls light diffraction using interference.
+
+This can be done with features etched into glass, known 
+as a \textbf{hard shifter mask}. 
+
+Soft shifter masks use a non-chrome material that allows only 
+phase-shifted light to come through. 
+
+\subsection{Levenson-type Mask}
+Masks can have additional material patterned onto the surface 
+that shifts the phase by 180 degrees to create interference 
+
+\subsection{Mask Geometry Engineering}
+When light goes through a pattern, some with defract and there will be 
+noise in the design. 
+
+\textbf{optical proximity correction} is encoding noise into the mask such 
+that the light that goes through the mask will etch the pattern \textbf{and}
+account for the noise created by the light. Add light where the pattern isn't 
+fully etched and remove light where the pattern is over-etched.
+
+Mask is no longer WYS / WYG (what you see is what you get) (lmao). 
+
+\subsection{Improved Exposure Systems}
+These improved systems only work with projective lithography. 
+
+\textbf{Off-Axis Illumination} changes the diffraction pattern by 
+angling the light 
+
+\textbf{Kohler Illumination} focusing light at the entrance of the aperture. 
+This minimizes glares, shadows, and contrast. The field is evenly illuminated.
+
+\subsection{Resolution Example}
+\equations{
+    B_{min}
+    =
+    \frac{k_1 \lambda}{N A}
+    \hp 
+    DOF 
+    =
+    \pm 
+    \frac{k_2 \lambda}{(NA)^2}
+    \hp 
+    NA 
+    =
+    n \sin(\theta)
+}
+The maximum that $NA$ can be is 1 (index of refraction of air), so 
+even with the absolute maximum, with $\lambda = 193nm$ and $k_1 = 0.25$, we get 
+\equations{
+    R = B_{min}
+    =
+    \frac{0.25 (193)}{1}
+    =
+    48.25 nm
+}
+However, with this resolution, we were able to get 22nm features. 
+The way that they increased their resolution was by increasing the 
+refractive index $n$ with a liquid medium. You need a liquid 
+that does not absord UV radiation, has a high refractive index, and is 
+compatible with all of the materials on your wafer. 
+
+This is called immersion lithography (or immersion imaging for microscopes). 
+
+\section{Summary}
+Wavefront engineering improves certain types of mask imaging. We 
+have 3 major improvements
+\begin{itemize}
+    \item
+    phase shifting masks
+    \item
+    optical proximity correction
+    \item
+    off-axis illumination 
+\end{itemize}
+
+\chapter{Optical Lithography}
+What's new? Limit shapes and keep it simple. Advances beyond 
+PSM, OPC, and OAI. 
+New light sources ($F_2$ lasers at 157nm, possibly lasers at 126nm). 
+
+Mask materials? Quartz cuts out at 190nm and CaF$_2$ at 150nm. Now what? 
+
+Throughput is impressive at 200WPH (wafers per hour). What is this number 
+when new technology has to be introduced?
+
+At some point, photolithography reaches its limit, so we have to switch 
+to UV or even x-ray lithography. The newest 3nm ASML machines use 
+EUV lithography or soft x-ray lithography. We also 
+have e-beam lithography and ion-beam lithography and nano-imprint lithography. 
+
+\section{Extreme UV Lithography}
+Wavelength range from 10nm to 14nm. These are also called soft x-rays 
+or vacuum UV. They developed from laser produced plasmas (LPP) and 
+synchrotrons. 
+They are only surface resist and vacumm compatible. 
+
+\subsection{Pros}
+Capable of printing sub-100nm features. All optics also must be reflective 
+(no lenses)
+
+\subsection{Cons}
+EUV is strongly absorbed in all materials, so it must be done in a vacuum. 
+All optics must be reflective (no lenses). Masks must be 100\% defect free. 
+New resists are need for this very low wavelength beam. 
+
+\section{X-ray Lithography}
+wavelength range from $0.4nm \to 5nm$. 
+Also called deep x-ray lithography. Sources include electron impact tubes, 
+laser based plasmas, and synchrotrons. PMMA can be used as a resist. 
+
+\subsection{Pro}
+\begin{itemize}
+    \item 
+    Large DOF 
+    \item 
+    Capable of printing sub-200nm 
+    \item 
+    Diffraction is not an issue
+    \item 
+    Dust is transparent
+    \item 
+    no optics involved
+\end{itemize}
+
+\subsection{Cons}
+\begin{itemize}
+    \item
+    masks need ot be opaque and transparent to x-ray
+    \item
+    Mask reduction is not possible 
+    \item
+    Masks can only be written with e-beams 
+\end{itemize}
+
+We can theoretically get smaller features, but the biggest issue 
+is the masks (tubes instead of mirrors/lenses). The masks also are all 
+shadowless.
+
+\section{E-Beam Lithography}
+Energy range from $10 \to 50 keV$. Can be both narrow beam or flood exposure. 
+PMMA and PGMA can both be used as a resist. 
+
+\subsection{Pros}
+\begin{itemize}
+    \item
+    Micron and sub-micron resist geometries
+    \item
+    Can be automated and precisely controlled
+    \item
+    Greater DOF
+    \item
+    Direct write without mask (narrow beam)
+\end{itemize}
+
+\subsection{cons}
+\begin{itemize}
+    \item 
+    slow, low throughput (scanning a 4in wafer takes over an hour)
+    \item 
+    must be done in a vacuum to avoid absorption 
+    \item 
+    Sample and resist must be able to handle electrons 
+\end{itemize}
+
+\section{Ion Beam Lithography}
+Energy range $> 100keV$. Uses positive ions (Gallium, Indium, Gold). 
+Various methods for producing ion beams (both narrow and flood exposure).
+PMMA and PGMA both can be used as a resist. 
+
+\subsection{Pros}
+\begin{itemize}
+    \item
+    Smallest beam size of anything $(< 8nm)$
+    \item
+    Higher resist sensitivity than e-beam
+    \item
+    negligible ion scanning 
+\end{itemize}
+
+\subsection{Cons}
+\begin{itemize}
+    \item 
+    Slow, low throughput
+    \item 
+    Must be done in a vacuum
+    \item 
+    Ion contamination (Gallium can implant in your substrate)
+    \item 
+    can break your wafer 
+\end{itemize}
+
+\section{Nanoimprint Lithography}
+Hot embossing applied to nanofabrication. A force presses a master 
+against a polymer, so that it imprints with the desired patterns via 
+UV, heat, or pressure. 
+Essentially, you squish a polymer (liquid) onto your substrate with the mask 
+in between. We're pressing a liquid through a very small channel at a very 
+high pressure.
+
+\subsection{Pros}
+\begin{itemize}
+    \item
+    Simple and relatively cheap
+    \item
+    Single layers are economical
+    \item
+    Small features are easier than large features (less stamping)
+\end{itemize}
+
+\subsection{Cons}
+\begin{itemize}
+    \item
+    Low throughput 
+    \item
+    Alignment can be costly 
+    \item
+    Mask can degrade 
+    \item
+    Release can be challenging 
+\end{itemize}
+
+\section{Maskless Lithography}
+There is a machine called a Heidelberg that is a Spacial Light Modulator 
+that produces patterns on the photoresist directly. 
+
+\subsection{Pros}
+\begin{itemize}
+    \item 
+    good for R\&D (no mask development)
+\end{itemize}
+
+\subsection{Cons}
+\begin{itemize}
+    \item
+    Write speeds depend on the model and can take minutes to hours
+\end{itemize}
+
+\section{3D Nanoprinting}
+\begin{enumerate}
+    \item
+    A negative PR is polymerized using 2 photon absorption
+    \item
+    The polymer itself is used to pattern the surface 
+    \item
+    A master can be made with molding
+\end{enumerate}
+The PR itself is not the material being used. Nanoprinting allows you to 
+make 3D PR patterns, and then you get etch/deposit a 3d pattern based on that 
+PR.
+
+\subsection{Pros}
+\begin{itemize}
+    \item
+    Simple and Low cost
+    \item
+    Simple layers are cheap 
+    \item
+    Small features are easier than large features (less printing)
+\end{itemize}
+
+
+\subsection{Cons}
+\begin{itemize}
+    \item 
+    Stitching errors 
+    \item 
+    Limited size of patterns 
+    \item 
+    Limited polymer materials (must be a negative PR)
+\end{itemize}
+
+\section{Soft Lithography}
+You use a stamp with a soft polymer and wack it into the thing. 
+
+
+\chapter{Physical Vapor Deposition (PVD)}
+Source/target to wafer/substrate.
+
+The 2 things to do after you have a pattern on your wafer are deposition 
+(adding stuff to the wafer), and etching (removing stuff from the wafer). 
+There are 2 types of main deposition processes, PVD and CVD. 
+
+PVD is physical vapor deposition, where you you plasma or boiling or any 
+sort of non-chemical process to atomize a material and place it onto a 
+substrate.
+
+CVD could involve 2 gasses being mixed such that the precipitate is formed 
+on your wafer. 
+
+Epitaxial processes involve depositing only a single layer film onto a wafer. 
+The way that this is done is with beams of molecules being placed (epitaxy). 
+
+Atomic layer deposition involves a self-terminating reaction. 2 materials 
+react on the substrate, but they are self-terminating, so they stop very quickly. 
+You condition your surface with 1 chemical and add a 2nd. They react and only 
+create a sinlge layer of reactant, and then you can purge your gasses to get 
+only a very thin film.
+
+Implantation and diffusion are types of doping (material modification)
+    
+\subsection{Types of PVD}
+\begin{itemize}
+    \item
+    Evaporation
+    \item
+    Sputtering
+    \item
+    Laser
+    \item
+    Molecular beam epitaxy
+\end{itemize}
+
+No matter what, film growth is achieved via \textbf{condensation} 
+of a vapor onto your substrate.
+This can be done with evaporation, or bombardent/sputtering.
+
+The deposition rate is proportional to the rate of mass transfer to the surface. 
+PVD is usually done in a vacuum to increase your mean free path. Also, 
+a very high vacuum keeps contamination to a bare minimum (ignore oxidation).
+Lastly, a high vacuum also depressed the boiling point of materials.
+
+We usually work in a high vacuum of $10^{-5} \to 10^{-7}$ torr.
+
+\subsection{Evaporation}
+Heat up your substance with an electron beam, heating coil, laser, RF induction, 
+resistive heating, etc. 
+
+\subsection{Sputtering}
+Ion bombardment and laser ablation are used to wack atoms off of your target.
+We usually use Argon or Nitrogen ions for sputtering because they are unreactive.
+
+\section{Mean Free Path}
+Defined as the average distance a molecule travels 
+before colliding with another molecule.
+The mean free path statistics result in the equation 
+
+p = pressure, T = temperature, d = diameter.
+\equations{
+    L 
+    = 
+    \frac{k_B T}{\sqrt{2} \pi d^2 p}
+    \hp 
+    \frac{k_B T}{p}
+    =
+    \frac{V}{N}
+}
+We want to increase mean free path, so we decrease pressure. The math is 
+in the lecture, but at a high vacuum, the mean free path is $L \approx 4m$.
+
+\subsection{Types of Pumps}
+Roughing pumps (rotary, etc.) can get you to a low/medium vacuum. 
+Cryopumps, ion pumps, turbo pumps, etc. 
+are able to get you to high vacuums.
+
+\subsection{Vacuum System Operation}
+Mechanical pump $\to$ Hi-vacuum pump, with lots of valves in between. 
+If a Hi-vacuum pump reaches atmospheric pressure, it breaks.
+
+\subsection{Pressure Gauges}
+At regular pressures, we use a gauge that measures that resistance 
+of a heated wire (less pressure means less heat loss from convection)
+
+\subsection{Ion Gauge}
+Operates by measuring thermionic current. We boil a material to make ions 
+and then accelerate them with a coil. The amount of ions collected is 
+proportional to the pressure. Less pressure means less ions and less current.
+
+\subsection{Outgassing}
+gasses emanate from surfaces inside the chamber. This is a limiting 
+factor for vacuums below $10^{-7}$. There are a few potential solutions: 
+\begin{itemize}
+    \item
+    Eliminate materials that absord gases
+    \item
+    bake the entire vacuum system at 150C to evaporate them.
+\end{itemize}
+
+\section{Evaporation}
+Use a heat source to turn a material to a gas. There 
+are many types of heat sources for evaporation.
+
+\begin{itemize}
+    \item
+    Resistance heat (no radiation, but might contaminate)
+    \item
+    E-Beam (no contamination, but emits radiation)
+    \item
+    RF-induction (no radiation, but contamination)
+    \item
+    Laser (no radiation, but expensive)
+\end{itemize}
+
+The three steps of this type of PVD are evaporation, transport, condensation.
+
+\subsection*{Very Long Tangent About Evaportation (Equilibrium Vapor 
+Pressure and Stuff)}
+If you pull a vacuum, things evaporate easier.
+
+\subsection{Clausius-Calpeyron Equation}
+Boiling point and vapor pressure 
+\equations{
+    \ln(P_v)
+    =
+    \frac{- \Delta H_{vap}}{R} \frac{1}{T}
+    +
+    C
+}
+
+\subsection{Hertz-Knudsen Equation}
+\equations{
+    N_e 
+    =
+    (2 \pi M k T)^{-1/2} P_v
+}
+$N_e$ is the number of molecules evaporating per unit area per time. M 
+is the molecular mass, $P_v$ is the vapor pressure. 
+
+\subsection{Thermal Evaporation}
+Pass current through a tungsten boat to generate heat. 
+
+\section{Deposition}
+The deposition rate is more important than the evaporation rate, even 
+if they are related. It depends on the evaporation rate, distance of the substrate, 
+and the angle of deposition. The evaporated mass expands and spreads out from 
+the source. We use Lambert's Cosine Law nad Knudsen's equation as well as a 
+factor $n$ that is related to the energy that an atom has when it leaves 
+the surface. $\phi$ is between the normal and the line of sight, and $\theta$ 
+is is between the observer's line of sight and the normal of the surface.
+\equations{
+    \frac{dM_s}{dA_s}
+    =
+    \frac{M_e(n + 1) \cos^n(\phi) \cos(\theta)}{2 \pi r^2}
+}
+
+When $n=0$, we get 
+\equations{
+    \frac{dM_s}{dA_s}
+    =
+    \frac{M_e \cos(\theta)}{2 \pi r^2}
+}
+The angles aren't completely intuitive, but there is a picture in the lab 
+slides. 
+
+\subsection{Film Thickness Variation}
+You get less deposition materials on the sides of the materials compared to the 
+center depending on the angle of deposition and the distance difference. 
+For a point source (n=0), we get a thickness of 
+
+\equations{
+    t 
+    =
+    \frac{M_e h}{4 \pi (h^2 + l^2)^{3/2} \rho_{density}}
+    \hp 
+    \frac{t_{max}}{t_{min}}
+    =
+    \frac{1}{\left(1 + \left(\frac{l}{h}\right)^{2}\right)^{3/2}}
+}
+
+This is found with the slightest amount of algebra. 
+For a surface source (n=1), we get a different equation 
+
+\equations{
+    t 
+    =
+    \frac{M_e h}{4 \pi (h^2 + l^2)^{2} \rho_{density}}
+    \hp 
+    \frac{t_{max}}{t_{min}}
+    =
+    \frac{1}{\left(1 + \left(\frac{l}{h}\right)^{2}\right)^{2}}
+}
+
+We want a thickness ratio as close to 1 as possible, so the point source 
+is the most ideal source for deposition (maximizes min/max). We 
+want to keep our point source as far as possible to decrease variation, but 
+that also dramatically decreases your deposition rate.
+
+\subsection{Planetary Substrate Holder}
+Making a point source material radiator is impossible, but my move our 
+wafers around mid-deposition so that the thickness anywhere on the wafer 
+is approximately constant. 
+
+\subsection{Directionality and Local Step Coverage}
+If you have features on your wafer, you have to worry about the fact that 
+space under/behind a feature will not have material deposited on it. 
+
+\section{Sources}
+Regular sources just have like a chamber that gets hot 
+
+\subsection{E-Beam}
+Very locally heat material using E-Beams and a magnetic field that focuses 
+and aligns it. The magnetic field can also raster scan the beam across the 
+source material. The main benefit is you have evaporate high-melting-point 
+materials without too much difficulty. 85\% of the electron energy goes 
+into heating, with the resting going into x-rays and electron generation. 
+x-ray damage can be an issue (secondary radiation). E-beams result is 
+higher quality films and deposition rates than thermal deposition.
+
+\section{Quartz Crystal Monitor (QCM)}
+Use a crystal to measure the thickness of thin films. You put a crystal 
+in your sputterer, and the deposited thin film changes the resonant 
+frequency of the crystal (because of the increased mass). 
+The resonant frequency can be measured, and that 
+can be use to calculate the thickness of the film. 
+
+\subsection{Math}
+It's just a simple harmonic oscillator.
+\equations{
+    f_1 
+    =
+    \frac{1}{2 \pi}
+    \sqrt{\frac{k}{m}}
+    \Rightarrow 
+    f_1^2 
+    =
+    \frac{1}{4 \pi^2}
+    \frac{k}{m}
+    \\
+    f_2 
+    =
+    \frac{1}{2 \pi}
+    \sqrt{\frac{k}{m + \Delta m}}
+    \Rightarrow 
+    f_2^2 
+    =
+    \frac{1}{4 \pi^2}
+    \frac{k}{m + \Delta m}
+    \\
+    \Delta m 
+    =
+    \frac{k}{4 \pi^2}
+    \left[
+        \frac{1}{f_1^2 }
+        -
+        \frac{1}{f_2^2 }
+    \right]
+}
+
+\section{Summary}
+\begin{itemize}
+    \item
+    Evaporation is most suitable for metallic thin films
+    \item
+    Compounds and alloys don't deposit well
+    \item
+    Deposition is direction, so it does not do well will steps 
+    \item
+    E-Beam deposition usually produces better films because of higher 
+    temperatures and less contamination
+    \item
+    High vacuum is required
+\end{itemize}
+
+Know a number of things about PVD. 
+equilibrium vapor pressure. its relation to temperature (Clausius 
+Clapeyron). Relation to evaporation rate (hertz-knudsen). Flux distribution. 
+thickness variation. 
+
+Dramatically raising the temperature will cause bigger thickness 
+variation and your boat will start melting (Lambert's Cosine Law).
+
+What if you want to deposit something like tungsten with a high melting point? 
+Don't use thermal evaporation. Use sputtering instead. 
+
+\chapter{Sputtering}
+Whack a material real hard so it gets kicked off the boat. 
+You can use ion bombardment (plasma) or laser ablation. 
+
+\section{Process}
+\begin{itemize}
+    \item 
+    The source and substrate are placed in a vacuum
+    \item 
+    Bombard the surface with high energy ions
+    \item 
+    Enough energy is added to a particle for it to escape the surface
+    \item 
+    The ejected atoms deposit on the substrate
+\end{itemize}
+
+After the vacuum is made, a sputtering gas (argon) is used to strike a plasma. 
+
+\section{Generating Plasma}
+Cathode (negative voltage) to Anode (grounded)
+
+Apply a voltage to accelerate free electrons that collide with atoms to make 
+ions.
+
+\subsection{Why Low Pressure?}
+At STP, the electrons would have a very small Mean Free Path, so they wouldn't 
+have the energy to create Argon ions. 
+
+With low pressure, the electron has time to accelerate, so it gains enough 
+energy to be able to ionize the Argon.
+
+The reason that we're in a medium vacuum and not a high vacuum is because 
+we need a decent amount of ion flux to be able to actually bombard our 
+target.
+
+\subsection{Electron Origin?}
+Field Emitted Electrons. The cathode emits electrons because of the electric 
+field created from the high voltage. It reduces the Work Function of the metal 
+electrons, so they are released. You also get free electrons from 
+the generated ions (Townsend Avalanche). 
+
+The plasma acts as a weakly charged gas in a quasi-neutral medium with 
+some amount of influencing fields. The particles all influence each other 
+because of their electric fields. 
+
+\subsection{Glow Discharge}
+The electrons can be absorbed by ions, and when they're absorbed, they 
+release light of a certain wavelength.
+
+The plasma is slightly positively charged because the ions have a higher 
+mass, so they need more time to accelerate and thus collect in that conductive 
+region (slightly). 
+
+The cathode at the target. The anode is at the substrate holder.
+
+\subsection{THE IONS ARE POSITIVE}
+
+\subsection{Magnetron Sputterer}
+Use an M field instead of an E field to accelerate electrons in circles. 
+This increases their mean free path and thus makes a denser plasma. 
+This is caused by the \textbf{Lorentz Force}
+
+\section{Ion Bombardment}
+Multiple things can happen with an ion hits a surface 
+
+\begin{itemize}
+    \item 
+    Reflection
+    \item 
+    Absorption
+    \item 
+    Sputtering
+    \item 
+    Ion Implantation
+    \item 
+    Chemical Reactions
+    \item 
+    Electron and Photon Emission
+\end{itemize}
+
+\subsection{Levels of Ion Bombardment}
+\begin{itemize}
+    \item
+    Very low energy = $< 5 ev$
+
+    Reflection or physisorption
+    \item
+    Low energy = $5 - 10 ev$
+
+    Surface damage and surface migration
+    \item 
+    Medium = $10 - 10000 eV$ 
+
+    Lattice damage, atomic ejection, nad heat - Sputtering 
+    \item 
+    high = $> 10 eV$ 
+
+    Ion implanatation into lattice (doping)
+\end{itemize}
+
+\section{Sputtering Regimes}
+
+
+\subsection{Single Knock-on Regime}
+Seen in the 10-30eV range. Mostly just recoil, but there are sometimes 
+collisions. 
+
+\subsection{Linear Collision Cascade Regime}
+Recoil is minimal. Cascading collisions produce sputtering, Binary collisions 
+(independent atom-atom collisions)
+
+
+\subsection{Heat Spike Regime}
+\begin{itemize}
+    \item
+Everything is happening all at the same time 
+    \item
+    Collisions cannot be considered independent 
+    \item
+    Energetic ion and dense material 
+    \item
+    feels like localized heating
+\end{itemize}
+
+\section{Sputtering Yield}
+Defined as atoms ejected per incident ion. 
+
+Dependent on a million things (incident angle, incident ion energy, 
+bombarding species, target materials). Varies from 0.1 - 10. 
+
+\subsection{Sputtered Atoms}
+Tend to have small energies between 1-10 eV (evaporation would have just 0.1eV). 
+Sputtering results in better film adhesion and density.
+There is a very wide distribution in sputtered atom energies because the process 
+is roughly stochastic.
+
+\section{Contamination}
+Contamination causes all sorts of issues and comes from a million different 
+sources 
+
+\subsection{Sources}
+\begin{itemize}
+    \item
+    Insufficient vacuum
+    \item
+    Outgassing
+    \item
+    Oxygen Impingement rate 
+\end{itemize}
+
+Resistivity of film can increase tremendously from implanted oxygen. 
+
+\subsection{Solution}
+\begin{itemize}
+    \item
+    Pump down to lower pressures 
+    \item
+    fill chamber with argon and pump down again to dilute remaining gas 
+\end{itemize}
+
+\section{Reactive vs Non-Reactive Sputtering}
+\subsection{Non-Reactive}
+\begin{itemize}
+    \item
+    Sputtering gas is not incorporated into film 
+    \item
+    Common choices are noble gases (mainly Argon)
+\end{itemize}
+
+\subsection{Reactive Sputtering}
+\begin{itemize}
+    \item
+    Sputtering gas will be incorporated into film
+    \item
+    This allows for certain alloys to be made 
+    $(Al_2 O_3, SiO_2, \ldots)$
+    \item
+    Common choices are $O_2, N_2, NH_3$.
+\end{itemize}
+
+\section{Laser Ablation Deposition}
+Instead of using a plasma to excite your target, you use a laser. 
+Useful for complex compounds. 
+
+\section{Molecular Beam Epitaxy (MBE)}
+You try to deposit a single crystal film onto a substrate by matching 
+lattice constants. 
+
+\chapter{Chemical Vapor Deposition (CVD)}
+Instead of providing mechanical or thermal energy, you provide chemical 
+potential energy of atoms in a gas. 
+
+\section{Mechanism}
+\begin{enumerate}
+    \item
+    Mass transport of reactant gases
+    \item
+    Gas-phase reaction leading to film precursors (homogeneous)
+    \item
+    Mass transport of film precursors
+    \item
+    Adsorption of film precursors
+    \item
+    Surface migration of film forming materials to the growth site 
+    \item
+    surface reaction (heterogeneous products)
+    \item
+    Desorption of byproducts
+    \item
+    Mass transport of byproducts
+\end{enumerate}
+
+\section{CVD Process Family}
+\begin{itemize}
+    \item
+CVD can occur in a million different ways. 
+    \item
+Can deposit metals, semiconductors, insulators, barriers, silicides, etc. 
+    \item
+Energy for CVD can be derived from thermal, plasma, and photon energy. 
+    \item
+There's a whole table in the slides
+\end{itemize}
+
+\section{CVD Reaction Types}
+Thermal Decomposition (not common in semiconductors), Redox Reactions, 
+Exchange Reactions, Coupled Reactions.
+
+\subsection{Precursor}
+\begin{itemize}
+    \item
+    Chemicals must be volatile/gaseous.
+    \item
+    Film formation must be thermodynamically predicted 
+    (decrease Gibbs Free Energy).
+    \item
+    Byproducts must also be volatile.
+\end{itemize}
+
+\subsection{Atmospheric Pressure CVD}
+Very fast reaction rate because there's a whole lot of gas. 
+Main issue is contamination.
+
+
+
+\section{Modeling CVD Processes}\
+Reactions occur at the surface. The concentration of species in gas (N$_g$) drops 
+to the contration of species at the surface $(N_s)$ across the boundary 
+(or tagnant) layer of thickness $(\delta)$.
+
+Flux to surface $(J_g)$ and flux consumed in film $(J_s)$ are controlled 
+by the reaction-rate constant $(k_S)$ and the mass trnasport constant $(h_g)$.
+
+\equations{
+    J_g
+    =
+    \frac{D_g}{\delta}
+    (N_g - N_s)
+    =
+    h_g 
+    (N_g - N_s)
+    \textrm{
+    \hp \hp
+        Flux to Surface}
+}
+
+\equations{
+    J_s
+    =
+    k_s \times N_s
+    \textrm{
+        \hp \hp \hp \hp 
+        Flux consumed in grown film}
+}
+
+At steady state, fluxes must be equal 
+\equations{
+    J_g 
+    =
+    J_s
+    =
+    \frac{N_g}{\frac{1}{h_g} + \frac{1}{k_s}}
+    =
+    \frac{h_g k_s N_g}{h_g + k_s}
+}
+
+The film growth rate is given by 
+\equations{
+    v 
+    \propto 
+    J_s 
+    =
+    \frac{h_g k_s N_g}{h_g + k_s}
+    % \propto 
+    % h_g N_g
+}
+
+If the film growth rate is mainly limited by mass transport, then you have a 
+diffusion limited regime $h_g << k_s$.
+
+If it's limited by reaction rate, then $h_g >> k_s$.
+
+Those last 2 limitations are the important things to remember about CVD deposition 
+rates. 
+
+The velocity is 
+\equations{
+    v 
+    \propto 
+    h_g N_g
+    \hp 
+    \textrm{limited by mass transport}
+    \\
+    v 
+    \propto 
+    k_s N_g
+    \hp 
+    \textrm{limited by reaction rate}
+}
+
+\subsection{Flux to Surface}
+When we are difficult (mass transport) limited, the film growth rate 
+depends on the flux to the surface $(J_s)$. 
+
+If we have a low vacuum to atmospheric pressure, then a stationary boundary layer 
+will develop, and the precursor gas must diffuse through it (caused by 
+laminar flow, not an issue if high vacuum because there are minimal gas 
+interactions). 
+
+If $delta(x)$ is the boundary layer thickness and is a function of distance 
+along the substrate $x$, then 
+\equations{
+    \delta(s)
+    =
+    \left(
+        \frac{\eta x}{\rho V}
+    \right)^{1/2}
+}
+Where $\eta$ is the gas viscosity, $\rho$ is the gas density, and $V$ is the gas 
+stream velocity.
+
+The average thickness of the boundary layer is 
+\equations{
+    \delta 
+    =
+    \frac{1}{L}
+    \int^{L}_{0}
+    \delta(x) dx 
+    =
+    \frac{1}{L}
+    \left(
+        \frac{\eta}{\rho V}
+    \right)^{1/2}
+    \int^{L}_{0}
+    x^{1/2} \, dx \, 
+    =
+    \frac{2}{3}
+    L 
+    \left(
+        \frac{\eta}{\rho V L}
+    \right)^{1/2}
+    =
+    \frac{2L}{3 \sqrt{Re}}
+}
+
+Where $Re$ is Reynold number which is the ratio of inertial forces to viscous 
+forces ($< 2000$ is laminar and over is turbulent, CVD should be laminar).
+
+Use Fick's first law of diffusion across the boundary layer 
+\equations{
+    J_g 
+    =
+    -D \frac{d \phi}{d x}
+    \approx 
+    - D 
+    \frac{N_s - N_g}{\delta}
+}
+Where $D$ is the diffusivity or diffusion constant. Further, at steady state, 
+then $J_g = J_s$. 
+
+For a diffusion limited process, the molecules on the surface will be sconsumed 
+as fast as they arrive, therefore the concentration at the surface 
+\equations{
+    N_s = 0
+    \rightarrow J_s = J_g 
+    =
+    D 
+    \frac{3 N_g \sqrt{Re}}{2L}
+}
+
+\subsection{Gas Flow Rate Dependence}
+At low flow rates, the film growth rate shows a square root dependence. 
+At high flow rates, the growth rate reachesa maximum and 
+becomes independent of flow. At this point, the 
+reaction rate controls the deposition.
+
+The rate limiting phenomenon can dictate the design of the reactor. 
+
+A vertical design is good for reaction-rate limited deposition, while a 
+horizontal design that maximizes gas flow is best for a mass transport 
+limited deposition. 
+
+
+\section{Surface Adsorption and Reaction} 
+It is worthwhile to study what occurs after a precursor molecule/atom reaches 
+the surface. 
+
+The must find a site to adsorb to the surface long enough for the decomposition/
+reduction/exchange reaction to take place. This will depend on 
+\begin{itemize}
+    \item
+    Precursor arrival rate
+    \item
+    Density of sites available for adsorption of precursor molecules 
+    \item
+    substrate temperature (that determines the residence time required for the 
+    reaction)
+\end{itemize}
+(sites consist of defects/discontinuities on the surface). 
+
+The elemental adatoms that result are not stationary but move in 
+ the surface uintil they encounter high-energy binding sites 
+ (vacancies, edges, kinks)
+
+
+Trapped adatoms nucleate growth of islands by trapping other migrating adatoms, 
+eventually developing a continuous film.
+
+\begin{center}
+    Nucleation 
+    $\rightarrow$
+    Growth of Nuclei 
+    $\rightarrow$
+    Coalescence
+    $\rightarrow$
+    Film Growth
+    $\rightarrow$
+    Continuous Film.
+\end{center}
+An adatom is a single atom on a crystal 
+
+
+\subsection{Material Bonding}
+Chemical bonds vs adhesive via coordinate bonds (Van der Vaals, hydrogen, 
+ionic) which determines if layer can exist and not delaminate.
+
+\subsection{Film Growth Rate vs Temperature}
+At high temperatures, the reaction rate is sufficiently, we get a mass shortage. 
+
+\equations{
+    g 
+    =
+    C e^{\frac{- \Delta E}{k_b T}}
+    \Rightarrow 
+    \log(g)
+    =
+    \frac{- \Delta E}{k_b} \frac{1}{T}
+}
+
+Log and $1/T$ are linearly proportional to each other (If reaction rate 
+limited regime). As $T$ increases you get back to a mass transport limited 
+regime.
+
+While higher temperatures produce higher growth rates, they also promote 
+gas phase reactions that are generally undesirable in CVD because they produce 
+particulates that fall onto the substrate and create film defects. To overcome 
+this, we can 
+\begin{itemize}
+    \item
+    Use a different precursor
+    \item
+    Reduce pressure (LPCVD) - increases diffusivity and reduces heat transfer.
+\end{itemize}
+
+\section{Film Growth Mechanisms}
+What happens once the reactant sreach the surface where 
+the film needs to grow? 
+
+\subsection{Nucleation of Growth}
+Generally, a stochastic process that strongly depends on the 
+precursor arrival flux, adsorption site density, surface migration 
+temperature, etc. 
+
+\subsection{Type of Growth}
+Island vs layer determines the grain size and boundaries while step 
+vs cluster determines the roughness and grain orientation. 
+These can be thought of as a thermodynamic competition between 
+surface / intersurface energies. 
+
+\begin{itemize}
+    \item
+    Frank-van der Merve mode (2 dimensional growth mode)
+
+    $\gamma_{substrate} \geq \gamma_{film} + \gamma_{interface}$
+    \item
+    Volmer-Weber mode (Island growth mode)
+
+    $\gamma_{substrate} < \gamma_{film} + \gamma_{interface}$
+    \item
+    Stranski-Krastanov mode
+
+    Initially, we have 
+    $\gamma_{substrate} \leq \gamma_{film} + \gamma_{interface}$
+
+    but then it turns to
+    $\gamma_{substrate} < \gamma_{film} + \gamma_{interface}$ 
+    due to strain effect
+\end{itemize}
+
+$\gamma$ is the surface energy or interface energy. 
+
+\subsection{Step Coverage}
+This is dependent on several factors 
+
+\begin{itemize}
+    \item 
+    Flux arriving at the surface: 
+    local visibility angle nad precursor flux 
+    $\theta = \int J_g d \theta$.
+\end{itemize}
+
+As the visibility angle is reduced, we see a thickness
+$\theta = \tan^{-1}(\frac{w}{h})$.
+
+Another thing that might affect this thickness given a hole/feature-y area is 
+the fact that complex surfaces have far more surface area for the same amount 
+of deposited material. SO basically, the two key factors are 
+
+\begin{itemize}
+    \item
+    Mean Free Path
+    \item
+    Surface Diffusivity
+\end{itemize}
+
+The outside corners have an angle of $\theta = 270 \deg$, which is the largest 
+anywhere, the thus those corners have the most material deposited on them, and 
+they might actually completely cover the hole with material.
+
+\subsection{Reactive Stiction (Sticking) $S_c$}
+That is the sticking coefficient 
+
+\equations{
+    S_c 
+    =
+    \frac{\Gamma_{incident} - \Gamma_{re-emission}}{\Gamma_{incident}}
+    =
+    \frac{\Gamma_{reaction}}{\Gamma_{Incident}}
+}
+
+Direct diffusion is $S_c = 1$, and bouncing means that $S_c < 1$.
+
+Low $S_c$ means that the film is conformal (it fills features evenly). 
+
+\section{Thing to Keep In Mind}
+Uniformity of the film: 
+Thickness, composition, structure, and properties are all affected by 
+all sorts of factors. 
+
+\begin{itemize}
+    \item
+    Throughput esired
+    \item
+    Intra-wafer and inter-wafer uniformity
+    \item
+    Film composition/purity
+    \item
+    Conformity on wafer topography
+\end{itemize}
+
+\subsection{Stresses}
+If there is a lattice mismatch or thermal expansion mismatch, there might be 
+residual stresses in the film. 
+
+Tensile stresses bring the sides up, and compressive stresses bring the center 
+up. Both are bad. 
+
+Types of material structures of deposited films include 
+
+Polycrystalline, amorphous, epitaxial (single crystalline), 
+columnar.
+
+The type of resulting films affects basically everything.
+
+\subsection{LPCVD}
+LPCVD is usually reaction rate limited, so the amount of material just into 
+the material is less important as much as the temperature of the substrate.
+
+\subsection{PECVD}
+PECVD is plasma-enhanced CVD. You use high energy ions to activate the precursor 
+so that it is more reactive (increasing reaction rate), and the electrons 
+also bombard the substrate to make it more reactive. 
+
+A common application is a low temperature insulator over metals. 
+
+typical process conditions include:
+\begin{itemize}
+    \item
+    0.5 to 5 torr
+    \item
+    200-400C 
+    \item
+    Surface reaction rate limited 
+    \item
+    Most common hot wall furnace
+\end{itemize}
+
+PECVD results in a low sticking coefficient. This results in low stress films, 
+but because of the extra reactions, there might be contamination.
+
+pros include uniformity, good step coverage, and low temperatures 
+
+cons include particle contamination, chemical contamination (high H content), 
+and pinhole errors in the deposition.
+
+\subsection{MOCVD}
+This is known as metal-organic CVD (or metal-organic vapor phase epitaxy). 
+
+Gases included arsine, phosphine, ammonia, disilane, and silane, 
+
+and liquid sources are trmethylgallium, trymethyl indium, trymethyl aluminum 
+that react to form films including GaAs.
+
+This is mainly used in solar cells and VCSELs and other things.
+
+It creates single layer growth. 
+
+\subsection{ALD}
+Atomic Layer Deposition. CVD is broken down into 2 half-reactions. 
+
+\begin{itemize}
+    \item
+    Precursors are kept separate and introduced squentially to complete
+    the reaction. 
+    \item
+    One cycle lays down one monolayer for the film in a well controlled manner
+    \item
+    self-terminating reaction.
+\end{itemize}
+
+pros include uniformity, monolyaer control, step coverage, and no gas 
+phase reaction. 
+
+The main con is that it is very very slow.
+
+\section{Summary}
+\begin{itemize}
+    \item
+Seen all the steps of the CVD mechanism. 
+    \item
+We classified different types of reactions 
+with examples of their use. 
+    \item
+    Developed a simple intuitive model to identify 
+    different process regimes 
+    (mass transport limited and reaction rate limited regimes)
+    \item
+    film growth characteristics
+    \item
+    conformal coverages
+    \item
+    Different variants and types of CVD
+\end{itemize}
+
+\section{MIDTERM 1 PREP}
+What's on the exam: Everything in Deposition (up to the end of Deposition). CVD 
+will be on the exam, dry etching will not be on the exam. 
+
+Exam is on monday during class, should take about 1 hour, but we'll have the room 
+for a full 2 hours. NO formulas need to be memorized, we will be given a sheet. Just 
+know how to use them. Not heavy calculation- if you set up the equation correctly, 
+you can make estimates. YOU CAN BRING A CALCULATOR. The best way to prepare 
+is go through the notes, read texts, go through the homeworks (best way). 
+
+Know how cleanrooms are classified and clean room safety processes. 
+Stokes settling and number of particles per hour that settle on a substrate . 
+
+Sources and types of contamination. Problems caused by contamination adn humidity. 
+Purpose of bunny suit and rules. 
+
+Know an MSDS. 
+
+NFPA and HMIS labels, how to read them, what they're meant for. 
+
+\subsection{Lithography 1}
+\begin{itemize}
+    \item
+    Process flow in microfabrication
+    \item
+    Typical patterning process flows (liftoff vs masking)
+    \item
+    Lithography process flows
+    \item
+    Cleaning processes (RCA1 vs RCA2, pihrana solution, O2 plasmas) and their purposes
+    \item
+    supercritical drying, ultrasonic cleaning, 
+    promoting surface adhesion for lithography
+    \item
+    Different methods of applying PR to a substrate with 
+    an emphasis on spinning. Know what happens during spinning 
+    and what are edge beads and why they form, why they're a problem, and how to 
+    alleviate the problem
+    \item
+    purpose of soft baking before exposure
+    \item
+    (me added) all baking processes and their purposes
+\end{itemize}
+
+\subsection{Lithography 2}
+\begin{itemize}
+    \item
+    Radiation for exposures, mercury lines, types of masks, transparency of mask materials 
+    at  different wavelengths
+    \item
+    Exposure systems, contact, proximity, projection, their resolution,
+    advantages nad disadvantages
+    \item
+    Resolution, diffraction and its impact resolution, diffraction limit, 
+    point spread function, numerical aperture, modulation transfer function. 
+\end{itemize}
+
+
+\subsection{Lithography 3}
+\begin{itemize}
+    \item
+    Components of a PR< resist tone nad what light does to PR's of different tones, 
+    different yypes of resists (single component, two-component, image reversal)
+    \item
+    What remains and what's gone with different tone resists and lightfield/darkfield 
+    masks
+    \item
+    effects of over and under-exposure for different tones of resists 
+    (Fresnel Zone, \textbf{other zone (google)})
+    \item
+    Resist sinsitivty and contrast; side-wall profiles 
+    \item
+    Development and post-development processing; resist stripping (acetone bath).
+\end{itemize}
+
+\subsection{Lithography 4}
+\begin{itemize}
+    \item
+    Alignment errors and how they einfluence exposure
+    \item
+    Vernier and Moire fringes for allignment 
+    \item
+    Sequence of things to do if you want to enhance resolution
+    \item
+    Resists: anti-reflection coatings, multi-layer resists, lift-off resists
+    \item
+    Masks: phase shift masks, mask geometry engineering
+    \item
+    Exposure: concept of different illumination systems, immersion 
+    lithography concepts
+    \item
+    Advanced lithography systems, particle-beams, maskless, soft.
+\end{itemize}
+
+
+\subsection{Deposition 1}
+\begin{itemize}
+    \item
+    Vacuum concepts, mean-free path and its relation to pressure, 
+    what does high vacuum do for deposition processes, technology ;
+    pumps and gauges
+    \item
+    Evaporation, vapor pressure and oiling; Clasusium Clapeyron Equation and how it is used 
+    to get the temperature fro a given 
+    vapor pressure; 
+    Hertz-Knudsen equation and how it is used 
+    to calculate the mass evaporation rate 
+    \item
+    Lamberts Cosine law and its use in determining 
+    evaporative flux 
+    desnity; point sources and plane sources; 
+    film thickness variation
+    \item
+    Evapoeation technology, e.g., e-beam evaporation, virtual point 
+    sources; direactionality and coverage, film thickness measurement with quartz 
+    crystal monitors - concept and calculations.
+\end{itemize}
+
+\subsection{Deposition 2}
+\begin{itemize}
+    \item
+    Sputtering concept, how and why plasmas are used, 
+    why is the pressrue in sputtering higher than that 
+    for evaporation
+    \item
+    Rudimentary idea of plasmas, basic zones, voltage drops across a plasma
+    \item
+    Particle energy and sputtering regimes; sputtering yield and 
+    factors affecting sputtering yield; Directionality, and sub-cosine 
+    flux distributing
+    \item
+    Comparisons between sputtering and evaporation, reactive cputtering nad laser 
+    ablation
+\end{itemize}
+
+Deposition is more conformal with sputtering because there are more collisions.
+
+Know why the glow region is slightly positive (gas moves slower than electrons)
+
+\subsection{Deposition 3}
+\begin{itemize}
+    \item
+    CVD mechanisms and reaction types. Conditions for use of a reaction 
+    in CVD, Diffusion across the boundary layer and surface reaction rates and how 
+    they determine CVD process regime
+    \item
+    Diffusion vs reaction rate limited regimes, growth rate behavior in these 
+    regimes
+    \item
+    Surface reaction and film growth mechanism adn how these determine 
+    the type of film obtained 
+    \item
+    Different CVD processes, the presmises behind the variation nad their advantages 
+    and disadvantages nad applications; ALD and the use of sequenced coupled reactions to get 
+    atomic layers. 
+    \item
+    Coverage, Reactive Sticking coefficient and how its effects conformal 
+    coverage.
+\end{itemize}
+
+Why use LPCVD vs just regular atmospheric CVD (if its reaction rate limited, you 
+don't need much gas in the chamber. Also, the vacuum keeps the substrate hot)
+
+\chapter{Removal - Dry Etching}
+How to get crap off of your substrate.
+
+\section{Subtractive Processes}
+Dry Etching is generally more used than dry etching 
+
+There are many many different etching techniques 
+\begin{itemize}
+    \item
+    Wet and dry etching
+    \item
+    Focused ion beam (FIB) milling
+    \item
+    Laser Machining
+    \item
+    Ultrasonic drilling
+    \item
+    Electrical discharge machining (EDM)
+    \item
+    Tradition precision machining
+\end{itemize}
+
+\subsection{Dry Etching}
+A solid surface is etched by the gas or vapor phase. 
+Recall ashing (dry stripping of resists). 
+
+In general, ry etching has fewer disposal problems, less corrosion of metal 
+features in the structure, less undercutting and broadening of PR features, and 
+cleaner surfaces. 
+
+types of dry etching include 
+\begin{itemize}
+    \item
+    Physically via ion bombardment
+    \item
+    Chemically by a reaction throuhg a reactive species at the surface 
+    \item
+    Combination of physical and chemical reactions
+\end{itemize}
+
+\begin{center}
+    Source (CF4)
+    $\to$
+    Plasma 
+    $\to$
+    Reactant (F0)
+    $\to$
+    Substrate (Si) 
+    $\to$
+    product (SiF4)
+\end{center}
+
+Dry etching, CVD, and evaporation all use vapor phase reactants.
+in CVD, the surface reaction gies rise to at least one solid product, 
+but in etching one hopes that all the reaction products are vapors 
+(having high vapor pressures). 
+Dry Etching, sputtering, adn version of CVD (PECVD) use plasmas, though 
+suttering uses a plasma for different purposes. 
+
+\begin{center}
+    Source (SiH4)
+    $\to$
+    Substrate (Si) 
+    $\to$
+    gas byproduct (2H2)
+\end{center}
+
+Dry etching is very similar to regular lithography because you put on 
+the PR, and then dry etch, and the perform lift-off with the PR.
+
+Anisotropic etching is vertical etching with no horizontal etching. 
+Isotropic etching will etch underneath the mask, and that's bad.
+
+dry etching is \textbf{highly directional} because the atoms hitting the substrate 
+are charged, so they move along the path of the electric field. 
+
+\subsection{SPUTTERING IS LESS DIRECTIONAL}
+
 
 
 

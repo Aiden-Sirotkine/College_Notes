@@ -674,14 +674,540 @@ $\Delta \Omega$.
 
 \section{Challenges of Pitch Detection}
 
+\section{Summary}
+\begin{itemize}
+    \item 
+    Source-filter model for speech signal 
+    \item 
+    ptich detection by autocorrelation
+    \item 
+    autocorrelation and its boost by FFT 
+\end{itemize}
 
+\section{310 Review}
+Given a discrete time system, how can we use it to filter a continuous 
+time signal. 
+If we sample at 10kHz and get a 1kHZ signal. We can do a DTFT to 
+get a discrete frequency 
+\equations{
+    \frac{f}{Fs}
+    =
+    \frac{\omega}{2 \pi}
+    =
+    \frac{k}{N}
+}
+So given a frequency $f$ and a sampling rate $Fs$, our DTFT signal should be 
+\equations{
+    2 \pi \frac{f}{Fs}
+    =
+    \omega
+    =
+    0.2 \pi
+}
 
+You can do the inverse to get the frequency $\Omega$ from $\omega$
 
+What if we want to change the pitch from 1kHz to 1.2kHz?
+The way we can do that is by changing the sampling rate. 
+\equations{
+    \frac{f}{Fs}
+    =
+    \frac{f_2}{Fs_2}
+    \rightarrow 
+    0.1
+    =
+    \frac{1200}{Fs_2}
+    \rightarrow 
+    Fs_2 
+    =
+    12000kHz
+}
 
+\subsection{Upsampling}
+perform zero-insertion on the signal (different from zero-padding because 
+it increases the wavelength of every wave in the signal). We do not 
+lose any data from upsampling. Upsampling in the frequency domain 
+can be written as 
+\equations{
+    y[n]
+    =
+    \begin{cases}
+        x[n/M]: n \% M = 0 
+        \\
+        0 : \textrm{otherwise}
+    \end{cases}
+    \\
+    Y(\omega)
+    =
+    \sum^{\infty}_{-\infty}
+    y[n] e^{-k \omega m}
+    =
+    \sum^{\infty}_{-\infty}
+    x[n/M] e^{-k \omega m}
+    =
+    \sum^{\infty}_{-\infty}
+    x[l] e^{-k \omega m l}
+}
+So $\omega$ is compressed by $M$
+\equations{
+    Y(\omega)
+    =
+    X(M \omega)
+}
+Remove the aliasing spectrum to get just the correct compressed frequency 
 
+\subsection{Upsampling with Interpolation}
+Use a low pass filter (LPF)
+\equations{
+    x 
+    \to 
+    \uparrow M 
+    \to 
+    LPF(\frac{\pi}{M})
+}
 
+By doing this, we can get 
+\equations{
+    y[n]
+    =
+    \sum_{k = -\infty}^{\infty}
+    s[k]
+    sinc(\frac{\pi (k - k M)}{M})
+}
+Fill the missing samples with an interpolation kernel function. 
+upsampling \textbf{increases wavelength} $P_0 \to M P_0$. A consequence of this 
+is that \textbf{frequency decreases}.
 
+\section{Downsampling}
+Remove features 
+\equations{
+    x[n]
+    \to 
+    \downarrow L 
+    \to 
+    y[n]
+}
+You do a long proof to get the final change in the frequency space 
+\equations{
+    y[n] = x[Ln]
+    \\
+    Y(\omega)
+    =
+    \frac{1}{L}
+    \sum_{n=0}^{L-1}
+    X\left(\frac{\omega - 2\pi}{L}\right)
+}
+The signal is stretched by $L$ and shifted by $2 \pi n$. To prevent 
+aliasing, we want a smaller bandwidth 
+\equations{
+    LB < \pi 
+    \to 
+    B < \frac{\pi}{L}
+}
+Downsampling \textbf{compresses wavelength} and a consequence of that 
+is that \textbf{frequency increases}.
 
+\section{Putting the 2 together}
+\equations{
+    x 
+    \to
+    LPF(\pi/L)
+    \to
+    \downarrow L
+    \to
+    \uparrow M 
+    \to
+    LPF(\frac{\pi}{M})
+}
+
+You can upsample first, but nothing useful will happen. You should 
+always downsample first. 
+
+\section{Modifying Pitch $P_0$}
+You can resample to change the pitch (upsampling first)
+\equations{
+    x 
+    \to
+    \uparrow M
+    \to
+    LPF(\frac{\pi}{max(M, L)})
+    \to
+    \downarrow L 
+    \to
+    y
+    \\
+    P_1 
+    =
+    \frac{M}{L}
+    P_0
+}
+This allows you change pitches by only a certain fraction.
+This stretches or compresses the entire spectrum. 
+Both pitch and vocal tract response (color of your voice) change! 
+How do we modify only pitch?
+
+\section{TD-PSOLA}
+This algorithm can modify the fundamental pitch of a signal 
+\textbf{without affecting the formants} (vocal tract response). 
+
+TD = time domain 
+\hp 
+PS = Pitch Synchronous (operate around reference points)
+
+OLA = overlap add (the synthesized signal overlaps and are added 
+together to form the final output)
+
+\begin{center}
+    Excitation Generator x(t) 
+    $\to$ 
+    Linear System h(t) 
+    $\to$ 
+    y(t)
+    =
+    x(t) * h(t)
+\end{center}
+You use a dirac delta convolution. 
+\equations{
+    x[n]
+    =
+    \sum \delta[n - P_0 k]
+    \hp 
+    \hat x[n]
+    =
+    \sum \delta[n - P_1 k]
+    \\
+    \hat y[n]
+    =
+    \hat x[n]
+    *
+     h[n]
+    =
+    \sum h[n - P_1 k]
+}
+It essentially adds empty space in between periods to change the frequency 
+without changing the essence of the signal. 
+
+\subsection{Finding Epochs}
+\begin{itemize}
+    \item
+    Signal peaks 
+    \item
+    provide the reference point 
+    \item
+    lab4 algorithm (autocorrelation)
+\end{itemize}
+
+\subsection{Epoch Mapping}
+You can find the inputs with pitch and waveform analysis. 
+Output epochs are regularly spaces 
+
+\subsection{Signal Synthesis by Windowing}
+If you just use the algorithm directly, you will get huge discontinuities 
+in the new signal. You need to use a window
+
+You can't use a regular bell shaped window because the peaks are not necessarily 
+in the center of the period, so the signal will be ruined. 
+
+Instead, you use a window the size of 2 periods, so that the window peak is 
+at the signal peak.
+
+\subsection{Block Processing Challenges}
+there are 2 main issues 
+
+\begin{itemize}
+    \item
+    the windowed interval may stretch across multiple \textbf{input} frames
+    \item
+    the windowed interval may stretch across multiple \textbf{output} frames
+\end{itemize}
+
+The way to fix this is by storing the buffers in 'past', 'present' and 'future' 
+for both the input and output. Let the buffer spill into both the past 
+and future frames to keep everything continuous.
+
+\chapter{Images}
+Audio is a 1d signal, while pictures are a 2d signal (x, y for each signal point).
+A digitized image is a bunch of pixels.
+You can use linear transformations to change the locations of each pixel. 
+You can also change the brightness and colors of pixels. 
+You also blur and sharpen images (not really an individual pixel change).
+This is known as spacial filtering (Examining/changing local regions).
+
+\section{Intensity}
+1 value for 1 pixel.
+\begin{itemize}
+    \item 
+    Binary (0, 1)
+    \item 
+    Grayscale (0, 255)
+    \item 
+    color (3 channel RGB, etc)
+\end{itemize}
+
+\subsection{Intensity Transformation}
+\equations{
+    s 
+    =
+    T(r)
+    \hp 
+    s, r \in [0, L-1]
+    \\
+    s = r + C
+}
+Just increase the intensity by a constant. This is called 
+\textbf{enhancing}.
+
+\equations{
+    s = L - 1 - r
+}
+This is known as the \textbf{negative image}. 
+
+\equations{
+    s = 
+    \begin{cases}
+        255 : a < s < b 
+        s : \textrm{otherwise}
+    \end{cases}
+}
+This is called \textbf{intensity-level slicing}. It essentially changes 
+values within a certain interval to a constant without changing 
+anything outside the interval.
+
+\section{Histogram Processing}
+Histograms represent a distribution of numerical data. Observing the 
+histogram can tell you spikes of certain data. The histogram range is 
+called the \textbf{contrast} or \textbf{dynamic range}. Consider how the 
+previous transformations affect the histogram. For the lab, we want a 
+low-contract, low-dynamic range image to turn into a high-contrast, high
+dynamic range
+
+\subsection{Histogram Equalization}
+Turn your histogram into a normal distribution.
+The probability distribution becomes flat and the cdf is just 
+y=x.
+\equations{
+    s 
+    =
+    h(r)
+    =
+    round
+    \left(
+        \frac{cdf[r] - cdf_{min}}{MN - cdf_{min}} (L-1)
+    \right)
+}
+$M, N$ are the width and height of the image. $L$ is the total number of gray 
+levels. CDF$_{min}$ is the smallest \textbf{non-zero} value that the cdf 
+can have. cdf[r] is the \textbf{total number} of pixels \textbf{at or 
+below} the value $r$.
+
+\section{Spatial Filtering}
+Spatial filtering is a predefined operation that is performed on a pixel 
+\textbf{and} its neighborhood. 
+
+\subsection{2D Convolution}
+
+a 1d convolution is 
+\equations{
+    g(t)
+    =
+    f(t) * w(t) 
+    =
+    \sum_k f(k) w(t-k)
+}
+
+but a 2d convolution is 
+\equations{
+    g(x, y)
+    =
+    f(x, y)
+    * 
+    w(x, y)
+    =
+    \sum_i \sum_j 
+    f(i, j) w(x - i, y - j)
+}
+
+Basically, each pixel is defined by a kernel function interacting with the pixel 
+and everything around it. Depending on where you start the kernel, you can 
+get output sizes that are different from the input sizes.
+
+\section{Convolution Output Domain}
+\subsection{Valid}
+kernel does not go outside original image. Output size $N - K + 1$ 
+
+\subsection{Same}
+Same size $N$ as input image. 
+
+\subsection{Full}
+Maximum sized convolution output size N + K - 1 
+
+\section{Smooth Spatial Domain}
+'average' the neighborhood of pixels to reduce sharp transitions. 
+
+\subsection{Median filter}
+Replace the value of the pixel with the median of the neighborhood. Effectively 
+removes impulse noise and salt and pepper noise. 
+
+\section{Sharpening Spatial Filters}
+Edge detection. Highlights transitions in intensity. similar to derivative 
+operator. It could also be a high pass filter in the frequency domain.
+
+\subsection{Gradient}
+Take the first derivative of the image. 
+\equations{
+    \nabla f 
+    =
+    \begin{bmatrix}
+        g_x \\ g_y 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \frac{\del f}{\del x} \\ 
+        \frac{\del f}{\del y}
+    \end{bmatrix}
+}
+There was a formula for the numerical gradient kernel but I didn't really 
+understand it at all. 
+
+\subsection{Laplacian}
+Second derivative. Difference of first derivative 
+\equations{
+    L 
+    =
+    (f(x+1) - f(x)) - (f(x) - f(x-1))
+    \\
+    =
+    f(x+1) + f(x-1) - 2f(x)
+}
+Much sharper than gradient because it uses more data and gives more information. 
+However, it also amplifies noise. 
+
+\section{Prototype}
+Do python code and \textbf{make a presentation}. 
+You can use a library, but you have to implement your own ideas and data. 
+
+\chapter{3D Signal Processing}
+Video data is of the form $f(x, y, t)$. Video processing algorithms 
+operate on a frame by frame basis. Frame rate is in frames per second (fps), 
+and our algorithm needs to be fast enough to not decrease the fps of the video. 
+60fps is the usual benchmark.
+
+\section{Tracking}
+Track a Region of Interest (ROI). Follow the object as it traverses. 
+The two challenges of this are the fact that the target moves, and we need 
+the computation time to be very fast. 
+
+\subsection{Function}
+The main paper we use takes advantage of a correlation filter. 
+We use a filter such that, given the input signal, returns a sharp signal at 
+the center of our green box and nothing everywhere else. 
+
+Given the next frame (slight change in data), the filter should still return 
+a sharp dot at the square, but it will be blurry. Then, we recalculate the filter 
+for the new box at frame 2. 
+
+\equations{
+    f_1 \& s_1 \Rightarrow w_1 
+    \rightarrow 
+    f_2 * w_1 = s_2 
+    \rightarrow 
+    f_2 \& s_2 = w_2 
+    \rightarrow 
+    \ldots
+}
+
+\subsection{Filter Itself}
+We use a circular filter 
+\equations{
+    \underset{w}{min} 
+    \sum_i 
+    (w^T x_i - y_i)^2
+}
+
+\section{Ridge Regression}
+
+\equations{
+    \underset{w}{min} 
+    \sum_i 
+    (w^T x_i - y_i)^2
+    + 
+    \lambda ||W||^2
+    \hp 
+    w 
+    =
+    (X^H X + \lambda I)^{-1} X^H y
+}
+
+Matrix inversion is an $O(N^3)$ operation, so how to we reduce the time 
+complexity of this algorithm? 
+
+\subsection{Circulant Matrices}
+All circulant matrices can be diagonalized with a DFT. 
+
+\equations{
+    \hat w 
+    =
+    \frac{\hat x \odot \hat y }{\hat x^* \odot \hat x + \lambda}
+}
+
+\subsection{Kernelized Correlation Filter}
+idk it was on the slides.
+
+\subsection{Lab 8: Digit Recognition Via Machine Learning}
+You get an extra 3\% by doing this lab. THIS IS INDIVIDUAL WORK. No lab quiz. 
+Due by the end of the semester, but need to demo at TA office hours. 
+
+\chapter{Machine Learning}
+We're going to make a program that input hand-written digits and outputs the 
+ASCII code of the number we think matches. 
+
+\subsection{Rule Based Programming}
+\begin{itemize}
+    \item
+    Program a list of command sor rules
+    \item
+    Know every step required to complete programs task 
+    \item 
+    Stupid machine learning 
+\end{itemize}
+
+\subsection{Actual Machine Learning}
+\begin{itemize}
+    \item
+    Algorithm figures out rules via trial and error and large well 
+    described/labeled datasets
+    \item
+    Can discover rules and correlations that humans cannot see 
+\end{itemize}
+
+\section{Regression}
+Predict a continuous value based off a dataset with 2 float values per item
+
+You figure out how close the model is to being perfect by using the 
+least squared error. 
+
+\section{Classification}
+Predict one of many discrete options based off a dataset with an item and a class 
+per item. 
+
+\section{Clustering}
+A form of unsupervised learning where you divide data into certain classifications 
+\textbf{without labels}. 
+
+\section{2D Image Recognition}
+Because we're in an ECE course, we treat the AI as a mapping from input to 
+output. 
+
+\section{Gradient Descent}
+You take the partial derivation of the cost function to find the minimum.
+
+\section{Multiple Features}
+You do the same gradient descent and have a similar cost function except you're 
+in a multi-dimensional space now. 
+
+\subsection{Learning Rate}
+If it's too small, it'll take forever, to learn, and if it's too large, it 
+will never converge because 
 
 
 
