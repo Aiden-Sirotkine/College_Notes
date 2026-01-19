@@ -4682,6 +4682,2884 @@ Consider just x
 }
 
 
+\section{3D Stationary States}
+\subsection{Recap}
+Imagine we have 2 particles, one of which with a central potential $V(r)$. 
+Because it is central, we can say that angular momentum is conserved 
+$\vec L = \vec r \times \vec p = - i \hbar \left( \vec r \times \vec \nabla \right)$.
+
+The SWE can be written as 
+\equations{
+    i \hbar 
+    \frac{\del \psi(r, \theta, \phi)}{\del t}
+    =
+    - \frac{\hbar}{2m}
+    \nabla^2 \psi(r, \theta, \phi)
+    +
+    V(r) \psi(r, \theta, \phi)
+    \hp
+    \psi 
+    =
+    R(r) Y(\theta, \phi)
+    \Rightarrow 
+    \\
+    \left(
+        \frac{1}{R}
+        \frac{\del}{\del r}
+        r^2 \frac{\del R}{\del r}
+        -
+        \frac{2 m r^2}{\hbar^2}
+        \left[
+            V(r) - E
+        \right]
+    \right)
+    \\
+    +
+    \frac{1}{Y}
+    \left(
+        \frac{1}{\sin(\theta)}
+        \frac{\del}{\del \theta}
+        \left(
+            \sin(\theta)
+            \frac{\del Y}{\del \theta}
+        \right)
+        +
+        \frac{1}{\sin^2(\theta)}
+        \frac{\del^2 Y}{\del \phi^2}
+    \right)
+    =
+    0
+}
+That is both the radial and angular equation that solve for our 
+wave function. 
+
+The expected value of angular momentum to be conserved is 
+\equations{
+    [\hat H, \hat L^2] = 0
+}
+
+Eigenstates and values of angular momentum can be written as 
+\equations{
+    [L_j, L_k]
+    =
+    i \hbar \epsilon_{jkl} L_l 
+    \hp 
+    j, k, l = \{x, y, z\}
+    \\
+    [L^2, L_j] = 0 
+    \Rightarrow 
+    L^2 \psi 
+    =
+    \lambda \psi 
+    \hp
+    L_z \psi 
+    =
+    \mu \psi
+}
+
+Let's define a thing and solve some stuff 
+\equations{
+    L_{\pm}
+    =
+    L_x \pm i Ly
+    \\
+    [L_z, L_{\pm}]
+    =
+    \pm \hbar L_{\pm}
+    \hp 
+    [L^2, L_{\pm}] = 0
+}
+
+If $\psi$ is an eigenfunction of $L^2$ and $L_z$, then $L_{\pm} \psi$ is also 
+an eigenfunction of those. 
+
+\equations{
+    L^2 (L_{\pm} \psi)
+    =
+    L_{\pm} L^2 \psi 
+    =
+    L_{pm} \lambda \psi 
+    =
+    \lambda (L_{pm} \psi) 
+    \\
+    L_z (L_{pm} \psi)
+    =
+    \left(
+        L_z L_{\pm}
+        -
+        L_{\pm} L_z
+    \right)
+    \psi 
+    +
+    L_{\pm} L_z \psi
+    =
+    \left(
+        \mu \pm \hbar 
+    \right) \psi
+}
+
+$L_{+} (L_{-})$ raises (or lowers) the Eigenvalue of $L_z$ by $\hbar$, 
+but \textbf{do not change} $L^2$.
+\equations{
+    L_{\pm} \psi 
+    =
+    \psi' 
+    \hp 
+    L^2 \psi 
+    =
+    \lambda \psi
+}
+
+\section{Bounds of Angular Momentum}
+\textbf{(z-component, given fixed $\lambda$)}
+
+The angular momentum looks like a ladder with rungs $\hbar$ apart. 
+The top of $\psi_t$ and the bottom is $\psi_b$
+\equations{
+    \psi = \mu 
+    \Rightarrow 
+    L_{+} \psi = \mu + \hbar 
+    \Rightarrow 
+    L_{-} \psi = \mu - \hbar 
+    \hp 
+    L_{-} \psi_{b} = 0
+    \hp
+    L_{+} \psi_{t} = 0
+    \\
+    L_z \psi_t
+    =
+    \hbar l \psi_t
+    \hp
+    L_z \psi_b
+    =
+    \hbar \bar{l} \psi_b
+    \hp 
+    L^2 
+    \psi_{t/b}
+    =
+    \lambda
+    \psi_{t/b}
+}
+$l$ and $\bar{l}$ are just the maximum and minimum values of $\mu$.
+
+I can do some identity shenanigans 
+\equations{
+    L_{\pm}
+    L_{\mp}
+    =
+    (L_x \pm i L_y)
+    (L_x \mp i L_y)
+    =
+    L_x^2 + L_y^2
+    \mp 
+    (L_x L_y - L_y L_x)
+    \\
+    =
+    L_2 - L_z^2
+    \mp 
+    i (i \hbar L_z)
+    \Rightarrow 
+    L^2 
+    =
+    L_{\pm}
+    L_{\mp}
+    + 
+    L_z^2 
+    \mp 
+    \hbar L_z
+    \\
+    L^2 \psi_t
+    =
+    \left(
+        L_{-} L_{+}
+        +
+        L_z^2 
+        +
+        \hbar L_z 
+    \right) \psi_t
+    =
+    \hbar^2 l (l + 1) \psi_t
+    =
+    \lambda \psi_t
+}
+
+These look suspiciously like Legendre Polynomials? eh we'll find out. 
+That is how the top of the ladder looks, but the bottom is different. 
+
+\equations{
+    \lambda 
+    \equiv 
+    \hbar^2 
+    \bar{l}
+    (\bar{l} - 1)
+}
+
+\section{Index Wavefunctions}
+Some idiot decided to make the index $m$ so now we have another $m$ that isn't 
+mass. 
+\equations{
+    L^2 
+    \psi_{l}^{m}
+    =
+    \hbar^2 l(l+1)
+    \psi_{l}^{m}
+    =
+    \lambda
+    \psi_{l}^{m}
+    \hp 
+    L_z
+    \psi_{l}^{m}
+    =
+    \hbar m 
+    \psi_{l}^{m}
+    =
+    \mu
+    \psi_{l}^{m}    
+}
+$L_{\pm}$ raises/lowers the z-projection by $\pm \hbar$
+$m_{min} = -l(-l+1)$ and it increments by $\hbar$ until to get 
+$m_{max} = l(l+1)$. $l$ is an integer or an integer $+ 1/2$.
+
+\subsection{Griffiths Fig. 4.12}
+If we imagine a sphere, a quantized value $L_z$ could be a circular trajectory 
+that lies near the top of the sphere. The largest value of $L_z$ is 
+the trajectory that lies on the diameter of the sphere, which is $\sqrt{L^2}$. 
+
+\section{Recap}
+Consider the SWE in 3D with a central potential $V = V(r)$. You write 
+it all out in spherical coordinates and do separation of variables and then 
+you get a radial equaation plus an angular equation = 0. The angular equation 
+became equal to $l(l+1)$ and the radial = $-l(l+1)$.
+
+Angular momentum is conserved. We should look for eigenfunctions of 
+$L^2$ and $L_z$ $([L^2, L_z] = 0)$. Use the structure of orthogonal 
+projections. 
+
+Introduce raising and lowering functions $L_{+}$ and $L_{-}$, that 
+raise and lower the $z$-projection of angular momentum. 
+\equations{
+    L^2 \psi_{l}^{m}
+    =
+    \hbar^2 l (l + 1)  \psi_{l}^{m}
+    \hp 
+    L_z  \psi_{l}^{m}
+    =
+    \hbar m \psi_{l}^{m}
+    \hp 
+    l 
+    =
+    \textrm{integer or integer + 1/2}
+    \\ 
+    m - -l, -l+1, \ldots, l+1, l
+}
+
+It's like a ladder with $\# m = zl + 1$ values. 
+The magnitude of angular momentum is conserved \textbf{and} 
+the z-projection \sout{are conserved} is quantized. 
+
+\section{Connecting $L$ to the angular equation}
+\equations{
+    \vec L 
+    =
+    -i \hbar 
+    \left(
+        \vec r 
+        \times 
+        \vec \nabla
+    \right)
+    \hp 
+    \nabla 
+    =
+    \hat r 
+    \frac{\del}{\del r}
+    +
+    \hat \theta 
+    \frac{1}{r}
+    \frac{\del}{\del \theta}
+    +
+    \hat \phi
+    \frac{1}{r \sin(\theta)}
+    \frac{\del}{\del \phi}
+    \hp 
+    \vec r 
+    =
+    r 
+    \hat r 
+}
+
+We cannot use just spherical coordinates because we know that only the 
+$z$-projection of the angular momentum is quantized. 
+\equations{
+    \vec L 
+    =
+    -i \hbar 
+    \left[
+        r 
+        \left(
+            \hat r \times \hat r 
+        \right) 
+        \frac{\del}{\del r}
+        +
+        \left(
+            \hat r \times \hat \theta
+        \right)
+        \frac{\del}{\del \theta}
+        +
+        \left(
+            \hat r + \hat \phi
+        \right)
+        \frac{1}{\sin(\theta)}
+        \frac{\del}{\del \phi}
+    \right]
+    \\
+    =
+    -i \hbar 
+    \left[
+        \hat \phi
+        \frac{\del}{\del \theta}
+        -
+        \hat \theta
+        \frac{1}{\sin(\theta)}
+        \frac{\del}{\del \phi}
+    \right]
+    \hp 
+    \hat \theta 
+    =
+    \cos(\theta)
+    \cos(\phi)
+    \hat i
+    \hp 
+    \vec r 
+    =
+    x \hat i 
+    + 
+    y \hat j
+    +
+    z \hat k
+    \\
+    L_x 
+    =
+    - i \hbar 
+    \left[
+        - \sin(\phi)
+        \frac{\del}{\del \theta}
+        -
+        \cos(\phi)
+        \cot(\theta)
+        \frac{\del}{\del \phi}
+    \right]
+    \\
+    L_y 
+    =
+    - i \hbar 
+    \left[
+        \cos(\phi)
+        \frac{\del}{\del \theta}
+        -
+        \sin(\phi)
+        \cot(\theta)
+        \frac{\del}{\del \phi}
+    \right]
+    \hp
+    L_z 
+    =
+    - i \hbar 
+    \frac{\del}{\del \phi}
+    \\
+    L_{+}
+    =
+    L_x 
+    \pm 
+    i L_y 
+    ====
+    \pm \hbar 
+    e^{\pm i \phi}
+    \left(
+        \frac{\del}{\del \theta}
+        \pm i \cot(\theta)
+        \frac{\del}{\del \phi}
+    \right)
+    \\
+    L^2 
+    =
+    L_{+}
+    L_{-}
+    +
+    L_z^2 
+    -
+    \hbar L_z
+    =
+    -\hbar^2
+    \left[
+        \frac{1}{\sin(\theta)}
+        \frac{\del}{\del \theta}
+        \left(
+            \sin(\theta)
+            \frac{\del}{\del \theta}
+        \right)
+        +
+        \frac{1}{\sin^2(\theta)}
+        \frac{\del^2}{\del \phi^2}
+    \right]
+    \\
+    L_{+}
+    L_{-}
+    =
+    - \hbar^2 
+    \left(
+        \frac{\del^2}{\del \theta^2}
+        +
+        \cot(\theta)
+        \frac{\del}{\del \theta}
+        +
+        \cot^2(\theta)
+        \frac{\del^2}{\del \phi^2}
+        +
+        i \frac{\del}{\del \phi}
+    \right)
+}
+
+With all this shenanigans, no derivations are given, our eigenvalue equation is 
+\equations{
+    \hbar^2 l (l + 1) \gamma 
+    =
+    L^2 \gamma 
+}
+
+\subsection{Angular Equation (Y)}
+\equations{
+    x \sin^2(\theta) * Y 
+    \hp 
+    Y 
+    =
+    \Omega(\theta)
+    \Lambda(\phi)
+    \\
+    \sin(\theta)
+    \frac{\del}{\del \theta}
+    \left(
+        \sin(\theta) 
+        \frac{\del Y}{\del \theta}
+    \right)
+    +
+    \frac{\del^2 Y}{\del \phi^2}
+    =
+    -l(l+1) \sin^2(\theta) Y 
+    \\
+    =
+    \left(
+        \frac{1}{\Omega}
+        \left[
+            \sin(\theta)
+            \frac{\del}{\del \theta}
+            \left(
+            \sin(\theta)
+            \frac{\del \Omega}{\del \theta}
+            \right)
+        \right]
+        +
+        l(l+1) \sin^2(\theta)
+    \right)
+    +
+    \frac{1}{\Lambda}
+    \frac{\del^2}{\del \phi^2}
+    \Lambda 
+    =
+    0
+}
+
+Say the first part equals $m^2$ and the second part equals $-m^2$.
+\equations{
+    \frac{1}{\Lambda}
+    \frac{\del^2 \Lambda}{\del \phi^2}
+    =
+    -m^2 
+    \Rightarrow 
+    \Lambda(\phi)
+    =
+    e^{i m \phi}
+    \Rightarrow 
+    \Lambda(\phi)
+    \overset{!}{=}
+    \Lambda(\phi + 2 \pi)
+    \Rightarrow 
+    m 
+    \in 
+    \mathbb{Z}
+    !!!!
+}
+
+We also figured out earlier than $m = -l, -l + 1, \ldots, l-1, l$
+and $l$ doesn't have to be an integer (can be integer + 1/2).
+
+in principle, Angular momentum allows half integer. 
+but for \textbf{orbital} angular momentum, only integers 
+are allowed.
+
+\subsection{$\Omega(\theta)$ equation}
+\equations{
+    \sin(\theta)
+    \frac{\del}{\del \theta}
+    \left(
+    \sin(\theta)
+    \frac{\del \Omega}{\del \theta}
+    \right)
+    +
+    \left(
+        l(l+1) \sin^2(\theta)
+        -
+        m^2
+    \right)
+    \Omega
+    =
+    0
+}
+
+You get the Legendre Polynomials (remember from PHYS435). You will not have 
+to derive it thank god. 
+\equations{
+    \Omega(\theta)
+    =
+    A P_{l}^{m}(\cos(\theta))
+    \\
+    P_{l}^{m}(x)
+    =
+    (-1)^m
+    (1 - x^2)^{m/2}
+    \left(
+        \frac{\del}{\del x}
+    \right)^m
+    P_{l}(x)
+    \hp 
+    P_{l}(x)
+    =
+    \frac{1}{2^{l} l!}
+    \left(
+        \frac{\del}{\del x}
+    \right)^l
+    (x^2 - 1)^{l}
+}
+
+With normalization, you get 
+\equations{
+    Y_{l}^{m}
+    (\theta, \phi)
+    =
+    \sqrt{
+        \frac{
+            (2l + 1)(l-m)!
+        }
+        {
+            4 \pi (l + m)!
+        }
+    }
+    e^{im \phi}
+    P_{l}^{m}(\cos(\theta))
+}
+
+This is known as "Spherical Harmonics"
+\equations{
+    \bra{ Y_{l}^{m} }
+    \ket{ Y_{l'}^{m'} }
+    =
+    \delta_{ll'}
+    \delta_{mm'}
+}
+
+$l$ and $m$ have to equal each other. 
+
+\section{Summary}
+$V = V(r)$ leads to 
+\equations{
+    L^2 Y(\theta, \phi)
+    =
+    \hbar^2 l(l + 1)
+    Y(\theta, \phi)
+    \hp 
+    L_z 
+    Y(\theta, \phi)
+    =
+    \hbar m 
+    Y(\theta, \phi)
+}
+
+Where $l$ is the total angular momentum and $m$ is something. 
+Imagine the Griffiths sphere. 
+
+\section{Discussion}
+\subsection{MIDTERM 1 KNOW EVERYTHING ABOUT THE QUANTUM HARMONIC OSCILLATOR}
+
+\subsection{3D QM}
+a 1D operator is now a 3D operator. 
+
+\equations{
+    \hat p \psi 
+    =
+    \begin{bmatrix}
+        \del_x \psi \\
+        \del_y \psi \\
+        \del_z \psi 
+    \end{bmatrix}
+    =
+    3D
+    \hp 
+    p^2 
+    =
+    \hat p 
+    \cdot 
+    \hat p 
+    =
+    1D 
+    \hp 
+    \hat p 
+    \cdot 
+    \hat p 
+    \neq 
+    \hat p
+    \hat p
+}
+
+\subsection{Degeneracy}
+Different Quantum States can have the same energy. 
+
+The degeneracy of $E_1$ is $3$ because each of $n_{x, y, z}$ can have 
+$n=1$. The degeneracy of $E_2$ is 6 because of permutation shenanigans. 
+
+\subsection{New Quantum Numbers}
+
+$n$ = principle quantum number (energy level)
+
+$l$ = angular momentum number. $0 < l < n$, so $n$ bounds $l$
+
+$m$ = angular momentum $z$-component. $m \in [-l, l]$ because it is essentially 
+just the $z$ projection of $\vec L$.
+
+$|L|
+=
+\sqrt{l(l+1)} \hbar
+$
+
+\subsection{new notation}
+$\ket{l, m}$ is a vector that tells you about your conserved angular 
+momentum properties. 
+
+\equations{
+    L_{+}
+    \ket{l, m}
+    =
+    C_{+}
+    \ket{l, m+1}
+    \hp
+    L_{-}
+    \ket{l, m}
+    =
+    C_{-}
+    \ket{l, m-1}
+}
+
+When the angular momentum gets "raised" or "lowered", the energy level 
+\textbf{does not change}, which means angular momentum magnitude also 
+doesn't change. 
+
+\subsection{Commutator Trick}
+Taking the commutator of 2 operators. 
+\equations{
+    [\hat A, \hat B] f 
+    =
+    \left(
+        \ldots
+    \right)
+    f
+    \hp 
+    \ldots 
+    =
+    [A, \hat B]
+}
+
+\textbf{ALWAYS USE A TEST FUNCTION}
+
+\subsection{Questions}
+Confirm the 3D Ehrenfest's Theorem
+
+\equations{
+    \frac{d}{dt}
+    \langle \hat p \rangle 
+    =
+    \langle - \nabla V \rangle 
+}
+
+Where $V$ is potential is not velocity. 
+
+I think we solved the expected value of momentum and 
+\equations{
+    \nabla V(r) 
+    =
+    \frac{1}{r}
+    \sin(\theta) 
+    asdfjaisfjasdfjasfadsfadksp[fkasdjfasdfnasdfnsadklfnasdfas
+    defasf
+    asdfsdf
+    sad
+    fdasdfasdfasdfasdfadfasdfasdfasdfasdfdasfasdfasdfasdfasdfasdfadfasdfasdfasdfasdfdasfasdf]
+}
+
+Show that it's all 0 and you're chilling. 
+
+\subsection{Uncertainty Principle}
+Formula Heisenberg's uncertainty principle, showing that there actually 
+is not a correlation between dimensions. 
+
+You jus yoi jsut do ou tuju standing
+
+\subsection{$\ket{l, m}$}
+Show that $L_{+} \ket{l, m}$ is an eigenstate of $L_z$ with eigenvalue 
+$\hbar (m+1)$.
+
+\equations{
+    L^2 
+    L_{+} \ket{l, m}
+    =
+    L^2 
+    \left(
+        L_x 
+        +
+        i L_y
+    \right)
+    \ket{l, m}
+}
+
+
+
+\section{Recap}
+
+You do a bunch of absolutely horrendous spherical coordinates math to 
+get a radial equation and an angular equation. 
+\equations{
+    L^2 Y(\theta, \phi)
+    =
+    \hbar l (l + 1) Y(\theta, \phi)
+}
+
+\section{Solving the Radial Equation}
+
+Let $u(r) = r R(r)$, so then our equation can be written as 
+\equations{
+    \frac{dR}{dr} 
+    =
+    \left(
+        r
+        \left(
+            \frac{du}{dr}
+        \right)
+        -
+        u
+    \right)
+    \frac{1}{r^2}
+    \Rightarrow 
+    \\
+    - \frac{\hbar^2}{2m}
+    \frac{\del^2 u}{\del r^2}
+    +
+    \left[
+        V 
+        +
+        \frac{\hbar^2}{2m}
+        \frac{l(l+1)}{r^2}
+    \right]
+    u
+    =
+    Eu
+}
+
+We can reduce the whole potential to just a $V_{\textrm{effective}}$
+
+\subsection{Spherical Infinite Square Well}
+\equations{
+    V 
+    =
+    \begin{cases}
+        0 : r \leq a
+        \\
+        \infty : r > a
+    \end{cases}
+}
+
+Inside the well, the SWE can be written as 
+\equations{
+    \frac{d^2 u}{dr^2}
+    =
+    \left[
+        \frac{l(l+1)}{r^2}
+        -
+        k^2
+    \right]
+    u
+    \hp 
+    k 
+    =
+    \frac{\sqrt{2mE}}{\hbar}
+}
+With boundary condition $u(a) = 0$
+
+for $l=0$ 
+\equations{
+    \frac{d^2 u}{dr^2}
+    =
+    k^2
+    u
+    \Rightarrow 
+    u 
+    =
+    A \sin(kr)
+    +
+    B \cos(kr)
+    \Rightarrow
+    A \sin(kr)
+    \hp 
+    ka 
+    =
+    \pi N
+    \\
+    R 
+    =
+    A \frac{\sin(kr)}{r}
+    +
+    B \frac{\cos(kr)}{r}
+    \Rightarrow 
+    A \frac{\sin(kr)}{r}
+}
+The cosine disappears because the limit of cos(r)/r means that $B=0$
+
+\subsection{$l > 0$}
+Look in the big book of functions and see that spherical harmonic functions 
+solve this equation 
+\equations{
+    u(r)
+    =
+    A \cdot r j_l(kr)
+    +
+    B r u_l(kr)
+    \\
+    j_l(x)
+    =
+    (-x)^{l}
+    \left(
+        \frac{1}{x}
+        \frac{d}{dx}
+    \right)^{l}
+    \frac{\sin(x)}{x}
+    =
+    \textrm{Bessel Function}
+    \\
+    u_l(x) 
+    =
+    \textrm{Spherical Neumann Function}
+}
+
+Bessel functions just look like a damped oscillator 
+
+The entire wave function looks like 
+\equations{
+    \psi(r, \theta, \phi)
+    =
+    A_{nl}
+    j_l
+    \left(
+        B
+    \right)
+    asfasdkjlfjadfghadflkhadsj
+}
+
+It looks like a bunch of step functions but with slopes between them. 
+
+$n$ is the principle quantum number (indexes energy)
+
+\section{MIDTERM}
+Everything up to HW9 - Discussion 8
+
+Don't worry about spherical harmonics that much. Know what's up 
+with the angular momentum operator. Know $\hat L$, but not $Y(\theta, \phi)$.
+
+The harmonic oscillator will be the most important part of the midterm. 
+
+
+
+
+\section{The Hydrogen Atom}
+You have a coulomb potential $V(r) = \frac{-e^2}{4 \pi \epsilon_0} \frac{1}{r}$
+
+The radial equation is of the form ($R = u / r$)
+\equations{
+    -
+    \frac{\hbar^2}{2m}
+    \frac{\del u^2}{\del r^2}
+    +
+    \left[
+        -
+        \frac{e^2}{4 \pi \epsilon_0}
+        \frac{1}{r}
+        +
+        \frac{\hbar^2}{2m_e}
+        \frac{l(l+1)}{r^2}
+    \right]
+    u 
+    =
+    E u 
+    \hp 
+    \psi 
+    =
+    R(r) Y_{l}^{m}(\theta, \phi)
+}
+You get a nice central potential with a central potential well 
+like we saw in classical mechanics and E\&M a million times over. Everything 
+in $[]$ is the effective potential, or $V_{eff}$
+
+Let's clean up the function 
+\equations{
+    \kappa 
+    \equiv 
+    \frac{\sqrt{-2 m_e E}}{\hbar}
+    \Rightarrow 
+    \frac{1}{\kappa^2}
+    \frac{d^2 u}{d r^2}
+    =
+    \left[
+        1 
+        -
+        \frac{m_e e^2}{2 \pi \epsilon_0 \hbar^2 \kappa}
+        \frac{1}{\kappa r}
+        +
+        \frac{l (l + 1)}{(\kappa r^2)}
+    \right]
+    \kappa
+    \\
+    \rho = \kappa \cdot r 
+    \hp 
+    \rho_0 
+    =
+    \frac{m_e e^2}{2 \pi \epsilon_0 \hbar^2 \kappa}
+    \Rightarrow 
+    \frac{d^2 u}{d \rho^2}
+    =
+    \left[
+        1 
+        -
+        \frac{\rho_0}{\rho}
+        +
+        \frac{l (l + 1)}{\rho^2}
+    \right]
+    u
+}
+
+This is absurd to solve analytically so we can instead observe the behavior at the 
+edges. 
+
+\subsection{Asymptotic Behavior}
+\equations{
+    \lim_{\rho \to \infty}
+    \Rightarrow 
+    \frac{d^2 u}{d \rho^2}
+    =
+    u 
+    \Rightarrow 
+    u(\rho)
+    =
+    A e^{-\rho}
+    +
+    B e^{\rho}
+    =
+    A e^{-\rho}
+    \\
+    \lim_{\rho \to 0}
+    \Rightarrow 
+    \frac{d^2 u}{d \rho^2}
+    =
+    \frac{l(l + 1)}{\rho^2}
+    u
+    \Rightarrow 
+    u(\rho)
+    =
+    C \rho^{l+1}
+    +
+    D \rho^{-l}
+    =
+    C \rho^{l+1}
+}
+Remove terms that lead to the equation being non-normalizable. 
+
+This means that our ansatz given the asymptotes can be written as 
+\equations{
+    u(\rho)
+    =
+    \rho^{l+1}
+    e^{-\rho}
+    v(\rho)
+    \hp
+    \frac{d u}{d \rho}
+    =
+    \rho^{l}
+    e^{-\rho}
+    \left(
+    (l + 1 - \rho)
+    v(\rho)
+    +
+    \rho \frac{dv}{d \rho}
+    \right)
+    \\
+    \frac{d^2 u}{d \rho^2}
+    =
+    \rho^{l}
+    e^{-\rho}
+    \left[
+        \left(
+            -2l - 2 + \rho + \frac{l(l+1)}{\rho}
+        \right)
+        v(\rho)
+        +
+        2(l + 1 - \rho)
+        \frac{dv}{d \rho}
+        +
+        \rho
+        \frac{d^2 v}{d \rho^2}
+    \right]
+}
+
+The way to solve this is by finding a recursive formula such that 
+\equations{
+    \rho
+    \frac{d^2 v}{d \rho^2}
+    +
+    \rho^{l}
+    e^{-\rho}
+    \left[
+        \left(
+            -2l - 2 + \rho + \frac{l(l+1)}{\rho}
+        \right)
+        v(\rho)
+        +
+        2(l + 1 - \rho)
+        \frac{dv}{d \rho}
+    \right]
+    =
+    0
+    \\
+    jfaklsdjfksadlfasklfklasdjflska;jfaldskjflksda
+}
+
+Develop $v(\rho)$ as a power series 
+\equations{
+    v(\rho)
+    =
+    \sum_{j=0}^{\infty}
+    c_{j} \rho^{j}
+    \hp 
+    \frac{d v(\rho)}{d \rho}
+    =
+    \sum_{j=0}^{\infty}
+    j
+    c_j \rho^{j-1}
+    =
+    \sum_{j=0}^{\infty}
+    (j+1)
+    c_{j+1} \rho^{j}
+    \\
+    \frac{d^2 v}{d \rho^2}
+    =
+    \sum_{j=0}^{\infty}
+    j(j+1)
+    c_{j+1} \rho^{j-1}
+}
+
+Insert that into the original equation to get 
+\equations{
+    \sum_{j=0}^{\infty}
+    j(j+1)
+    c_{j+1} \rho^{j}
+    +
+    2(l+1)
+    \sum_{j=0}^{\infty}
+    (j+1)
+    c_{j+1} \rho^{j}
+    \\
+    -
+    2
+    \sum_{j=0}^{\infty}
+    j c_{j} \rho^{j}
+    +
+    \left[
+        \rho_0 
+        -
+        2(l+1)
+    \right]
+    \sum_{j=0}^{\infty}
+    c_{j} \rho^{j}
+    =
+    0
+}
+
+Now that we have this giant gross equation, it has to be true that 
+we get an equation for \textbf{each} power of $\rho$
+\equations{
+    j(j+1)
+    c_{j+1}
+    +
+    2(l+1)
+    (j+1)
+    c_{j+1}
+    -
+    2
+    j c_{j}
+    +
+    \left[
+        \rho_0 
+        -
+        2(l+1)
+    \right]
+    \sum_{j=0}^{\infty}
+    c_{j}
+    =
+    0
+}
+
+We now have a relation of $c_{j+1}$ to $c_j$
+\equations{
+    c_{j+1}
+    =
+    \frac{2(j + l + 1) - \rho_0}{(j+1)(j + 2l + 2)}
+    c_j
+}
+
+Now we have to find some end to the series. 
+\equations{
+    \textrm{large } \rho 
+    \rightarrow 
+    u(\rho)
+    =
+    e^{-\rho}
+    \hp
+    \textrm{large } j 
+    \rightarrow 
+    c_{j+1}
+    \approx 
+    \frac{2}{j+1}
+    c_j
+    \Rightarrow 
+    c_j 
+    =
+    \frac{2j}{j!} c_0
+}
+
+But we know this cant be true for all $j$ because it leads to an incorrect answer
+\equations{
+    v(\rho)
+    =
+    c_0 
+    \sum_j 
+    \frac{2j}{j!}
+    \rho^j 
+    =
+    c_0 e^{2 \rho}
+    \Rightarrow 
+    u(\rho)
+    =
+    c_0 \rho^{l+1}
+    e^{\rho}
+    \neq
+    e^{-\rho}
+}
+
+\subsection{I zoned out whoops}
+The series has to terminate somewhere 
+\equations{
+    c_{N-1} \neq 0 : c_{N} = 0
+    \\
+    2(N+ l )
+    -
+    \rho_0
+    =
+    0
+    \hp 
+    N = n + l
+    \\
+    \rho_0 = 2n 
+    \Rightarrow 
+    E 
+    =
+    - \frac{\hbar^2 \kappa^2}{2m_e}
+    =
+    - \frac{m_e e^4}{8 \pi^2 \epsilon_0^2 \hbar^2 \rho_0^2}
+    \hp 
+    E_n 
+    =
+    -
+    \left[
+        \frac{m_e}{2 \hbar^2}
+        \left(
+            \frac{e^2}{4 \pi \epsilon_0}
+        \right)^2
+    \right]
+    \frac{1}{n^2}
+    =
+    \frac{E_1}{n^2}
+    \\
+    E_1 
+    =
+    -13.6 meV
+}
+Bohr actually found this result (Bohr Model 1913) 
+without quantum mechanics which is kind of insane if you think about it. 
+
+$N$ control the series termination and it controls the amount of nodes 
+in the radial equation (similar to in other models with $n$).
+
+If we observe earlier definitions 
+\equations{
+    \kappa 
+    =
+    \left(
+    \frac{m_e e^2}{4 \pi \epsilon_0 \hbar^2}
+    \right)
+    \frac{1}{n}
+    =
+    \frac{1}{an}
+    \hp 
+    a 
+    \equiv
+    \frac{4 \pi \epsilon_0 \hbar^2}{m_e e^2}
+    =
+    0.53 \cdot 10^{-10} m
+    \\
+    \rho 
+    =
+    \frac{r}{an}
+    \hp 
+    \psi_{nlm}(r, \theta, \phi)
+    =
+    R_{nl}(r) Y_{l}^{m} (\theta, \phi)
+    \hp 
+    R_{nl}
+    =
+    \frac{1}{r}
+    \rho^{l+1}
+    e^{-\rho}
+    v(\rho)
+}
+Where $v$ is a polynomial of degree $(n-l-1)$ and $c_j$ is known from 
+the recursion formula. 
+
+The wave function now fits in the neat potential well who would 
+have guessed 
+\equations{
+    \psi_{1, 0, 0}
+    =
+    R_{1, 0}
+    (r)
+    Y_{0}^{0}
+    (\theta, \phi)
+    \hp 
+    R_{1, 0}(r)
+    =
+    \frac{c_0}{a}
+    e^{-r/a}
+    \hp 
+    v(\rho)
+    =
+    c_0 
+    =
+    \const
+    \\
+    \int^{\infty}_{0} dr \, 
+    |R_{1, 0}|^2 r^2
+    =
+    1
+    \rightarrow 
+    c_0 
+    =
+    \frac{2}{\sqrt{a}}
+    Y_{0}^{0}
+    =
+    \frac{1}{\sqrt{4\pi}}
+    \\
+    \psi_{1, 0, 0}(r, \theta, \phi)
+    =
+    \frac{1}{\sqrt{4 a^3}} e^{-r/a}
+}
+$v(\rho) = c_0$ is found from the recursive formula. 
+
+\subsection{Importance}
+We now have a nice graph of energy levels related to quantum number that 
+I have definitely seen before. 
+
+As $N$ increases, degeneracy also goes up. 
+\equations{
+    d(n)
+    =
+    \sum_{l=0}^{n-1}
+    (2l+1)
+    =
+    n^2
+}
+
+If I add anything more than 13.6meV when its in the lowest state the hydrogen 
+atom will just be ionized. 
+
+This is as far as you can get with analytical math in quantum mechanics. 
+Everything else involves approximations and computation.
+
+\section{Discussion}
+\subsection{Potentials You Know}
+\begin{itemize}
+\item
+free particle = 0 
+\item
+infinite square is 0 or infinite 
+\item
+oscillator is $\frac{1}{2} m \omega^2 x^2$ 
+\item
+Now we study the hydrogen atom $V = \frac{1}{r}$
+\end{itemize}
+
+The SWE can be solved for the H atom and nothing else 
+\equations{
+    \hat H 
+    =
+    - \frac{\hbar^2}{2 \mu}
+    \nabla^2
+    -
+    \frac{Z e^2}{4 \pi \epsilon_0 r}
+}
+
+And it has solution that can be derived from separation of variables 
+\equations{
+    \psi_{nlm}(r, \theta, \phi)
+    =
+    R_{n}(r) Y_{l, m}(\theta, \phi)
+}
+
+$m$ gives us the z-projection of the angular momentum quantum number 
+which is given to us by $l$. $n$ gives us energy, and $n$ is independent 
+from $l$ and $m$. 
+
+\subsection{Normalizing in Space}
+\equations{
+    1
+    =
+    \int^{\infty}_{0} dr \,
+    |R(r)|^2 r^2
+    \int^{2 \pi}_{0}
+    \int^{\pi}_{0} \, d \theta \, d \phi
+    |Y(\theta, \phi)|^2
+    \sin(\theta)
+}
+
+\subsection{Spherical Harmonics}
+These are a class of well behaved functions that define our eigenstates 
+\equations{
+    \psi_{nlm}
+    =
+    \ket{n, m, l}
+}
+
+And $l$ and $m$ are coupled. $m$ has bounds $\pm l$ in unit steps. 
+
+\subsection{Chemical Orbitals}
+This is the consequence of spherical harmonics in quantum shenanigans. 
+
+The orbital images are surfaces of equal probability density. 
+(Technically, electrons are in a superposition of a bunch of the lowest states, 
+but if we observe all of them, we get the chemists POV where they take 
+up the lowest states in a neat ordered shelf).
+
+\subsection{New Eigenvalues}
+We have $\hat L_z$ operator, which projects the angular momentum to the z-axis. 
+\equations{
+    \hat L_z \ket{l, m}
+    =
+    \hbar m \ket{l, m}
+    \hp 
+    L^2 \ket{l, m}
+    =
+    l(l+1) \ket{l, m}
+    \hp 
+    Y_{l}^{m}
+}
+L is on the bottom and $m$ is on the top. 
+
+\subsection{Questions}
+\equations{
+    -\frac{\hbar^2}{2m} \nabla^2 \psi 
+    + 
+    \frac{1}{2} m \omega^2 r^2 \psi 
+    =
+    E \psi 
+    \Rightarrow 
+    \\
+    -\frac{\hbar^2}{2m}
+    \left(
+        \frac{\del^2}{\del x^2}
+        +
+        \frac{\del^2}{\del y^2}
+        +
+        \frac{\del^2}{\del z^2}
+    \right)
+    + 
+    \frac{1}{2} m \omega^2 (x^2 + y^2 + z^2) \psi 
+    =
+    E \psi 
+    \Rightarrow 
+    \\
+    -
+    \frac{\hbar^2}{2m}
+        \frac{\del^2}{\del x^2}
+    -
+    \frac{\hbar^2}{2m}
+        \frac{\del^2}{\del y^2}
+    -
+    \frac{\hbar^2}{2m}
+        \frac{\del^2}{\del z^2}
+    \\
+    =
+    \frac{1}{2} m \omega^2 (x^2 + E_x) 
+     \psi 
+    + 
+    \frac{1}{2} m \omega^2 (y^2 + E_y)  \psi 
+    + 
+    \frac{1}{2} m \omega^2 (z^2 + E_z) \psi 
+    \\
+    -
+    \frac{\hbar^2}{2m}
+        \frac{\del^2}{\del x^2}
+        =
+    \frac{1}{2} m \omega^2 (x^2 + E_x) 
+    \Rightarrow 
+    \frac{\del^2}{\del x^2}
+    =
+    -\frac{1}{2} m \omega^2 \frac{2m}{\hbar^2} (x^2 + E_x) 
+}
+
+This is just the 1d harmonic oscillator 3 times. 
+
+Find the degeneracy 
+\equations{
+    E 
+    =
+    \hbar \omega 
+    \left(
+        n_x 
+        +
+        n_y 
+        +
+        n_z
+        +
+        \frac{3}{2}
+    \right)
+}
+
+The degeneracy you just get from stars and bars. 
+
+Show that $L_x$ is conserved. 
+\equations{
+    [\hat H, L_x]
+    =
+    [\hat H, y p_x]
+    +
+    [\hat H, x p_x]
+}
+
+The previous part implied that the eigenstates of the 3d SHO. 
+
+$L_x$ and $L_y$ are different and not gonna also be eigenstates of $L_z$ 
+
+\subsection{Other Question}
+You have a rigid rotor in a magnetic field
+
+If energy is measured, what are the possible results? 
+
+\equations{
+    \frac{L^2}{2I}
+    \psi 
+    +
+    \omega_0 L_z \psi 
+    =
+    E
+    \phi 
+    \hp 
+    L^2 \psi 
+    =
+    \hbar^2 l (l+1) \psi 
+    \hp 
+    L_z \psi 
+    =
+    \hbar m \psi 
+    \\
+    \frac{\hbar^2 l(l+1)}{2I}
+    \psi 
+    +
+    \omega_0 \hbar m 
+    \psi 
+    =
+    E
+    \psi 
+    \\
+    \sqrt{\frac{3}{4 \pi}} 
+    \sin(\theta) \sin(\phi)
+    =
+    \sqrt{\frac{3}{4 \pi}} 
+    \sin(\theta)
+    \left(
+        \frac{e^{i \psi} - e^{-i \psi}}{2i}
+    \right)
+}
+
+You turn the thing into 2 eigenstates. 
+
+\section{MIDTERM 2 REVIEW}
+
+Commutators $[\hat A, \hat B] = 0$ can be simultaneously diagonalized. 
+
+But there is a certain amount of uncertainty in that. 
+\equations{
+    \sigma_A^2 \sigma_B^2 
+    \geq
+    \left(
+    \frac{
+    \langle 
+    [\hat A, \hat B]
+    \rangle
+    }{2i}
+    \right)^2
+}
+
+A quantity is conserved if $[\hat H, \hat A] = 0$
+
+The generalized Ehrenfest Theorem is 
+\equations{
+    \frac{d}{dt}
+    \langle A \rangle 
+    =
+    [\hat H, \hat A]
+    +
+    \langle 
+    \frac{d A}{dt}
+    \rangle 
+}
+Where the 2nd term is typically 0. The G.E.T. also leads to energy-time uncertainty
+$(\Delta E \Delta t)$.
+
+Basically, given some observable, you'll probably have to figure out the uncertainty 
+and if the observable is conserved. 
+
+\subsection{Simple Harmonic Oscillator} 
+Just a wave function with a potential $V(x) = \frac{1}{2} m \omega^2 x^2$ 
+\equations{
+    H
+    =
+    \hbar \omega 
+    \left(
+    a_{+}
+    a_{-}
+    +
+    \frac{1}{2}
+    \right)
+    =
+    -
+    \frac{\hbar^2}{2m}
+    \frac{\del^2}{\del x^2}
+    +
+    \frac{1}{2}
+    m \omega^2 x^2 
+    \hp 
+    [ a_{-}, a_{+} ]
+    =
+    1
+    \\
+    a_{-} 0 = 0
+    \hp 
+    a_{+} \ket{n} = \sqrt{n+1} \ket{n+1}
+    \hp
+    a_{-} \ket{n} = \sqrt{n} \ket{n-1}
+    \hp 
+    \bra{n} \hat A \ket{n}
+    =
+    \hbar \omega 
+    \left(
+    n + \frac{1}{2}
+    \right)
+}
+
+The stationary states are some sort of special polynomial with a fancy name, but that 
+won't come up on the midterm. 
+
+You give us an observable made of +'s and -'s and a wave function made of stationary 
+states and you have to calculate something. There is also time evolution but the 
+time evolution is very simple. 
+
+\subsection{Angular Momentum} 
+Given some angular momentum $l$, there is basically a ladder for the quantum number $m$ 
+that spans from $+l$ to $-l$.
+\equations{
+    L_{\pm}
+    =
+    L_x 
+    +
+    iL_y
+}
+I'm not 100$\%$ sure that this is true, double check the angulular momentum math. 
+
+For the radial equation/3D harmonic oscillator, just solve for each dimension.
+
+\subsection{Know 3D QM} 
+
+\subsection{Know Coherent States}
+
+\subsection{Know Pauli Matrices}
+
+\chapter{Spin}
+Classically, orbiting things have angular momentum $\vec L = \vec r \times \vec p$
+and spinning things also have that $\vec s = \vec I \cdot \vec \omega$
+
+Quantum mechanical particles have integer spin
+\begin{itemize}
+    \item
+    Boson: integer spin (photons have s=1)
+    \item
+    Fermions: Integer + 1/2
+\end{itemize}
+
+Spin is comparable to orbital angular momentum 
+\equations{
+    \vec s 
+    =
+    \begin{bmatrix}
+        s_x \\ s_y \\ s_z
+    \end{bmatrix}
+    \hp
+    [\hat s_i, \hat s_j]
+    =
+    i \hbar \hat s_k
+}
+
+And we have ladder operators for spin the same way as angular momentum 
+\equations{
+    \hat s^2 \ket{s, m}
+    =
+    \hbar^2 s(s+1) \ket{s, m}
+    \hp 
+    \hat s_z =
+     asfjklagjkoa;djfklsdajf;
+}
+
+\section{Spin 1/2}
+The eigenstates of $\hat s_z$ are known as spinors 
+\equations{
+    \ket{0}
+    \equiv
+    \chi_{+}
+    \equiv
+    \begin{bmatrix}
+        1 \\ 0
+    \end{bmatrix}
+    \equiv
+    \ket{\frac{1}{2}, \frac{1}{2}}
+    \equiv
+    \ket{\uparrow}
+    \hp
+    \ket{1}
+    \equiv
+    \chi_{-}
+    \equiv
+    \begin{bmatrix}
+        0 \\ 1
+    \end{bmatrix}
+    \equiv
+    \ket{\frac{1}{2}, \frac{1}{2}}
+    \equiv
+    \ket{\downarrow}
+}
+
+And the eigenvalues of these states can be written as 
+\equations{
+    \hat s^2 \chi_{+}
+    =
+    \frac{3}{4} \hbar^2 \chi_{+}
+    \hp
+    \hat s^2 \chi_{-}
+    =
+    \frac{3}{4} \hbar^2 \chi_{-}
+    \\
+    \hat s^2 
+    =
+    \frac{3}{4} \hbar^2 
+    \begin{bmatrix}
+        1 & 0 \\ 0 & 1
+    \end{bmatrix}
+    =
+    \frac{3}{4} \hbar^2 
+    \left(
+        \ket{0}
+        \bra{0}
+        +
+        \ket{1}
+        \bra{1}
+    \right)
+    \\
+    \hat s_z \chi_{+}
+    =
+    \frac{\hbar}{2}
+    \chi_{+}
+    \hp
+    \hat s_z \chi_{-}
+    =
+    -
+    \frac{\hbar}{2}
+    \chi_{-}
+}
+
+\subsection{Time Evolution}
+$\mu$ rotates under an external magnetic field $\vec B$ 
+
+There's a gyromagnetic ratio $\vec \mu = \gamma \cdot \vec L$. So spin in 
+a magnetic field experiences: 
+\equations{
+    \dot{\vec L}
+    =
+    \vec \mu \times \vec B
+    \Rightarrow 
+    \dot{\vec \mu} 
+    =
+    \gamma \vec \mu \times \vec B
+}
+
+\section{Hamiltonian}
+This can be derived with some shenanigans 
+\equations{
+    H 
+    =
+    \vec \mu 
+    \cdot 
+    \vec B
+    \hp 
+    \vec \mu 
+    =
+    \gamma \vec s
+}
+
+\subsection{Example}
+\equations{
+    \vec B = B_0 \hat z 
+    \hp 
+    \hat H 
+    =
+    - \gamma \vec B \cdot \vec s
+    =
+    - 
+    \frac{\gamma B_0 \hbar}{2} \hat \sigma_z
+}
+$\sigma$ is a pauli matrix
+
+idk something something I'm texting my family 
+
+At $t=0$ 
+\equations{
+    \alpha \ket{0} 
+    +
+    \beta \ket{1} 
+    =
+    \cos(\frac{\theta}{2}) 
+    \ket{0}
+    +
+    \sin(\frac{\theta}{2}) 
+    e^{i \phi}
+    \ket{1}
+    \\
+    \chi(t)
+    =
+    \alpha \chi_{+}
+    e^{-i \frac{E_{+}}{\hbar} t}
+    +
+    \beta \chi_{-}
+    e^{-i \frac{E_{-}}{\hbar} t}
+    \\
+    \langle s_x \rangle 
+    =
+    \bra{\chi(t)} s_x \ket{\chi(t)}
+    =
+    \frac{\hbar}{2} 
+    \sin(\theta) \cos(\gamma B_0 t)
+}
+
+$\omega = \gamma B_0$ is the Larmor frequency or something.
+
+\subsection{Bloch Spheres}
+They can be used to represent spin but I can't draw in this notebook.
+
+Magnetic resonance is just making spin states go from $\ket{\uparrow}$ 
+to $\ket{\downarrow}$
+
+\section{Recap}
+Spin is a vector with a commutator that acts like Pauli matrices and there's 
+also a ladder function that goes with it 
+\equations{
+    \hat s^2 \ket{s, m}
+    =
+    \hbar^2 s(s+1) \ket{s, m}
+    \hp 
+    \hat s_z \ket{s, m}
+    =
+    \hbar m \ket{s, m}
+    \\
+    s_{\pm} \ket{s, m}
+    =
+    \hbar 
+    \sqrt{s(s+1) - m(m \pm 1)} \ket{s, m \pm 1}
+}
+
+For spin 1/2 particles, the operator is 
+\equations{
+    \vec s 
+    =
+    \frac{\hbar}{2} \vec \sigma 
+    =
+    \frac{\hbar}{2} \begin{bmatrix} \sigma_x \\ \sigma_y \\ \sigma_z \end{bmatrix}
+}
+
+The general state of a spin particle can be written as 
+\equations{
+    \chi 
+    =
+    \alpha \chi_{+}
+    +
+    \beta \chi_{-}
+}
+
+\section{1/2 Spin in B Field}
+\equations{
+    \hat H 
+    =
+    - \gamma \vec B \cdot \vec s 
+    =
+    - \frac{\gamma B_0 \hbar}{2}
+    \hat \sigma_z
+}
+
+\section{Stern-Gerlach}
+\equations{
+    \vec F 
+    =
+    \vec \nabla 
+    (\vec \mu \cdot \vec B)
+    \hp
+    \chi 
+    =
+    \frac{1}{\sqrt{2}}
+    (
+        \ket{\uparrow}
+        +
+        \ket{\downarrow}
+    )
+}
+
+You just use a magnetic field, and when the particle is the wrong spin it gets 
+pushed away. 
+
+\equations{
+    \ket{\pm}
+    =
+    \frac{1}{\sqrt{2}}
+    (
+        \ket{\uparrow}
+        \pm
+        \ket{\downarrow}
+    )
+}
+
+$\ket{x, +}$ means that 1st one is direction, and the 2nd is spin. 
+
+\subsection{Angular Momentum}
+Consider 2 separate spin 1/2 particles. 
+We have new operators 
+\equations{
+    \hat S_{x, y, z}^{(j)}
+    \hp 
+    \hat S^{(j)^2}
+}
+
+You can take the composite of 2 states 
+\equations{
+    \ket{s_1, s_2, m_1, m_2}
+    \equiv 
+    \ket{s_1, m_1} 
+    \otimes 
+    \ket{s_2, m_2}
+}
+Where $\otimes$ is the kronecker product. 
+
+You take all the operators of all the things and get either $s(s+1)$ or $\hbar m$.
+
+To measure the total angular momentum, you use a new operator 
+\equations{
+    \hat s 
+    =
+    \hat s^{(1)}
+    +
+    \hat s^{(2)}
+}
+
+What happens if we measure $\hat s_z$? 
+\equations{
+    \hat s_z 
+    \ket{s_1, s_2, m_1, m_2}
+    =
+    s_z^{(1)}
+    \ket{s_1, s_2, m_1, m_2}
+    +
+    s_z^{(2)}
+    \ket{s_1, s_2, m_1, m_2}
+    \\
+    =
+    \hbar(m_1 + m_2)
+    \ket{s_1, s_2, m_1, m_2}
+    \hp
+    \ket{\uparrow \uparrow}
+    \ket{\frac{1}{2}, \frac{1}{2},\frac{1}{2},\frac{1}{2}}
+    \rightarrow
+    m=1
+    \\
+    \ket{\uparrow \downarrow}
+    \rightarrow m=0
+    \hp
+    \ket{\downarrow \uparrow}
+    \rightarrow m=0
+    \hp 
+    \ket{\downarrow \downarrow}
+    \rightarrow m=-1
+}
+
+This doesn't work because we now have 2 separate states with the same quantum 
+number. 
+
+\subsection{Joint Ladder Operators}
+the top state is $\ket{\uparrow \uparrow}$, and if we apply the lowering 
+operator to it, we get 
+\equations{
+    s_{-}
+    \ket{\uparrow \uparrow}
+    =
+    \left(
+    s_{-}^{(1)}
+    \ket{\uparrow}
+    \right)
+    \ket{\uparrow}
+    +
+    \ket{\uparrow}
+    \left(
+    s_{-}^{(2)}
+    \ket{\uparrow}
+    \right)
+    =
+    \hbar 
+    \ket{\downarrow}
+    \ket{\uparrow}
+    +
+    \hbar 
+    \ket{\uparrow}
+    \ket{\downarrow}
+    \\
+    s_{-} \ket{10}
+    =
+    2 \hbar \ket{\downarrow \downarrow} \equiv \ket{1, -1}
+}
+
+And then you normalize it 
+\equations{
+    s = 1: 
+    \begin{cases}
+        dfhdaf;jfjkadsljflsdj
+    \end{cases}
+}
+
+We have a missing basis vector that is 
+\equations{
+    \frac{1}{\sqrt{2}} 
+    \left(
+        \ket{\uparrow \downarrow}
+        -
+        \ket{\downarrow \uparrow}
+    \right)
+    \hp 
+    s = 0 
+    \hp 
+    m=0
+    \\
+    \hat s^2 
+    \frac{1}{\sqrt{2}} 
+    \left(
+        \ket{\uparrow \downarrow}
+        -
+        \ket{\downarrow \uparrow}
+    \right)
+    =
+    ? 
+    \\
+    \hat s^2 
+    =
+    s^{(1)^2}
+    +
+    s^{(2)^2}
+    +
+    2
+    s^{(1)}
+    s^{(2)}
+    \\
+    s^{(1)^2}
+    \ket{\psi_[-]}
+    =nadfjkladjfkadsnfjkls
+    \\
+    s^{(1)}
+    \cdot
+    s^{(2)}
+    \ket{\psi_{-}}
+    =
+    -\frac{3 \hbar^2}{\psi}
+    \ket{\psi_{-}}
+    \\
+    \hat s^2 \ket{\psi} = 0 
+    \Rightarrow 
+    \frac{1}{\sqrt{2}} 
+    \left(
+        \ket{\uparrow \downarrow}
+        -
+        \ket{\downarrow \uparrow}
+    \right)
+    =
+    \ket{00}
+}
+
+\section{Discussion}
+Write down the matrices for $S_{+}$ and $S_{-}$. Write 
+
+\section{Identical Particles}
+a 2 electron system is not the state as 2 combined 1-electron systems. 
+
+The hamiltonian of the system is 
+\equations{
+    H 
+    =
+    - \frac{\hbar^2}{2m_1}
+    \nabla^2_1
+    - 
+    \frac{\hbar^2}{2m_2}
+    \nabla^2_2
+    +
+    V(\vec r_1, \vec r_2)
+}
+
+We can use separation of variables 
+\equations{
+    V(\vec r_1, \vec r_2)
+    =
+    V_1(\vec r_1)
+    +
+    V_2(\vec r_2)
+}
+
+Now we can make an ansatz for the wave function 
+\equations{
+    \psi(\vec r_1, \vec r_2)
+    =
+    \psi_a(\vec r_1) \psi_b(\vec r_2)
+    \hp
+    H_{1, 2}
+    =
+    - \frac{\hbar^2}{2m_{1/2}}
+    \nabla_{1/ 2}^2
+    +
+    V_{1/2}(\vec r_{1/2})
+    \\
+    H_{1/2} \psi_{a//b} 
+    =
+    E_{a/b} \psi_{a/b} 
+    H_{tot}
+    =
+    H_{1}
+    +
+    H_{2}
+    \hp 
+    E_{tot}
+    =
+    E_a
+    +
+    E_b
+    \\
+    \psi
+    =
+    \psi_{a}
+    \psi_{b}
+    =
+    e^{-i E_a/\hbar t}
+    e^{-i E_b /\hbar t}
+}
+
+We can have solutions that are linear combinations 
+\equations{
+    \psi
+    =
+    A 
+    \psi_a(\vec r_1) \psi_c(\vec r_2)
+    +
+    B
+    \psi_b(\vec r_1) \psi_d(\vec r_2)
+}
+
+\section{Bosons are Fermions}
+There are two ways to do something in 3D 
+\equations{
+    \psi_{\pm}(\vec r_1, \vec r_2)
+    =
+    A
+    \left(
+    \psi_a(\vec r_1)
+    \psi_b(\vec r_2)
+    \pm
+    \psi_a(\vec r_2)
+    \psi_b(\vec r_1)
+    \right)
+}
++ is Bosons and - is Fermions.
+
+\subsection{Particle Exchange}
+Bosons are symmetric and need exchange and Fermions are anti-symmetric 
+\equations{
+    \psi_{+}(\vec r_1, \vec r_2)
+    =
+    \psi_{+}(\vec r_2, \vec r_1)
+    \hp
+    \psi_{-}(\vec r_1, \vec r_2)
+    =
+    -\psi_{-}(\vec r_2, \vec r_1)
+}
+
+Consider 2 particles in the same state 
+\equations{
+    \psi_{+}(\vec r_1, \vec r_2)
+    =
+    \left(
+    \psi_a(\vec r_1)
+    \psi_a(\vec r_2)
+    +
+    \psi_a(\vec r_2)
+    \psi_a(\vec r_1)
+    \right)
+    =
+    2A
+    \psi_a(\vec r_2)
+    \psi_a(\vec r_1)
+    \\
+    \psi_{-}(\vec r_1, \vec r_2)
+    =
+    \left(
+    \psi_a(\vec r_1)
+    \psi_a(\vec r_2)
+    -
+    \psi_a(\vec r_2)
+    \psi_a(\vec r_1)
+    \right)
+    =
+    0
+}
+
+Pauli exclusion principle! Fermions can't be in the same quantum state. 
+
+\section{2 Particles in a Well}
+If we imagine indistinguishable bosons, we take the sum of the energies 
+from each particle being in each state. 
+
+If we imagine 2 indistinguishable Fermions. 
+\equations{
+    \psi_{12}
+    =
+    \psi_a(x_1) 
+    \psi_b(x_2) 
+}
+
+But if the fermions/bosons are distinguishable, then 
+\equations{
+    \psi_{12}
+    =
+    A
+    \left(
+    \psi_a(x_1)
+    \psi_b(x_2)
+    \pm
+    \psi_b(x_1)
+    \psi_a(x_2)
+    \right)
+}
+
+Consider spin, the total wave is 
+\equations{
+    \psi 
+    =
+    \psi(x) \chi 
+    \hp 
+    \chi 
+    =
+    \textrm{spinor}
+}
+
+For bosons:
+\equations{
+    \psi_{+}(\vec r_1, \vec r_2)
+    =
+    \psi_{+}(\vec r_2, \vec r_1)
+}
+
+For Fermions
+\equations{
+    \psi_{-}(\vec r_1, \vec r_2)
+    =
+    -\psi_{-}(\vec r_2, \vec r_1)
+}
+
+We can do some math shenanigans with Bosons
+\equations{
+    \psi(x_1, x_2)
+    =
+    \psi_a(x_1)
+    \psi_b(x_2)
+    =
+    \ket{a}
+    \ket{b}
+    \Rightarrow 
+    \psi_B
+    =
+    \frac{1}{\sqrt{2}}
+    \left(
+    \ket{a} 
+    \ket{b} 
+    +
+    \ket{a} 
+    \ket{b} 
+    \right)
+}
+
+and Fermions 
+\equations{
+    \psi_F
+    =
+    \frac{1}{\sqrt{2}}
+    \left(
+    \ket{a} 
+    \ket{b} 
+    +
+    \ket{a} 
+    \ket{b} 
+    \right)
+}
+
+We can consider a distance operator for distinguishable particles
+\equations{
+    \langle d^2 \rangle 
+    =
+    \langle (x_1 - x_2)^2 \rangle 
+    =
+    \langle x_1^2 \rangle
+    +
+    \langle x_2^2 \rangle
+    +
+    \langle x_1 x_2 \rangle
+    \\
+    \langle x_1^2 \rangle
+    =
+    \bra{a} x_1^2 \ket{a}
+    \bra{b} \ket{b}
+    =
+    \langle x^2 \rangle_a
+    \hp 
+    \langle x_2^2 \rangle
+    ===
+    \langle x^2 \rangle_b
+    \\
+    \langle x_1 x_2 \rangle 
+    =
+    \bra{a} x_1 \ket{a}
+    \bra{b} x_2 \ket{b}
+    =
+    \langle x \rangle_a
+    \langle x \rangle_b
+}
+
+And for Bosons/Fermions, we can calculate the same thing 
+\equations{
+    \langle x_1^2 \rangle 
+    =
+    \frac{1}{2}
+    \left[
+	\bra{a} x_1^2 \ket{a} 
+	\bra{b} \ket{b}
+	+
+	\bra{b} x_1^2 \ket{b} 
+	\bra{a} \ket{a}
+	\pm
+	\bra{a} x_1^2 \ket{b} 
+	\bra{b} \ket{a}
+	\pm
+	\bra{b} x_1^2 \ket{a} 
+	\bra{a} \ket{b}
+    \right]
+    \\
+    =
+    \frac{1}{2}
+    \left[
+	\langle x^2 \rangle_a
+	+
+	\langle x^2 \rangle_b
+    \right]
+    =
+    \langle x_2^2 \rangle
+    \\
+    \langle x_1 x_2 \rangle 
+    ===
+    \langle x \rangle_a
+    \langle x \rangle_b
+    \pm
+    |\langle x \rangle_{ab} |^2
+    \hp 
+    \langle x \rangle_{ab}
+    =
+    \bra{a} x \ket{b} 
+    \\
+    \langle d^2 \rangle 
+    =
+    \langle x^2 \rangle_a 
+    +
+    \langle x^2 \rangle_b 
+    -
+    2
+    \langle x \rangle_a
+    \langle x \rangle_b
+    \mp 
+    2 |\langle x \rangle_{ab} |^{2}
+}
+
+This whole phenomenon is known as the Exchange Force 
+
+\subsection{that's the end of final material, only 1 lecture left}
+
+\section{DISCUSSION}
+Imagine a particle with spin. If spin=1, then there are 3 possible spin states. 
+
+Spin 1/2 is up and spin -1/2 is down.
+
+For each spin value $S$, we have 2S + 1 spin states.
+
+Consider an in state with up and down and out state with up and down. This gives us 
+4 possible input and output combinations, which gives us a spin matrix with 4 entries. 
+
+Consider 2 particles, each with an input and output, each with 2 possible states up 
+and down. 
+
+Now we work in a new basis where 
+\equations{
+    \ket{1}
+    =
+    \ket{\uparrow \uparrow}
+    \hp 
+    \ket{2}
+    =
+    \ket{\uparrow \downarrow}
+    \hp
+    \ket{3}
+    =
+    \ket{\downarrow \uparrow}
+    \hp
+    \ket{4}
+    =
+    \ket{\downarrow \downarrow}
+    \\
+    S_{ij}
+    =
+    \bra{i} S \ket{j}
+}
+
+This then means that $S$ is a 4x4 matrix with 16 entries. 
+
+We can do some goofy tensor product shenanigans 
+\equations{
+    S 
+    =
+    S_1 
+    \otimes 
+    S_2
+    \hp 
+    S_1 
+    =
+    \begin{pmatrix}
+	a_1 & b_1 \\
+	c_1 & d_1 
+    \end{pmatrix}
+    \\
+    S 
+    =
+    \begin{bmatrix}
+	a_1 S_2 & b_1 S_2 \\
+	c_1 S_2 & d_1 S_2 
+    \end{bmatrix}
+}
+
+This shows how S is a 4x4 because it's the tensor product of each particle which 
+are 2x2 matrices. 
+
+We can't add two spins together because they live in different vector spaces for each 
+particle 
+\equations{
+    \vec S_1 
+    +
+    \vec S_2
+    =
+    S_1 \otimes 1_2 
+    +
+    1_2 \otimes S_2
+}
+
+Where $1_2$ is the identity for the particle. Think of addition as 2 particles communicating 
+with each other in different vector spaces. 
+
+\subsection{Degeneracy}
+given a 2 particle system, the maximum total spin is $S_1 + S_2$. The minimum total 
+spin magnitude is $|S_1 - S_2|$. 
+
+For example, if both spins are 1, then $0 < S < 2$, so there are 3 possible spin 
+magnitudes. The degeneracy, however, is 2S+1 for each S, so its 1, 3, 5 for 0, 1, 2.
+This means the total degeneracy is 9.
+
+\subsection{Questions}
+Consider 2 spin 1/2 particles (2 possible states up and down) 
+
+Find the total spin $S^2$ and z component $S_z$ in terms of the spin m
+operators for the individual particles $(S_1, S_2)$.
+
+\equations{
+    \vec S_x 
+    =
+    \frac{\hbar}{2} \sigma_z
+}
+
+The only possible values for total spin are 0 and 1. Because the state itself 
+has spin states 0 and 1, the eigenvalues of that vector must also be 0 or 1.
+\equations{
+    \hat S \ket{S_{1+2}}
+    =
+    \lambda  \ket{S_{1+2}}
+    =
+    1 \ket{S_{1+2}}
+    \hp
+    0 \ket{S_{1+2}}
+    \\
+    \hat S^2 \ket{S_{1+2}}
+    =
+    \lambda^2 \ket{S_{1+2}}
+    =
+    1 \ket{S_{1+2}}
+    \hp
+    0 \ket{S_{1+2}}
+}
+
+The degeneracy comes from the total spin values. For $S^2 = 0$ there is only 
+degeneracy 1 which leads to $S_z = 0$. For $S^2 = 1$ we have $2s+1 = 3$ degeneracy, 
+which means $S_z = -1,0,1$. -1 is connected to $\ket{\downarrow \downarrow}$, 
+you can correspond $S_z = 0$ to 
+$\frac{1}{\sqrt{2}} (\ket{\downarrow \uparrow} + \ket{\uparrow \downarrow})$.
+
+Consider the hamiltonian for 2 interactive spin 
+\equations{
+    \hat H 
+    =
+    \alpha 
+    \hat S_1 
+    \cdot 
+    \hat S_2
+}
+
+Use your answers from question 1 to show that 
+\equations{
+    \hat S_1 
+    \cdot 
+    \hat S_2
+    =
+    \frac{1}{2}
+    \left(
+    \hat S^2 
+    -
+    \hat S_1^2
+    -
+    \hat S_2^2
+    \right)
+}
+
+\chapter{Extra Homeworks}
+\section{Hw10}
+\subsection{1}
+Let 
+\equations{
+    L_{+} f^m_l 
+    =
+    A^m_l f^{m+1}_{l}
+    \hp
+    L_{-} f^m_l 
+    =
+    A^m_l f^{m-1}_{l}
+}
+
+What are $A$ and $B$ if the eigenfunctions $f$ are normalized? 
+I think we learned about this and it's just $m+1$ or whatever.
+
+First show that $L_{\pm}$ is the Hermitian Conjugate of $L_{\mp}$ and then uh 
+something. Since $L_x$ and $L_y$ are observables, you may assume they are 
+Hermitian, but you can prove it if you want. 
+
+\equations{
+    L_{\pm}
+    =
+    L_x 
+    \pm
+    i L_y
+}
+Proof by obvious that it's Hermitian $(-i^* = i)$.
+We use a specific identity. 
+\equations{
+    L_{\pm} L_{\mp}
+    =
+    L^2 - L_z^2 \pm \hbar L_z
+    \\
+    \bra{f^m_l}
+    L^2 - L_z^2 \pm \hbar L_z
+    \ket{f^m_l}
+    =
+    \bra{f^m_l}
+    L^2
+    \ket{f^m_l}
+    -
+    \bra{f^m_l}
+    L_z^2
+    \ket{f^m_l}
+    \pm
+    \bra{f^m_l}
+    \hbar L_z
+    \ket{f^m_l}
+    \\
+    =
+    \hbar^2 l(l+1)
+    \bra{f^m_l}
+    \ket{f^m_l}
+    -
+    \hbar^2 m^2
+    \bra{f^m_l}
+    \ket{f^m_l}
+    \pm
+    \hbar^2 m
+    \bra{f^m_l}
+    \ket{f^m_l}
+    \Rightarrow 
+    \\
+    \bra{L_{\mp} f^m_l}
+    \ket{L_{\mp} f^m_l}
+    =
+    \left(
+    \hbar^2 l(l+1)
+    -
+    \hbar^2 m^2
+    \pm
+    \hbar^2 m
+    \right)
+    \bra{f^m_l}
+    \ket{f^m_l}
+    \\
+    =
+    \hbar^2
+    \left(
+    l(l+1)
+    -
+    m^2
+    \pm
+    m
+    \right)
+    \bra{f^m_l}
+    \ket{f^m_l}
+    \\
+    B
+    =
+    \hbar^2
+    \sqrt{
+    l(l+1)
+    -
+    m^2
+    +
+    m
+    }
+    \hp
+    A
+    =
+    \hbar^2
+    \sqrt{
+    l(l+1)
+    -
+    m^2
+    -
+    m
+    }
+}
+The $\pm$ and $\mp$ are important, I fucked that up on last midterm as well lol.
+
+At the top and bottom of the ladder you get 0 which makes sense but we actually see
+the math math out because $l = m$.
+
+\subsection{2}
+Do a hundred million commutation relations lmao. 
+\equations{
+    \\
+    L 
+    =
+    \vec r \times \vec p 
+    =
+    \hat x (yp_z - zp_y)
+    -
+    \hat y (x p_z - z p_x)
+    +
+    \hat z (x p_y - y p_x)
+    \hp 
+    L_z 
+    =
+    L \hat z
+    \\
+    [L_z, x]
+    =
+    (x p_y - y p_x) x 
+    -
+    x (x p_y - y p_x)
+    \hp 
+    L_z
+    =
+    xp_y - yp_x
+    =
+    \\
+    [L_z, p_x]
+}
+Okay I can figure out the rest but I gotta know my commutation relations. 
+
+\subsection{3}
+Get a rotational analog of Ehrenfest's theorem 
+\equations{
+    \frac{d}{dt} \langle L \rangle 
+    =
+    \langle N \rangle 
+    =
+    \langle 
+    r
+    \times (- \nabla V)
+    \rangle
+}
+
+I have no clue how to solve this right off the bat 
+\equations{
+    \frac{d}{dt} \langle L \rangle 
+    =
+    \frac{d}{dt} \langle r \times p \rangle 
+    =
+    \langle r \times \frac{d}{dt} p \rangle 
+    =
+    \langle r \times - \nabla V \rangle 
+}
+
+Show that angular momentum is conserved for any spherical potential (idk)
+
+\subsection{4}
+What is $L_{+} Y^{+}_{+}$? It's 0 lmao 
+
+Do some other stuff. Okay I feel better and I'll definitely be better after writing 
+everything on a cheat sheet 
+
+\section{Homework 12}
+\subsection{1}
+Compute the expected values of $\langle S_{x, y, z} \rangle$ for a normalized 
+spinor $\chi$. Spinors are eigenfunctions of spin I think.
+
+\equations{
+    \chi
+    =
+    \begin{bmatrix} a \\ b \end{bmatrix} 
+    =
+    a \chi_{+}
+    +
+    b \chi_{-}
+    =
+    a
+    \begin{bmatrix} 1 \\ 0 \end{bmatrix} 
+    +
+    b
+    \begin{bmatrix} 0 \\ 1 \end{bmatrix} 
+    \\
+    S_z \chi_{+} 
+    =
+    \frac{\hbar}{2} 
+    \chi
+    \\
+    S_{xyz}
+    i \hbar \sigma_{xyz} 
+}
+
+This can be calculated by just knowing all of the matrices
+\subsection{2}
+An electron is in a magnetic field 
+\equations{
+    B 
+    =
+    B_0 \cos(\omega t) \hat k
+}
+
+Construct the Hamiltonian 
+\equations{
+    H
+    =
+    -\gamma \vec B 
+    \cdot \vec S 
+    =
+    -\gamma B_0 \cos(\omega t) S_z
+    =
+    E 
+}
+
+Find $\chi(t)$
+
+This can be done by solving the time dependent SWE directly. 
+\equations{
+    \chi(t)
+    =
+    \begin{pmatrix} \alpha(t) \\ \beta(t) \end{pmatrix}
+    \\
+    H \chi 
+    =
+    i \hbar \frac{\del}{\del t} \chi 
+    \Rightarrow 
+    \frac{- \gamma B_0 \hbar}{2}
+    \cos(\omega(t))
+    \begin{pmatrix}
+	1 & 0 \\
+	0 & -1 
+    \end{pmatrix}
+    \begin{pmatrix} \alpha(t) \\ \beta(t) \end{pmatrix}
+    =
+    i \hbar 
+    \begin{pmatrix} \alpha'(t) \\ \beta'(t) \end{pmatrix}
+}
+
+Just solve the diff eq by separating the variables. 
+
+Find $p(S_x = \hbar/2)$
+
+The two states $S_x = \pm \hbar/2$ correspond to eigenstates $\ket{\pm}$, so we 
+specifically need to find the probability that the state collapses to state $\ket{-}$.
+
+Find the necessary $B$ to guarantee a spin flip. This is just math, if you solved
+ the last part correctly then this is easy. 
+
+\section{Hw 13}
+Write the Hamiltonian for 2 non-interacting particles in an infinite square well. 
+Verify that the fermion ground state is an eigenfunction of $H$, and find the 
+eigenvalue. 
+
+The fermion ground state is 
+\equations{
+    \psi_n(x)
+    =
+    \sqrt{\frac{2}{a}}
+    \sin(\frac{n \pi}{a} x)
+    \hp 
+    E_n = n^2 K
+    \\
+    \psi_{n1, n2}
+    =
+    \psi_{n1}(x_1)
+    \psi_{n2}(x_2)
+    \hp 
+    E_{n1, n2}
+    =
+    (n_1^2 + n_2^2) K
+}
+It's not actually that bad you can solve it with separation of variables. 
+
+\subsection{1b}
+Find the next two excited states (beyond the ground state). Wave functions, energies, 
+and degeneracies. For each of the three cases (distinguishable, identical 
+bosons, identical fermions).
+
+you just like go up in energy and keep thinking about the particle. 
+
+distinguishable particles will have non-zero degeneracy if the energies are different 
+because you just swap the particles. This cannot be done for identical particles. 
+Identical fermions (same spin) must follow the Pauli exclusion principle, and thus 
+can't have the same energy.
+
+You do a buncha bullshit
+
+\chapter{FINAL PREP}
+$l$ can only be an integer and $S$ can be either an integer or integer + 1/2
+\begin{itemize}
+    \item
+	Know the SWE for time-independent and dependent lmao
+    \item
+	Know/derive every ensemble 
+	(square wells, free particle, oscillators, 2-level, radial, spin? etc)
+    \item
+	Know the quantum formula (energy eigenstates, time operator, etc)
+    \item
+	KNOW MATH (commutators, operators, observables, eigenvalues, eigenstates, 
+	pauli matrices, permutation symbol $\epsilon$
+    \item
+	know eigenbasis transformations (you saw on homework)
+    \item
+	Ehrenfest theorem and inequalities and Heisenberg Uncertainty Principle
+    \item
+	Hermitian stuff
+    \item
+	OPERATORS (momentum, S, L, $S_{xyz}$, $L_{xyz}$, $L^2$, $S^2$, etc)
+    \item
+	Separation of variables
+    \item
+	degeneracy 
+    \item
+	angular momentum 
+    \item
+	Bosons vs Fermions lmao
+    \item
+	multiple particles? (yea just in case)
+\end{itemize}
+
+\section{Multi-Particle Stuff}
+Electrons are indistinguishable, so we do some bullshit to show this off 
+\equations{
+    \psi_{\pm}(r_1, r_2)
+    =
+    A
+    \left(
+    \psi_a(r_1)
+    \psi_b(r_2)
+    \pm
+    \psi_b(r_1)
+    \psi_a(r_2)
+    \right)
+}
+
+The plus sign is bosons and the minus sign is fermions. You can clearly see 
+the pauli exclusion principle because if 2 fermions are identical, your wave function 
+is just 0.
+
+Bosons are symmetric under interchange, and fermions are antisymmetric under 
+interchange. So bosons are integer spin and fermions are half integer spin.
+
+
+
+
 
 
 

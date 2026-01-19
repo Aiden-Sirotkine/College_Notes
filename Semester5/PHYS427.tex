@@ -6415,6 +6415,3350 @@ For the high temp limit we get
 The Debye model gets the low and high temperature limits correct, but 
 does not do as well in the middle.
 
+\chapter{Quantum Statistics}
+Consider 
+\equations{
+    n_Q
+    =
+    \left(
+        \frac{m k_B T}{2 \pi \hbar^2}
+    \right)^{3/2}
+    =
+    \frac{1}{\lambda_T^3}
+}
+Where $\lambda_{T}$ is the De Broglie wavelength. 
+
+For $n \sim n_Q$, the wavefunctinos overlap which means that quantum effects 
+are important. For high temperature $k_B T >> \Delta \epsilon$, then it's 
+functionally continuous.
+
+\equations{
+    Z_N 
+    =
+    \frac{Z_{1}^{N}}{N!}
+    \hp 
+    Z_1 
+    =
+    n_Q V
+}
+
+Fermions have 1/2 integer spin. Bosons have integer spin. 
+Quantum particles have orbitals each with unique energy, so our partition 
+function is of the form 
+\equations{
+    Z 
+    =
+    e^{- \beta \epsilon_{1}}
+    +
+    e^{- \beta \epsilon_{2}}
+    +
+    e^{- \beta \epsilon_{3}}
+    + 
+    \ldots
+}
+
+\section{Fermions}
+
+If we consider 2 particles in a 3 orbital system, our partition function 
+is of the form 
+\equations{
+    Z_{FD}
+    =
+    e^{- \beta (\epsilon_1 + \epsilon_2)}
+    +
+    e^{- \beta (\epsilon_2 + \epsilon_3)}
+    +
+    e^{- \beta (\epsilon_1 + \epsilon_3)}
+}
+
+If we use just Maxwell Boltzmann statistics, we get 
+\equations{
+    Z_{MB}
+    =
+    \frac{Z_{1}^N}{Z!}
+    =
+    \frac{1}{Z}
+    \left(
+    e^{- \beta \epsilon_{1}}
+    +
+    e^{- \beta \epsilon_{2}}
+    +
+    e^{- \beta \epsilon_{3}}
+    \right)^2
+    \\
+    =
+    e^{- \beta (\epsilon_1 + \epsilon_2)}
+    +
+    e^{- \beta (\epsilon_2 + \epsilon_3)}
+    +
+    e^{- \beta (\epsilon_1 + \epsilon_3)}
+    +
+    \frac{1}{2}
+    \left(
+    e^{- 2\beta \epsilon_{1}}
+    +
+    e^{- 2\beta \epsilon_{2}}
+    +
+    e^{- 2\beta \epsilon_{3}}
+    \right)
+}
+
+We get 3 incorrect terms because MB statistics overcounts the multiple 
+occupancy states. At high temperatures, this doesn't matter because the 
+vast majority of states don't worry about the Pauli Exclusion Principle, but 
+it is important for Quantum Mechanics.
+
+\section{Bosons}
+If we consider 2 bosons with 3 possible states (they have the same spin), 
+we get the true partition 
+function of 
+
+\equations{
+    Z_{BE}
+    =
+    e^{- \beta (\epsilon_1 + \epsilon_2)}
+    +
+    e^{- \beta (\epsilon_2 + \epsilon_3)}
+    +
+    e^{- \beta (\epsilon_1 + \epsilon_3)}
+    +
+    e^{- 2\beta \epsilon_{1}}
+    +
+    e^{- 2\beta \epsilon_{2}}
+    +
+    e^{- 2\beta \epsilon_{3}}
+}
+
+The Maxwell Boltzmann results actually \textbf{undercounts} the partition 
+function because it includes the 1/2 coefficient
+
+\equations{
+    Z_{MB}
+    =
+    e^{- \beta (\epsilon_1 + \epsilon_2)}
+    +
+    e^{- \beta (\epsilon_2 + \epsilon_3)}
+    +
+    e^{- \beta (\epsilon_1 + \epsilon_3)}
+    +
+    \frac{1}{2}
+    \left(
+    e^{- 2\beta \epsilon_{1}}
+    +
+    e^{- 2\beta \epsilon_{2}}
+    +
+    e^{- 2\beta \epsilon_{3}}
+    \right)
+}
+
+MB works fine as long as the probability for \textbf{multiple occupancy}
+is \textbf{negligible}. This is true when $n << n_Q$
+
+\section{Average Occupancy}
+Consider an ideal gas. For a particle to be in state $i$, the probability is 
+\equations{
+    p(i)
+    =
+    \frac{e^{- \beta \epsilon_i}}{Z_i}
+}
+
+For $N$ particles, the average number of occupants in state $i$ is
+\equations{
+    \langle N_i \rangle_{MB}
+    =
+    N p_i 
+    =
+    \frac{N}{Z_i}
+    e^{- \beta \epsilon_i}
+    =
+    \frac{N}{n_Q V}
+    e^{- \beta \epsilon_i}
+}
+
+% So with this, we can extrapolate to find the average number of occupants 
+% in state $i$ 
+% \equations{
+%     \langle N_i \rangle_{MB}
+%     =
+%     \frac{N}{n_Q V} e^{- \beta \epsilon_i} 
+%     =
+%     \frac{N}{n_Q V} e^{- \beta \epsilon_i} 
+% }
+
+This is true for $n << n_Q$ where we neglect mutliple occupancy. thus 
+$\langle N_i \rangle << 1$.
+
+\section{Fermi-Dirac and Bose-Einstein Distributions}
+(That's what FD and BE are in the equations above)
+\equations{
+    E_{tot}
+    N_1 \epsilon_1
+    +
+    N_2 \epsilon_2
+    +
+    N_3 \epsilon_3
+    + 
+    \ldots
+    =
+    \sum_{i} N_i \epsilon_i
+}
+
+$N_i$ is either 0 or 1 for fermions and can be $0 \to N$ for bosons.
+If it wasn't for the Pauli Exclusion Principle, quantum objects would
+be exactly the same as photons/phonons statistically (i think).
+
+We can use the grand canonical ensemble to implement the restraint 
+$N = \sum N_i$. The system will have the $i$th orbital, and the 
+reservoir will contain all other orbitals. We are in equilibrium with 
+$R, T, \mu$.
+
+\subsection{Fermions}
+Calculate the Gibbs sum and get the FD distribution.
+\equations{
+    \zeta 
+    =
+    e^{\beta (\mu * 0 - \epsilon_i * 0)}
+    +
+    e^{\beta (\mu * 1 - \epsilon_i * 1)}
+    =
+    1 + 
+    e^{\beta (\mu - \epsilon_i)}
+}
+Now we can find the average occupancy 
+\equations{
+    \langle N_{i} \rangle_{FD}
+    =
+    \frac{0 + 1 * ( 1 + e^{\beta (\mu - \epsilon_i)})}{\zeta}
+    =
+    \frac{ e^{\beta (\mu - \epsilon_i)} }{
+    1 + 
+    e^{\beta (\mu - \epsilon_i)}
+    }    
+    =
+    \frac{1}{
+    e^{\beta (\epsilon_i - \mu)}
+    + 1
+    }
+    =
+    f_{FD}
+    (\epsilon_i, T)
+}
+You can solve the same thing with 
+\equations{
+    \langle N_i \rangle 
+    =
+    \frac{1}{\beta}
+    \frac{\del}{\del \mu}
+    \ln(\zeta)
+}
+
+But what about the chemical potential? The chemical potential $\mu$ must satisfy 
+the constraint
+\equations{
+    N \overset{!}{=}
+    \sum_i \langle N_i \rangle_{FD}
+    =
+    \sum f_{FD}(\epsilon_i, T)
+}
+
+The average energy can be found with 
+\equations{
+    U 
+    =
+    \sum_i 
+    \langle N_i \rangle_{FD}
+    \epsilon_{i}
+    =
+    \sum_i 
+    f_{FD}(\epsilon_i, T)
+    \epsilon_{i}
+    =
+    \frac{\epsilon_i}{
+    e^{\beta (\epsilon_i - \mu)}
+    + 1
+    }
+}
+
+The graph of the Fermi-Dirac distribution is something. For $T=0$ 
+$f_{FD}$ is at a constant $1$ until $\epsilon_i = \mu$, in which it's a 
+step function to 0. For higher $T$, the step function becomes a 
+smooth decrease.
+
+At $\epsilon_i = \mu \Rightarrow \langle N_i \rangle_{FD} = \frac{1}{2} \sim k_B T$
+
+\subsection{Bosons}
+\equations{
+    \zeta_i 
+    =
+    e^{\beta(\mu * 0 + \epsilon_i * 0)}
+    +
+    e^{\beta(\mu * 1 + \epsilon_i * 1)}
+    +
+    \ldots 
+    +
+    e^{\beta(\mu * N + \epsilon_i * N)}
+}
+
+If $N \sim 10^{20} \sim \infty$, then 
+\equations{
+    \zeta_i 
+    =
+    \sum_{n_i = 0}^{\infty}
+    e^{\beta (\mu - \epsilon_i) n_i}
+    =
+    \frac{1}{1 - e^{\beta (\mu - \epsilon_i)}}
+    \\
+    \langle N_i \rangle_{BE} 
+    =
+    \frac{1}{\beta}
+    \frac{\del}{\del \mu}
+    \ln(\zeta_i)
+    =
+    \frac{e^{\beta(\mu - \epsilon_i)}
+    }{1 - e^{\beta (\mu - \epsilon_i)}}
+    =
+    \frac{1}{e^{\beta (\epsilon_i - \mu)} - 1}
+    =
+    f_{BE}(\epsilon_i, T)
+}
+
+\section{Summary}
+\equations{
+    f_{BE/FD}(\epsilon_i, T)
+    =
+    \frac{1}{e^{\beta (\epsilon_i - \mu)} \pm 1}
+    \hp
+    N 
+    =
+    \sum
+    \frac{1}{e^{\beta (\epsilon_i - \mu)} \pm 1}
+}
+
+The BE distribution is infinite at $\epsilon_i = \mu$, and goes down exponentially. 
+
+Maxwell Boltzmann is $\infty$ at $\epsilon_i = 0$ and goes down 
+exponentially 
+
+Fermi-Dirac is $1$ at $\epsilon_i = 0$ and goes down in a mellow step function. 
+
+For $\epsilon_i >> \mu$ 
+\equations{
+    f_{BE} 
+    \approx
+    e^{-\beta (\epsilon_i - \mu)}
+    \approx
+    f_{FD} 
+    \\
+    \langle N_i \rangle_{MB}
+    \frac{n}{n_Q }
+    e^{-\beta \epsilon_i}
+    =
+    e^{- \beta (\epsilon_i - \mu)}
+    \\
+    \mu 
+    =
+    k_B T \ln(\frac{n}{n_Q})
+}
+
+\textbf{All distributions agree} for large energy.
+
+\section{Discussion 7}
+Quantum many particle wave functions. 
+
+There are 2 types of particles: Bosons and Fermions. 
+
+Bosons are $\psi = + \psi$ and fermions are $\psi = - \psi$, 
+whatever the fuck that means. 
+
+\equations{
+    \psi(x, x_2)
+    =
+    \frac{1}{\sqrt{2}}
+    \left(
+        \psi_a(x_a)
+        \psi_a(x_a)
+        +
+        \psi_a(x_b)
+        \psi_b(x_a)
+    \right)
+    \begin{cases}
+        = 0 : \textrm{Fermion (Pauli Exclusion Principle)}
+        \\
+        \neq 0 : \textrm{Boson}
+    \end{cases}
+}
+
+\subsection{Spin-Statistics Theorem}
+Bosons have integer spin $(0, 1, 2, \ldots)$
+
+Fermions have half-integer spins $(1/2, 3/2, 5/2, \ldots)$
+
+\section{Degenerate Fermi Gases}
+Gases where we're near the limit $n \sim n_Q$ so multiple occupancy 
+plays a role. We see them in white dwarves and neutron stars, and well 
+as electrons in metals. 
+
+\equations{
+    n_Q 
+    =
+    \left(
+        \frac{m k_B T}{2 \pi \hbar^2}
+    \right)^{3/2}
+}
+
+If we consider $T_d$ (degeneracy) such that $n(T_d) = n_Q(T_d)$, then 
+we can solve for $T_d$
+\equations{
+    n
+    =
+    \left(
+        \frac{m k_B T_d}{2 \pi \hbar^2}
+    \right)^{3/2}
+    \Rightarrow 
+    T_d 
+    =
+    \frac{2 \pi \hbar^2}{m k_B} n^{2/3}
+    \hp 
+    \frac{T_d}{T}
+    =
+    \left(
+        \frac{n}{n_Q(T)}
+    \right)^{2/3}
+}
+
+if $T < T_d$, then $n > n_Q(T)$, it is more dense, and quantum shenanigans 
+needs to be considered. 
+ 
+if $T > T_d$, then $n < n_Q(T)$, it is less dense.
+
+If we consider a typical metal, $T_d = 50,000-100,000K$, so room temp 
+is way less than that, and metals are considered degenerate (need to deal 
+with quantum shenanigans). The Fermi-Dirac distribution of a metal $f_{FD}$ 
+is close to a step function for $T << T_d$. 
+
+\subsection{Sommerfeld Theory of Metals}
+Assume electrons in the metal are a gas of free electrons (electrically neutral). 
+
+In reality, electrons feel forces from nearby atoms, but ignore long range 
+forces because metal are electrically neutral. 
+
+\subsection{Chemical Potential}
+\equations{
+    N 
+    \overset{!}{=}
+    \sum_n \langle N(\epsilon_n, T) \rangle 
+    =
+    \sum_n f_{FD}(\epsilon_n, T)
+    =
+    \frac{1}{e^{\beta(\epsilon_n - \mu)} + 1}
+    \\
+    U(T)
+    =
+    \sum_n 
+    \langle N(\epsilon_n, T) \rangle * \epsilon_n  
+    =
+    \sum_n f_{FD}(\epsilon_n, T) * \epsilon_n 
+    =
+    \sum_n
+    \frac{\epsilon_n}{e^{\beta(\epsilon_n - \mu)}}
+}
+The $+1$ at the end was dropped in lecture idk why. 
+
+\subsection{Particle in a Box Approach}
+\equations{
+    \epsilon_n 
+    =
+    \frac{\hbar^2 k_n^2}{2m}
+    \hp
+    k_n^2
+    =
+    k_x^2
+    +
+    k_y^2
+    +
+    k_z^2
+    \hp 
+    k_{x}
+    =
+    \frac{n_x \pi}{L_x}
+    \\
+    \Delta \epsilon
+    =
+    \frac{\hbar^2 \pi^2}{2m L^2}
+    =
+    \frac{\hbar^2 \pi^2}{2m V^{2/3}}
+    \approx 
+    10^{-15} eV 
+    \Rightarrow 
+    \sum_n 
+    \to 
+    \int_{0}^{\infty} d \epsilon
+    \\
+    \# States([\epsilon, \epsilon + d \epsilon])
+    =
+    \# spin * 
+    \left(
+        ??
+    \right)
+}
+
+You do the big circle geometry thing for a shell of radius 
+$k = \sqrt{\frac{2 m \epsilon}{\hbar^2}}$ and axes $k_x, k_y$.
+Also know that are there 2 spins per electron. 
+\equations{
+    \# States([\epsilon, \epsilon + d \epsilon])
+    =
+    \# spin * 
+    \left(
+        \frac{\textrm{Volume of Shell}}{\textrm{Volume per state}}
+    \right)
+    =
+    2
+    \left(
+         \frac{4 \pi k^2 \frac{dk}{8}}
+        {\frac{\pi^3}{V}}
+    \right)
+    \\
+    =
+    \frac{V}{\pi^2} k^2 dk 
+    =
+    \frac{V}{\pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \sqrt{\epsilon}
+    d \epsilon
+    \hp 
+    dk 
+    =
+    \sqrt{\frac{2m}{\hbar^2}}
+    \frac{d \epsilon}{2 \sqrt{\epsilon}}
+}
+
+This is different from a photon gas where $\epsilon = \hbar \omega = \hbar c k$.
+
+But now that we have all this shenanigans, we can calculate the density of 
+states. 
+\equations{
+    N 
+    =
+    \sum_n \langle N(\epsilon_n, T) \rangle 
+    =
+    \int_{0}^{\infty} \, d \epsilon \, 
+    D(\epsilon)
+    f_{FD}(\epsilon_n, T)
+    \\
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \int_{0}^{\infty} \, d \epsilon \, 
+    \frac{\sqrt{\epsilon}}{e^{\beta(\epsilon - \mu)} + 1}
+    \\
+    U
+    =
+    \sum_n \epsilon_n f_{FD}(\epsilon_n, T)
+    =
+    \int_{0}^{\infty} \, d \epsilon \, 
+    D(\epsilon) * \epsilon * f_{FD}(\epsilon, T)
+    \\
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \int_{0}^{\infty} \, d \epsilon \, 
+    \frac{\epsilon^{3/2}}
+    {e^{\beta(\epsilon - \mu)} + 1}
+}
+
+These integrals cannot really be solve analytically, but we know that 
+for $T \to 0$ (Which we can say is true because $T << T_D$), 
+the FD distribution is a step function, which makes the integrals 
+simple. 
+\equations{
+    f_{FD}
+    \approx 
+    \begin{cases}
+        1 : \epsilon < \mu(0)
+        \\
+        0 : \epsilon > \mu(0)
+    \end{cases}
+    \Rightarrow 
+    \\
+    N 
+    =
+    \int_{0}^{\mu(0)} d \epsilon \, 
+    D(\epsilon)
+    * 1
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \int_{0}^{\mu(0)} d \epsilon \, 
+    \sqrt{\epsilon}
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \frac{2}{3}
+    (\epsilon_F)^{3/2}
+}
+
+We can use this to solve for chemical potential 
+\equations{
+    \epsilon_F 
+    =
+    \mu(0)
+    =
+    \frac{\hbar^2}{2m}
+    \left(
+        3 \pi^2 \frac{N}{V}
+    \right)^{2/3}
+    =
+    \textrm{Fermi Energy}
+    \propto 
+    n^{2/3}
+}
+
+\subsection{Fermi Energy}
+
+The Fermi Energy is the highest energy 
+level that is occupied by electrons at $T=0$. Because 
+the Fermi energy is proportional to density, it is an \textbf{intensive}
+quantity.
+
+We can also calculate the energy 
+\equations{
+    U 
+    =
+    \sum_n \epsilon_n f_{FD}(\epsilon_n, T)
+    =
+    \int_{0}^{\mu(0)} \, d \epsilon \, 
+    D(\epsilon) * \epsilon * 1
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \int_{0}^{\mu(0)} \, d \epsilon \, 
+    \epsilon^{3/2}
+    \\
+    =
+    \frac{2}{5}
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \epsilon_{F}^{5/2}
+    =
+    \frac{2}{5}
+    \frac{3}{2}
+    \left(
+    \frac{2}{3}
+    \frac{V}{2 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \epsilon_{F}^{3/2}
+    \right)
+    \epsilon_{F}
+    =
+    \frac{3}{5}
+    N 
+    \epsilon_F
+}
+
+For very low $T$, $U \neq 0$ (Lecture 15 and Pauli Exclusion Principle).
+
+\subsection{Fermi Temperature}
+\equations{
+    T_F 
+    \overset{!}{=}
+    \frac{\epsilon_F}{k_B}
+    \hp 
+    T_F \approx T_D 
+    \Rightarrow 
+    k_B T_D 
+    =
+    \frac{2 \pi \hbar^2}{m}
+    n^{2/3}
+    \approx 
+    (3 n^2)^{2/3}
+    \frac{\hbar^2}{2m}
+    n^{2/3}
+    =
+    \epsilon_F
+    \\
+    T_F =
+    50,000-100,000
+    \Rightarrow 
+    k_B T_{normal}
+    << 
+    \epsilon_F
+}
+
+\subsection{Fermi Pressure}
+\equations{
+    p(T)
+    =
+    - 
+    \left(
+        \frac{\del F}{\del V}
+    \right)_{T, N}
+    \hp 
+    T = 0 
+    \hp 
+    F = U 
+    \hp 
+    p(0)
+    =
+    - 
+    \left(
+        \frac{\del U}{\del V}
+    \right)_{T, N}
+    \\
+    U(T \to 0)
+    =
+    \frac{3}{5}
+    N \epsilon_F 
+    =
+    \frac{3}{5}
+    N
+    \frac{\hbar^2}{2m}
+    \left(
+        3 \pi^2 
+        \frac{N}{V}
+    \right)^{2/3}
+    \hp 
+    \epsilon_F 
+    =
+    \frac{\hbar^2}{2m}
+    \left(
+        3 \pi^2 
+        \frac{N}{V}
+    \right)^{2/3}
+    \\
+    U 
+    =
+    \frac{3}{5}
+    (3 \pi^2)^{2/3}
+    \frac{\hbar^2}{2m}
+    \frac{N^{5/3}}{V^{2/3}}
+    \Rightarrow 
+    p(0)
+    =
+    \frac{2}{3}
+    \alpha 
+    \frac{N^{5/3}}{V^{5/3}}
+    =
+    \frac{2}{3}
+    \frac{U(0)}{V}
+}
+There's something weird with 5/3 and 2/3 here but I can't figure out what 
+
+\subsection{Classical Ideal Gas}
+\equations{
+    pV = N k_B T 
+    \Rightarrow 
+    p 
+    =
+    \frac{2}{3}
+    \frac{U}{V}
+    \hp 
+    U_{I.G.}
+    =
+    N * \frac{3}{2} k_B T 
+    \hp 
+    T \to 0 : U \to 0
+}
+So our Fermi Pressure actually matches the Classical interpretation of pressure. 
+
+There's some shenanigans with degeneracy pressure $p = - \frac{\del U}{\del V}$ 
+but I can't see the blackboard. Also $\Delta \epsilon \sim 1/ V^{2/3}$
+
+\subsection{Degeneracy Pressure}
+\equations{
+    p \sim 10^{9} \frac{N}{m^2}
+}
+
+\section{Heat Capacity of Metals}
+We discussed how 
+\equations{
+    C_V
+    =
+    \gamma T 
+    + 
+    A T^3
+}
+
+$AT^3$ comes from photons, and $\gamma T$ comes from the conduction of 
+electrons. At small $T > 0$, only electrons within $k_B T$ of $\epsilon_F$ 
+can move to an excited state (Because for a less-energetic electron, all the 
+nearby states above it are already filled up by other electrons). 
+
+Only a fraction of electrons $\sim \frac{k_B T}{\epsilon_F}$
+\equations{
+    N \frac{k_B T}{\epsilon_F} k_B T
+    =
+    N \frac{k_B^2 T^2}{\epsilon_F} k_B T
+}
+
+Take the derivative and get $C_V \propto T$
+    
+\section{Degenerate Fermi Gas Derivation}
+Consider a gas where $n > n_Q$, $T < T_d ~ 10^5 K$. 
+We know that 
+\equations{
+    N = \int^{\infty}_{0} \, d \epsilon \,
+     D(\epsilon) f_{FD}(\epsilon, T)
+    \hp 
+    U = 
+    \int^{\infty}_{0} d \epsilon \, 
+    \epsilon
+    D(\epsilon) f_{FD}(\epsilon, T)
+    \\
+    \epsilon_F 
+    =
+    \mu(0)
+    \hp 
+    U(0), 
+    T_F 
+    =
+    \frac{\epsilon_F}{k_B}
+    \approx 
+    T_d
+}
+
+\subsection{Sommerfeld Expansion}
+\equations{
+    \mu(T)
+    =
+    \mu(0)
+    +
+    O(T^2)
+    \hp
+    U(T)
+    =
+    U(0)
+    +
+    O(T^2)
+    =
+    \frac{3}{5}
+    N \epsilon_F
+    +
+    O(T^2)
+}
+
+\subsection{Math}
+\equations{
+    I 
+    =
+    \int^{\infty}_{0} d \epsilon \, 
+    \epsilon^n D(\epsilon) f(\epsilon, T)
+    :
+    n=
+    \hp 
+    \begin{cases}
+        0 : I = N \\
+        1 : I = U 
+    \end{cases}
+}
+We can treat $f(\epsilon, T)$ as a step function and define 
+$\phi = \epsilon^n D(\epsilon)$.
+
+\equations{
+    \psi(\epsilon)
+    =
+    \int^{\epsilon}_{0} d \epsilon' \, 
+    \phi(\epsilon')
+    \Rightarrow 
+    \phi(\epsilon)
+    =
+    \frac{d \psi}{d \epsilon}
+    \\
+    I 
+    =
+    \int^{\infty}_{0} d \epsilon \, 
+    f(\epsilon, T) \phi(\epsilon)
+    =
+    \int^{\infty}_{0} d \epsilon \, 
+    f(\epsilon, T)
+    \frac{d \psi}{d \epsilon}
+    \hp 
+    \textrm{by parts}
+    \\
+    =
+    f(\epsilon, T)
+    \psi(\epsilon)
+    \Big|^{\infty}_{0}
+    -
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{d f(\epsilon, T)}{d \epsilon}
+    \psi(\epsilon)
+    =
+    0
+    -
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{d f(\epsilon, T)}{d \epsilon}
+    \psi(\epsilon)
+    \\
+    I 
+    =
+    -
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{d f(\epsilon, T)}{d \epsilon}
+    \psi(\epsilon)
+}
+Because $f(\epsilon, T)$ is functionally a step function, its roughly 0 everywhere,
+and then very large at the step itself 
+\equations{
+    -\frac{d f(\epsilon, T)}{d \epsilon}
+    =
+    \frac{\beta e^{\beta (\epsilon - \mu)}}
+    {e^{\beta (\epsilon - \mu)} + 1}
+}
+
+We can do a taylor expansion around $\epsilon = \mu$ 
+to get function as a sum. 
+\equations{
+    \psi(\epsilon)
+    =
+    % \phi(\mu)
+    % + 
+    % \phi'(\mu)
+    % (\epsilon - \mu)
+    % +
+    % \frac{1}{2}
+    % \psi''(\mu)
+    % (\epsilon - \mu)^2
+    % +
+    % \ldots
+    % =
+    \sum_{m = 0}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    (\epsilon - \mu)^m
+    \\
+    I 
+    =
+    -
+    \sum_{m = 0}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{d f(\epsilon, T)}{d \epsilon}
+    (\epsilon - \mu)^m
+    \\
+    =
+    \sum_{m = 0}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{\beta e^{\beta (\epsilon - \mu)}}
+    {e^{\beta (\epsilon - \mu)} + 1}
+    (\epsilon - \mu)^m
+    \hp 
+    x 
+    =
+    \beta (\epsilon - \mu)
+    \\
+    =
+    \sum_{m = 0}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    *
+    \beta^{-m}
+    \int^{\infty}_{- \beta \mu} d x \, 
+    \frac{e^{x} x^m}
+    {(e^{x} + 1)^2}
+}
+
+We do some more math 
+\equations{
+    \mu \approx 
+    \epsilon_F 
+    =
+    k_B T 
+    : 
+    T << T_F 
+    \hp
+    \beta \mu 
+    =
+    \frac{\mu}{k_B T}
+    \approx 
+    \frac{T_F}{T}
+    >> 1 
+    \Rightarrow 
+    \lim_{x \to \infty} e^{-x} \to 0
+    \\
+    \approx 
+    I 
+    =
+    \sum_{m = 0}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    *
+    \beta^{-m}
+    \int^{\infty}_{-\infty} d x \, 
+    \frac{e^{x} x^m}
+    {(e^{x} + 1)^2}
+}
+
+Do a lowest order term $(m = 0$ because we already did a taylor series)
+\equations{
+    I_0
+    =
+    \int^{\infty}_{-\infty} d x \, 
+    \frac{e^{x} x^m}
+    {(e^{x} + 1)^2}
+    = 
+    \frac{-1}{(e^{x} + 1)}
+    \Big|^{\infty}_{-\infty}
+    =
+    1
+}
+
+Let's try all odd $m$ 
+\equations{
+    I_{odd}
+    =
+    \frac{x^m e^{x}}{(e^{x} + 1)^2}
+    =
+    \frac{x^m}{(e^{x} + 1) (e^{x} + 1) e^{-x}}
+    =
+    \frac{x^m}{(e^{x} + 1) (1 + e^{-x})}
+    \\
+    \int^{\infty}_{-\infty} dx \,
+    \frac{x^m}{(e^{x} + 1) (1 + e^{-x})}
+    =
+    0
+}
+
+This is true because its an odd function for all odd $m$. Now 
+let's try to find $I_m$ for even $m$ 
+\equations{
+    I_2 
+    =
+    \int^{\infty}_{-\infty} dx \,
+    \frac{x^2 e^{x}}{(e^{x} + 1)^2}
+    =
+    \ldots 
+    =
+    2 \zeta(2)
+    =
+    \frac{\pi^3}{3}
+}
+
+We don't need to worry about the higher terms because they're all small 
+and vanish. Now we put everything back together to get 
+\equations{
+    \int^{\infty}_{0} d \epsilon \, 
+    f(\epsilon, T) 
+    \phi(\epsilon)
+    =
+    \sum_{m \textrm{ even}}^{\infty}
+    \frac{1}{m!}
+    \psi^{(m)}(\mu)
+    \beta^{-m}
+    I_m
+    % \int^{\infty}_{-\infty} d x \, 
+    % \frac{e^{x} x^m}
+    % {(e^{x} + 1)^2}
+    \\
+    =
+    \psi(\mu)
+    \cdot 1
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \psi''(\mu)
+    +
+    \ldots
+}
+
+That is just the $m=0$ and $m=2$ term. 
+And now we back to solving for $\psi$
+\equations{
+    \psi(\epsilon)
+    =
+    \int^{\epsilon}_{0} d \epsilon'
+    \phi(\epsilon')
+    =
+    \int^{\epsilon}_{0} d \epsilon'
+    (\epsilon')^n D(\epsilon')
+    \\
+    I 
+    =
+    \psi(\mu)
+    \cdot 1
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \psi''(\mu)
+    +
+    \ldots
+    =
+    \int^{\mu}_{0} d \epsilon \,
+    \phi(\epsilon)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \phi'(\mu)
+    +
+    \ldots
+}
+
+\equations{
+    \phi 
+    =
+    \epsilon^n D(\epsilon)
+    =
+    \begin{cases}
+        n = 0 
+        \Rightarrow 
+        \int 
+        \overset{!}{=}
+        N 
+        \\
+        n = 1 
+        \Rightarrow 
+        U(\epsilon)
+    \end{cases}
+}
+
+Let's start with $n=0$ 
+\equations{
+    \phi(\epsilon) = D(\epsilon)
+    \Rightarrow 
+    I_{n=0}
+    =
+    \int^{\infty}_{-\infty}
+    f(\epsilon, T) D(\epsilon)
+    \overset{!}{=}
+    N
+    \\
+    =
+    \int^{\mu}_{0} d \epsilon \,
+    D(\epsilon)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    D'(\epsilon)
+    +
+    \ldots
+    \hp
+    \int^{\mu}_{0} d \epsilon \,
+    =
+    \int^{\epsilon_F}_{0} d \epsilon \,
+    +
+    \int^{\mu}_{\epsilon_F} d \epsilon \,
+    \\
+    I_{n=0}
+    =
+    N 
+    =
+    \int^{\epsilon_F}_{0} d \epsilon \,
+    D(\epsilon)
+    +
+    \int^{\mu}_{\epsilon_F} d \epsilon \,
+    D(\epsilon)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    D'(\epsilon)
+    \Rightarrow 
+    \\
+    N 
+    =
+    N 
+    +
+    D(\epsilon_F) (\mu - \epsilon_F)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    D'(\epsilon)
+    \Rightarrow 
+    \\
+    0
+    =
+    D(\epsilon_F) (\mu - \epsilon_F)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    D'(\epsilon)
+    \hp 
+    \mu 
+    \approx 
+    \epsilon_F 
+}
+
+Now we solve for $\mu$ 
+\equations{
+    \mu(T)
+    \approx 
+    \epsilon_F 
+    -
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \frac{D'(\epsilon)}{D(\epsilon)}
+    \\
+    D(\epsilon_F)
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+    \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \epsilon_F^{1/2}
+    \hp
+    D'(\epsilon_F)
+    =
+    \frac{V}{2 \pi^2}
+    \left(
+    \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \frac{1}{2 \epsilon^{1/2}}
+    =
+    \frac{D(\epsilon_F)}{2 \epsilon_F}
+    \\
+    \mu(T)
+    \approx 
+    \epsilon_F 
+    - 
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \frac{1}{2 \epsilon_F}
+    =
+    \epsilon_F 
+    - 
+    \frac{\pi^2}{12}
+    \left(
+    \frac{k_B T}{\epsilon_F}
+    \right)
+    k_B T
+}
+
+\subsection{$U$}
+Now we can calculate $U$ 
+\equations{
+    U(T)
+    =
+    \int^{\infty}_{0} d \epsilon \, 
+    \epsilon D(\epsilon) f(\epsilon, T)
+    =
+    \int^{\mu}_{0} d \epsilon \, 
+    \epsilon D(\epsilon)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \frac{d}{d \epsilon}
+    \left(
+        \epsilon D(\epsilon)
+    \right)
+    \Big|_{\epsilon_F}
+    \\
+    =
+    \int^{\epsilon_F}_{0} d \epsilon \, 
+    \epsilon D(\epsilon)
+    +
+    \int^{\mu}_{\epsilon_F} d \epsilon \, 
+    \epsilon D(\epsilon)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \left(
+    D(\mu)
+    +
+    \mu 
+    D'(\mu)
+    \right)
+    \\
+    =
+    \frac{3}{5} N \epsilon_F
+    +
+    \epsilon_F D(\epsilon_F)
+    \left(
+        \mu - \epsilon_F
+    \right)
+    +
+    \frac{\pi^2}{6}
+    (k_B T)^2 
+    \left(
+    D(\mu)
+    +
+    \mu 
+    D'(\mu)
+    \right)
+}
+
+plug in $\mu(T)$ and use $D'(\epsilon_F) = D'(\epsilon_F)/2 \epsilon_F$ 
+and $\mu = \epsilon_F - \frac{\pi^2}{12} (\frac{k_B T}{\epsilon_F}) k_B T$
+\equations{
+    U(T)
+    =
+    U(0)
+    -
+    \frac{\pi^2}{12} (\frac{(k_B T)^2}{\epsilon_F}) \epsilon_F 
+    D(\epsilon_F)
+    +
+    \frac{\pi^2}{6} (k_B T)^2
+    D(\epsilon_F)
+    +
+    \frac{\pi^2}{6} (k_B T)^2
+    \epsilon_F
+    \frac{D(\epsilon_F)}{2 \epsilon_F}
+    \\
+    =
+    U(0)
+    -
+    \frac{\pi^2}{6} (k_B T)^2
+    D(\epsilon_F)
+    =
+    U(T = 0)
+    -
+    \frac{\pi^2}{4} N k_B T
+    \left(
+        \frac{k_B T}{\epsilon_F}
+    \right)
+    +
+    \ldots
+}
+
+\subsection{$C_v$}
+We can find the specific heat capacity
+\equations{
+    C_V 
+    =
+    \frac{\pi^2}{2}
+    N k_B
+    \frac{k_B}{\epsilon_F}
+    =
+    \gamma T 
+}
+
+\section{Discussion (Didn't Write Anything)}
+
+\section{Bose Einstein Condensante (Eventually) or Band Gaps idk}
+\subsection{Particles in a Box}
+You have a bunch of particles with energy $\epsilon(k) = \frac{|hbar^2 k^2}{2m}$
+
+Metals have a band gap. Bascially the electrons are in a little energy parabola
+under the Fermi energy. 
+
+\subsection{Bose-Einstein Condensate}
+Porfessor DeMarco's group. When $n \sim n_Q$, interesting things happen. 
+If you bring particles to a temperature such 
+that $k_B T < \epsilon_1 - \epsilon_0$, then every particle will be in the 
+ground state necessarily. However, we found out that in the Bose-Einstein 
+Distribution, we can actually have $k_B T > \epsilon_1 - \epsilon_0$.
+
+The B-E Distribution, we have 
+\equations{
+    \langle N(\epsilon, T) \rangle_{BE} 
+    =
+    f_{BE}(\epsilon, T)
+    =
+    \frac{1}{e^{\beta (\epsilon - \mu)} - 1}
+    \\
+    N 
+    =
+    \sum
+    \langle N(\epsilon, T) \rangle_{BE} 
+    =
+    \sum
+    \frac{1}{e^{\beta (\epsilon - \mu)} - 1}
+    \Rightarrow 
+    \textrm{ get $\mu$}
+    \\
+    \lim_{T \to 0}
+    \langle N(\epsilon, T) \rangle_{BE} 
+    =
+    N 
+    =
+    \frac{1}{e^{\beta (\epsilon - \mu)} - 1}
+    \hp 
+    \lim_{T \to 0}
+    \mu(T)
+    \approx 
+    \epsilon_0 
+    - 
+    \frac{k_B T}{N}
+}
+
+Given $V = 1cm, N = 10^{22} 4He, m = 6.6 \cdot 10^{-27}, T = 1mK$, we 
+get an energy difference of $\epsilon_1 - \epsilon_0 \approx 1.5 \cdot 10^{18} eV$. 
+We see that $\mu = \epsilon_0 - \frac{k_B T}{N} = \epsilon_0 - 10^{-29}$, so 
+it's functionally extremely close to the ground state. We see that 
+$e^{\beta (\epsilon_0 - \mu)}$ is much close to 1 than 
+$e^{\beta (\epsilon_1 - \mu)}$.
+
+\subsection{Maxwell Boltzmann (Incorrent)}
+\equations{
+    \frac{\langle N(\epsilon_1, T) \rangle_{MB}}
+    {\langle N(\epsilon_0, T) \rangle_{MB}}
+    =
+    e^{- \beta \Delta \epsilon}
+    =
+    e^{- 1.8 * 10^{-11}}
+    \approx 
+    1
+}
+The maxwell boltzmann distribution tells us that there is an even 
+amount of particles in the ground state as the 1st excited state, which is 
+experimentally incorrect. 
+
+\subsection{Bose-Einstein Statistics}
+\equations{
+    \langle N(\epsilon_1, T) \rangle_{BE}
+    =
+    \frac{1}{e^{-\beta (\epsilon_1 - \mu)} - 1}
+    =
+    \frac{1}{e^{1.8 \cdot 10^{-11}} - 1}
+    \approx 
+    \frac{1}{ 1 + 1.8 \cdot 10^{-11} - 1 }
+    \approx 
+    5 \cdot 10^{10}
+    \\
+    \frac{ \langle N(\epsilon_1, T) \rangle_{BE} }
+    { \langle N(\epsilon_0, T) \rangle_{BE} } 
+    =
+    \frac{5 \cdot 10^{10}}{10^{22}}
+    =
+    5 \cdot 10^{-12}
+}
+The Bose-Einstein statistics show us that the ground state is far far more 
+occupied than the 1st excited state, which is what we expect experimentally 
+even though $k_B T >> \Delta \epsilon$.
+This is called Bose-Einstein Condensation. At what temperature do we actually 
+start seeing this condensation? 
+
+\subsection{Maximum $T$ For Condensation}
+Apparently it can't really be proved analytically, but we can represent 
+it graphically. 
+
+\equations{
+    N 
+    =
+    \langle N_0(T) \rangle_{BE}
+    +
+    \langle N_{\epsilon}(T) \rangle_{BE}
+    \hp
+    \langle N_{\epsilon}(T) \rangle_{BE}
+    =
+    \int^{\infty}_{0} d \epsilon \, 
+    D(\epsilon) f(\epsilon, T)
+    \\
+    =
+    \frac{V}{4 \pi^2}
+    \left(
+        \frac{2m}{\hbar^2}
+    \right)^{3/2}
+    \int^{\infty}_{0} d \epsilon \, 
+    \frac{\sqrt{\epsilon}}{e^{-\beta (\epsilon - \mu)} - 1}
+    \equiv 
+    F(\mu)
+}
+
+$F(\mu)$ tells you for what $\mu$ and $T$ is $N_\epsilon$ on the order of $N$ 
+(i think I'm not sure at all). $T_2$ is the critical temperature such that 
+\equations{
+    N(T \leq T_{E})
+    =
+    2.612 n_Q(T)
+    \hp
+    \langle N(T = T_{E}) \rangle 
+    \overset{!}{=}
+    N
+    = 
+    2.612 n_Q(T_E) V
+    \\
+    \frac{\langle N_0(\epsilon_0) \rangle}{N}
+    =
+    1
+    -
+    \left(
+        \frac{T}{T_E}
+    \right)^{3/2}
+}
+
+\chapter{Phase Transformations}
+Remeber the following identities from past lectures (11). 
+\equations{
+    G(T, p)
+    =
+    U + pV - TS = H - TS 
+    \hp 
+    G 
+    =
+    \sum_{i = 1}^{n}
+    N_i \mu_i(T, p)
+    \\
+    dG 
+    =
+    -S dT 
+    +
+    V dp 
+    +
+    \sum_{i = 1}^{n}
+    \mu_i(T, p) \, d N_i 
+}
+
+There are many types of phase transitions in stat mech beyond the normal ones 
+\begin{itemize}
+    \item
+    gas/liquid/solid/plasma
+    \item
+    superfluid/normal fluid
+    \item
+    superconductor
+    \item
+    crystallographic phases in solids
+    \item
+    paramagnetic/ferromagnetic
+\end{itemize}
+
+\subsection{Phase Diagrams}
+You've seen them. They show at what $p, T$ are materials liquid, solid, gas. 
+The critical point is the point where liquid and gas are indisinguishable.
+
+\section{Coexistence Curves}
+These are the boundaries on the phase diagram, and at these boundaries, 
+2 phases can exist in equilibrium at the same time. Gibbs Free Energy is 
+minimized in equilibrium, so 
+\equations{
+    G 
+    =
+    \sum_{i=1}^{2}
+    N_i \mu_i 
+    =
+    N_1 \mu_1 
+    +
+    N_2 \mu_2 
+    \\
+    dG 
+    =
+    0
+    =
+    -S dT  + V dp + 
+    \sum_{i=1}^{2}
+    N_i \mu_i 
+    \Rightarrow 
+     \mu_1 dN_1
+    =
+    -
+    \mu_2 dN_2  
+    \Rightarrow 
+    \\
+    (\mu_1 - \mu_2) dN_1 
+    =
+    0
+    \Rightarrow 
+    \mu_1 = \mu_2
+}
+So we are in diffusive equilibrium when Gibbs free energy is minimized 
+at a phase transition (neither phase is moving to the other).
+
+\section{TOO BUSY REGISTERING FOR CLASSES TO PAY ATTENTION}
+let $v$ is volume per particle $V/N$. 
+
+The liquid-gas boundary is equation
+\equations{
+    \left(
+        \frac{dp}{dt}
+    \right)_{l \iff g}
+    =
+    \frac{s_g - s_l}{v_g - v_l}
+    > 0
+}
+
+The solid-liquid phase boundary is 
+\equations{
+    \left(
+        \frac{dp}{dt}
+    \right)_{s \iff l}
+    =
+    \frac{s_l - s_s}{v_l - v_s}
+    < 
+    0
+}
+
+\section{Latent Heat}
+\equations{
+    h_2 - h_1 
+    =
+    T (s_2 - s_1)
+    =
+    T \Delta S 
+    =
+    L
+}
+
+The specific heat capacity can be written in terms of enthalpy 
+\equations{
+    C_p 
+    =
+    T
+    \left(
+        \frac{\del S}{\del T}
+    \right)_{p}
+    =
+    \left(
+        \frac{\del U}{\del T}
+    \right)_{p}
+    +
+    p 
+    \left(
+        \frac{\del V}{\del T}
+    \right)_p 
+    \\
+    =
+    \left(
+        \frac{\del}{\del T}
+        \left(
+            U 
+            +
+            pV
+        \right)
+    \right)_{p}
+    =
+    \left(
+        \frac{\del H}{\del T}
+    \right)_p
+    \Rightarrow 
+    H 
+    =
+    \int C_p(T) dT 
+    \hp 
+    \Delta H 
+    =
+    \int 
+    (C_{p2} - C_{p1}) dT
+}
+
+\section{Clausius-Clapeyron}
+
+I think this is right but I'm not sure because it was first brought up 
+when I was registering for classes
+\equations{
+    \left(
+        \frac{dp}{dT}
+    \right)
+    =
+    \frac{\Delta s}{\Delta v}
+    \Rightarrow 
+    \frac{L}{T \Delta v}
+    =
+    \left(
+        \frac{dp}{dT}
+    \right)_{\textrm{Co-lx curve}}
+}
+
+\subsection{Vapor Pressure Equation}
+\equations{
+    p(T)
+    =
+    p_0 
+    e^{-L / k_B T}
+}
+
+\chapter{Van der Waals Model} 
+Consider an ideal gas such that $pV = n k_B T$. If we were to model pressure 
+and volume with everything else constant, it would be inversely proportional. 
+
+However, what actually happens is that $pV = N k_B T$ until there is a phase 
+transition, and then pressure stays constant and V decreases as a liquid, and 
+pressure increases dramatically as a solid. 
+
+\section{Non-Ideal Gas (With Interactions)}
+\equations{
+    \epsilon_{tot} 
+    =
+    \sum_{i=1}^{N} 
+    \frac{p_i^2}{2m} 
+    +
+    \sum_{pairs} 
+    \phi(\vec r_i - \vec r_j)
+}
+
+Because each of pair of particles interact with each other in a unique way, so 
+we need to consider every interaction between every set of particles.
+
+There are $N(N-1)/2$ terms ($N$ choose $2$). 
+\equations{
+    \sum_{pairs}
+    =
+    \sum_{i=1}^{N}
+    \sum_{j=i+1}^{N}
+    =
+    \frac{1}{2}
+    \underset{i \neq j}{
+	\sum_{i=1}^{N}
+	\sum_{j=1}^{N}
+    }
+}
+
+We can use this to find the partition function. The classical partition function 
+for a non-ideal gas is 
+\equations{
+    Z_{tot}
+    =
+    \frac{1}{h^{3N}}
+    \frac{1}{N!}
+    \int d^3 p_1 
+    \ldots
+    \int d^3 p_N
+    \int d^3 r_1 
+    \ldots
+    \int d^3 r_N
+    \Rightarrow 
+    \\
+    \exp(- \beta 
+    \left(
+    \sum_{i} \frac{p_i^2}{2m} 
+    +
+    \frac{1}{2}
+    \sum_{i, j, i \neq j} 
+    \phi_{ij}
+    \right)
+    )
+}
+
+You can pull out a factor
+\equations{
+    \frac{1}{N!}
+    \int 
+    \frac{d^3 p_i}{(2 \pi \hbar)^3}
+    e^{-\beta \frac{p_i^2}{2m}}
+}
+
+Which then gives us 
+\equations{
+    \frac{1}{N!}
+    \left[
+	\left(
+	    \int 
+	    \frac{d^3 p_i}{(2 \pi \hbar)^3}
+	    e^{-\beta \frac{p_i^2}{2m}}
+	\right)^N
+	*
+	\int d^3 r_1 
+	\ldots
+	\int d^3 r_n 
+	\exp(
+	    -\frac{\beta}{2}
+	    \sum_{i \neq j}
+	    \phi(\vec r_i - \vec r_j)
+	)
+    \right]
+}
+
+If we consider an ideal gas ($\phi = 0$), then we see that this equation 
+returns $V^N$, which is what we expect. 
+
+\section{Mean Field Theory} 
+Instead of considering every interaction across every particle everywhere, you 
+can just consider the average energy of the interactions and use that for your 
+calculations. 
+
+This assumptions allows our energy calculation to be written as 
+\equations{
+    \epsilon_i 
+    =
+    \frac{p_i^2}{2m}
+    +
+    \langle 
+    \frac{1}{2} 
+    \sum_{i \neq j} 
+    \phi(|\vec r_i - \vec r_j|)
+    \rangle
+    =
+    \frac{p_i^2}{2m}
+    +
+    U_{eff}
+    \\
+    Z_{tot}
+    =
+    \frac{1}{N!}
+    \left(
+	n_Q(T) 
+	\cdot 
+	\int d^3 \vec R \,
+	e^{-\beta U_{eff}}
+    \right)^N
+}
+
+$U_{eff}$ looks like the orbitals that we observed in classical mechanics where there's a 
+nice potential well but it increases dramatically as we get too close to $R_0$ 
+and it increases from negative to 0 as $R \to \infty$. 
+\equations{
+    \phi(R < R_0) \to \infty
+    \hp
+    \phi(R \to \infty) \to 0 
+    \hp
+    \phi(R > R_0) < 0
+}
+
+Now we have to solve that integral. 
+\equations{
+    U_{eff} \to \infty 
+    \Rightarrow 
+    e^{- \beta U_{eff}} \to 0
+}
+
+This means that the volume integral will only be non-zero in the volume $V - V_{excl}$
+where $V_{excluded} = (N-1)b \approx Nb$ where $b$ is the volume of 1 particle. 
+
+\subsection{"Smooth Potential" Approximation} 
+Let's replace $U_{eff}$ by the average of it over space (assuming uniform particle 
+density), this allows us to get 
+\equations{
+    U_{eff} 
+    =
+    \langle 
+    \frac{1}{2}
+    \sum_{i \neq j} 
+    \phi(|\vec r_i - \vec r_j|)
+    \rangle 
+    =
+    \frac{N - 1}{2} 
+    \langle \phi \rangle 
+    \approx 
+    \frac{N}{2}
+    \langle \phi \rangle 
+    \approx 
+    -\frac{Na}{V}
+    \\
+    \langle \phi \rangle 
+    =
+    - \frac{1}{V}
+    \int^{\infty}_{R0}
+    4 \pi R^2 dr |\phi(R)|
+    =
+    -\frac{2a}{V} 
+    \hp 
+    R_0 
+    =
+    2a
+}
+
+$a$ is the information of the spatial dependence of $\phi$ (attractiveness). 
+Now our energy can be written purely in terms of two information bearing variables 
+$a$ and $b$. 
+
+\equations{
+    Z_{tot}
+    =
+    \frac{1}{N!} 
+    \left(
+	n_Q
+	\cdot 
+	(V - Nb)
+	e^{+\beta \frac{Na}{V}}
+    \right)^N
+    \Rightarrow 
+    F_{vdW}
+    =
+    - k_B T \ln(Z_{tot}) 
+    \\
+    =
+    -N k_B T 
+    \ln(n_Q (V - Nb))
+    +
+    k_B T \ln(N!) 
+    -
+    \frac{N^2 a}{V}
+}
+
+VdW is Van der Waals
+
+You use Stirling's Approximation and simplify terms to get 
+\equations{
+    F_{VdW}
+    =
+    -N k_B T 
+    \left[
+	\ln(\frac{n_Q (V - Nb)}{N})
+	+
+	1
+    \right]
+    -
+    \frac{N^2a}{V}
+}
+
+This is the free energy of the ideal gas, expect $V \to V - Nb$ and 
+add a $\left( \frac{- N^2 a}{V} \right)$ attraction term.
+
+\equations{
+    p 
+    =
+    - 
+    \frac{dF_{vdw}}{dV} 
+    =
+    \frac{N k_B T}{V - Nb} 
+    -
+    \frac{N^2a}{V^2}
+}
+
+Set $a$ and $b$ to 0 to get the ideal gas law. 
+
+Typical values of $a$ and $b$ are usually 
+a = 2.5 eV \AA 
+\hp
+b = (4 \textrm{\AA})$^3$
+
+In terms of the graphical difference the VDW forces usually add a saddle 
+point and a little bump. What actually happens is that there is a phase transition
+that completely ignores the bump as the gas turns into a liquid. 
+
+At critical temperature $T_c$, we get 
+\equations{
+    \left(
+    \frac{\del p}{\del V} 
+    \right)_{T, N}
+    =
+    0 
+    \hp 
+    \left(
+    \frac{\del^2 p}{\del V^2} 
+    \right)_{T, N}
+    =
+    0 
+}
+
+This is graphically represented by the inflection point. 
+The critical point is when $p = p_c, V = V_c, T= T_c$, each of which 
+are functions of $a$ and $b$. $a$ and $b$ are material dependent parameters. 
+
+You can normalize $p, V, T$ to $\hat p, \hat V, \hat T$ to remove $a$ and $b$ 
+to get the Law of Corresponding States 
+
+\subsection{Law of Corresponding States} 
+\equations{
+    \left(
+    \hat p 
+    +
+    \frac{3}{\hat V^2} 
+    \right)
+    \left(
+    3 \hat V 
+    - 
+    1
+    \right)
+    =
+    8 \hat T 
+}
+
+This equation works well for noble gases because their VDW forces are relatively small. 
+
+\section{Maxwell Construction}
+We can finally understand phase changes with non-ideal gases. 
+
+We can graphically represent the Gibbs Free Energy for constant $N, T$ 
+\equations{
+    dG 
+    =
+    -S dT 
+    +
+    V dp 
+    +
+    \mu dN 
+    =
+    V dp 
+}
+
+Graphing G over p given increasing $V$ gives you a loop, and because equilibrium is when 
+$G$ is minimized, the loop is ignored and $V$ actually jumps during equilibrium 
+(phase change). 
+
+\section{Weiss Model of ferromagnetism}
+Consider a spin 1/2 electron in a magnetic field of $\vec B$. 
+\equations{
+    \epsilon
+    =
+    - \mu_B B s 
+    \hp 
+    s 
+    =
+    \pm 1
+}
+
+\subsection{Single Spin}
+\equations{
+    z 
+    =
+    e^{\mu_B B / k_B T}
+    +
+    e^{-\mu_B B / k_B T}
+    =
+    2 \cosh(\frac{\mu_B B}{k_B T})
+    \\
+    \langle s \rangle 
+    =
+    \tanh(\frac{\mu_B B}{k_B T})
+}
+
+\subsection{Many Spin}
+Consider a material with $n = N / V$ density of spins. 
+
+The magnetization can be written as 
+\equations{
+    M(B, T)
+    =
+    n \mu_B \langle s \rangle 
+    =
+    n \mu_B
+    \tanh(\frac{\mu_B B}{k_B T})
+}
+
+If we consider this for a very small magnetic field $B$ such that 
+$\tanh(x) \approx x$, we get 
+\equations{
+    M(B, T)
+    =
+    n \mu_B^2
+    \frac{B}{k_B T}
+}
+
+\subsection{Curie Law}
+The magnetic susceptibility can be written as 
+\equations{
+    \chi(B, T)
+    =
+    \left(
+        \frac{\del M}{\del B}
+    \right)_{B=0}
+    =
+    \frac{n \mu_B^2}{k_B T}
+    \sim 
+    \frac{1}{T}
+}
+
+This is true for a paramagnet with no interactions. 
+
+In ferromagnetism, we have $M \neq 0$ even when $B = 0$ 
+
+\subsection{Exchange Interaction}
+Consider a pair of electron spins $i, j$.
+\equations{
+    \epsilon_{each}
+    =
+    -2 J_{ij} s_i s_j
+    \Rightarrow 
+    \epsilon_{total}
+    =
+    -
+    \sum_{i}
+    \mu_B B s_i
+    -
+    \frac{1}{2}
+    \sum_{i=1}^{N}
+    \sum_{j=1}^{N}
+    2 J_{ij} s_i s_j
+}
+
+\subsection{Ising Model}
+
+Instead of considering every single possible particle pair, we can consider 
+only nearest neighbor interactions to get a similar effect. 
+\equations{
+    \epsilon_{total}
+    =
+    -
+    \sum_{i}
+    \mu_B B s_i
+    -
+    J
+    \sum_{i, j = NN}
+    s_i s_j
+}
+
+This is known as the Ising Model, and it is very useful. It is only analytically 
+solvable is 1D and 2D if we assume $B=0$. In 3D it's impossible. 
+
+\subsection{Mean Field Theory}
+Replace the interaction term with the average over all spins. 
+\equations{
+    \epsilon_i 
+    =
+    - \mu_B B s_i 
+    -
+    J s \sum_{j \neq i} s'_i
+    \approx 
+    - \mu_B B s_i 
+    -
+    J s \sum_{j \neq i} \langle s_i \rangle 
+    =
+    - \mu_B B s_i 
+    -
+    J s \langle s_i \rangle N_{nn}
+    \\
+    =
+    - \mu_B B s_i 
+    -
+    \mu_B B_{eff} s_i 
+    =
+    -\mu_B (B + B_{eff}) s_i
+    \\
+    M 
+    =
+    n \mu_B \langle s_i \rangle
+    \hp 
+    \lambda 
+    =
+    \frac{J N_{nn}}{n}
+    \hp 
+    B_{eff}
+    =
+    \lambda \cdot M 
+}
+
+The effective magnetization can be written as 
+\equations{
+    M(B, T)
+    =
+    n \mu_B 
+    \tanh(\frac{\mu_B (B + B_{eff})}{k_B T})
+    \\
+    M(B=0, T)
+    =
+    n \mu_B 
+    \tanh(\frac{\mu_B \lambda M}{k_B T})
+}
+
+This is a transcendental equation that can't solve analytically, but can 
+be solved graphically (because $M$ is on both sides). 
+
+We can find the inflection point of this graph, and that gives us the Curie 
+temperature where materials stop being magnetic 
+\equations{
+    l'(M)
+    =
+    \frac{dM}{dM}
+    =
+    1
+    =
+    r'(M)
+    =
+    \frac{n \mu_B \lambda}{k_B}
+    \\
+    T_C 
+    =
+    \frac{n \mu_B^2 \lambda}{k_B}
+}
+
+\chapter{Landau Theory}
+Using the Ising model, we looked at a magnetic solid and saw that the 
+magnetization is 
+\equations{
+    M 
+    \sim 
+    (T_C - T)^{\beta}
+    \hp 
+    \beta 
+    =
+    \frac{1}{2}
+}
+that $\beta$ is true for mean field theory, and more than 3 dimensions. For 3D models, 
+you can run simulations and get something different. 
+
+Landau Theory is universal, which means it works for all materials 
+regardless of macroscopic properties. 
+
+\section{Landau Theory of Phase Transitions}
+This is the general theory of 2nd order phase transitions. 
+it's phenomenological and uses mean field theory. 
+
+\section{Order Parameter}
+We can consider a condensated phase (liquid) as ordered because all the particles 
+are in similar states, so $\xi > 0$, while above the temperature 
+$T_C$ would be disorded, 
+so order parameter $\xi=0$. $\xi$ is the order parameter. 
+
+Imagine gas as disordered and liquid as ordered with $\xi = \rho - \rho_C$, so it is 
+described by density.
+
+For a magnet, paramagnets are disordered and ferromagnets are ordered with 
+$\xi = M$, magnetization. 
+
+We can consider a regular gas as disordered and a superfluid as ordered with 
+$\xi = |\psi|^2$, the superfluid fraction. 
+
+\section{Landau Free Energy}
+$F_L(\xi, T)$ is minimized in equilibrium. Because of this, we can say that 
+$\xi$ is small near $T_C$, so we can expand $F_L(\xi, T)$ around $\xi=0$
+\equations{
+    F_L(\xi, T)
+    =
+    g_0(T)
+    +
+    g_1(T)\xi
+    +
+    \frac{1}{2}
+    g_2(T) \xi^2
+    +
+    \frac{1}{3}
+    g_3(T) \xi^3
+}
+
+And in equilibrium, we know the derivative is 0, so we get 
+\equations{
+    \left(
+    \frac{\del F}{\del \xi}
+    \right)_{T}
+    =
+    0
+    =
+    g_1(T)
+    +
+    g_2(T) \xi
+    +
+    g_3(T) \xi^2 
+    +
+    \ldots
+}
+
+\subsection{Symmetry}
+If $B=0$, expect $F_L$ to be an even function because $\uparrow \uparrow \uparrow$
+and $\downarrow \downarrow \downarrow$ should be the same. This means that $F_L$ 
+can be written as 
+\equations{
+    F_L
+    =
+    g_0(T)
+    +
+    \frac{1}{2}
+    g_2(T) \xi^2
+    +
+    \frac{1}{4}
+    g_4(T) \xi^4
+}
+
+We skip the odd parts of the function. At equilibrium, we get 
+\equations{
+    \frac{\del F_L}{\del \xi}
+    =
+    0
+    =
+    g_2(T) \xi 
+    +
+    g_4(T) \xi^3
+    \hp
+    \xi
+    =
+    0
+    \hp 
+    \xi 
+    =
+    \pm
+    \sqrt{\frac{-g_2(T)}{g_4(T)}}
+    \\
+    \frac{\del^2 F_L}{\del \xi^2}
+    =
+    g_2(T) + 3g_4(T) \xi^2 
+}
+$\xi_0$ is minimum if $g_2(T) > 0$, $\xi_{\pm}$ is minimum if $g_2(T) < 0$
+
+if $g_2 \geq 0$, then expect $\xi_{eq} = 0$ for $T \geq T_C \Rightarrow g_2 \geq 0$
+for $T > T_C$.
+
+if $g_2 \leq 0$, then expect $\xi_{eq} \neq 0$ for $T < T_C \rightarrow g_2 < 0$ for 
+$T < T_C$
+
+You can do a taylor expansion near $T_C$ to get 
+
+\equations{
+    F_L
+    =
+    g_0(T)
+    + 
+    \frac{1}{2} \alpha (T - T_C) \xi^2
+    +
+    \frac{1}{4} g_4(T) \xi^4
+}
+
+For a symmetric 0 B field, we can get a free energy of 
+\equations{
+    F_L(T)
+    =
+    \begin{cases}
+	g_0(T) : T \leq T_C 
+	\\
+	g_0(T) - \frac{\alpha^2 (T_C - T)^2}{4g_4} : T \leq T_C 
+    \end{cases}
+}
+
+\section{Landau's Postulate}
+All 2nd order phase transitions have such a form for $F_L(\xi, T)$ close 
+to $T_C$.
+
+This is the same for $\beta, \gamma$ exponents.
+
+\section{$B \neq 0$} 
+\equations{
+    F_L(\xi, T)
+    =
+    g_0(T)
+    + 
+    \frac{1}{2} \alpha 
+    (T - T_C) \xi^2 
+    +
+    \frac{1}{4} g_4 \xi^4 
+    -
+    H \cdot \xi
+}
+H is the generalized force (H=B for Ising model)
+
+\subsection{Equilibrium}
+\equations{
+    \left(
+    \frac{\del F_L}{\del \xi}
+    \right)_{T}
+    =
+    0
+    =
+    \alpha(T- T_C) \xi 
+    +
+    g_4 \xi^3 - H 
+}
+
+If we take this to lowest order, we get 
+\equations{
+    \xi 
+    =
+    \frac{H}{\alpha(T - T_C)}
+    \\
+    \chi
+    =
+    \left(
+    \frac{\del \xi}{\del H}
+    \right)_{H=0}
+    \sim 
+    (T - T_C)^{\gamma} 
+    \hp 
+    \gamma
+    =
+    1
+    : 
+    T > T_C 
+}
+
+\section{Summary}
+$H$ is phenomenological (but is interpretable for magnets)
+
+quantitatively right, but still has mean field exponents. 
+
+You need actual field theory to get better agreement with experiments. 
+
+\section{Extension to 1st order Phase Transitions}
+\equations{
+    F_L
+    =
+    g_0
+    +
+    \frac{1}{2} \alpha (T - T_C) \xi^2 
+    +
+    \frac{1}{3} g_3 \xi^3 
+    +
+    \frac{1}{4} g_4 \xi^4
+    \\
+    \left(
+    \frac{\del F_L}{\del \xi}
+    \right)_{T}
+    =
+    0
+    =
+    \alpha (T - T_C)\xi 
+    +
+    g_3 \xi^2 
+    +
+    g_3 \xi^4 
+    =
+    \xi
+    \left(
+	\alpha(T - T_C)
+	+
+	g_3 \xi 
+	+
+	g_4 \xi^2
+    \right)
+    \\
+    \xi_{\pm}
+    =
+    \frac{- g_3 \pm \sqrt{g_3^2 - 4 g_4 \alpha(T - T_C)}}{2 g_4}
+}
+
+\section{MIDTERM2}
+\equations{
+    (1 + e^{-2\beta \epsilon})
+    (1 + e^{-\beta \epsilon} + e^{-2\beta \epsilon})
+    =
+    (1 + e^{-\beta \epsilon} + e^{-2\beta \epsilon})
+    +
+    (e^{-2\beta \epsilon} + e^{-3\beta \epsilon} + e^{-4\beta \epsilon})
+    \\
+    =
+    1
+    +
+    e^{-\beta \epsilon}
+    +
+    2e^{-2\beta \epsilon}
+    +
+    e^{-3\beta \epsilon}
+    +
+    e^{-4\beta \epsilon}
+}
+
+I'm so sad this is tragic.
+
+\chapter{Kinetic Theory}
+How a system approaches equilibrium. Mechanisms of heat transfer include 
+\begin{itemize}
+    \item
+    Radiation (light)
+    \item
+    Conduction (material transfer)
+    \item
+    Convection (bulk flow)
+\end{itemize}
+
+\section{Kinetics}
+Consider a statistical ensemble that can explore all accessible microstates. The
+system is isolated coupled to a reservoir (canonical), 
+which means that $U, T = \const$.
+
+Consider a paramagnet. 
+
+\section{Ergodic Hypothesis}
+Given enough time, a system will explore all possible microstates. 
+
+\section{Master Equation}
+$P_i(T)$ is the probability that a system if found in state $i$ at time $t$.
+
+$P_i(T)$ will increase if the system transitions into state $i$. 
+
+$P_i(T)$ decreases if $i$ goes into other states. 
+
+We can consider a transition probability per unit time $W_{i \to j}$
+
+\equations{
+    \frac{dP_2}{dt}
+    =
+    P_1 \cdot W_{1 \to 2} 
+    -
+    P_2 \cdot W_{2 \to 1} 
+    \\
+    \frac{dP_1}{dt}
+    =
+    P_2 \cdot W_{2 \to 1} 
+    -
+    P_1 \cdot W_{1 \to 2} 
+}
+
+If we consider an arbitrary number of states, we get 
+\equations{
+    \frac{dP_i}{dt}
+    =
+    \sum_i W_{j \to i} \cdot P_j
+    -
+    \sum_j W_{i \to j} \cdot P_i 
+}
+
+Term 1 is all the transitions into $i$, and Term 2 is all the transitions out 
+of state $i$. This is one of the most important equations in non-equilibrium 
+statistical mechanics. 
+
+\subsection{Principle of Detailed Balance} 
+The system is steady state if $\frac{dP_i}{dt} = 0$ for all $i$.
+\equations{
+    \sum_j W_{j \to i} \cdot P_j
+    =
+    \sum_j W_{i \to j} \cdot P_i
+    \Rightarrow 
+    \textrm{into $i$}
+    =
+    \textrm{out of $i$}
+}
+
+However, for detailed balanced, every individual transition must be balanced 
+\equations{
+    W_{j \to i} \cdot P_j 
+    =
+    W_{i \to j} \cdot P_i 
+    \forall i,j
+}
+
+The number of transitions from $j \to i$ per time equals the number of 
+transitions $i \to j$ per time.
+
+\subsection{Example}
+Consider a system with 3 states that cycle into each other in only 1 direction.
+\equations{
+    W_{1 \to 2}
+    \to
+    W_{2 \to 3}
+    \to
+    W_{3 \to 1}
+    \to 
+    \ldots
+    \\
+    \frac{dP_1}{dt}
+    =
+    -W_{1 \to 2} \cdot P_1 
+    +
+    W_{3 \to 1} \cdot P_3
+}
+
+This is not equilibrium, so the system cannot be in detailed balance even if it's in 
+a steady state. 
+
+However, every every transition was bi-directional, we could have detailed balance. 
+\equations{
+    \frac{dP_1}{dt}
+    =
+    \left(
+	-W_{1 \to 2} P_1
+	+
+	W_{2 \to 1} P_2
+    \right)
+    +
+    \left(
+	-W_{1 \to 3} P_1
+	+
+	W_{3 \to 1} P_3
+    \right)
+}
+
+If everything equals each other and it's 0, then we have detailed balance.
+
+In equilibrium, steady state is necessary, but not sufficient. We need detailed 
+balance. This is important for simulations. 
+
+For a closed system, we make a fundamental assumption that $P_i = P_j$
+
+\section{System Coupled to a Reservoir} 
+\equations{
+    P_i 
+    =
+    \frac{e^{-\epsilon_i / k_B T}}{Z}
+}
+
+You can plug this into the detailed balance equation to get 
+\equations{
+    \frac{W_{j \to i}}{W_{i \to j}}
+    =
+    \frac{P_i}{P_j} 
+    =
+    e^{-(\epsilon_i - \epsilon_j) / k_B T}
+}
+
+The probability of going from high energy to low energy is higher than going 
+from low energy to high.
+
+\equations{
+    \epsilon_j
+    >
+    \epsilon_i 
+    \Rightarrow 
+    W_{j \to i}
+    >
+    W_{i \to j}
+}
+
+\section{Einstein Relations}
+Consider a gas of photons at temperature $T$. Interactions that can happen are 
+spontaneous emission, absorption, and stimulated emission. 
+
+Absorption has a proportionality constant $B \mu(\omega)$ where 
+\equations{
+    \mu(\omega)
+    =
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \frac{1}{e^{\beta \hbar \omega} - 1}
+}
+
+Emission has constant $A$, and stimulated emission has $B' \mu(\omega)$ Each one 
+moves the state by $\hbar \omega$
+
+Write down the master equation to get 
+\equations{
+    \frac{dP_1}{dt}
+    =
+    0
+    =
+    W_{2 \to 1} \cdot P_2 
+    -
+    W_{1 \to 2} \cdot P_1
+    =
+    (A + B' \mu(\omega)) P_2
+    -
+    B \mu(\omega) P_1
+}
+
+The first part is both types of emission, and the 2nd part is absorption.
+Use the known equations of the canonical ensemble to get
+\equations{
+    \frac{W_{2 \to 1}}{W_{1 \to 2}}
+    =
+    \frac{P_2}{P_1}
+    =
+    \frac{A + B' \mu(\omega)}{B \mu(\omega)}
+    =
+    e^{\beta \hbar \omega}
+}
+
+That gives us 
+\equations{
+    A(e^{\beta \hbar \omega} - 1)
+    =
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \left(
+    B e^{\beta \hbar \omega} - B'
+    \right)
+}
+
+This is true for all $T$. It has only a single solution 
+\equations{
+    A 
+    =
+    B 
+    \frac{\hbar \omega^3}{\pi^2 c^3} 
+    \hp 
+    B
+    =
+    B'
+}
+
+You only need to know 1 of the 3 transition probabilities to calculate the 
+other 2. There's also no way to get detailed balance for all $T$ 
+of a photon gas unless you have all 3 properties 
+
+\section{Chemical Kinetics}
+Consider chemical reaction. 
+\equations{
+    A + B 
+    \iff 
+    AB
+}
+
+If we want equilibrium, then the rate going into AB should equal the rate going 
+out of AB. The rate into AB can be written as 
+\equations{
+    \frac{d[AB]}{dt}
+    =
+    k_{+} [A][B]
+    -
+    k_{-} [AB]
+}
+
+$k_{-}$ has units 1/s and is a first order rate constant. $k_{+}$ is a second order 
+rate constant and has units $1 / (t*concentration)$. At equilibrium, we use the 
+master equation to get 
+\equations{
+    \frac{d[AB]}{[A][B]}
+    =
+    \frac{k_{+}}{k_{-}}
+}
+
+This gives us the law of mass action
+\equations{
+    \frac{[AB] n_0}{[A][B]}
+    =
+    e^{\Delta G_{0} / k_B T}
+    =
+    K(T)
+    =
+    \frac{k_{+}}{k_{-}}
+}
+
+\chapter{Thermal Radiation}
+We learned about black body radiation and the raleigh equation and the ultra-violet 
+catastrophe and all that jazz. The energy density is proportional to $T^4$.
+
+If we imagine a star. It's basically just a big ol photon gas with some energy 
+being released. 
+\equations{
+    J_{u}
+    =
+    \sigma_b T^4
+}
+
+\section{Black Body}
+An object that just absorbs all EM radiation and emits radiation according
+to its temperature $T$.
+
+equilibrium means that there is no net energy flow (the energy absorbed perfectly 
+equals the energy emitted).
+
+\equations{
+    J_{cavity}
+    =
+    J_{blackbody}
+    =
+    \sigma_b T^4
+}
+
+I have not paid attention to anything whatsoever 
+
+\section{Kirchhoff's Law}
+\equations{
+    a(\omega)
+    =
+    e(\omega)
+    =
+    P_{refl}
+    =
+    r(\omega)
+    \cdot 
+    P_{incident}
+    \hp
+    e(\omega)
+    +
+    r(\omega)
+    =
+    1
+}
+
+A good absorber is a good emitter. A good reflector is a 
+poor absorber and poor emitter. 
+
+\section{The Greenhouse Effect}
+The sun can be pretty decently approximated as a black body.
+There's an energy flux density and a $P_{inc}$ idk what $P$ is.
+
+We can figure out the average temperature of the earth by looking at the amount 
+of energy the sun hits it with and the amount of energy it emits. We assumed the earth 
+is a black body and that is not true.
+
+\section{Boltzmann Transport Equation}
+We did some derivation shenanigans and got 
+\equations{
+    \frac{\del f}{\del t}
+    +
+    \vec v 
+    \cdot 
+    \vec \nabla_{T} f
+    +
+    \frac{\vec F}{m} 
+    \cdot 
+    \vec \nabla_{v} f 
+    =
+    \left(
+	\frac{\del f}{\del t}
+    \right)
+    \hp
+    \vec \nabla_{v}
+    =
+    \begin{pmatrix}
+	\frac{\del}{\del v_x} \\ \frac{\del}{\del v_y} \\ \frac{\del}{\del v_z}
+    \end{pmatrix}
+}
+
+At equilibrium, the right hand side goes to 0. If we assume the derivative is linear, 
+we can get something nice 
+\equations{
+    \frac{\del f}{\del t}
+    =
+    -
+    \frac{f - f_0}{\tau}
+    \Rightarrow 
+}
+
+This relaxation approach allows us to solve the equation iteratively. Our dot products also 
+simplify to get a steady state equation of 
+\equations{
+    v_z \frac{\del f}{\del z}
+    =
+    -
+    \frac{f - f_0}{\tau}
+}
+
+If we consider the Maxwell Distribution for velocities, we can actually figure out $f_0$ 
+\equations{
+    f_0(\vec r, \vec v)
+    =
+    n(\vec r)
+    \left(
+	\frac{m}{2 \pi k_B T}
+    \right)^{3/2}
+    e^{- \frac{mv^2}{2 k_B T}}
+    \Rightarrow 
+    f
+    =
+    f_0 
+    -
+    v_z \tau_z 
+    \frac{\del f}{\del z}
+}
+
+This is solved iteratively by plugging $f$ into $\frac{\del f}{\del z}$
+
+\equations{
+    f_1 
+    \approx 
+    f_0 
+    -
+    v_z \tau_c 
+    \frac{\del f_0}{\del z}
+    \hp
+    f_2 
+    \approx 
+    f_0 
+    -
+    v_z \tau_c 
+    \frac{\del f_0}{\del z}
+    +
+    (v_z \tau_c)^2
+    \frac{\del^2 f_0}{\del z^2}
+    \hp 
+    \ldots
+}
+
+First order is generally enough. 
+
+We can find the flux of the particles 
+\equations{
+    \vec J 
+    =
+    n \vec v 
+    =
+    \int d^3 v \, 
+    f(\vec r, \vec v, t)
+    \cdot 
+    \vec v 
+}
+
+We reduce it do just 1 dimension to get 
+\equations{
+    J_z 
+    =
+    \int d^3 v \,
+    f_1 v_z 
+    =
+    \int d^3 v \,
+    f_0 v_z 
+    -
+    \int d^3 v \,
+    v_z^2 \tau_c
+    \frac{\del f_0}{\del z}
+}
+
+Because $f_0$ is even in $v_z$, the integral every goes to 0, so the average flux is 0, 
+which makes sense in equilibrium.
+\equations{
+    \int d^3 v \,
+    f_0 v_z 
+    =
+    n 
+    \langle v_z \rangle 
+    =
+    0
+}
+
+\subsection{Fick's Law}
+This means that our flux is only dependent on the 2nd part,so we get 
+\equations{
+    J_z 
+    =
+    - \tau_c \langle v_z^2 \rangle \frac{\del n}{\del z}
+    =
+    -D \vec \nabla n
+    \hp 
+    \langle v_z^2 \rangle 
+    \approx 
+    \frac{1}{3}
+    \langle v^2 \rangle 
+    \hp 
+    D 
+    =
+    \frac{1}{3}
+    \bar v l
+}
+
+This is attained by integrating over the maxwell velocity distribution, which I did not 
+write down.
+
+\section{Propagation}
+We know the heat conduction equation 
+\equations{
+    \frac{\del T}{\del t}
+    =
+    D_T \nabla^2 T
+    \hp 
+    D_T
+    =
+    \frac{\kappa}{\hat c_v}
+    =
+    \frac{1}{3} \bar v l
+}
+
+The particle diffusion equation is very similar 
+\equations{
+    \frac{\del n}{\del t}
+    =
+    D \nabla^2 v 
+    \hp
+    D
+    =
+    \frac{1}{3} \bar v l
+}
+
+This is very similar to a 3d wave equation where 
+\equations{
+    \frac{\del^2 u}{\del t^2}
+    =
+    c \nabla^2 u 
+}
+where $c$ is the speed of wave propagation
+
+A pulse in 1 dimension has the equation 
+\equations{
+    \frac{\del \theta}{\del t}
+    =
+    D 
+    \frac{\del^2 \theta}{\del z^2}
+}
+
+We can put this into fourier space to get a more readable answer. 
+\equations{
+    \tilde \theta(k, t)
+    =
+    \int^{\infty}_{-\infty} dz \, 
+    e^{-ikz} \theta(z, t)
+    \hp
+    \theta(k, t)
+    =
+    \frac{1}{2 \pi}
+    \int^{\infty}_{-\infty} dk \, 
+    e^{ikz} \tilde \theta(z, t)
+    \\
+    \frac{\del \theta}{\del t}
+    =
+    \frac{1}{2 \pi}
+    \int^{\infty}_{-\infty} dk \, 
+    e^{ikz} \frac{\del}{\del t} \tilde \theta(z, t)
+    \hp
+    \frac{\del^2 \theta(z, t)}{\del z^2}
+    =
+    \frac{1}{2 \pi}
+    \int^{\infty}_{-\infty} dk \, 
+    (-k^2)
+    e^{ikz} \tilde \theta(z, t)
+}
+
+Plug all the junk into all the other junk to get 
+\equations{
+    \frac{\del \theta}{\del t}
+    -
+    D \frac{\del^2 \theta}{\del z^2}
+    =
+    0
+    \Rightarrow 
+    \frac{1}{2 \pi}
+    \int^{\infty}_{-\infty} dk \, 
+    e^{ikz} 
+    \left(
+    \frac{\del \tilde \theta}{\del t}
+    +
+    k^2 D \tilde \theta
+    \right)
+    =
+    0
+    \Rightarrow 
+    \tilde \theta 
+    =
+    A(k) 
+    \cdot 
+    e^{-k^2 D t}
+    \\
+    A(k) 
+    =
+    \tilde \theta(k, t=0)
+    =
+    \int dz \, 
+    e^{-ikz} \delta(z - z_0)
+    =
+    e^{-ikz_0}
+    \\
+    \tilde \theta 
+    =
+    e^{-ikz_0}
+    e^{-k^2 D t}
+}
+
+Take the inverse fourier transform to get the thing back in z-space. You get some 
+gaussian integral which returns an exponent. 
+\equations{
+    \theta 
+    =
+    - \alpha 
+    \left[
+    k^2 
+    -
+    \frac{i \beta}{\alpha} k 
+    +
+    \left(
+    i \frac{\beta}{2 \alpha}
+    \right)^2 
+    \right]
+    +
+    \alpha
+    \left(
+    i \frac{\beta}{2 \alpha}
+    \right)^2 
+    ============
+    \\
+    \theta(z, t)
+    =
+    \frac{1}{\sqrt{4 \pi D t}}
+    e^{- \frac{(z - z_0)^2}{4 D t}}
+}
+It is a gaussian in z-space that grows in time, which intuitively makes sense. 
+You can normalize it and get a mean of 0 (symmetric). The variance can also be calculated 
+\equations{
+    \sigma_z^2 
+    =
+    \langle (z - z_0)^2 \rangle 
+    =====
+    2Dt
+}
+
+The variance increases linearly in time. This means the standard deviation grows with the 
+square root of time, so diffusion is not actually that fast. 
+
+\subsection{Microscopic Diffusion Theory}
+Particles form a gaussian by performing a random walk and slowly going outwards.
+Gaussians are binomial are coin flips are probability. My ass is not writing this down 
+I know how probability works. 
+
+The next lecture is explicitly doing this derivation so I guess I'm writing it. 
+
+Consider a particle with a 1/2 chance of going right or left. We consider the $N_R$ as a 
+step to the right, so our probability of going to th right is
+\equations{
+    p(N_R, N)
+    =
+    \frac{N!}{N_R! (N - N_R)!} 
+    \left(
+    \frac{1}{2}
+    \right)^{N_R}
+    \left(
+    \frac{1}{2}
+    \right)^{N-N_R}
+    =
+    \frac{N!}{N_R! (N - N_R)!} 
+    \left(
+    \frac{1}{2}
+    \right)^{N}
+}
+
+With this we can figure out the mean and variance 
+\equations{
+    \langle N_R \rangle 
+    =
+    \sum_{N_R = 0}^{N}
+    N_R p(N_R, N)
+    =
+    \frac{N}{2}
+    \\
+    \langle z \rangle 
+    =
+    (z \langle N_R \rangle - N) l_z 
+    =
+    0
+    \\
+    \langle N_R^2 \rangle 
+    =
+    \sum_{N_R = 0}^{N} 
+    N_R^2 p(N_R, N)
+    =
+    \frac{N(N+1)}{4} 
+    \\
+    \langle z^2 \rangle 
+    =
+    \langle (z N_R - N)^2 l_z^2 \rangle 
+    =
+    4 l_z^2 \langle N_R^2 \rangle 
+    -
+    4 \langle N_R \rangle N l_z^2 
+    +
+    N^2 l_z^2 
+    \\
+    =
+    l_z^2 N(N+1) 
+    -
+    2N^2 l_z^2 
+    +
+    N^2 l_z^2 
+    =
+    N l_z^2
+    \\
+    \sigma_z 
+    =
+    Nl_z^2 
+    \hp 
+    N 
+    =
+    \frac{t}{\tau_c}
+    \Rightarrow 
+    \sigma_z^2 
+    =
+    \frac{t}{\tau_c} l_z^2 
+    \sim t
+    \\
+    \sigma_z 
+    \sim 
+    \sqrt{t}
+}
+
+Kinematics follows a very similar derivation 
+\equations{
+    z = vt 
+    \Rightarrow 
+    z_{rms}
+    =
+    \sqrt{2 D t}
+    \sim 
+    \sqrt{t}
+}
+
+The mean position is unchanged.
+
+Diffusion is not a good method for transporting molecules over long distances. 
+\equations{
+    t
+    =
+    \frac{z^2}{2D}
+    =
+    \frac{10^4 cm^2}{2 * 10^6 \frac{cm^2}{s}}
+    =
+    5 \cdot 10^9 s 
+    =
+    150 \textrm{ years}
+}
+
+She wrote a graph about something or other and it looks like a straight line 
+going up until $L$ and then a straight horizontal line. idk man it's graphing 
+$\theta$ over $z$ but I don't know what $\theta$ is.
+
+\section{Steady State Solution}
+\equations{
+    \theta_{ss}(z) 
+    =
+    \theta_0 \frac{z}{L}
+    \Rightarrow 
+    \frac{\del^2 \theta}{\del z^2} 
+    =
+    0
+    =
+    \frac{\del \theta}{\del t}
+    \frac{1}{D}
+    \Rightarrow 
+    \theta(z, t)
+    =
+    \theta_{ss}(z)
+    +
+    \theta_p(z, t)
+}
+
+Use separation of variables to solve for the particular solution $\theta_p$
+\equations{
+    \theta_p(z, t)
+    =
+    Z(z) T(t)
+    \Rightarrow 
+    Z(z)
+    \frac{\del T(t)}{\del t}
+    =
+    D T(t)
+    \frac{\del^2 Z(z)}{\del z^2}
+    \Rightarrow 
+    \\
+    \frac{1}{D T(t)}
+    \frac{\del T(t)}{\del t}
+    =
+    \frac{1}{Z(z)}
+    \frac{\del^2 Z(z)}{\del z^2}
+}
+
+With this you can find solutions 
+\equations{
+    \frac{\del T(t)}{\del t}
+    =
+    -D k^2 T(t)
+    \hp
+    \frac{\del^2 Z(z)}{\del z^2}
+    =
+    -k Z(z)
+    \\
+    \theta_p(z, t)
+    =
+    \begin{cases}
+	e^{-k^2 D t} \cdot \cos(kz)
+	\\
+	\textrm{or}
+	\\
+	e^{-k^2 D t} \cdot \sin(kz)
+    \end{cases}
+}
+
+The general solution can be written in the form 
+\equations{
+    \theta_p(z, t)
+    =
+    \frac{a_0}{z}
+    +
+    \sum_{n=1}^{\infty}
+    a_n(t) \cos(k_n z)
+    +
+    \sum_{n=1}^{\infty}
+    b_n(t) \sin(k_n z)
+}
+
+Sum over all $k$ that satisfy boundary conditions.
+\equations{
+    a_n(t)
+    =
+    a_n(t=0) e^{-k_n D \cdot t}
+    \hp
+    b_n(t)
+    =
+    b_n(t=0) e^{-k_n D \cdot t}
+    \\
+    \theta(z=0, t)
+    \overset{!}{=} 
+    0 
+    \hp 
+    \theta(z=L, t)
+    \overset{!}{=} 
+    \theta_0
+    \\
+    \theta_{ss}
+    =
+    \theta_{0}
+    \frac{z}{L}
+}
+$\theta_{ss} + \theta_{p}$ fulfills the boundary conditions.
+
+If $\theta(z=k, t) = 0$, then we can fill in a bunch of variables. 
+\equations{
+    \theta_p(z, t)
+    =
+    \sum_{n=1}^{\infty} 
+    b_n(0)
+    e^{- (\frac{n \pi}{L})^2 D t} \sin(\frac{n \pi}{L} z)
+}
+
+The cos disappears because you need $0$ at $0$ and $k = n \pi / L$ because you 
+seen the sin term to be 0 at $L$. 
+\subsection{Initial Conditions}
+if $\theta(z, t=0) = 0$, then we can solve for more things. The $e$ term is 0 at $t=0$
+so that goes away. 
+
+You can do an inverse fourier transform to solve for $b_n(0)$ 
+\equations{
+    b_n(0)
+    =
+    \frac{2}{L}
+    \int^{L}_{0} dz \, 
+    \theta_p(z, t=0) \sin(\frac{n \pi}{L} z)
+    =
+    \frac{2}{L}
+    \int^{L}_{0} dz \, 
+    -\theta_0 \frac{z}{L} \sin(\frac{n \pi}{L} z)
+}
+substitute $u = n \pi z / L$
+\equations{
+    b_n(0)
+    =
+    - \frac{2 \theta_0}{(n \pi)^2} 
+    \int^{n \pi}_{0} du \, 
+    u \sin(u)
+    =
+    2 \theta_0 \frac{(-1)^{n}}{2 \pi}
+}
+
+Plug the stuff into the thing to get
+\equations{
+    \theta(z, t)
+    =
+    \theta \frac{z}{L}
+    +
+    2 \theta_0 
+    \sum_{n=1}^{\infty}
+    \frac{(-1)^{n}}{n \pi} 
+    e^{- (\frac{n \pi}{L})^2 D t} 
+    \cdot 
+    \sin(\frac{n \pi}{L} z)
+}
+
+After a long time, we consider only the most slowly decaying term (smallest n). 
+\equations{
+    \theta(z, t \to \infty)
+    \approx \theta_0 \frac{z}{L}
+    -
+    \frac{2 \theta_0}{\pi}
+    e^{- (\frac{\pi}{L})^2 D t}
+    \cdot 
+    \sin(\frac{\pi z}{L})
+}
+
+Everything is a damped harmonic oscillator
+
+\section{FINAL INFORMATION}
+UP TO LECTURE 25 THANK GOD
+
+There will be office hours both this week and next week (yay!). 
+
+Wednesday December 17th at 8am at Noyes 217.
+
+It's a 2 hour exam. Study the entire course.
+
+\begin{itemize}
+    \item
+	heat engines 
+    \item 
+	carnot cycle 
+    \item 
+	entropy and its relation to heat capacity
+    \item 
+	really understand heat capacity/specific heat
+    \item
+	microstates and its relation to entropy 
+    \item
+	How to calculate average energies 
+    \item
+	limits of $t \to 0$ and $t \to \infty$ to leading order terms.
+    \item
+	Quantum statistics (Fermi Energies and stuff)
+    \item
+	Know every ensemble 
+\end{itemize}
+
+Go over the lectures and review some things. We talked about heat capacity 
+for insulators and conductors. 
+
+You get the same sheet and there's also a formula sheet online.
+
+\section{Extra Stuff lmao}
+Ashcroft and Mermin
+
+\chapter{FINAL PREP}
+Know derivations for stuff, not formulas. Most formulas are on the pre-made equation sheet. 
+
+Van der Walls derivation for phase transitions 
+
+MEAN FIELD THEORY IS LIKE EVERYTHING.
+
+
+
+
+
+
+
+
 
 
 

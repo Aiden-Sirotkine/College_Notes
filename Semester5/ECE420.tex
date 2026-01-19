@@ -1209,6 +1209,147 @@ in a multi-dimensional space now.
 If it's too small, it'll take forever, to learn, and if it's too large, it 
 will never converge because 
 
+\section{Model Representation (Lab 8)}
+\begin{center}
+    Training Set
+    $\rightarrow$
+    Learning Algorithm
+    $\rightarrow$
+    Hypothesis Model $h$
+    \\
+    feauture $x$
+    $\rightarrow$
+    $h$
+    $\rightarrow$
+    response $y$
+\end{center}
+
+Use gradient descent and a linear model with squared error. 
+
+\section{Logistic Regression}
+Uses a non-linear function and a threshold barrier to determine binary 
+classification (usually sigmoid function). 
+This works better for the tumor diagnosis discussed in the slides because 
+the classification is pretty nicely separate, so a more distinguishing 
+model (sigmoid compared to linear) classifies the tumors better. 
+
+\subsection{Issues}
+The mean squared error of the sigmoid has many local minima, 
+so we need a different loss function. 
+\equations{
+    cost
+    =
+    \begin{cases}
+        - \log(h_{\theta}(x))
+        : 
+        y = 1
+        \\
+        - \log(1 - h_{\theta}(x))
+        : 
+        y = 0
+    \end{cases}
+    \\
+    y = 1
+    \hp 
+    h_{\theta}(x)
+    \to 1 
+    :
+    cost
+    \to 0
+    \hp
+    h_{\theta}(x)
+    \to 0
+    :
+    cost
+    \to \infty
+}
+
+It basically makes the loss exponentially bad if the classification is wrong.
+
+Now our loss will very similar to mean squared error, and our 
+gradient descent will be smooth. 
+
+\section{Digit Recognition}
+the output is a bunch of probabilities and the classification from 
+the model is the argmax of the output. 
+
+\subsection{Confusion Matrix}
+predicted responses vs actual responses. 
+
+If the confusion matrix is mostly diagonal, then you model is pretty good. 
+
+\chapter{Professor Research}
+Bluetooth and wifi and NFC stuff and RFID stuff and GPS and LoRa (Long Range).
+
+Wifi has low range high data rate, LTE less so, bluetooth very low range and lower 
+data rate. RFID and NFC need almost full contact. GPS has crazy long range. 
+
+The way that wifi works is by encoding all of our information in a low frequency 
+signal and then doing magic to it. 
+
+Challenges with wireless communication is multipath.
+
+\section{OFDM}
+Orthogonal Frequency Division Multiplexing.
+
+Multipath algorithm something that uses FFT. 
+
+\section{LoRa}
+Low power wide area networks for IoT. 
+
+Battery should last 5-10years, should be cheap, range of 1-10km, kbps speeds. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

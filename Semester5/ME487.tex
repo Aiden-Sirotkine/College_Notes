@@ -2314,7 +2314,7 @@ Know why the glow region is slightly positive (gas moves slower than electrons)
 Why use LPCVD vs just regular atmospheric CVD (if its reaction rate limited, you 
 don't need much gas in the chamber. Also, the vacuum keeps the substrate hot)
 
-\chapter{Removal - Dry Etching}
+\chapter{Removal - Etching}
 How to get crap off of your substrate.
 
 \section{Subtractive Processes}
@@ -2390,14 +2390,1287 @@ Isotropic etching will etch underneath the mask, and that's bad.
 dry etching is \textbf{highly directional} because the atoms hitting the substrate 
 are charged, so they move along the path of the electric field. 
 
-\subsection{SPUTTERING IS LESS DIRECTIONAL}
+\subsection{(UNRELATED) SPUTTERING IS LESS DIRECTIONAL}
+
+\section{Etching (Repeat)}
+Subtractive Process. There are many types of etching 
+
+\begin{itemize}
+    \item
+    Wet and Dry Etching
+    \item
+    focused ion beam (FIB) milling
+    
+    Used to make specimens for tunneling electron microscopy
+    \item
+    laser machining
+
+    Use femto-second lasers such that no heat is transferred into the substrate, 
+    but the wanted material is blasted off. It is also used in opto-electronics 
+    to melt and change the refractive index of glass for things like waveguides.
+    \item
+    Ultrasonic drilling
+
+    Used especially for hard brittle materials. Used a while ago before deep RIE 
+    became popular. You have an oscillating tool and a slurry with granular 
+    hard particles in it. The particles couple with the oscillator and wack 
+    the surface hard enough to remove the surface. Cavitation also happens 
+    during utrasonic drilling which aides in etching.
+    \item
+    Electrical discharge machining (EDM)
+
+    Generate a spark to cause ablation. Not a very used process because it 
+    causes melting and oxidation. 
+    \item
+    Tradition precision machining
+\end{itemize}
+
+Dry etching is when a surface is etched by the gas or vapor phase. 
+Recall ashing (dry stripping of resist). 
+In general ,dry etching has fewer disposal problems, less corrosion 
+of metal features in the structure, less undercutting and broadening of 
+photoresist features, and cleaner surfaces.
+
+Types of dry etching include: 
+\begin{itemize}
+    \item
+    Physically by ion bombardment
+    \item
+    Chemically by a reaction through a reactive species at teh surface
+    \item
+    Combination of physical and chemical reactions
+\end{itemize}
+
+In CVD, the surface reaction gives rise to at least one solid product, but in 
+etching one hopes that all the reaction projects are vapors (have high 
+vapor pressures) so that nothing can condense/precipitate on the wafer. 
+
+Dry Etching, sputtering, and versions of CVD (PECVD) use plasmas, though 
+sputtering uses a plasma for different purposes. 
+
+Wet etching must be used to etch silver because many dry etching processes 
+use 
+
+\subsection{Damascene Process}
+Used for making interconnects on devices 
+
+\begin{itemize}
+    \item
+    Deposit copper onto your substrate (photolithography)
+    \item
+    perform CMP (chemical mechanical polishing) to remove the top layers of 
+    excess copper and keep the copper inside your trenches
+    \item
+    Repeat until you have thick enough copper for your interconnects. 
+\end{itemize}
+
+Interconnects used to be made with Aluminum because you could use dry etching 
+without salts staying on your wafer. 
+
+\subsection{Plasma}
+In sputtering, you essentially dry etch you target to then deposit the waste 
+on your wafer. 
+
+In PECVD, you create a very reactive species with the energy from the plasma, 
+and that reactive species attaches to the wafer. The plasma also 
+moves unwanted species from the substrate.
+
+Dry etching with plasma can make a very reactive species that removes 
+material. The plasma is also just cause high energy particles to remove material 
+(physical etching).
+
+\section{Dry Etching in Fabrication}
+\begin{enumerate}
+    \item
+    Lithographic Patterning
+    \item
+    Dry Etching
+    \item
+    Stripping
+    \item
+    Repeat until happy
+\end{enumerate}
+
+The mask has to be made of anything that isnt etched by your etchant 
+(usually PR). 
+
+Edge profile is important. 
+
+\subsection{Anisotropic}
+Vertical etching with no horizontal etching (directional).
+
+\subsection{Isotropic}
+Veritcla etching wit hequal horizontal etching. This usually leads 
+to etching under your PR.
+
+Anisotropic etching is usually preferred. Many etching processes are very 
+close to antisotropic (good enough). The way to do this is by tuning the 
+amount of physical and chemical etching within a single process. 
+
+\section{Etch Selectivity}
+\begin{center}
+    Etch Selectivity
+    =
+    $
+    \frac{\textrm{Etch rate of material to be removed}}
+    {\textrm{Etch rate of material to stay}}
+    $
+\end{center}
+
+If the Etch selectivity is 1, then the etch will evently remove your substrate 
+and your thin film, so you can produce a trench the height of the thin film 
+before the mask is entirely gone.
+
+Etching selectivity defines the amount that you can etch given a certain 
+layer of PR. If you etch selectivity is low, then you need a thicker mask.
+
+We want etch selectivity to be high with respect to both the mask (PR) 
+and substrate (so it acts as an etch stop).
+    
+There exist a number of papers that take notes of etch rates for 
+micromachining processes.
+
+\section{Why Use Plasmas}
+Basically all dry etching uses a plasma. 
+
+Plasmas contain 
+Ions, atoms, excited ,neutrals, and radicals. 
+All species play a role in etching. 
+
+The soruce gas is the most abundant species followed 
+by the etch reaction products, then neutrals, then ions. 
+\equations{
+    e- + O_2 
+    \Rightarrow 
+    2 O^{0} + e'
+}
+
+\subsection{Radical}
+$\hat{}$ 0 denotes a free radical. It is a neutral or ion with 
+unpaired electrons (very reactive).
+
+\subsection{Role of Ions}
+Ions are very useful 
+
+\begin{itemize}
+    \item
+    Bombard the surface
+    \item
+    Clean (remove contaminating films)
+    \item
+    Activate the surface (reaction sites) by causing defects/broken bonds 
+    on the surface.
+    \item
+    Ion energy $\to$ directional etching
+\end{itemize}
+
+\subsection{Etching Si with Cl}
+We ram the dichloride gas with an electron to form 2 radicals, and then 
+those react with the silicon to form $SiCl_2$ to $SiCl_4$, which is a 
+gas that is easily removed from the wafer.
+
+There are many types of etching 
+
+\section{Dry Etching}
+Gas phase etching - all reaction byproducts are volatile or gas phase 
+
+Use plasmas, offers lots of advantages over wet etching. 
+
+Typically, low pressures, 1mT to 10T, are used. 
+
+\subsection{Plasma Advantages}
+\begin{itemize}
+    \item
+    Tune etching from isotropic to directional to anisotropic
+    \item
+    Increase rates by radical generation
+    \item
+    Ion bombardment to surface cleans and activates it
+    \item
+    y providing high energy partcile interaction, they 
+    produce new reaction pathways, thus enabling "high temperature chemistry" 
+    at low temperatures
+\end{itemize}
+
+Typically, Cl$_{2}$, CF$_{4}$, O$_{2}$, H$_{2}$, and SiH$_{4}$ are flowed through the plasma to 
+generate radicals Cl, F, O, H radicals to etch
+
+\subsection{Function}
+Negative cathode to positive anode 
+negative glow plasma is next to negative cathode. 
+A potential of from 1.5kV across 15 cm is used for plasma etching. 
+The change in potential accelerates and ionizes the argon atoms. 
+
+\begin{center}
+(-) Cathode 
+$\to$
+Cathode dark space 
+$\to$
+glow plasma (+)
+$\to$
+anode dark space
+$\to$
+anode(+)
+\end{center}
+The potential is 0 in the glow plasma, so the atoms are not accelerated there. 
+
+\section{Paschen Curve}
+Paschen's Law: The breakkdown voltage, V, is a function of the 
+product of gas pressure, P, vs electrode gap distance $d$. 
+
+The right side of the graph has too many collisions, or the gap is to large 
+to allow for sufficient acceleration for ionization. 
+\equations{
+    V_{\textrm{breakdown}}
+    =
+    f(P \times d)
+}
+
+The graph starts by going sharply downward from $V = \infty$ and then curves back up to 
+an oblique asymptote (diagonal).
+
+If pressure is 0 or gap distance is 0, it makes sense for the breakdown 
+voltage to be $\infty$ because there are no atoms to breakdown in between the 
+cathode and anode if there's no pressure or no space for gases to exist. 
+
+If $P \to \infty$ or $d \to \infty$, it also makes sense for $V \to \infty$ because 
+if $P \to \infty$, there's so many particles that absorb so much energy that 
+you need a crazy potential to break down all of them. If $d \to \infty$, then 
+the anode and cathode are so far away that nothing fun happens without a 
+crazy potential because nothing accelerates quickly. The change in potential 
+over distance is going to be close to nothing because there is so much 
+distance to cover. 
+
+There exists some nice ratio of $P$ and $d$ that minimizes $V_{\textrm{breakdown}}$,
+which is the ratio that we experimentally want.
+
+\begin{itemize}
+    \item
+    On the left side, the gap is too small for the ionization avalanche to occur. 
+    \item
+    On the right side, there's too many collisions, or the gap is too large for 
+    sufficient acceleration
+    \item 
+    Argon is mainly used because it has a low minimum breakdown voltage. 
+\end{itemize}
+
+\section{Spacial Zones}
+and species in a glow discharge 
+
+\begin{enumerate}
+    \item
+    Cathode
+    \item
+    Aston dark space
+    \item
+    Cathode glow
+    \item
+    Crookes (Hittorf) dark space
+    \item
+    Negative Glow (brightest region)
+    \item
+    Faraday dark space
+    \item
+    Positive column (provides most of the light from the plasma)
+    \item
+    Anode glow
+    \item
+    Anode dark space
+    \item
+    Anode
+\end{enumerate}
+
+At 20mT, the plasma contains $10^{15} cm^{-3}$ Neutrals, $0.01 - 0.5$ radicals 
+to neutrals ratio. Ions to neutrals raio of $10^{-6} - 10^{-3}$.
+
+Plasma density is just the number of ions plus the number of electrons. 
+
+Ion temperature is $\frac{1}{2} m_i v_i^2 = k_B T_i$ can be used 
+to calculate velocity. 
+
+The brightness is important because it tells you about your ion density. 
+
+\subsection{Sheath Voltage Drop}
+Tells you how much your ions will accelerate before hitting the substrate. 
+
+\section{RF Plasmas}
+DC plasma will note work if we place an insulating substrate on one of the 
+electrodes. 
+
+We go to a RF plasma with a frequency in $1-20MHz$ Range. 
+f = $13.56 MHz$ is common because it is permitted by the FCC. 
+
+Often times the anode is a grounded electrode and the cathode is a 
+power electrode. 
+
+Now there's 
+
+cathode, sheath, plasma , sheath, anode. 
+
+The plasma has an extra positive charge.
+
+\equations{
+    2 V_p
+    \sim 
+    \frac{V_{rf_{pp}}}{2}
+    -
+    |V_{dc}|
+    \hp 
+    V_{dc}
+    =
+    \frac{k T_e}{2e}
+    \ln(\frac{T_e M_i}{T_i M_e})
+}
+
+Where $M_e$ is electron mass, ion mass, $T_e$ is electron temperature, ion 
+temperature. $T_e = 2 * 10^{4}$ $T_i = T_{gas} = 500K$, and $M_e/ M_i = 10^{?}$
+
+\subsection{Power Electrode}
+The power electrode gets a DC bias and becomes negative. 
+
+The plasma itself has a potential, but the DC current has a much higher 
+amplitude than the plasma potential, so it much be centered around $V < 0$ so 
+that the peak of the DC is at the voltage of the plasma. 
+
+\section{Configurations of RF Plasma Etching}
+
+\subsection{ Capacitively Coupled Plasma (CCP) (Parallel Plate Configuration) }
+
+You make a plasma because some stuff in between 2 charged things. 
+
+The sheaths behave like capacitors 
+
+The plasma behaves like a diode because none of the electrode can become 
+positive with respect to the plasma. As soon as any electrode tends to become 
+positive W.R.T. the plasma, the current increases dramatically to raise the plasma 
+potential 
+
+The dark spaces in the plasma are areas of limited 
+conductiivty 
+
+\equations{
+    C \sim A / d 
+    \hp 
+    \frac{V_T}{V_p}
+    =
+    \frac{C_p}{C_T}
+    =
+    \left(
+        \frac{A_p}{d_p}
+    \right)
+    \left(
+        \frac{d_T}{A_T}
+    \right)
+}
+
+From the Child-Langmuir Law, we get 
+\equations{
+    \frac{V_T^{3/2}}{d_T^2}
+    =
+    \frac{V_p^{3/2}}{d_p^2}
+    \Rightarrow 
+    \frac{V_T}{V_p}
+    =
+    \left(
+        \frac{A_T}{A_p}
+    \right)
+}
+$A$ is electrode area and $d$ is sheath length. $V_T$ is cathode potential 
+and $V_p$ is plasma potential. 
+
+\subsection{Capacitance}
+The capacitance is what connects the plasma charge to the sheath charge. 
+
+The capacitor works because the plasma itself is very conductive, but 
+the sheaths are insulators, so current does not flow. 
+
+\subsection{CCP RIE configuration}
+
+Use a smaller cathode which holds the substrate. This will mean that 
+more energetic ions bombard the substrate. 
+
+The system operates at $\sim 20 mT$, so there are very few collisions 
+in the sheath. 
+
+RIE is more directional than plasma etching. Bombardment leads to more 
+dislocations and dangling bonds resulting in a more reactive surface 
+for initialting etching reactions. 
+
+Etch rates in the vertical direction are much much more than etch rates 
+in the horizontal direction because bombardment is usually vertical. 
+
+Etch rates in RIE ar emuch higher than just ion etching. 
+
+\subsection{CCP Cons}
+\begin{itemize}
+    \item
+    Low plasma densities - Ions/Neutrals ratio $(10^{-6} \sim 10^{-3})$
+    \item
+    RF power simultaneously influences plasma nad sheath powers.
+\end{itemize}
+
+\subsection{Inductively Coupled Plasma (ICP)}
+Fixes the issues with CCP
+
+\begin{itemize}
+    \item
+    Inductive coupling produces a high density plasma with higher 
+    Ions/Neutrals ratio $(10^{-3} - 10^{-1})$.
+
+    This is the case because of something with Lorentz forces and the magnetic 
+    fields also accelerating the ions in the plasma, leading to a higher 
+    plasma density. 
+    \item
+    ICP plasmas have virtually no sheath voltages. A separate RF 
+    circuit is used to capacitively couple the plasma ot the electrode 
+    holding the substrate.
+\end{itemize}
+
+With 1 circuit, you can tune the plasma density, and with the other, you tune 
+the rate that ions bombard the surface. 
+
+There is a picture in the slides.
+
+We use a mix of chemical and physical etching/sputtering to get 
+high etching rates and directionality. 
+
+We have 1 RF source driving an induction coil. 
+
+\subsection{ICP Results}
+Very high etching rates (5-10 microns/min)
+
+And can etch with very high aspect ratio (9 times deeper than wide).
+Can go up to 100x. This can be compared to other feature size aspect ratios 
+of 2-3 or even just isotropic 1.
+
+\subsection{Downstream/Remote Plasma }
+Plasma is generated with ICP, CCP, or microwave. Only reactive radicals 
+make it to the substrate. Ions themselves are blocked (no ion bombardment).
+
+The plasma is in a chamber separate from the substrate. Used for pure 
+chemical etching because there is not acceleration. Used to cleaning, activation, 
+or stripping PR. 
 
 
+\subsection{Sidetrack About Plasmas}
+ALL PLASMAS ARE POSITIVE. It's called the negative glow because it's near 
+the negative side of the capacitor. 
 
 
+\section{Dry Etching Mechanisms}
+We talked about how plasmas can make radicals and also be used for just 
+ion bombardment. We mix chemical and physical based etching processes 
+to get useful tools. 
+
+\subsection{Physical Sputtering}
+\begin{itemize}
+    \item
+Atomic sand blasting. 
+    \item
+Sheath voltage determined ion energy. 
+    \item
+Most tools use Argon ions. 
+    \item
+It tends to be anisotropic (directional). 
+    \item
+Low selectivity, redeposition issues, surface damage issues. 
+    \item
+Etch rates depend 
+on ion current, energy, and substrate material (higher etch rates means you 
+should use an inductively coupled pasma to tune parameters). 
+    \item
+Etch rates are low (10-50nm / min). 
+\item 
+Used when chemistry is not available to produce volatile products to etch.
+\end{itemize}
+
+$< 3eV$ leads to physical adsorption. 4-10eV is some surface sputtering. 
+10-5000 is sputtering. $> 5000$ leads to implantation instead of sputtering. 
+
+\subsection{Sputter Etching or Ion Beam Milling}
+Similar to sputtering, but the plasma source is decoupled from the substrate. 
+Pure ion bombardment with 0 chemistry. 
+
+Typical features include rounded corners. Sidewalls reflect ions to form 
+trenches near edges. Side profiling in directional.
+
+\begin{enumerate}
+    \item
+    Low energy ions are extracted from liquid source
+    \item
+    Made into a beam and accelerated through a column
+    \item
+    Focused at a point on the substrate/specimen to cause local sputtering
+    \item
+    Deflector plates/Scanner allows the beam to be directed to different 
+    points on the substrate/specimen
+\end{enumerate}
+
+Lenses are usually electrostatic instead of electromagnetic. Ion beams
+are very very slow, slow applications are mainly research or metrology related. 
+
+\subsection{Pure Chemical Dry Etching} 
+Silicon can be etched by XeF$_2$ 
+
+\begin{itemize}
+    \item
+	No plasma is required
+    \item
+	XeF$_2$ is a white powder with a low vapor pressure
+    \item
+	Vapor reacts with Si 
+    \item
+	Etch rate is dependent on feature size (100-200nm/minute), but can 
+	be as high as $10 \mu m/$minute in a plasma 
+    \item
+	High selectivity with silica and nitride masks
+    \item
+	Highly reactive with water (bad)
+\end{itemize}
+
+We can also use CF$_4$ to produce radicals for etching. 
+
+Etching rates will depend strongly on temperature. Higher temperature means 
+higher etch rate, and increased loading (exposed area) will decrease etch rate. 
+
+Etching is isotropic. Being chemical, it is highly selective and faster than 
+sputtering. 
+
+May use various reactor configurations: Downstream/Remote Plasma, 
+Parallel Plate Plasmas, etc. 
+
+Etching may be inhibited by surface deposition and production of non-volatile 
+products. 
+
+Depending on the voltage bias of the substrate, negative ions (F- in CF4) will 
+be repelled by the substrate, and will not help in the etching process. 
+
+The neutral radicals diffuse towards the surface and are the 
+\textbf{primary etch species}. 
+
+The plasma is important because it creates not only the reactive species, but also 
+the species that aid with desorption.
+
+\section{Loading Effects}
+\begin{itemize}
+    \item
+	A macroscopic loading effect occurs when the amount of etchant is 
+	being depleted by the amount of reactant. 
+    \item
+	The etch rate is inversely proportional to the 
+	exposed silicon.
+    \item
+	The more chemical etching, the bigger the loading effect
+    \item
+	At lower pressures, the effect becomes smaller 
+    \item
+	Uniformity is compromised by an etch rate dependent on loading
+    \item
+	Gas flow and residence time (the average length of time a 
+	molecule of gas spends in the chamber) are now much more important in the 
+	overall uniformity of the etching process. 
+\end{itemize}
+
+\section{Mixed Physical and Chemical Etching}
+A combination of bot ha physical and a chemical plasma etching process
+ leads ot the combined benefits of both (i.e. Ar$^+$ kinetically exciting Cl gas).
+ Sidewalls are etched back, bottom curved, some undercutting can occur, and etch 
+ profiles are more vertical. 
+
+ Generally, this involves high energy ions that 
+ \begin{enumerate}
+     \item
+	 Sputter (ion mill) the surface
+     \item
+	 Drive the etching reaction on the surface
+     \item
+	 drive desorption of products from the surface
+     \item
+	 Create reactive products
+ \end{enumerate}
+
+Less dependence on temperature, loading, and surface contamination. 
+Good selectivity and anisotropic etching (This is not only because of the 2 
+reaction mechanisms, but become reaction products that are hard to etch end 
+up on the side-wall, decreasing the etch rate in those directions). 
+
+\section{Etching Rules}
+Bulk etching of Si is done by CF$_4$ which etches Si isotropically and produces 
+high vapor pressure SiF$_4$. In RIE (mixed phys. + chem.) etching, 
+chlorofluorocarbons and oxidizing additives are also added. In general, Cl and Br
+do not spontaneously react with Si (need ion bombardment) and CFC's produced 
+polymerization. In this context it is good to hae some guidelines. 
+
+\subsection{Fluorine to Carbon (F/C) Ratio} 
+\begin{itemize}
+    \item
+	When Fl and C are both present, etching and polymerization occur. 
+    \item
+	Etching is caused by Fl
+    \item
+	Polymerization occurs due to hydrocarbon formation and deposition
+    \item
+	the lower the F/C ratio, the lower the etching 
+    \item
+	Adding H forms HF and lowers the F/C ratio and etch rate and increases 
+	polymerization
+    \item
+	Adding oxygen forms CO products and increases the F/C ratio and etch rate. 
+    \item
+    O also aggressively attacks the resist, redicing selectivity with respect to the PR.
+\end{itemize}
+
+\subsection{Selectivity}
+\begin{itemize}
+    \item
+	The desirable etch process with etch the sample and not the mask
+    \item
+	The polymerization point is when the polymer removal rate equals the 
+	polymerization rate 
+    \item
+	A better selectivity is achieved closer to the polymerization point 
+    \item
+	Factors that increase the polymerization rate (and selectivity) include: 
+	\begin{itemize}
+	    \item
+		lower temperature
+	    \item
+		high H concentration
+	    \item
+		low plasma power
+	    \item
+		high chamber pressure
+	    \item
+		high monomer concentration
+	\end{itemize}
+    \item
+	Unselective etches for Si include CF$_4$ and SF$_6$
+    \item
+	Selective etches for Si include Cl$_2$, CCl$_2$, Cl$_2$-C$_2$F$_6$
+\end{itemize}
+
+by-products from chemical etching can decrease the selectivity of the etch 
+because the by-products can attack your photoresist. 
+
+\subsection{Substrate Bias} 
+Increased substrate bias means increased sheet voltage drop which means more electric 
+field change and acceleration and thus physical etching
+
+\begin{itemize}
+    \item
+	If all other factors are kept constant, a negative bias on the surface exposed 
+	to the plasma increases the etching behavior over polymerizaiton
+    \item
+	This is a physical process where the ions are bombarding the surface and 
+	sputtering the polymer
+\end{itemize}
+
+\subsection{Metal Etching}
+\begin{itemize}
+    \item
+	Chlorocarbons and fluorocarbons are typically used to etch metal films
+    \item
+	Native metal oxides are removed chemically, some metal halides are removed 
+	with physical sputtering.
+    \item
+	O and water vapor must be removed from the etching processing chamber so 
+	additional metal oxides are not formed
+    \item
+	Ion bombardment is essential due to the strong metal oxide bond
+\end{itemize}
+
+\subsection{Etching Mixtures} 
+Flourinated Carbons are very common because the products are very volatile 
+
+\subsection{Ion-enhanced Inhibitor Etching} 
+Simulaneously deposit a material onto the substrate while also etching it. 
+Certain gases can be added to the system to promote deposition, which slows down 
+or blocks etching. 
+
+Ion bombardment removes the deposited film from horizontal surfaces, but not vertical 
+surfaces. This increases anisotropy which keep it selective. 
+
+Ion bombardment, when well tuned, can lead to high aspect rations of 9:1. 
+
+\section{Dry Etching} 
+Diagram in the slides. 
+
+Physical processes have low pressure and low selectivity, but high energy and anisotropy, 
+while chemical processes have the opposite. 
+
+Ion enhanced chemical etching and inhibitor etching are mixed forms, which sputtering is 
+purely physical and chemical etching is purely chemical. 
+
+Physical etching results in slightly rounded corners or mostly straight (ion enhanced), 
+while chemical etching can be either completely round (isotropic) or completely straight 
+(inhibition)
+
+\section{Si Etching}
+In the 90's there were many issues with dry etching 
+\begin{itemize}
+    \item
+	etch rates were stupid slow (1 $\mu$m/min)
+    \item
+	300 $\mu$m wafers took 5 hours to thru-etch, which resists won't survive
+    \item
+	Something about aspect ratios
+    \item
+	Something about something else 
+\end{itemize}
+
+\subsection{Fixes}
+High density plasma (ICP) with density $> 10^{11}$/cm$^3$ and low pressures 
+of 1-100mT with good Ion uniformity. 
+
+This leads to higher, more consistent, higher aspect ratio etching rates. 
+
+\section{Bosch Process (Deep RIE)} 
+crazy high aspect ratios (100:1) and etch speeds (20 microns/min). 
+Super flat wall angles. Very selective to both PR and oxide films (250:1). 
+
+Process switches between etching and deposition. Polymer is deposited on the 
+walls and the bottom is etched. The gas is Octafluorocyclobutane (C$_4$F$_8$ lmao), and the 
+ring breaks and they the broken polymers combine to form a long chain polymer that 
+can't be etched away easily. The etch gas is SF$_6$ which decomposes and etches 
+silicon.
+
+It is important to put in these two gases separately because they react together 
+to prevent long polymer formation. 
+
+\subsection{Challenges}
+\begin{itemize}
+    \item
+	Side wall profile control is difficult
+    \item
+	Silicon grass, scalloping, microloading, mask undercutting, and uniformity
+    \item
+	ARDE: Aspect Ratio Dependent Etch rate
+\end{itemize}
+
+Even with these challenges, selectivity, etch rate, aspect ratio, and uniformity are 
+still better than other plasma methods on Si. 
+
+\subsection{Sidewall Quality}
+Should be vertical. It can be controlled by power, pulse duration, gas flow, and pressure. 
+
+Some profiles can be corrected. The types of profiles are positive taper, retrograde 
+taper, barrelling/undercutting, and facetic (bottom bulges) and trenching 
+(bottom sinks down). 
+
+\textbf{Scalloping} happens due to the switching of gases, and it leads to little 
+ribs in the trench. 
+
+\textbf{Silicon Grass} is towers caused by dust blocking a vertical etching process. 
+
+\textbf{Some other one} I wasn't paying attention. 
+
+Bad resist profiles (undercut, overcut) will also cause the etching to be poor because 
+it will inhibit correct etching. 
+
+\section{SOI Notching} 
+Dry etching on SOI wafers can have challenges 
+
+\begin{itemize}
+    \item
+	Ions can build up on the oxide layer
+    \item
+	Over-etching can cause ions to be deflected and etch into the sidewalls
+	 of the bottom of the feature
+\end{itemize}
+Using pulsed power can allow the charge to dissipate.
+End point detection methods can also be used to determine when you reach the oxide 
+layer. 
+
+\chapter{Single Crystal Silicon}
+It's an element with a bandgap lmao. It's cheap as shit so we've gotten very 
+good at purifying it for chips. 
+
+It's also very tunable so we can mess around with it. 
+We can make it piezo-resistive, it has an indirect bandgap, it has high 
+thermal conductivity and low thermal expansion. 
+
+\section{Crystal}
+Repeating structures of atoms. The Unit cell is the smallest repeating structure 
+in a lattice. 
+
+Simple Cubic is SC. Body Centered Cubic (BCC) has 1 atom in the center. 
+Face-Centered Cubic has a center at each face. 
+
+The number of atoms in a unit cell is wacky. SC has 1, BCC has 2, and FCC at 4 
+based on some magic. 
+
+\section{Miller Indices (h, k, l) - Planes}
+Planes and directions are described with numbers. You take the intercept, 
+take the reciprocal of the intercept, and reduce it to the lowest set 
+of integers for a ratio. 
+
+$1, \infty, \infty \Rightarrow \frac{1}{1}, \frac{1}{\infty}, \frac{1}{\infty}
+\Rightarrow 1, 0, 0$
+
+$2, 1, 4 \Rightarrow \frac{1}{2}, \frac{1}{1}, \frac{1}{4}
+\Rightarrow 2, 4, 1$
+
+Direction can also be described with Miller Indices. [100] is the type of 
+plane that describes all possible flat straight planes perpendicular planes, no 
+matter their orientations $(010, \bar 100, etc)$
+
+\section{Elemental Si}
+It's got 4 electrons. It's got a diamond cubic structure. The atom density 
+is $4/\sqrt{2} \cdot a$ where $a$ is the side length. During anisotropic 
+etching, the 111 plane is etched less because it has the lowest danging bond 
+density. 
+
+\subsection{Electrical Properties}
+Both electrons and holes can be treated as charged particles that contribute to
+the overall conductivity of the of the material. 
+
+The reason that our chromium resistivity was so messed up because of boundary 
+scattering.
+
+\subsection{Czochralski method for Si Wafer Making}
+You put a seed of actually crystal Si in a bunch of molten Si and then spin it 
+until you get a flat wafer. 
+
+All the wafers we use in this class are [100] wafers. 111 wafers aren't 
+particularly common because that plane does not etch well. You can use 
+the flat sides of the wafer to figure out the orientation. 
+
+\section{Doping}
+You put stuff in things to change the band gap. 
+
+N-type doping is arsenic, phosphorus, etc. electron donors. 
+
+P-type doping is Boron, gallium etc. electron acceptors.
+
+Why does the float zone method produce high resistivity silicon? Because 
+there are less impurities with this method (no crucible).
+
+\section{Wafer Spec}
+Some wafers are more flat than others (flatness, planarity). Wafers deflect/warp 
+some amount over the entire surface. 
+
+There are all sorts of defects. Pits, scratches, etc. 
+
+\begin{itemize}
+    \item
+    Prime wafers: highest possible
+    \item
+    epi wafers: thin Si layer
+    \item
+    Test wafer: cheap
+    \item
+    etc
+\end{itemize}
+
+You can polish the back of the wafer if you want. 
+
+\chapter{Anisotropic Etching}
+Dry etching is physical or chemical while wet etching is chemical. 
+Dry etching is very expensive and very slow because it uses big fancy 
+plasma machines. Wet etching is cheaper because it just uses acid. 
+Wet etching is very good with selectivity because it uses chemistry magic 
+vs just brute force wacking the material in dry etching. 
+
+\section{Wet Etching}
+
+For wet etching, you can use a bunch of different chemicals (HF etches SiO2). 
+Etch selectivity is high, but can be sensitive to impurities. 
+
+Etch rate is a function of concentration, mixing rate, etc. Arrhenius relationship. 
+\equations{
+    \textrm{rate} \propto e^{-E_a / k_B T}
+}
+
+Etch selectivity should ideally be infinity (etch rate of substrate vs mask). 
+
+Etching occurs in equal rates in all directions which is bad 
+because because your walls are not flat. However, it removes rust and damaged 
+surfaces. 
+
+Amorphous nad Polycrystalline films can be etched anisotropically due to 
+material "randomness". 
+
+single crystal materials have varying etch rates dependent on planes.
+
+\subsection{Etching Process}
+\begin{enumerate}
+    \item
+    Etching species generation
+    \item
+    Diffuse to surface
+    \item
+    Adsorption
+    \item
+    Reaction
+    \item
+    Desorption
+    \item
+    Diffusion away/ byproduct removal
+\end{enumerate}
+
+Etching is diffusion limited in trenches because it is hard to get 
+material to the bottom of a trench. 
+
+Reaction rate limited etching is dependent on temperature and that's basically it. 
+
+Diffusion limited etching can be increased with stirring. 
+
+\section{Sidewall slope}
+You can actually get near straight walls if you allow alot of undercutting 
+because its basically the surface of a sphere, and bigger spheres have 
+flatter surfaces. 
+
+Reaction rate limited etching is useful because it means that parts of the wafer 
+aren't going to be etched faster than others due to geometry. 
+
+\section{Device "releasing"}
+You can add "etch holes" to increase etch speed of material underneath a feature. 
+
+This is important because something something cantilevers and van der waal forces. 
+
+\section{Loading}
+If there are too many features in a local area, it will take a long time to etch 
+relative to a different part of the wafer. 
+
+\section{Challenges}
+\begin{itemize}
+    \item
+    Findind a suitable mask for high precision
+    \item
+	Etch rate is agitation sensitive
+    \item
+	Etch rate is temperature sensitive
+\end{itemize}
+
+\subsection{Agitation}
+With agitation, etching happens everywhere equally, so larger mask holes 
+means faster etching rates. 
+Without agitation, the depth etch rate is the same no matter the mask hole, so etched 
+features are not spherical. 
+
+If the regime isn't reaction rate limited, agitation will not change etching. In 
+this case, you change temperature. 
+
+\section{Isotropic Etchants}
+Usually acids (HF, HNA, nitric acid, etc.). Produces rounded features, used at lower 
+temperatures $(<50C)$. Tend to be diffusion limited and not rate limited. Selective 
+etching can be used to vary etch rates. Often used for polishing.
+
+Wet etching is almost never used to high aspect ratio etching. 
+
+\subsection{WetER2 Table}
+It's just a table with a bunch of etchances and what they do. 
+
+\section{HF}
+\begin{itemize}
+    \item
+Etches SiO2 and not Si. Also attacks aluminum and silicon nitride. 
+    \item
+Etch rate from 0.1-1 microns/min 
+    \item
+    It's considered a weak acid but will like immediately kill you. Goes into your 
+    skin and eats your bones. Health Hazard 4.
+    \item 
+    Completely isotropic etching
+\end{itemize}
+
+HF is usually used in a buffered solution of NH$_4$F so that it's less evil.
+HF can diffuse through polymers, so no mask will survive all that long or be 
+all that effective. 
+
+You can use a nitride mask for a long HF etch. 
+
+\section{Phosphoric Acid} 
+etches nitride. 50nm/min etch (pretty slow). Need a tough Oxide mask because PR 
+will not work at 50C. Etches completely isotropically. 
+
+\section{HNA (HF:Nitric:Acetic)}
+Put everything together to make a new etchant. Nitric acid oxidizes Si. HF reacts 
+with silica. Acetic acid prevents the dissociation of Nitric acid. 
+
+\subsection{Doping}
+P type silicon will etch very fast because you need holes in the chemical reaction. 
+N type inhibits etching because there are no holes.
+
+You can change the ratio of each acid in the solution to change the etching properties
+of it. You get different types of etching and polishing and all sorts of stuff 
+depending on the ratio. The ratio also determines how the etchant is reaction 
+limited. 
+
+5:2:3 is the regular ratio. 
+
+\section{Masks}
+SiO2 can be used for shallow etching. Nitride or Gold are good for long etches.
+PR and Al are bad. Doping affects etching pretty significantly. 
+
+\subsection{Summary}
+\begin{itemize}
+    \item
+    Iso etching is primarily done with acids. 
+    \item
+    Acid mixtures are pretty important.
+    \item
+    The etching mechanism is mainly oxidation, which makes it independent of the 
+    crystal properties in the material. 
+    \item
+    This kind of etching is used for shallow etches due to undercutting. Not used 
+    for deep structures 
+    \item 
+    very good for release etching. 
+\end{itemize}
+
+\chapter{Anisotropic Etching (Bases)}
+Etch the silicon planes at different rates. It was developed in Bell Labs in the 60's. 
+You can use anisotropic etching to produce certain shapes, and the patterns are bound 
+by the slowest etching plane. You get more control than isotropic wet etching, and you 
+get more reproducability and accuracy $(0.5 \mu m)$. 
+
+Base etching is slower than isotropic etching, usually $1 \mu m$/min. You need higher 
+temperatures to encourage etching, and anisotropic etching is less sensitive to agitation.
+Anisotropic etching is mainly used for single crystal materials (Si, Quartz, Germanium, 
+etc.). The 111 plane in Si resists etching the most. 
+
+The orientation and type of wafer used if important to how it gets etched. Corners 
+will etch in weird ways. 
+
+You want the number of danging bonds to be high to increase etch rates in certain 
+planes. 
+
+Etch rate goes down with bond density and back-plane bond density. Etch rate goes 
+up with dangling bond density. Etch rate is slower with increased atom density. Etch 
+rate is faster with greater surface bond density. More surface oxidation means 
+less etching. 
+
+\section{Etchants}
+Alkaline aqueous based etchants include KOH, NaOH, LiOH, etc. There are also 
+alkaline organic etchants like hydrazine. No external voltage is needed. Etching is 
+dopant insensitive (doesn't matter). Alcohols slow down the etching process. 
+
+Etch rate is reaction rate controlled. 
+
+Pros are KOH etching are: 
+\begin{itemize}
+    \item
+	fastest
+    \item
+	selective 
+    \item
+	makes vertical sidewalls
+\end{itemize}
+
+Cons include 
+\begin{itemize}
+    \item
+	not CMOS compatible (etches matal)
+    \item
+	ion contamination
+\end{itemize}
+
+EDP is a very common organic alkali etchant. CMOS compatible, lots of masks, and lowest 
+Boron doping etch stop. However, it'l corosive and optically dense (hard to see). 
+It also ages quickly, has a low aspect ratio, and precipitates. 
+
+TMAH is another etchant, it is CMOS compatible and smooth, but has a slow etch rate 
+and bad selectivity. 
+
+\section{Reactions}
+Electrons are injected into the conduction band to cause Si atoms to bond with other 
+things. Basically silicon hydrolyses water, but OH isnt really consumed in the process. 
+
+\section{Etch Rates}
+Arrhenius relationship with 1/T. Very temperature dependent.
+
+\section{Surface Roughness}
+Anisoptropic etching leaves behind a rough surface compared to acid etching. You can 
+do a small amount of isotropic etching to just smooth the surface. 
+
+Macroscopic roughness (notching or pillowing) increase with depths. 
+
+Average roughness is dependent on agitation. 
+
+\subsection{Terracing}
+Stair case of etching based on the crystal planes.
+
+\section{Masks}
+Difficult because anisotropic takes a long time, and it has to not eat through 
+the entire mask 
+
+\section{Doping}
+Doping affects the etch rate of silicon dramatically (boron). Ion implanted dopants 
+can be used as etch stops. EDP is more sensitive than KOH against dopants. 
+
+KOH, EDP, and TMAH are the main anisotropic etchants, but choose which of the three 
+requires many considerations. 
+
+\subsection{Thermal Diffusion}
+Use heat
+
+\subsection{Ion Implantation}
+Use electron beams
+
+\subsection{Spin On Products}
+SOG (spin on glass) is a dielectric applied to a wafer in liquid form. 
+
+\section{Alignment}
+A "Wagon-wheel" etch mask produces a flower pattern that visually depicts the etch ratio 
+along different planes. Etching will occur under your mask :(. Concave and convex corners
+ are etched very different my isotropic etching (concave corners become rounded). 
+
+\section{Silicon Oxidation}
+There's like a million slides on this and I'm not paying attention.
+Wet oxidation is usually faster than dry oxidation.
+
+MEMS usually uses wet oxide because everything we make is big and not very detailed, 
+so we like being faster.
+
+There's a deel drog equation or fuckin whatever.
+
+\chapter{Bonding and Packaging}
+It's kind of an additive process. Put 2 MEMs devices or thin films together to get a bigger 
+thing. 
+
+\section{Need for Wafer Bonding}
+It is good for creating single crystal structures. Membranes and embedded 
+channels/cavities.
+You can also make thick or multi-level systems. 
+
+These can be combined with anisotropic etching to make unique shapes. 
+
+\section{Fusion Bonding Process}
+Take two pristine surfaces and stick them together. This adheres them with van der 
+waals forces. Then you use high forces and temperatures to get chemical reformation 
+and turn the 2 wafers into 1 wafer. 
+
+\subsection{Poly-silicon Bonding}
+Use something for surface hydration or plasma. Needs very high temperatures (450 C)
+
+\subsection{Hydrogen Bond Bridging}
+When H is connected to a very electronegative atom, the H atom gets polarized, so it 
+can attract to other things at high temperatures. This usually occurs at 200 C.
+
+There's a thing called thermal gradient bonding(?). Si-Si bonding also requires a 
+hydration process. 
+
+Make OH groups- put them together so you get attraction/bond bridging- increase 
+temperature to encourage chemical bonding.
+
+\section{Voids}
+Voids are what happens when there is an imperfect bond. Voids have very high stress.
+
+\section{Application}
+You can make cool pumps and stuff
+
+\section{Anoding Bonding}
+High voltage generates high electrostatic forces at gaps, which squishes em together. 
+
+You must use a glass with a mobile cation, and then you use voltage to migrate that 
+cation, which enables bond reformation.
+
+\subsection{CTE Mismatch}
+I have no idea what CTE is but bad things happen if you ignore it.
+
+\section{Eutectic Bonding} 
+You need only 2 materials. Bring 2 metals to the transition between solid and liquid. 
+
+You find a specific perfect composition such that the melting point of each individual 
+material are the same.
+
+Gold is very common for eutectic bonding.
+
+\subsection{Melting Alloys}
+When you do that, the first melt that comes out is the eutectic concentration.
+
+\section{Polymer Bonding}
+adhesives and stuff. Simple and cheap, but not as permanent as the fancy wafer bonding 
+methods.
+
+\section{Packaging}
+Put your tiny fragile device in a thing that will stop it from exploding.
+It also provides connections do you can actually use the MEMS device without being 
+microscale yourself. 
+
+MEMS packaging is generally harder than semiconductor packaging because you need to 
+maintain a vacuum and allow throughput of physical acceleration while still making sure 
+the device cant break.
+
+Packaging is generally done on the full wafer-scale instead of the chip-scale.
+
+We know which chips are gonna be good depending on their location on the wafer.
+
+\subsection{Flip Chip Substrate}
+Flip the chip onto a laminate such that bumps make contact with the die pads and carry 
+signal. This is the superior method and has much higher contact density.
+
+\subsection{Wire Bonded Substrate}
+You just have a very thin wire connecting the die to the outside.
+
+Ball Bonding, Wedge bonding, ribbon bonding, etc. all used in wire bonding.
+
+\subsection{Leadframe}
+Metal structure that moves signals from the die to the outside. 
+
+\section{Sensors}
+Biological and Chemical sensors are very hard because they need direct contact with the 
+environment. Most packaging needs to be done in a vacuum.
+
+\chapter{Recipes and Approaches to Fabricating Devices}
+\begin{enumerate}
+    \item
+    Novel idea
+    \item
+    Standardized CAD tools
+    \item
+    Design layout with standard cells
+    \item
+    fabricate with standard processes (foundry)
+    \item
+    success
+\end{enumerate}
+
+This is generally easy and cheap, but limited in terms of available tools and materials 
+and whatnot.
+
+\section{MUMPS}
+Multi User MEMS Processes.
+
+I think it's a bajillion people all making difference devices on the same wafer so it 
+looks like one big mess.
+
+You call someone and give them a cad file and they produce it on their own machines.
+
+\section{SOI MEMS}
+Silicon on insulator 
+
+You can buy an SOI wafer and specify the thickness of the handle layer, oxide layer, 
+and device layer. 
+
+Does not scale well, but is good for industry research.
+
+\subsection{SUMMIT V}
+Sandia ultra-planar, multi-level MEMS Technology 5 
+
+5-layer polycilicon and IoO2 with planarization. Can be used to generate even more 
+complex MEMS.
 
 
+\chapter{FINAL}
+Exam is monday 7pm-10pm at this classroom. It should only be a 2 hour exam. 80\% of the 
+exam will be material NOT covered on the 1st exam. 20\% will be review.
+
+\section{KNOW MUMPS ON THE FINAL}
+
+There might be a question discussing the MUMPS process.
+
+\equations{
+	SNR
+	=
+	10 \log_{10}
+	\left(
+	\frac{P_{target}}{P_{noise}}
+	\right)
+}
 
 
 
 \end{document}
+
